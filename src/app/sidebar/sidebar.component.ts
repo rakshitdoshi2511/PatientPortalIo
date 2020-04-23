@@ -19,37 +19,50 @@ export class SidebarComponent implements OnInit {
       iconName: 'home'
     },
     {
-      title: "Price Setting",
-      url: "price-setting-overview",
+      title: "Laboratory Reports",
+      url: "laboratory",
       icon: "💸",
-      iconName: 'card'
+      iconName: 'card',
+      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
     },
     {
-      title: 'My Profile',
-      url: 'profile',
+      title: 'Nutrition',
+      url: 'nutrition',
       icon: '👤',
-      iconName: 'person'
+      iconName: 'person',
+      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
     },
     {
-      title: 'Notifications',
-      url: 'notification',
+      title: 'Radiology',
+      url: 'radiology',
       icon: '⚙️',
-      iconName: 'notifications'
+      iconName: 'notifications',
+      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
+    },
+    {
+      title: 'Medical Reports',
+      url: 'medical-reports',
+      icon: '⚙️',
+      iconName: 'notifications',
+      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
     }
-    // ,{
-    //   title: "Map",
-    //   url: "/map",
-    //   icon: "🗺️"
-    // }
-
+    
   ];
 
   constructor(private _api: ApiService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.model.name = 'Joe Bonamassa';
+    this.model.mrn = '1562';
+    this.model.email = 'test@sap.com';
+  }
 
   logOut(){
     
+  }
+
+  getImagePath(p){
+    return p.iconPath;
   }
 
 }

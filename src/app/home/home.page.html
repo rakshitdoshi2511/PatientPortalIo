@@ -1,20 +1,66 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar class="ahThemeToolBar">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
+      <img src="../assets/images/ahlogo.png" class="ahLogo" />
+    </ion-buttons>
+    <!-- <ion-buttons slot="end">
+      <ion-button color="medium" (click)="openProfile()">
+        <ion-icon src="../assets/icon/usericon.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
+      <img src="../assets/icon/usericon.svg">
+    </ion-thumbnail>
+    <ion-title class='ion-text-center titleWhite'>Home</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content class="background-image">
+  <section class="w-100">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 myrow flip-card">
+          <div class="diamond diamond1 flip-card-inner" [routerLink]="['/laboratory']">
+            <!-- [routerLink]="['/home/laboratory']" -->
+            <div class="diamondCard text-center flip-card-front">
+              <img src="../../assets/icon/icon_flask.svg" height="40em">
+              <br />
+              <h3 class="title">LABORATORY</h3>
+              <span class="subtitle">Access to the laboratory reports</span>
+            </div>
+            <div class="diamondCard text-center flip-card-back">
+              <h3 class="title">LABORATORY BACK</h3>
+              <span class="subtitle">Access to the laboratory reports</span>
+            </div>
+          </div>
+          <div class="diamond diamond2" [routerLink]="['/nutrition']">
+            <div class="diamondCard text-center">
+              <img src="../../assets/icon/icon_nutrition.svg" height="40em">
+              <br />
+              <h3 class="title">NUTRITION</h3>
+              <span class="subtitle">Access to the nutrition care reports</span>
+            </div>
+          </div>
+          <div class="diamond diamond3" [routerLink]="['/radiology']">
+            <div class="diamondCard text-center">
+              <img src="../../assets/icon/icon_radiology.svg" height="40em">
+              <br />
+              <h3 class="title">RADIOLOGY</h3>
+              <span class="subtitle">Access to the radiology reports and images</span>
+            </div>
+          </div>
+          <div class="diamond diamond4" [routerLink]="['/medical-reports']">
+            <div class="diamondCard text-center">
+              <img src="../../assets/icon/icon_report.svg" height="40em">
+              <br />
+              <h3 class="title">MEDICAL REPORTS</h3>
+              <span class="subtitle">Access General Medical Reports, ER and Hospital Discharge reports</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </section>
 </ion-content>

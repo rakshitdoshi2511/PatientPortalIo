@@ -6,6 +6,8 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { UserPopoverComponent } from '../user-popover/user-popover.component';
+
 
 @NgModule({
   imports: [
@@ -14,6 +16,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,UserPopoverComponent],
+  entryComponents: [UserPopoverComponent]
 })
 export class HomePageModule {}

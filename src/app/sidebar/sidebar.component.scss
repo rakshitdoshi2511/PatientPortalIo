@@ -93,9 +93,14 @@
     font-size: 0.8rem;
 }
 
-.egaThemeButton{
-    --background: #0CC6DE;
-    --background-activated: #0CC6DE;
-      --background-focused: #0CC6DE;
-      --background-hover: #0CC6DE;
+.ahThemeButton{
+    --background: rgb(83,143,182);
+    --background-activated: rgb(83,143,182);
+      --background-focused: rgb(83,143,182);
+      --background-hover: rgb(83,143,182);
+  }
+
+  .icon-icon_flask:before {
+    content: "\e900";
+    color: #fff;
   }
