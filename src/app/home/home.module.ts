@@ -16,7 +16,7 @@ import { UserPopoverComponent } from '../user-popover/user-popover.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage,UserPopoverComponent],
-  entryComponents: [UserPopoverComponent]
+  declarations: [HomePage],//,UserPopoverComponent],
+  entryComponents: []//[UserPopoverComponent]
 })
 export class HomePageModule {}

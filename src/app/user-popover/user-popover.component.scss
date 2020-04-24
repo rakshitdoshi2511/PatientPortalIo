@@ -69,9 +69,10 @@
 }
 
 .media {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    // display: -webkit-box;
+    // display: -ms-flexbox;
+    // display: flex;
+    text-align: center;
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;

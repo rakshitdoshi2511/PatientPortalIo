@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LaboratoryPageRoutingModule } from './laboratory-routing.module';
 
 import { LaboratoryPage } from './laboratory.page';
+import { UserPopoverComponent } from '../user-popover/user-popover.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { LaboratoryPage } from './laboratory.page';
     IonicModule,
     LaboratoryPageRoutingModule
   ],
-  declarations: [LaboratoryPage]
+  declarations: [LaboratoryPage],//,UserPopoverComponent],
+  entryComponents: []//[UserPopoverComponent]
 })
 export class LaboratoryPageModule {}
