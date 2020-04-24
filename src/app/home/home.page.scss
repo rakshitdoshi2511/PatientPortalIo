@@ -235,9 +235,9 @@ ion-content ion-toolbar {
   transform-style: preserve-3d;
 }
 
-// .flip-card:hover .flip-card-inner{
-//   transform: rotateY(180deg);
-// }
+.flip-card:hover .flip-card-inner{
+  //  
+}
 
 .flip-card-front, .flip-card-back{
 
@@ -252,5 +252,14 @@ ion-content ion-toolbar {
 .flip-card-back{
   background: rgb(87,143,182);
   transform: rotateY(180deg);
+}
+
+@keyframes spin {
+  from { 
+    transform: rotateY(0deg) rotate(-45deg); 
+  }
+  to {
+    transform: rotateY(360deg) rotate(-45deg); 
+  }
 }
 
