@@ -45,13 +45,6 @@ export class SidebarComponent implements OnInit {
       icon: '⚙️',
       iconName: 'notifications',
       iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
-    },
-    {
-      title: 'Test',
-      url: 'test',
-      icon: '⚙️',
-      iconName: 'notifications',
-      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
     }
     
   ];

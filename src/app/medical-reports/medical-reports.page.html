@@ -66,22 +66,23 @@
       <ion-tab-bar slot="bottom">
         <ion-tab-button id="all" (click)="filterDocuments('ALL')" [ngClass]="model.selectedAll">
           <ion-icon name="person-circle"></ion-icon>
-          <ion-label>All Documents</ion-label>
+          <!-- <ion-label>All Documents</ion-label> -->
+          <span>All Documents</span>
           <ion-badge color="dark">{{model.allDocuments}}</ion-badge>
         </ion-tab-button>
         <ion-tab-button id="emergencyc" (click)="filterDocuments('EME')" [ngClass]="model.selectedEmergency">
           <ion-icon name="person-circle"></ion-icon>
-          <ion-label class="ion-text-wrap">Emergency Discharge</ion-label>
+          <span>Emergency Discharge</span>
           <ion-badge color="dark">{{model.emergencyDocuments}}</ion-badge>
         </ion-tab-button>
         <ion-tab-button id="physicain" (click)="filterDocuments('PHY')" [ngClass]="model.selectedPhysician">
           <ion-icon name="person-circle"></ion-icon>
-          <ion-label>Physician Discharge</ion-label>
+          <span>Physician Discharge</span>
           <ion-badge color="dark">{{model.physicianDocuments}}</ion-badge>
         </ion-tab-button>
         <ion-tab-button id="medical" (click)="filterDocuments('MED')" [ngClass]="model.selectedMedical">
           <ion-icon name="person-circle"></ion-icon>
-          <ion-label>Medical Report</ion-label>
+          <span>Medical Report</span>
           <ion-badge color="dark">{{model.medicalDocuments}}</ion-badge>
         </ion-tab-button>
       </ion-tab-bar>
