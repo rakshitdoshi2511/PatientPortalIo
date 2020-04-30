@@ -1,7 +1,0 @@
-{
-  "name": "PatientPortalIonic",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
