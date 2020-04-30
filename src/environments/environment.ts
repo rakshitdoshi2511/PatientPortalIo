@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: '',
+  ver: '1.0.0',
+  app_prefix: 'amc_',
+  default_languag: 'en'
 };
 
 /*

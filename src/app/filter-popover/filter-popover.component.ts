@@ -11,4 +11,12 @@ export class FilterPopoverComponent implements OnInit {
 
   ngOnInit() {}
 
+  applyFilters(){
+
+  }
+
+  clearFilters(){
+    
+  }
+
 }

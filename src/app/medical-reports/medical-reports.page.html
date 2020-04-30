@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
       <!-- <img src="../assets/images/ahlogo.png" class="ahLogo" /> -->
-      <img src="../assets/icon/favico.png" class="ahLogoMini" />
+      <img src="./assets/icon/favico.png" class="ahLogoMini" />
     </ion-buttons>
     <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
-      <img src="../assets/icon/usericon.svg">
+      <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
     <ion-title class='ion-text-center titleWhite'>Medical Reports</ion-title>
   </ion-toolbar>
@@ -14,10 +14,10 @@
     <ion-searchbar showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
     </ion-searchbar>
     <ion-buttons slot="end">
-      <button ion-button (click)="sortData()">
+      <button ion-button (click)="sortData()" icon-only clear>
         <ion-icon name="swap-vertical"></ion-icon>
       </button>
-      <button ion-button (click)="showFilters()">
+      <button ion-button (click)="showFilters()" icon-only clear>
         <ion-icon name="funnel"></ion-icon>
       </button>
     </ion-buttons>

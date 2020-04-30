@@ -1,3 +1,25 @@
-<p>
-  filter-popover works!
-</p>
+<ion-header>
+    <ion-title>Filter By</ion-title>
+</ion-header>
+<ion-content>
+    <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-select>
+            <ion-select-option value="1">On Review</ion-select-option>
+            <ion-select-option value="2">Ready</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+       <ion-label>Doctors</ion-label>
+       <ion-select>
+           <ion-select-option value="3">Dr. Suzanne Al Sayed</ion-select-option>
+           <ion-select-option value="4">Dr. Yaman Tai</ion-select-option>
+       </ion-select>
+   </ion-item>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-label slot="start" (click)="applyFilters()" style="color:rgb(87, 143, 182);font-weight: bold;">Apply</ion-label>
+        <ion-label slot="end" (click)="clearFilters()" style="color:black">Clear</ion-label>
+    </ion-toolbar>
+</ion-footer>

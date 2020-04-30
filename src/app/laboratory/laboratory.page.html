@@ -3,10 +3,10 @@
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
       <!-- <img src="../assets/images/ahlogo.png" class="ahLogo" /> -->
-      <img src="../assets/icon/favico.png" class="ahLogoMini" />
+      <img src="./assets/icon/favico.png" class="ahLogoMini" />
     </ion-buttons>
     <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
-      <img src="../assets/icon/usericon.svg">
+      <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
     <ion-title class='ion-text-center titleWhite'>Laboratory Reports</ion-title>
   </ion-toolbar>
@@ -14,10 +14,10 @@
     <ion-searchbar showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
     </ion-searchbar>
     <ion-buttons slot="end">
-      <button ion-button (click)="sortData()">
+      <button ion-button (click)="sortData()" icon-only clear>
         <ion-icon name="swap-vertical"></ion-icon>
       </button>
-      <button ion-button (click)="showFilters()">
+      <button ion-button (click)="showFilters($event)" icon-only clear>
         <ion-icon name="funnel"></ion-icon>
       </button>
     </ion-buttons>
@@ -45,6 +45,11 @@
                       <h5 style="color:rgb(87,143,182);font-weight:bold">Document Number: {{document.documentNo}}</h5>
                       <h6>{{document.physician}}</h6>
                       <span>Status : {{document.status}}</span>
+                      <div class="pull-right">
+                        <span style="font-size: 2em;">
+                          <ion-icon name="document-text" (click)="openDocument()"></ion-icon>
+                        </span>
+                      </div>
                     </div>
                     <div class="task-footer">
                       <div class="pull-left"><span class="fa fa-clock-o"></span> {{document.date}} - {{document.time}}</div>

@@ -10,5 +10,7 @@ export class UserPopoverComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+  resetPassword(){}
+  logOut(){}
 
 }

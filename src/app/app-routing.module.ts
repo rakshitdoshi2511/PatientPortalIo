@@ -4,7 +4,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),canActivate: [AuthGuardService],},
   { path: 'login', loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)},
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)},
   { path: 'laboratory', loadChildren: () => import('./laboratory/laboratory.module').then( m => m.LaboratoryPageModule)},

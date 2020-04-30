@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import * as _ from "lodash";
+import { KeyValue } from '@angular/common';
 
 
 @Component({
@@ -30,8 +31,9 @@ export class RadiologyPage implements OnInit {
     return await popover.present();
   }
   /**Helper Methods */
-  customSort(a, b) {
+  customSort(a:KeyValue<number,string>, b:KeyValue<number,string>) {
     //Do not do anything since originalOrder is not working;
+    return 0;
   }
   getDateDisplay(item) {
     console.log(item);
@@ -54,8 +56,51 @@ export class RadiologyPage implements OnInit {
   isGroupShown(group) {
     return group.value[0].show;
   }
+  sortData(){
+    
+  }
   showFilters(){
     
+  }
+  filterList(evt) {
+    this.documents = this.documentsOld;
+    const searchTerm = evt.srcElement.value;
+    console.log(searchTerm);
+    if (!searchTerm) {
+      this.documents = this.documentsOld;
+      let formattedDocuments = _.groupBy(this.documents, 'date');
+      _.forEach(formattedDocuments, function (_document) {
+        _document['lineItems'] = _document;
+      });
+      this.documents = formattedDocuments;
+      return;
+    }
+    if (searchTerm == "") {
+      this.documents = this.documentsOld;
+    }
+    this.documents = this.documents.filter(document => {
+      if (document.documentNo && searchTerm) {
+        if (document.documentNo.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || document.physician.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || document.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+
+    let formattedDocuments = _.groupBy(this.documents, 'date');
+    _.forEach(formattedDocuments, function (_document) {
+      _document['lineItems'] = _document;
+    });
+    this.documents = formattedDocuments;
+
+  }
+  filterListClear(evt) {
+    this.documents = this.documentsOld;
+    let formattedDocuments = _.groupBy(this.documents, 'date');
+    _.forEach(formattedDocuments, function (_document) {
+      _document['lineItems'] = _document;
+    });
+    this.documents = formattedDocuments;
   }
   /**Data API */
   loadData() {

@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
 
   /**Screen Interactions */
   onLogin() {
+    this._api.setLocal('isLoggedIn', true);
     this.router.navigateByUrl('home');
   }
   ngOnInit() {

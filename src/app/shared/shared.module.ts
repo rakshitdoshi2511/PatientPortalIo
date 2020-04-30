@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [ RouterModule, CommonModule],
-    declarations: [ UserPopoverComponent ],
-    exports: [  UserPopoverComponent]
+    declarations: [],
+    exports: []
 })
 
 export class SharedModule {

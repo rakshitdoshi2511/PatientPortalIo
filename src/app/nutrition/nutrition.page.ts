@@ -53,8 +53,51 @@ export class NutritionPage implements OnInit {
   isGroupShown(group) {
     return group.value[0].show;
   }
+  sortData(){
+    
+  }
   showFilters(){
     alert("ShowFilters");
+  }
+  filterList(evt) {
+    this.documents = this.documentsOld;
+    const searchTerm = evt.srcElement.value;
+    console.log(searchTerm);
+    if (!searchTerm) {
+      this.documents = this.documentsOld;
+      let formattedDocuments = _.groupBy(this.documents, 'date');
+      _.forEach(formattedDocuments, function (_document) {
+        _document['lineItems'] = _document;
+      });
+      this.documents = formattedDocuments;
+      return;
+    }
+    if (searchTerm == "") {
+      this.documents = this.documentsOld;
+    }
+    this.documents = this.documents.filter(document => {
+      if (document.documentNo && searchTerm) {
+        if (document.documentNo.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || document.physician.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || document.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+
+    let formattedDocuments = _.groupBy(this.documents, 'date');
+    _.forEach(formattedDocuments, function (_document) {
+      _document['lineItems'] = _document;
+    });
+    this.documents = formattedDocuments;
+
+  }
+  filterListClear(evt) {
+    this.documents = this.documentsOld;
+    let formattedDocuments = _.groupBy(this.documents, 'date');
+    _.forEach(formattedDocuments, function (_document) {
+      _document['lineItems'] = _document;
+    });
+    this.documents = formattedDocuments;
   }
   /**Data API */
   loadData() {
@@ -111,11 +154,11 @@ export class NutritionPage implements OnInit {
       });
 
     this.documentsOld = _data;
-    let formattedDocuments = _.groupBy(_data, 'date');
-    _.forEach(formattedDocuments, function (_document) {
-      _document['lineItems'] = _document;
-    });
-    this.documents = formattedDocuments;
+    // let formattedDocuments = _.groupBy(_data, 'date');
+    // _.forEach(formattedDocuments, function (_document) {
+    //   _document['lineItems'] = _document;
+    // });
+    this.documents = _data;
     console.log(this.documents);
   }
 
