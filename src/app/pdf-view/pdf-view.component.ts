@@ -14,7 +14,7 @@ export class PdfViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pdfSrc = '../assets/files/Sample.pdf';
+    this.pdfSrc = './assets/files/Sample.pdf';
   }
 
   dismiss(){

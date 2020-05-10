@@ -11,6 +11,11 @@ const routes: Routes = [
   { path: 'nutrition',  loadChildren: () => import('./nutrition/nutrition.module').then( m => m.NutritionPageModule)},
   { path: 'radiology',  loadChildren: () => import('./radiology/radiology.module').then( m => m.RadiologyPageModule)},
   { path: 'medical-reports',  loadChildren: () => import('./medical-reports/medical-reports.module').then( m => m.MedicalReportsPageModule)},
+  // {
+  //   path: 'sample',
+  //   loadChildren: () => import('./sample/sample.module').then( m => m.SamplePageModule)
+  // },
+  
   
 ];
 

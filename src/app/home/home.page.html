@@ -16,121 +16,98 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="background-image">
-  <section class="w-100" style="overflow: hidden;">
-    <div class="row">
-      <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-xl-12">
-        <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
-        <div class="col-lg-6 col-xl-6 col-md-6 col-xs-12 col-sm-12 myrow flip-container">
-          <div class="flipper" [routerLink]="['/laboratory']">
-            <div class="diamond diamond1 myDiamond">
-              <div class="diamondCard text-center myDiamond__face flipper-front">
-                <img src="./assets/icon/icon_flask.svg" height="40em">
-                <br />
-                <h3 class="title">LABORATORY</h3>
-                <span class="subtitle">Access to the laboratory reports</span>
+  <div class="row  h-100 align-items-center">
+    <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-xl-12">
+      <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
+      <div class="col-lg-6 col-xl-6 col-md-6 col-xs-12 col-sm-12 align-self-center">
+        <div id="main">
+          <div class="box blue">
+            <div class="diamondIn">
+              <div class="front" style="background: rgb(102,203,221);">
+                <div class="text-center frontContent">
+                  <img src="./assets/icon/icon_nutrition.svg" height="40em">
+                  <br />
+                  <h3 class="title">NUTRITION</h3>
+                  <h3 class="title">REPORTS</h3>
+                  <!-- <span class="subtitle smallDevice">Access to the nutrition care reports</span> -->
+                </div>
               </div>
-              <div class="diamondCard text-center myDiamond__face flipper-back">
-                <img src="../../assets/icon/icon_flask.svg" height="40em">
-                <br />
-                <h3 class="title">Total Reports: 23</h3>
-                <span class="subtitle">Last report:2nd Feb 2020</span>
-              </div>
-            </div>
-          </div>
-          <div class="flipper" [routerLink]="['/nutrition']">
-            <div class="diamond diamond2 myDiamond">
-              <div class="diamondCard text-center myDiamond__face flipper-front">
-                <img src="./assets/icon/icon_nutrition.svg" height="40em">
-                <br />
-                <h3 class="title">NUTRITION</h3>
-                <span class="subtitle">Access to the nutrition care reports</span>
-              </div>
-              <div class="diamondCard text-center myDiamond__face flipper-back">
-                <img src="../../assets/icon/icon_nutrition.svg" height="40em">
-                <br />
-                <h3 class="title">Total Reports: 5</h3>
-                <span class="subtitle">Last report:2nd Feb 2020</span>
+              <div class="back" style="background: rgb(102,203,221);">
+                <div class="text-center backContent">
+                  <img src="./assets/icon/icon_nutrition.svg" height="40em">
+                  <br />
+                  <h3 class="title">TOTAL: 5</h3>
+                  <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="flipper" [routerLink]="['/radiology']">
-            <div class="diamond diamond3 myDiamond">
-              <div class="diamondCard text-center myDiamond__face flipper-front">
-                <img src="./assets/icon/icon_radiology.svg" height="40em">
-                <br />
-                <h3 class="title">RADIOLOGY</h3>
-                <span class="subtitle">Access to the radiology reports and images</span>
+          <div class="box green">
+            <div class="diamondIn">
+              <div class="front" style="background: rgb(87,143,182)">
+                <div class="text-center frontContent">
+                  <img src="./assets/icon/icon_flask.svg" height="40em">
+                  <br />
+                  <h3 class="title">LABORATORY</h3>
+                  <h3 class="title">REPORTS</h3>
+                </div>
               </div>
-              <div class="diamondCard text-center myDiamond__face flipper-back">
-                <img src="./assets/icon/icon_radiology.svg" height="40em">
-                <br />
-                <h3 class="title">Total Reports: 12</h3>
-                <span class="subtitle">Last report:18th Jan 2020</span>
-              </div>
-            </div>
-          </div>
-          <div class="flipper" [routerLink]="['/medical-reports']">
-            <div class="diamond diamond4 myDiamond">
-              <div class="diamondCard text-center myDiamond__face flipper-front">
-                <img src="./assets/icon/icon_report.svg" height="40em">
-                <br />
-                <h3 class="title">MEDICAL REPORTS</h3>
-                <span class="subtitle">Access General Medical Reports, ER and Hospital Discharge reports</span>
-              </div>
-              <div class="diamondCard text-center myDiamond__face flipper-back">
-                <img src="./assets/icon/icon_report.svg" height="40em">
-                <br />
-                <h3 class="title">Total Reports: 42</h3>
-                <span class="subtitle">Last report:14th March 2020</span>
+              <div class="back" style="background: rgb(87,143,182)">
+                <div class="text-center backContent">
+                  <img src="./assets/icon/icon_flask.svg" height="40em">
+                  <br />
+                  <h3 class="title">TOTAL: 23</h3>
+                  <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
+                </div>
               </div>
             </div>
           </div>
-          <!-- <div class="diamond diamond2 flipper" [routerLink]="['/nutrition']">
-            <div class="diamondCard text-center flipper-front">
-              <img src="../../assets/icon/icon_nutrition.svg" height="40em">
-              <br />
-              <h3 class="title">NUTRITION</h3>
-              <span class="subtitle">Access to the nutrition care reports</span>
-            </div>
-            <div class="diamondCard text-center flipper-back">
-              <img src="../../assets/icon/icon_nutrition.svg" height="40em">
-              <br />
-              <h3 class="title">Total Reports: 5</h3>
-              <span class="subtitle">Last report:2nd Feb 2020</span>
-            </div>
-          </div>
-          <div class="diamond diamond3 flipper" [routerLink]="['/radiology']">
-            <div class="diamondCard text-center flipper-front">
-              <img src="../../assets/icon/icon_radiology.svg" height="40em">
-              <br />
-              <h3 class="title">RADIOLOGY</h3>
-              <span class="subtitle">Access to the radiology reports and images</span>
-            </div>
-            <div class="diamondCard text-center flipper-back">
-              <img src="../../assets/icon/icon_radiology.svg" height="40em">
-              <br />
-              <h3 class="title">Total Reports: 12</h3>
-              <span class="subtitle">Last report:18th Jan 2020</span>
+          <div class="box red">
+            <div class="diamondIn">
+              <div class="front" style="background: rgb(102,203,221);">
+                <div class="text-center frontContent">
+                  <img src="./assets/icon/icon_radiology.svg" height="40em">
+                  <br />
+                  <h3 class="title">RADIOLOGY</h3>
+                  <h3 class="title">REPORTS</h3>
+                  <!-- <span class="subtitle smallDevice">Access to the radiology reports and images</span> -->
+                </div>
+              </div>
+              <div class="back" style="background: rgb(102,203,221);">
+                <div class="text-center backContent">
+                  <img src="./assets/icon/icon_radiology.svg" height="40em">
+                  <br />
+                  <h3 class="title">TOTAL: 12</h3>
+                  <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="diamond diamond4 flipper" [routerLink]="['/medical-reports']">
-            <div class="diamondCard text-center flipper-front">
-              <img src="../../assets/icon/icon_report.svg" height="40em">
-              <br />
-              <h3 class="title">MEDICAL REPORTS</h3>
-              <span class="subtitle">Access General Medical Reports, ER and Hospital Discharge reports</span>
+          <div class="box yellow">
+            <div class="diamondIn">
+              <div class="front" style="background: rgb(87,143,182)">
+                <div class="text-center frontContent">
+                  <img src="./assets/icon/icon_report.svg" height="40em">
+                  <br />
+                  <h3 class="title">MEDICAL</h3>
+                  <h3 class="title">REPORTS</h3>
+                  <!-- <span class="subtitle smallDevice">Access General Medical Reports, ER and Hospital Discharge reports</span> -->
+                </div>
+              </div>
+              <div class="back" style="background: rgb(87,143,182)">
+                <div class="text-center backContent">
+                  <img src="./assets/icon/icon_report.svg" height="40em">
+                  <br />
+                  <h3 class="title">TOTAL: 42</h3>
+                  <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
+                </div>
+              </div>
             </div>
-            <div class="diamondCard text-center flipper-back">
-              <img src="../../assets/icon/icon_report.svg" height="40em">
-              <br />
-              <h3 class="title">Total Reports: 42</h3>
-              <span class="subtitle">Last report:14th March 2020</span>
-            </div>
-          </div> -->
+          </div>
         </div>
-        <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
       </div>
+      <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
     </div>
-  </section>
+  </div>
 
 </ion-content>
