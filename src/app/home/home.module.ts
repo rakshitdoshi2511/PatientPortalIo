@@ -7,14 +7,15 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
-
+import { TranslateModule,TranslateLoader } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    TranslateModule
   ],
   declarations: [HomePage],//,UserPopoverComponent],
   entryComponents: []//[UserPopoverComponent]

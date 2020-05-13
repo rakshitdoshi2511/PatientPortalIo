@@ -178,3 +178,10 @@ ul, ol{
     content: "\e900";
     color: #fff;
   }
+
+  ion-toggle{
+      --background-checked: rgb(83,143,182);
+  }
+  .toggle-inner{
+      background: rgb(83,143,182) !important;
+  }

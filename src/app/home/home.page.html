@@ -16,14 +16,14 @@
       <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
       <div class="col-lg-6 col-xl-6 col-md-6 col-xs-12 col-sm-12 align-self-center">
         <div id="main">
-          <div class="box blue">
+          <div class="box blue"> <!--NUTRITION-->
             <div class="diamondIn" [routerLink]="['/nutrition']">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">NUTRITION</h3>
-                  <h3 class="title">REPORTS</h3>
+                  <h3 class="title">{{'tile_nutrition' | translate | uppercase}}</h3>
+                  <h3 class="title">{{'tile_report' | translate | uppercase}}</h3>
                   <!-- <span class="subtitle smallDevice">Access to the nutrition care reports</span> -->
                 </div>
               </div>
@@ -31,40 +31,40 @@
                 <div class="text-center backContent">
                   <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">TOTAL: 5</h3>
+                  <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.nutritionCount}}</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="box green">
+          <div class="box green"> <!--LABORATORY-->
             <div class="diamondIn" [routerLink]="['/laboratory']">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_flask.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">LABORATORY</h3>
-                  <h3 class="title">REPORTS</h3>
+                  <h3 class="title">{{'tile_laboratory' | translate | uppercase}}</h3>
+                  <h3 class="title">{{'tile_report' | translate | uppercase}}</h3>
                 </div>
               </div>
               <div class="back" style="background: rgb(87,143,182)">
                 <div class="text-center backContent">
                   <img src="./assets/icon/icon_flask.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">TOTAL: 23</h3>
+                  <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.laboratoryCount}}</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="box red">
+          <div class="box red"> <!--RADIOLOGY-->
             <div class="diamondIn" [routerLink]="['/radiology']">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">RADIOLOGY</h3>
-                  <h3 class="title">REPORTS</h3>
+                  <h3 class="title">{{'tile_radiology' | translate | uppercase}}</h3>
+                  <h3 class="title">{{'tile_report' | translate | uppercase}}</h3>
                   <!-- <span class="subtitle smallDevice">Access to the radiology reports and images</span> -->
                 </div>
               </div>
@@ -72,20 +72,20 @@
                 <div class="text-center backContent">
                   <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">TOTAL: 12</h3>
+                  <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.radiologyCount}}</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="box yellow">
+          <div class="box yellow"> <!--MEDICAL-->
             <div class="diamondIn" [routerLink]="['/medical-reports']">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_report.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">MEDICAL</h3>
-                  <h3 class="title">REPORTS</h3>
+                  <h3 class="title">{{'tile_medical' | translate | uppercase}}</h3>
+                  <h3 class="title">{{'tile_report' | translate | uppercase}}</h3>
                   <!-- <span class="subtitle smallDevice">Access General Medical Reports, ER and Hospital Discharge reports</span> -->
                 </div>
               </div>
@@ -93,7 +93,7 @@
                 <div class="text-center backContent">
                   <img src="./assets/icon/icon_report.svg" class="iconTitle">
                   <br />
-                  <h3 class="title">TOTAL: 42</h3>
+                  <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.medicalCount}}</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
                 </div>
               </div>

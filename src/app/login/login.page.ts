@@ -11,6 +11,7 @@ import { AlertController,Platform } from '@ionic/angular';
 import { GlobalService } from './../services/global.service';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginPage implements OnInit {
     private global:GlobalService,
     private http:HttpClient,
     private nativeHttp:HTTP,
-    private platform:Platform
+    private platform:Platform,
+    private translate: TranslateService,
 
   ) {
     this.baseUrl = environment.url;
@@ -78,7 +80,8 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('home');
   }
   login(){
-    this._loader.showLoader('Authenticating');
+    let msg = this.translate.instant('dialog_title_authentication');
+    this._loader.showLoader(msg);
 
     this.doLogin();
   }

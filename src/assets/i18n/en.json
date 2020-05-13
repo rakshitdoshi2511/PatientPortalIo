@@ -1,3 +1,18 @@
 {
-    
+    "lbl_login":"Login",
+    "username":"Username",
+    "password":"Password",
+    "dialog_title_authentication":"Authenticating",
+    "tile_nutrition":"Nutrition",
+    "tile_laboratory":"Laboratory",
+    "tile_radiology":"Radiology",
+    "tile_medical":"Nutrition",
+    "tile_report":"Reports",
+    "tile_total":"Total",
+    "sidemenu_home":"Home",
+    "sidemenu_lab":"Laboratory Reports",
+    "sidemenu_nutrition":"Nutrition Reports",
+    "sidemenu_radiology":"Radiology Reports",
+    "sidemenu_medical":"Medical Reports",
+    "lbl_logout":"Log out"
 }

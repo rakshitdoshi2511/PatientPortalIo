@@ -9,13 +9,17 @@ import { UserPopoverComponent } from '../user-popover/user-popover.component';
 })
 export class HomePage {
   tiles: any = [];
+  model: any = {};
 
   constructor(
     public popoverController: PopoverController,
   ) {}
 
   ngOnInit(){
-
+    this.model.laboratoryCount = 23;
+    this.model.nutritionCount = 5;
+    this.model.radiologyCount = 13;
+    this.model.medicalCount = 45;
   }
   ionViewDidEnter(){
     this.tiles.push(
@@ -35,6 +39,7 @@ export class HomePage {
       animated:true,
     });
     return await popover.present();
+    
   }
 
   openProfile(event){

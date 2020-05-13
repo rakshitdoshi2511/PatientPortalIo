@@ -12,10 +12,8 @@
 <div class="nav">
 	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
 		<div class="nav-item" [routerLink]="[p.url]">
-			<!-- <span class="icon-icon_flask_blue"></span> -->
-			<!-- <i class="icon-icon_flask_blue"></i> -->
 			<ion-icon src="{{p.iconPath}}"></ion-icon>
-			{{p.title}}
+			{{p.title | translate}}
 			<span class="divider"></span>
 		</div>
 	</ion-menu-toggle>
@@ -23,7 +21,7 @@
 
 <div class="footer">
 	<div class="footer-nav">
-		<ion-button expand="full" class="ahThemeButton" (click)="logOut()">Log out</ion-button>
+		<ion-button expand="full" class="ahThemeButton" (click)="logOut()">{{ 'lbl_logout' | translate | uppercase}}</ion-button>
 	</div>
 
 	<div class="footer-app-version">

@@ -1,3 +1,18 @@
 {
-    
+    "lbl_login":"تسجيل الدخول",
+    "username":"اسم المستخدم",
+    "password":"كلمه السر",
+    "dialog_title_authentication":"المصادقة",
+    "tile_nutrition":"التغذية",
+    "tile_laboratory":"مختبر",
+    "tile_radiology":"الأشعة",
+    "tile_medical":"طبي",
+    "tile_report":"التقارير",
+    "tile_total":"مجموع",
+    "sidemenu_home":"الصفحة الرئيسية",
+    "sidemenu_lab":"تقارير المختبر",
+    "sidemenu_nutrition":"تقارير التغذية",
+    "sidemenu_radiology":"تقارير الأشعة",
+    "sidemenu_medical":"التقارير الطبية",
+    "lbl_logout":"تسجيل خروج"
 }

@@ -23,19 +23,19 @@
   </ion-toolbar>  
 </ion-header>
 <ion-content>
-  <!-- <div class="card">
+  <div class="card" [hidden]="!model.isVisible">
     <div class="content">
       <div class="panel-group" *ngIf="documents">
         <ion-list>
-          <div *ngFor="let _document of documents | keyvalue: customSort">
+          <div *ngFor="let _document of documentsMobile | keyvalue: customSort">
             <div class="panel panel-default">
               <div class="panel-heading clickable" (click)="toggleGroup(_document)" [ngClass]="{active:isGroupShown(_document)}">
                 <h4 class="panel-title">
-                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>Document Date : {{getDateDisplay(documents[_document.key])}}</span>
+                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>Document Date : {{getDateDisplay(documentsMobile[_document.key])}}</span>
                 </h4>
               </div>
               <div *ngIf="isGroupShown(_document)">
-                <div class="tasks" id="tasks" *ngFor="let document of documents[_document.key].lineItems">
+                <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
                   <div class="task-item" [ngClass]="document.class">
                     <div class="task-text">
                       <h5 style="color:rgb(87,143,182);font-weight:bold">Document Number: {{document.documentNo}}</h5>
@@ -51,11 +51,12 @@
               </div>
             </div>
           </div>
-        </ion-list>
+        </ion-list> 
       </div>
     </div>
-  </div> -->
-  <div class="table-responsive padding" style="margin:1em">
+  </div>
+
+  <div class="table-responsive padding" style="margin:1em" [hidden]="model.isVisible">
     <table class="table table-striped">
       <thead>
         <tr class="" style="background-color:#909090;color:white">

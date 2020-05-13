@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import * as _ from "lodash";
 
@@ -12,10 +12,12 @@ import * as _ from "lodash";
 export class NutritionPage implements OnInit {
   model: any = {};
   documents: any;
+  documentsMobile:any;
   documentsOld: any;
 
   constructor(
     public popoverController: PopoverController,
+    public platform:Platform
   ) { }
 
   /**Dialog and Loaders*/
@@ -38,6 +40,8 @@ export class NutritionPage implements OnInit {
   }
   /**Default Methods*/
   ngOnInit() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
   }
   ionViewDidEnter() {
     this.loadData();
@@ -154,10 +158,11 @@ export class NutritionPage implements OnInit {
       });
 
     this.documentsOld = _data;
-    // let formattedDocuments = _.groupBy(_data, 'date');
-    // _.forEach(formattedDocuments, function (_document) {
-    //   _document['lineItems'] = _document;
-    // });
+    let formattedDocuments = _.groupBy(_data, 'date');
+    _.forEach(formattedDocuments, function (_document) {
+      _document['lineItems'] = _document;
+    });
+    this.documentsMobile = formattedDocuments;
     this.documents = _data;
     console.log(this.documents);
   }

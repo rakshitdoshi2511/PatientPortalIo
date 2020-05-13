@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import {GlobalService} from './services/global.service';
@@ -14,6 +14,8 @@ import {GlobalService} from './services/global.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  layoutDir: string = 'ltr';
+  layoutDirSideMenu: string = 'start';
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -41,5 +43,12 @@ export class AppComponent {
         // this.router.navigateByUrl('login');
       // }
     });
+
+    //Set App Direction based on language selected
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      event.lang == 'ar'? this.layoutDir = 'rtl' : this.layoutDir = 'ltr';
+      event.lang == 'ar'? this.layoutDirSideMenu = 'end': this.layoutDirSideMenu = 'start';
+    })
   }
+
 }

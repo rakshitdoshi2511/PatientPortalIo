@@ -118,3 +118,10 @@
     filter: alpha(opacity = 50);
     cursor: pointer;
   }
+
+  .hidden-show-when{
+    display: none !important;
+  }
+  .hidden-hide-when{
+    display: none !important;
+  }
