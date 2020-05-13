@@ -15,36 +15,32 @@ export class SidebarComponent implements OnInit {
     {
       title: 'Home',
       url: '/home',
-      icon: '🏠',
-      iconName: 'home'
+      iconName: 'home',
+      iconPath: '../assets/icon/icon_home_blue.svg'
     },
     {
       title: "Laboratory Reports",
       url: "laboratory",
-      icon: "💸",
       iconName: 'card',
-      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
+      iconPath: '../assets/icon/icon_flask_blue.svg'
     },
     {
       title: 'Nutrition',
       url: 'nutrition',
-      icon: '👤',
       iconName: 'person',
-      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
+      iconPath: '../assets/icon/icon_nutrition_blue.svg'
     },
     {
       title: 'Radiology',
       url: 'radiology',
-      icon: '⚙️',
       iconName: 'notifications',
-      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
+      iconPath: '../assets/icon/icon_radiology_blue.svg'
     },
     {
       title: 'Medical Reports',
       url: 'medical-reports',
-      icon: '⚙️',
       iconName: 'notifications',
-      iconPath: 'url(../assets/icon/icon_flask_blue.svg)'
+      iconPath: '../assets/icon/icon_report_blue.svg'
     }
     
   ];

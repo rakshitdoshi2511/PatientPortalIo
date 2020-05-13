@@ -13,7 +13,8 @@
 	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
 		<div class="nav-item" [routerLink]="[p.url]">
 			<!-- <span class="icon-icon_flask_blue"></span> -->
-			<i class="icon-icon_flask_blue"></i>
+			<!-- <i class="icon-icon_flask_blue"></i> -->
+			<ion-icon src="{{p.iconPath}}"></ion-icon>
 			{{p.title}}
 			<span class="divider"></span>
 		</div>

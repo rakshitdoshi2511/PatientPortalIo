@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -18,6 +19,10 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TranslateModule,TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { HttpModule, Http } from '@angular/http';
+import { HTTP } from '@ionic-native/http/ngx';
+import {GlobalService} from './services/global.service';
 //import { HttpModule, Http } from '@angular/http';
 //import { SharedModule } from './shared/shared.module';
 
@@ -42,6 +47,8 @@ export function setTranslateLoader(http: HttpClient) {
     BrowserModule, 
     IonicModule.forRoot(),
     HttpClientModule, 
+    FormsModule,
+    HttpModule,
     TranslateModule.forRoot({
       loader: {
        provide: TranslateLoader,
@@ -53,6 +60,9 @@ export function setTranslateLoader(http: HttpClient) {
     PdfViewerModule
   ],
   providers: [
+    BnNgIdleService,
+    HTTP,
+    GlobalService,
     DocumentViewer,
     StatusBar,
     SplashScreen,

@@ -4,11 +4,6 @@
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
       <img src="./assets/images/ahlogo.png" class="ahLogo" />
     </ion-buttons>
-    <!-- <ion-buttons slot="end">
-      <ion-button color="medium" (click)="openProfile()">
-        <ion-icon src="../assets/icon/usericon.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
     <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
       <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
@@ -22,10 +17,10 @@
       <div class="col-lg-6 col-xl-6 col-md-6 col-xs-12 col-sm-12 align-self-center">
         <div id="main">
           <div class="box blue">
-            <div class="diamondIn">
+            <div class="diamondIn" [routerLink]="['/nutrition']">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
-                  <img src="./assets/icon/icon_nutrition.svg" height="40em">
+                  <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
                   <br />
                   <h3 class="title">NUTRITION</h3>
                   <h3 class="title">REPORTS</h3>
@@ -34,7 +29,7 @@
               </div>
               <div class="back" style="background: rgb(102,203,221);">
                 <div class="text-center backContent">
-                  <img src="./assets/icon/icon_nutrition.svg" height="40em">
+                  <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
                   <br />
                   <h3 class="title">TOTAL: 5</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
@@ -43,10 +38,10 @@
             </div>
           </div>
           <div class="box green">
-            <div class="diamondIn">
+            <div class="diamondIn" [routerLink]="['/laboratory']">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
-                  <img src="./assets/icon/icon_flask.svg" height="40em">
+                  <img src="./assets/icon/icon_flask.svg" class="iconTitle">
                   <br />
                   <h3 class="title">LABORATORY</h3>
                   <h3 class="title">REPORTS</h3>
@@ -54,7 +49,7 @@
               </div>
               <div class="back" style="background: rgb(87,143,182)">
                 <div class="text-center backContent">
-                  <img src="./assets/icon/icon_flask.svg" height="40em">
+                  <img src="./assets/icon/icon_flask.svg" class="iconTitle">
                   <br />
                   <h3 class="title">TOTAL: 23</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
@@ -63,10 +58,10 @@
             </div>
           </div>
           <div class="box red">
-            <div class="diamondIn">
+            <div class="diamondIn" [routerLink]="['/radiology']">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
-                  <img src="./assets/icon/icon_radiology.svg" height="40em">
+                  <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
                   <br />
                   <h3 class="title">RADIOLOGY</h3>
                   <h3 class="title">REPORTS</h3>
@@ -75,7 +70,7 @@
               </div>
               <div class="back" style="background: rgb(102,203,221);">
                 <div class="text-center backContent">
-                  <img src="./assets/icon/icon_radiology.svg" height="40em">
+                  <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
                   <br />
                   <h3 class="title">TOTAL: 12</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>
@@ -84,10 +79,10 @@
             </div>
           </div>
           <div class="box yellow">
-            <div class="diamondIn">
+            <div class="diamondIn" [routerLink]="['/medical-reports']">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
-                  <img src="./assets/icon/icon_report.svg" height="40em">
+                  <img src="./assets/icon/icon_report.svg" class="iconTitle">
                   <br />
                   <h3 class="title">MEDICAL</h3>
                   <h3 class="title">REPORTS</h3>
@@ -96,7 +91,7 @@
               </div>
               <div class="back" style="background: rgb(87,143,182)">
                 <div class="text-center backContent">
-                  <img src="./assets/icon/icon_report.svg" height="40em">
+                  <img src="./assets/icon/icon_report.svg" class="iconTitle">
                   <br />
                   <h3 class="title">TOTAL: 42</h3>
                   <span class="subtitle smallDevice">Last report: 2nd Feb 2020</span>

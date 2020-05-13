@@ -36,16 +36,25 @@
     </ul>
   </div>
   <div class="twt-write col-sm-12">
-    <h6 style="color: #bdbdbd;font-size: 13px;"><span><ion-icon name='call'></ion-icon></span> Contact: <span class="pull-right">
+    <h6 style="color: #bdbdbd;font-size: 13px;"><span>
+        <ion-icon name='call'></ion-icon>
+      </span> Contact: <span class="pull-right">
         +962 6 1555 5353
       </span></h6>
-    <h6 style="color: #bdbdbd;font-size: 13px;"><span><ion-icon name='mail'></ion-icon></span> Email: <span class="pull-right">
-      test@sap.com
-    </span></h6>
+    <h6 style="color: #bdbdbd;font-size: 13px;"><span>
+        <ion-icon name='mail'></ion-icon>
+      </span> Email: <span class="pull-right">
+        test@sap.com
+      </span></h6>
   </div>
   <footer class="twt-footer">
     <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">Reset Password</ion-button>
     <ion-button expand="full" class="ahThemeButton" (click)="logOut()">Log out</ion-button>
+    <ion-row class="twt-write">
+      <h6 style="color: #bdbdbd;font-size: 13px;margin-top: 0.8em;">Arabic</h6>
+      <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
+      <h6 style="color: #bdbdbd;font-size: 13px;margin-top: 0.8em;">English</h6>
+    </ion-row>
     <!-- <a href="#"><i class="fa fa-camera"></i></a>
     <a href="#"><i class="fa fa-map-marker"></i></a>
     New Castle, UK

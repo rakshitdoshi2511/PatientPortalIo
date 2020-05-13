@@ -7,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPopoverComponent implements OnInit {
 
+  model: any = {};
   constructor() { }
 
   ngOnInit() {}
   resetPassword(){}
   logOut(){}
+  switchLanguage(){
+    console.log(this.model.language);
+  }
 
 }
