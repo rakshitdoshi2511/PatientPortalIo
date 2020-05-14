@@ -11,12 +11,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="background-image">
-  <div class="row  h-100 align-items-center">
+  <!--Web View-->
+  <div class="row  h-100 align-items-center" [hidden]="model.isVisible">
     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-xl-12">
       <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
       <div class="col-lg-6 col-xl-6 col-md-6 col-xs-12 col-sm-12 align-self-center">
         <div id="main">
-          <div class="box blue"> <!--NUTRITION-->
+          <div class="box blue">
+            <!--NUTRITION-->
             <div class="diamondIn" [routerLink]="['/nutrition']">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
@@ -37,7 +39,8 @@
               </div>
             </div>
           </div>
-          <div class="box green"> <!--LABORATORY-->
+          <div class="box green">
+            <!--LABORATORY-->
             <div class="diamondIn" [routerLink]="['/laboratory']">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
@@ -57,7 +60,8 @@
               </div>
             </div>
           </div>
-          <div class="box red"> <!--RADIOLOGY-->
+          <div class="box red">
+            <!--RADIOLOGY-->
             <div class="diamondIn" [routerLink]="['/radiology']">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
@@ -78,7 +82,8 @@
               </div>
             </div>
           </div>
-          <div class="box yellow"> <!--MEDICAL-->
+          <div class="box yellow">
+            <!--MEDICAL-->
             <div class="diamondIn" [routerLink]="['/medical-reports']">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
@@ -102,6 +107,62 @@
         </div>
       </div>
       <div class="col-lg-3 col-xl-3 col-md-3 col-xs-12 col-sm-12"></div>
+    </div>
+  </div>
+  <!--Mobile View-->
+  <div class="container-fluid h-100 align-items-center paddingTopMobile" [hidden]="!model.isVisible">
+    <div class="row clearfix">
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="info-box-3 bg-green" style="background: rgb(87,143,182)" [routerLink]="['/laboratory']">
+          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+            <!-- <i class="zmdi zmdi-account col-blue"></i> -->
+            <img src="./assets/icon/icon_flask.svg" class="iconTitle">
+          </div>
+          <div class="content">
+            <div class="text">{{'tile_laboratory' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="number">{{model.laboratoryCount}}</div>
+            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="info-box-3 bg-green" style="background: rgb(102,203,221);" [routerLink]="['/nutrition']">
+          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+            <!-- <i class="zmdi zmdi-account col-blue"></i> -->
+            <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
+          </div>
+          <div class="content">
+            <div class="text">{{'tile_nutrition' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="number">{{model.nutritionCount}}</div>
+            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="info-box-3 bg-green" style="background: rgb(87,143,182)" [routerLink]="['/radiology']">
+          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+            <!-- <i class="zmdi zmdi-account col-blue"></i> -->
+            <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
+          </div>
+          <div class="content">
+            <div class="text">{{'tile_radiology' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="number">{{model.radiologyCount}}</div>
+            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="info-box-3 bg-green" style="background: rgb(102,203,221);" [routerLink]="['/medical-reports']">
+          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+            <img src="./assets/icon/icon_report.svg" class="iconTitle" >
+          </div>
+          <div class="content">
+            <div class="text">{{'tile_medical' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="number">{{model.medicalCount}}</div>
+            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

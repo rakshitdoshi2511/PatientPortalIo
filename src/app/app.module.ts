@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserPopoverComponent } from './user-popover/user-popover.component';
+import { GradientWithRadialProgressCardComponent } from './gradient-with-radial-progress-card/gradient-with-radial-progress-card.component';
 import { FilterPopoverComponent } from './filter-popover/filter-popover.component';
 import { FileOpener } from '@ionic-native/file-opener';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
@@ -23,6 +24,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { HttpModule, Http } from '@angular/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import {GlobalService} from './services/global.service';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
 //import { HttpModule, Http } from '@angular/http';
 //import { SharedModule } from './shared/shared.module';
 
@@ -36,12 +38,14 @@ export function setTranslateLoader(http: HttpClient) {
     SidebarComponent,
     UserPopoverComponent,
     FilterPopoverComponent,
+    GradientWithRadialProgressCardComponent,
     PdfViewComponent
   ],
   entryComponents: [
     UserPopoverComponent,
     FilterPopoverComponent,
-    PdfViewComponent
+    PdfViewComponent,
+    GradientWithRadialProgressCardComponent
   ],
   imports: [
     BrowserModule, 
@@ -49,6 +53,7 @@ export function setTranslateLoader(http: HttpClient) {
     HttpClientModule, 
     FormsModule,
     HttpModule,
+    RoundProgressModule,
     TranslateModule.forRoot({
       loader: {
        provide: TranslateLoader,

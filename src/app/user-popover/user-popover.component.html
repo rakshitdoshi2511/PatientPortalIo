@@ -1,13 +1,3 @@
-<!-- <div class="card">
-  <img src="../../assets/icon/usericon_blue.svg" alt="John" style="width:50%">
-  <h1>Joe Bonamassa</h1>
-  <p class="title">Patient MRN:1562</p>
-  <p>Gender:Male</p>
-  <p>Date of Birth:22.01.1977</p>
-  <p>Telephone:+962 6 1555 5353</p>
-  <p>Email:test@sap.com</p>
-</div> -->
-
 <section class="card">
   <div class="twt-feed blue-bg">
     <div class="media">
@@ -20,40 +10,41 @@
     </div>
     <div class="media-body">
       <h2 class="text-white display-6">Joe Bonamassa</h2>
-      <p class="text-light">MRN:1562</p>
+      <p class="text-light">{{'lbl_mrn' | translate | uppercase}}:1562</p>
     </div>
   </div>
   <div class="weather-category twt-category">
     <ul>
       <li class="active">
-        <h6 style="font-size:13px;">Gender</h6>
+        <h6 style="font-size:13px;">{{'lbl_gender' | translate | uppercase}}</h6>
         Male
       </li>
       <li>
-        <h6 style="font-size:13px;">Date of Birth</h6>
+        <h6 style="font-size:13px;">{{'lbl_date_of_birth' | translate | uppercase}}</h6>
         22.01.1977
       </li>
     </ul>
   </div>
   <div class="twt-write col-sm-12">
-    <h6 style="color: #bdbdbd;font-size: 13px;"><span>
+    <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
         <ion-icon name='call'></ion-icon>
-      </span> Contact: <span class="pull-right">
+      </span> {{'lbl_contact' | translate | uppercase}}: <span class="pull-right">
         +962 6 1555 5353
       </span></h6>
-    <h6 style="color: #bdbdbd;font-size: 13px;"><span>
+    <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
         <ion-icon name='mail'></ion-icon>
-      </span> Email: <span class="pull-right">
+      </span> {{'lbl_email' | translate | uppercase}}: <span class="pull-right">
         test@sap.com
       </span></h6>
   </div>
+  
   <footer class="twt-footer">
-    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">Reset Password</ion-button>
-    <ion-button expand="full" class="ahThemeButton" (click)="logOut()">Log out</ion-button>
+    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_reset_password' | translate | uppercase}}</ion-button>
+    <ion-button expand="full" class="ahThemeButton" (click)="logOut()">{{'lbl_logout' | translate | uppercase}}</ion-button>
     <ion-row class="twt-write">
-      <h6 style="color: #bdbdbd;font-size: 13px;margin-top: 0.8em;">Arabic</h6>
+      <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
-      <h6 style="color: #bdbdbd;font-size: 13px;margin-top: 0.8em;">English</h6>
+      <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
     </ion-row>
   </footer>
 </section>

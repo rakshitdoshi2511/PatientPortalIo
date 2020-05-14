@@ -9,10 +9,17 @@
     "tile_medical":"طبي",
     "tile_report":"التقارير",
     "tile_total":"مجموع",
+    "tile_last_report":"التقرير الأخير",
     "sidemenu_home":"الصفحة الرئيسية",
     "sidemenu_lab":"تقارير المختبر",
     "sidemenu_nutrition":"تقارير التغذية",
     "sidemenu_radiology":"تقارير الأشعة",
     "sidemenu_medical":"التقارير الطبية",
-    "lbl_logout":"تسجيل خروج"
+    "lbl_logout":"تسجيل خروج",
+    "lbl_mrn":"رقم السجل الطبي",
+    "lbl_gender":"جنس",
+    "lbl_date_of_birth":"تاريخ الولادة",
+    "lbl_contact":"اتصل",
+    "lbl_email":"البريد الإلكتروني",
+    "lbl_reset_password":"إعادة تعيين كلمة المرور"
 }

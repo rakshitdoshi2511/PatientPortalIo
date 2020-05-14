@@ -31,6 +31,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
     "angular-cli-ghpages": "^0.6.2",
+    "angular-svg-round-progressbar": "^3.0.1",
     "bn-ng-idle": "^1.0.1",
     "cordova-browser": "^5.0.4",
     "cordova-plugin-advanced-http": "^2.4.1",

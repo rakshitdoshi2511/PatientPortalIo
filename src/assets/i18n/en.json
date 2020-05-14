@@ -6,13 +6,21 @@
     "tile_nutrition":"Nutrition",
     "tile_laboratory":"Laboratory",
     "tile_radiology":"Radiology",
-    "tile_medical":"Nutrition",
+    "tile_medical":"Medical",
     "tile_report":"Reports",
     "tile_total":"Total",
+    "tile_last_report":"Last Report",
     "sidemenu_home":"Home",
     "sidemenu_lab":"Laboratory Reports",
     "sidemenu_nutrition":"Nutrition Reports",
     "sidemenu_radiology":"Radiology Reports",
     "sidemenu_medical":"Medical Reports",
-    "lbl_logout":"Log out"
+    "lbl_logout":"Log out",
+    "lbl_mrn":"Medical Record Number",
+    "lbl_gender":"Gender",
+    "lbl_date_of_birth":"D.O.B",
+    "lbl_contact":"Contact",
+    "lbl_email":"Email",
+    "lbl_reset_password":"Reset Password"
+
 }
