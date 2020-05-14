@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController,Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import * as _ from "lodash";
 import { KeyValue } from '@angular/common';
@@ -14,10 +14,12 @@ export class RadiologyPage implements OnInit {
 
   model: any = {};
   documents: any;
+  documentsMobile:any;
   documentsOld: any;
 
   constructor(
     public popoverController: PopoverController,
+    public platform:Platform
   ) { }
 
   /**Dialog and Loaders*/
@@ -41,8 +43,12 @@ export class RadiologyPage implements OnInit {
   }
   /**Default Methods*/
   ngOnInit() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
   }
   ionViewDidEnter() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
     this.loadData();
   }
   /**Screen Interaction */
@@ -166,8 +172,9 @@ export class RadiologyPage implements OnInit {
     _.forEach(formattedDocuments, function (_document) {
       _document['lineItems'] = _document;
     });
-    this.documents = formattedDocuments;
-    console.log(this.documents);
+    this.documentsMobile = formattedDocuments;
+    this.documents = _data;
+    //console.log(this.documents);
   }
 
 }

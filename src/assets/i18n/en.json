@@ -21,6 +21,13 @@
     "lbl_date_of_birth":"D.O.B",
     "lbl_contact":"Contact",
     "lbl_email":"Email",
-    "lbl_reset_password":"Reset Password"
+    "lbl_reset_password":"Reset Password",
+    "lbl_document":"Document",
+    "lbl_document_no":"Document Number",
+    "lbl_sample":"Sample",
+    "lbl_date":"Date",
+    "lbl_status":"Status",
+    "lbl_physician":"Physician",
+    "lbl_type":"Type"
 
 }

@@ -24,22 +24,64 @@
   </ion-toolbar>  
 </ion-header>
 <ion-content>
-  <div class="card">
+  <!--Web View-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="table-responsive padding" style="margin:1em" [hidden]="model.isVisible">
+        <table class="project-list-table table-nowrap table-centered table-borderless table padding" style="padding:1rem">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 100px;"></th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">Document No</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">Date</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">Status</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">Physician</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lt of documents">
+              <td>
+                <img
+                  src="../../assets/icon/icon_document_blue.svg"
+                  alt="" class="avatar-sm"></td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" href="/projects-list">{{lt.documentNo}}</a></h5>
+              </td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
+              </td>
+              <td><span class="badge badge-primary">{{lt.status}}</span></td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
+              </td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+  <!--Mobile View-->
+  <div class="card" [hidden]="!model.isVisible">
     <div class="content">
       <div class="panel-group" *ngIf="documents">
         <ion-list>
-          <div *ngFor="let _document of documents | keyvalue: customSort">
+          <div *ngFor="let _document of documentsMobile | keyvalue: customSort">
             <div class="panel panel-default">
               <div class="panel-heading clickable" (click)="toggleGroup(_document)" [ngClass]="{active:isGroupShown(_document)}">
                 
                 <h4 class="panel-title">
                   <!-- <div class="block"></div> -->
-                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>Document Date : {{getDateDisplay(documents[_document.key])}}</span>
+                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>Document Date : {{getDateDisplay(documentsMobile[_document.key])}}</span>
                   <!-- <p><span>Pricing Period: {{getPricingDates(orders[cust.key])}}</span></p> -->
                 </h4>
               </div>
               <div *ngIf="isGroupShown(_document)">
-                <div class="tasks" id="tasks" *ngFor="let document of documents[_document.key].lineItems">
+                <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
                   <div class="task-item" [ngClass]="document.class">
                     <div class="task-text">
                       <h5 style="color:rgb(87,143,182);font-weight:bold">Document Number: {{document.documentNo}}</h5>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController,Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import * as _ from "lodash";
 import { KeyValue } from '@angular/common';
@@ -12,12 +12,14 @@ import { KeyValue } from '@angular/common';
 export class MedicalReportsPage implements OnInit {
   model: any = {};
   documents: any;
+  documentsMobile:any;
   documentsOld: any;
   emergencyDocuments: any;
   physicanDocuments: any;
   medicalDocuments: any;
   constructor(
     public popoverController: PopoverController,
+    public platform:Platform
   ) { }
 
   /**Dialog and Loaders*/
@@ -41,8 +43,12 @@ export class MedicalReportsPage implements OnInit {
   }
   /**Default Methods*/
   ngOnInit() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
   }
   ionViewDidEnter() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
     this.loadData();
   }
   /**Screen Interaction */
@@ -73,10 +79,13 @@ export class MedicalReportsPage implements OnInit {
         this.model.selectedMedical = '';
 
         let formattedDocuments = _.groupBy(that.documentsOld, 'date');
+        that.documents = that.documentsOld;
+
         _.forEach(formattedDocuments, function (_document) {
           _document['lineItems'] = _document;
         });
-        that.documents = formattedDocuments;
+        that.documentsMobile = formattedDocuments
+        
 
         break;
       case 'EME':
@@ -89,7 +98,8 @@ export class MedicalReportsPage implements OnInit {
         _.forEach(_emergencyDocuments, function (_document) {
           _document['lineItems'] = _document;
         });
-        that.documents = _emergencyDocuments;
+        that.documents = that.emergencyDocuments;
+        that.documentsMobile = _emergencyDocuments;
 
         break;
       case 'PHY':
@@ -102,7 +112,8 @@ export class MedicalReportsPage implements OnInit {
         _.forEach(_physicianDocuments, function (_document) {
           _document['lineItems'] = _document;
         });
-        that.documents = _physicianDocuments;
+        that.documents = that.physicanDocuments;
+        that.documentsMobile = _physicianDocuments;
 
         break;
       case 'MED':
@@ -115,12 +126,15 @@ export class MedicalReportsPage implements OnInit {
         _.forEach(_medicalDocuments, function (_document) {
           _document['lineItems'] = _document;
         });
-        that.documents = _medicalDocuments;
+        that.documents = that.medicalDocuments;
+        that.documentsMobile = _medicalDocuments;
         break;
     }
   }
   filterList(evt) {
+    
     this.documents = this.documentsOld;
+    this.documentsMobile = this.documentsOld;
     const searchTerm = evt.srcElement.value;
     console.log(searchTerm);
     if (!searchTerm) {
@@ -129,7 +143,7 @@ export class MedicalReportsPage implements OnInit {
       _.forEach(formattedDocuments, function (_document) {
         _document['lineItems'] = _document;
       });
-      this.documents = formattedDocuments;
+      this.documentsMobile = formattedDocuments;
       return;
     }
     if (searchTerm == "") {
@@ -148,7 +162,7 @@ export class MedicalReportsPage implements OnInit {
     _.forEach(formattedDocuments, function (_document) {
       _document['lineItems'] = _document;
     });
-    this.documents = formattedDocuments;
+    this.documentsMobile = formattedDocuments;
 
   }
   filterListClear(evt) {
@@ -157,7 +171,7 @@ export class MedicalReportsPage implements OnInit {
     _.forEach(formattedDocuments, function (_document) {
       _document['lineItems'] = _document;
     });
-    this.documents = formattedDocuments;
+    this.documentsMobile = formattedDocuments;
   }
   /**Data API */
   loadData() {
@@ -246,9 +260,10 @@ export class MedicalReportsPage implements OnInit {
     _.forEach(formattedDocuments, function (_document) {
       _document['lineItems'] = _document;
     });
-    this.documents = formattedDocuments;
+    this.documentsMobile = formattedDocuments;
+    this.documents = _data;
     this.filterDocuments('ALL');
-    console.log(this.documents);
+    //console.log(this.documents);
   }
 
 }

@@ -139,3 +139,82 @@ ion-tab-button[aria-selected=true]{
 .ionLabel{
   font-size: 14px;
 }
+
+.project-list-table {
+	border-collapse: separate;
+  border-spacing: 0 12px;
+  background: #f8f8fb;
+	tr {
+		background-color: white;
+  }
+  td {
+    padding: .75rem !important;
+    vertical-align: top;
+    border-top: 1px solid #eff2f7;
+    vertical-align: middle!important;
+  }
+	.table {
+		width: 100%;
+		margin-bottom: 1rem;
+		color: #495057;
+		background-color: transparent; // Reset for nesting within parents with `background-color`.
+		th,
+		td {
+			padding: .75rem !important;
+			vertical-align: top;
+      border-top: 1px solid #eff2f7;
+      vertical-align: middle!important;
+		}
+		thead th {
+			vertical-align: bottom;
+			border-bottom: (2 * 1px) solid #eff2f7;
+		}
+		tbody+tbody {
+			border-top: (2 * 1px) solid #eff2f7;
+		}
+	}
+	.avatar-sm {
+		height: 3rem;
+    width: 3rem;
+    vertical-align: middle;
+    border-style: none;
+	}
+	.text-truncate {
+		overflow: hidden;
+		text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #495057;
+  }
+  a{
+    outline: none!important;
+    text-decoration: none!important;
+  }
+  
+  .font-size-14 {
+    font-size: 14px!important;
+  }
+  .text-dark {
+    color: #343a40!important;
+  }
+  .text-muted {
+    color: #74788d!important;
+  }
+  .mb-0, .my-0 {
+    margin-bottom: 0!important;
+  }
+
+  .badge{
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+}

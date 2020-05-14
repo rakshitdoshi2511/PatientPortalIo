@@ -8,13 +8,15 @@ import { LaboratoryPageRoutingModule } from './laboratory-routing.module';
 
 import { LaboratoryPage } from './laboratory.page';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
+import { TranslateModule,TranslateLoader } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LaboratoryPageRoutingModule
+    LaboratoryPageRoutingModule,
+    TranslateModule
   ],
   declarations: [LaboratoryPage],//,UserPopoverComponent],
   entryComponents: []//[UserPopoverComponent]

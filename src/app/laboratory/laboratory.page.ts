@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController,Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import { FilterPopoverComponent } from '../filter-popover/filter-popover.component';
 import * as _ from "lodash";
@@ -7,6 +7,7 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
 import { AlertController, ModalController } from '@ionic/angular';
 import { KeyValue } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-laboratory',
@@ -17,6 +18,7 @@ export class LaboratoryPage implements OnInit {
 
   model: any = {};
   documents: any;
+  documentsMobile:any;
   documentsOld: any;
 
   
@@ -25,6 +27,8 @@ export class LaboratoryPage implements OnInit {
     public popoverController: PopoverController,
     private documentViewer:DocumentViewer,
     private modalController: ModalController,
+    public platform:Platform,
+    private translate: TranslateService,
   ) { }
 
   /**Dialog and Loaders*/
@@ -63,10 +67,20 @@ export class LaboratoryPage implements OnInit {
     console.log(item);
     return item[0].date;
   }
+  getAlignmentClassRight(){
+    return this.translate.getDefaultLang()=='en'?'pull-right':'pull-left';
+  }
+  getAlignmentClassLeft(){
+    return this.translate.getDefaultLang()=='en'?'pull-left':'pull-right';
+  }
   /**Default Methods*/
   ngOnInit() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
   }
   ionViewDidEnter() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
     this.loadData();
   }
   /**Screen Interaction */
@@ -189,7 +203,8 @@ export class LaboratoryPage implements OnInit {
     _.forEach(formattedDocuments, function (_document) {
       _document['lineItems'] = _document;
     });
-    this.documents = formattedDocuments;
+    this.documentsMobile = formattedDocuments;
+    this.documents = _data;
     console.log(this.documents);
   }
 

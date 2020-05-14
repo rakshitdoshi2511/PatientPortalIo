@@ -8,7 +8,7 @@
     <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
       <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
-    <ion-title class='ion-text-center titleWhite'>Laboratory Reports</ion-title>
+    <ion-title class='ion-text-center titleWhite'>{{'tile_laboratory' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
@@ -24,36 +24,78 @@
   </ion-toolbar>  
 </ion-header>
 <ion-content>
-  <div class="card">
+  <!--Web View-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="table-responsive padding" style="margin:1em" [hidden]="model.isVisible">
+        <table class="project-list-table table-nowrap table-centered table-borderless table padding" style="padding:1rem">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 100px;"></th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_sample' | translate | uppercase}} {{'lbl_date' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lt of documents">
+              <td>
+                <img
+                  src="../../assets/icon/icon_document_blue.svg"
+                  alt="" class="avatar-sm"></td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" href="/projects-list">{{lt.documentNo}}</a></h5>
+              </td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
+              </td>
+              <td><span class="badge badge-primary">{{lt.status}}</span></td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
+              </td>
+              <td>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+  <!--Mobile View-->
+  <div class="card" [hidden]="!model.isVisible">
     <div class="content">
-      <div class="panel-group" *ngIf="documents">
+      <div class="panel-group" *ngIf="documentsMobile">
         <ion-list>
-          <div *ngFor="let _document of documents | keyvalue: customSort">
+          <div *ngFor="let _document of documentsMobile | keyvalue: customSort">
             <div class="panel panel-default">
               <div class="panel-heading clickable" (click)="toggleGroup(_document)" [ngClass]="{active:isGroupShown(_document)}">
                 
                 <h4 class="panel-title">
                   <!-- <div class="block"></div> -->
-                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>Document Date : {{getDateDisplay(documents[_document.key])}}</span>
+                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document' | translate | titlecase}} {{'lbl_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}</span>
                   <!-- <p><span>Pricing Period: {{getPricingDates(orders[cust.key])}}</span></p> -->
                 </h4>
               </div>
               <div *ngIf="isGroupShown(_document)">
-                <div class="tasks" id="tasks" *ngFor="let document of documents[_document.key].lineItems">
+                <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
                   <div class="task-item" [ngClass]="document.class">
                     <div class="task-text">
-                      <h5 style="color:rgb(87,143,182);font-weight:bold">Document Number: {{document.documentNo}}</h5>
+                      <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5>
                       <h6>{{document.physician}}</h6>
-                      <span>Status : {{document.status}}</span>
-                      <div class="pull-right">
+                      <span>{{'lbl_status' | translate | titlecase}} : {{document.status}}</span>
+                      <div [class]="getAlignmentClassRight()">
                         <span style="font-size: 2em;">
                           <ion-icon name="document-text" (click)="openDocument()"></ion-icon>
                         </span>
                       </div>
                     </div>
                     <div class="task-footer">
-                      <div class="pull-left"><span class="fa fa-clock-o"></span> {{document.date}} - {{document.time}}</div>
-                      <div class="pull-right"><h6 style="color:rgb(87,143,182);">{{document.type}}</h6></div>
+                      <div [class]="getAlignmentClassLeft()"><span class="fa fa-clock-o"></span> {{document.date}} - {{document.time}}</div>
+                      <div [class]="getAlignmentClassRight()"><h6 style="color:rgb(87,143,182);">{{document.type}}</h6></div>
                     </div>
                   </div>
                 </div>

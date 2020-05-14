@@ -44,6 +44,8 @@ export class NutritionPage implements OnInit {
                                                                                     :this.model.isVisible = false;
   }
   ionViewDidEnter() {
+    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
+                                                                                    :this.model.isVisible = false;
     this.loadData();
   }
   /**Screen Interaction */
