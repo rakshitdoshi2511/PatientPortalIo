@@ -28,5 +28,11 @@
     "lbl_date":"تاريخ",
     "lbl_status":"الحالة",
     "lbl_physician":"الطبيب المعالج",
-    "lbl_type":"نوع"
+    "lbl_type":"نوع",
+    "lbl_category":"الفئة",
+    "lbl_exam":"امتحان",
+    "tab_all_documents":"كافة المستندات",
+    "tab_emergency_discharge":"تفريغ الطوارئ",
+    "tab_physician_discharge":"إبراء الذمة من الطبيب",
+    "tab_medical_report":"تقرير طبي"
 }

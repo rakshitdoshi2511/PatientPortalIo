@@ -28,6 +28,12 @@
     "lbl_date":"Date",
     "lbl_status":"Status",
     "lbl_physician":"Physician",
-    "lbl_type":"Type"
+    "lbl_type":"Type",
+    "lbl_category":"Category",
+    "lbl_exam":"Exam",
+    "tab_all_documents":"All Documents",
+    "tab_emergency_discharge":"Emergency Discharge",
+    "tab_physician_discharge":"Physician Discharge",
+    "tab_medical_report":"Medical Report"
 
 }

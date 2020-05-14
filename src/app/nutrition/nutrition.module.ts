@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { NutritionPageRoutingModule } from './nutrition-routing.module';
 
 import { NutritionPage } from './nutrition.page';
+import { TranslateModule,TranslateLoader } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NutritionPageRoutingModule
+    NutritionPageRoutingModule,
+    TranslateModule
   ],
   declarations: [NutritionPage]
 })

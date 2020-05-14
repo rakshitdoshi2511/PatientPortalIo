@@ -3,6 +3,7 @@ import { PopoverController,Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import * as _ from "lodash";
 import { KeyValue } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-medical-reports',
@@ -19,7 +20,8 @@ export class MedicalReportsPage implements OnInit {
   medicalDocuments: any;
   constructor(
     public popoverController: PopoverController,
-    public platform:Platform
+    public platform:Platform,
+    public translate: TranslateService
   ) { }
 
   /**Dialog and Loaders*/
@@ -40,6 +42,12 @@ export class MedicalReportsPage implements OnInit {
   getDateDisplay(item) {
     console.log(item);
     return item[0].date;
+  }
+  getAlignmentClassRight(){
+    return this.translate.getDefaultLang()=='en'?'pull-right':'pull-left';
+  }
+  getAlignmentClassLeft(){
+    return this.translate.getDefaultLang()=='en'?'pull-left':'pull-right';
   }
   /**Default Methods*/
   ngOnInit() {
