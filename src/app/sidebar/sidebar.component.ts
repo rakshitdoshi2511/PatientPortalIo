@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from './../services/api.service';
 import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+import {Storage} from '@ionic/storage';
+import { PopoverController,AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,12 +20,32 @@ export class SidebarComponent implements OnInit {
   constructor(
     private _api: ApiService,
     private translate: TranslateService,
+    private storage: Storage,
+    public alertController: AlertController,
     ) { }
 
   ngOnInit() {
-    this.model.name = 'Joe Bonamassa';
-    this.model.mrn = '1562';
-    this.model.email = 'test@sap.com';
+    let that = this;
+    
+    that.storage.get(that._api.getLocal('token')).then((val)=>{
+      let _data = val;
+      console.log(_data);
+      if(Object.keys(_data).length>0){
+        this.model.firstName = _data.Vname;
+        this.model.lastName = _data.Nname;
+        this.model.mrn = _data.Patnr;
+        this.model.age = _data.Age;
+        this.model.sex = _data.Sex;
+        this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
+        this.model.contact = '';
+        this.model.email = _data.Emailid;
+      }
+      
+    });
+
+    // this.model.name = 'Joe Bonamassa';
+    // this.model.mrn = '1562';
+    // this.model.email = 'test@sap.com';
 
     let _pages = [{
       title: this.translate.instant('sidemenu_home'),

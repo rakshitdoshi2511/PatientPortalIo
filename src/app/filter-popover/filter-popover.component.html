@@ -1,25 +1,39 @@
 <ion-header>
-    <ion-title>Filter By</ion-title>
+    <ion-title>{{'lbl_filter_by' | translate | titlecase}}</ion-title>
 </ion-header>
 <ion-content>
-    <ion-item>
-        <ion-label>Status</ion-label>
-        <ion-select>
-            <ion-select-option value="1">On Review</ion-select-option>
-            <ion-select-option value="2">Ready</ion-select-option>
+    <ion-item size="12">
+        <ion-label size="4">{{'lbl_status' | translate | titlecase}}</ion-label>
+        <ion-select size="8" [(ngModel)]="model.status">
+            <div  *ngFor="let status of statusFilter">
+                <ion-select-option value="{{status.statusCode}}">{{status.status}}</ion-select-option>
+            </div>
         </ion-select>
     </ion-item>
     <ion-item>
-       <ion-label>Doctors</ion-label>
-       <ion-select>
-           <ion-select-option value="3">Dr. Suzanne Al Sayed</ion-select-option>
-           <ion-select-option value="4">Dr. Yaman Tai</ion-select-option>
-       </ion-select>
-   </ion-item>
+        <ion-label>{{'lbl_physician' | translate | titlecase}}</ion-label>
+        <ion-select [(ngModel)]="model.physician">
+            <div  *ngFor="let physican of physicianFilter">
+                <ion-select-option value="{{physican.physican}}">{{physican.physican}}</ion-select-option>
+            </div>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>{{'lbl_type' | translate | titlecase}}</ion-label>
+        <ion-select [(ngModel)]="model.type">
+            <div  *ngFor="let documentType of documentTypesFilter">
+                <ion-select-option value="{{documentType.type}}">{{documentType.type}}</ion-select-option>
+            </div>
+        </ion-select>
+    </ion-item>
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
-        <ion-label slot="start" (click)="applyFilters()" style="color:rgb(87, 143, 182);font-weight: bold;">Apply</ion-label>
-        <ion-label slot="end" (click)="clearFilters()" style="color:black">Clear</ion-label>
+    <ion-toolbar style="margin-top: 1em;">
+        <ion-button expand="full" class="ahThemeButton" (click)="applyFilters()">
+            {{'lbl_apply_filters' | translate | uppercase}}</ion-button>
+        <ion-button expand="full" class="ahThemeButton" (click)="clearFilters()">{{'lbl_clear_filters' | translate | uppercase}}
+        </ion-button>
+        <!-- <ion-label slot="start" (click)="applyFilters()" style="color:rgb(87, 143, 182);font-weight: bold;">Apply</ion-label>
+        <ion-label slot="end" (click)="clearFilters()" style="color:black">Clear</ion-label> -->
     </ion-toolbar>
 </ion-footer>

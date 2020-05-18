@@ -7,6 +7,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import {GlobalService} from './services/global.service';
+import { Constant } from './constant';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent {
     private bnIdle: BnNgIdleService,
     private router: Router,
     private global:GlobalService,
+    private constant: Constant,
   ) {
     this.initializeApp();
   }
@@ -36,7 +38,7 @@ export class AppComponent {
     });
     console.log("Platform" + this.platform);
     //60seconds idle time out
-    this.bnIdle.startWatching(this.global.sessionTimeout).subscribe((isTimedOut: boolean) => {
+    this.bnIdle.startWatching(this.constant.sessionTimeOut).subscribe((isTimedOut: boolean) => {
       // if (res) {
         console.log("Session Expiry");
         // this.bnIdle.stopTimer();

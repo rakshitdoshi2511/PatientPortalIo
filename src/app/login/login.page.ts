@@ -12,6 +12,7 @@ import { GlobalService } from './../services/global.service';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { Constant}  from '../constant';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class LoginPage implements OnInit {
     private nativeHttp:HTTP,
     private platform:Platform,
     private translate: TranslateService,
+    private constant: Constant
 
   ) {
     this.baseUrl = environment.url;
@@ -99,7 +101,7 @@ export class LoginPage implements OnInit {
         this._api.setLocal('token', _obj.Token);
         this._api.setLocal('username',that.model.username);
         this._api.setLocal('sessionTimeout',_obj.BrowserTimeout);
-        this.global.sessionTimeout = _obj.BrowserTimeout/10;
+        this.constant.sessionTimeOut = _obj.BrowserTimeout/10;
         this.bnIdle.resetTimer();
         that._loader.hideLoader();
         this.router.navigateByUrl('home');

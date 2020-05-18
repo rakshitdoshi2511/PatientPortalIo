@@ -34,31 +34,33 @@
               <th scope="col" style="width: 100px;"></th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_sample' | translate | uppercase}} {{'lbl_date' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let lt of documents">
+            <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
               <td>
                 <img
                   src="../../assets/icon/icon_document_blue.svg"
                   alt="" class="avatar-sm"></td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" href="/projects-list">{{lt.documentNo}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)">{{lt.documentNo}}</a></h5>
               </td>
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
               </td>
-              <td><span class="badge badge-primary">{{lt.status}}</span></td>
+             
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
               </td>
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
               </td>
+               <!-- <td><span class="badge badge-primary" [style.background]="renderStatus(lt.statusCode)" style="color:black">{{lt.status}}</span></td> -->
+               <td><span class="pill" [style.background]="renderStatus(lt.statusCode)" style="color:black">{{lt.status}}</span></td>
             </tr>
           </tbody>
         </table>
@@ -73,11 +75,8 @@
           <div *ngFor="let _document of documentsMobile | keyvalue: customSort">
             <div class="panel panel-default">
               <div class="panel-heading clickable" (click)="toggleGroup(_document)" [ngClass]="{active:isGroupShown(_document)}">
-                
                 <h4 class="panel-title">
-                  <!-- <div class="block"></div> -->
                   <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document' | translate | titlecase}} {{'lbl_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}</span>
-                  <!-- <p><span>Pricing Period: {{getPricingDates(orders[cust.key])}}</span></p> -->
                 </h4>
               </div>
               <div *ngIf="isGroupShown(_document)">

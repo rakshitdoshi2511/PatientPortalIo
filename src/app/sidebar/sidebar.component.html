@@ -2,8 +2,8 @@
 	<div class="logo">
 		<img src="../../assets/icon/usericon_blue.svg">
 		<span>
-			<h3>{{model.name | titlecase}}</h3>
-			<p>MRN: {{model.mrn | lowercase}}</p>
+			<h3>{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h3>
+			<p>{{'lbl_mrn_short' | translate | uppercase}}: {{model.mrn | lowercase}}</p>
 			<p>{{model.email | lowercase}}</p>
 		</span>
 	</div>

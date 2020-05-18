@@ -50,7 +50,6 @@ export class WebService {
   get(url:string )
   get(){
       let _url = arguments[0]
-
       let url = this.baseUrl + _url;
       let custHeaders = arguments[1];
       let params = arguments[2];

@@ -24,3 +24,12 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.pdfViewer{
+    --width: 90% !important;
+    --height: 100% !important;
+    width: 90% !important;
+    height: 100% !important;
+    margin-left: 5% !important;
+    margin-right:5% !important;
+  }

@@ -9,19 +9,19 @@
       </a> -->
     </div>
     <div class="media-body">
-      <h2 class="text-white display-6">Joe Bonamassa</h2>
-      <p class="text-light">{{'lbl_mrn' | translate | uppercase}}:1562</p>
+      <h2 class="text-white display-6">{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h2>
+      <p class="text-light">{{'lbl_mrn' | translate | uppercase}}:{{model.mrn}}</p>
     </div>
   </div>
   <div class="weather-category twt-category">
     <ul>
       <li class="active">
         <h6 style="font-size:13px;">{{'lbl_gender' | translate | uppercase}}</h6>
-        Male
+        {{model.sex}}
       </li>
       <li>
         <h6 style="font-size:13px;">{{'lbl_date_of_birth' | translate | uppercase}}</h6>
-        22.01.1977
+        {{model.birthDate}}
       </li>
     </ul>
   </div>
@@ -29,12 +29,12 @@
     <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
         <ion-icon name='call'></ion-icon>
       </span> {{'lbl_contact' | translate | uppercase}}: <span class="pull-right">
-        +962 6 1555 5353
+        {{model.contact}}
       </span></h6>
     <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
         <ion-icon name='mail'></ion-icon>
       </span> {{'lbl_email' | translate | uppercase}}: <span class="pull-right">
-        test@sap.com
+        {{model.email | lowercase}}
       </span></h6>
   </div>
   
