@@ -46,29 +46,57 @@ export class HomePage {
   setLocalModel(_data){
     let _laboratory = _data.SESSIONTOLABDATA.results;
     _.forEach(_laboratory,function(data){
-      data.dateFormatted = data.Sdate.toString().replace(/\//g, "")
+      data.dateFormattedStr = moment(data.Sdate.toString().replace(/\//g, "")).format("YYYY-MM-DD");
+      data.dateFormatted = new Date(data.dateFormattedStr);
+      data.lastDate =  moment(data.Sdate.toString().replace(/\//g, "")).format("Do MMM YYYY");
     });
+
+    _laboratory = _.sortBy(_laboratory,'dateFormatted').reverse();
     
     let _radiology = _data.SESSIONTORADDATA.results;
     _.forEach(_radiology,function(data){
-      data.dateFormatted = data.Edate.toString().replace(/\//g, "")
+      data.dateFormattedStr = moment(data.Edate.toString().replace(/\//g, "")).format("YYYY-MM-DD");
+      data.dateFormatted = new Date(data.dateFormattedStr);
+      data.lastDate =  moment(data.Edate.toString().replace(/\//g, "")).format("Do MMM YYYY");
     });
     //debugger;
+    _radiology = _.sortBy(_radiology,'dateFormatted').reverse();
 
+    let _nutrition = _data.SESSIONTONUTCARE.results;
+    _.forEach(_nutrition,function(data){
+      data.dateFormattedStr = moment(data.Ddate.toString().replace(/\//g, "")).format("YYYY-MM-DD");
+      data.dateFormatted = new Date(data.dateFormattedStr);
+      data.lastDate =  moment(data.Ddate.toString().replace(/\//g, "")).format("Do MMM YYYY");
+    });
+    //debugger;
+    _nutrition = _.sortBy(_nutrition,'dateFormatted').reverse();
+
+    let _medReports = _data.SESSIONTOMEDREP.results;
+    _.forEach(_medReports,function(data){
+      data.dateFormattedStr = moment(data.Ddate.toString().replace(/\//g, "")).format("YYYY-MM-DD");
+      data.dateFormatted = new Date(data.dateFormattedStr);
+      data.lastDate =  moment(data.Ddate.toString().replace(/\//g, "")).format("Do MMM YYYY");
+    });
+    //debugger;
+    _medReports = _.sortBy(_medReports,'dateFormatted').reverse();
     
     this.model.laboratoryCount = _laboratory.length;
-    this.model.laboratoryLastDate = '';
+    this.model.laboratoryLastDate = _laboratory.length>0?_laboratory[0].lastDate:'-';
     this.model.radiologyCount = _radiology.length;
-    this.model.radiologyLastDate = '';
+    this.model.radiologyLastDate = _radiology.length>0?_radiology[0].lastDate:'-';
+    this.model.nutritionCount = _nutrition.length;
+    this.model.nutritionLastDate = _nutrition.length>0?_nutrition[0].lastDate:'-';
+    this.model.medicalCount = _medReports.length;
+    this.model.medicalLastDate = _medReports.length>0?_medReports[0].lastDate:'-';
 
   }
   /*Default Methods*/
   ngOnInit(){
     this._loadData();
-    // this.model.laboratoryCount = 23;
-    this.model.nutritionCount = 5;
-    this.model.radiologyCount = 13;
-    this.model.medicalCount = 45;
+    this.model.laboratoryCount = 0;
+    this.model.nutritionCount = 0;
+    this.model.radiologyCount = 0;
+    this.model.medicalCount = 0;
     this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
                                                                                     :this.model.isVisible = false;
   }
@@ -91,7 +119,7 @@ export class HomePage {
       Token:that._api.getLocal('token')
     }
 
-    that._dataServices.loadData('SESSIONSET',_param,null,false,['SESSIONTOLABDATA','SESSIONTORADDATA'],true).subscribe(
+    that._dataServices.loadData('SESSIONSET',_param,null,false,['SESSIONTOLABDATA','SESSIONTORADDATA','SESSIONTONUTCARE','SESSIONTOMEDREP'],true).subscribe(
       _success=>{
         //that._loader.hideLoader();
         let _obj = _success.d;

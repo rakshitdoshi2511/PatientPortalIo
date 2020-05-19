@@ -93,6 +93,17 @@ export class DataService {
     }); 
   }
 
+  deleteSession(entitySetName,params,filters,isPost,expandEntities,isExpand){
+    let headers = {
+      
+    }
+    let _url = this.generateURL(entitySetName,params,filters,isPost,expandEntities,isExpand);
+    return this._http.get(_url,{} , headers)
+      .map((response: Response) => {
+        return response.json();
+    }); 
+  }
+
 
   /**Getters and Setters*/
   setData(id,data){

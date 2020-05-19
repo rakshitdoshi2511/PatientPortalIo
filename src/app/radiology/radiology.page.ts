@@ -51,6 +51,14 @@ export class RadiologyPage implements OnInit {
     });
     return await modal.present();
   }
+  async openModalMobile(_base64, documentNo) {
+    const modal = await this.modalController.create({
+      component: PdfViewComponent,
+      backdropDismiss: false,
+      componentProps: { data: _base64, documentNo: documentNo },
+    });
+    return await modal.present();
+  }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: UserPopoverComponent,
@@ -165,6 +173,15 @@ export class RadiologyPage implements OnInit {
     this.filterPopover(event);
   }
   showPDF(_object){
+    let msg = this.translate.instant('dialog_title_loading');
+    this._loader.showLoader(msg);
+
+    this.loadDetails(_object.documentKey,_object.documentNo);
+  }
+  openPDF(_object){
+    let msg = this.translate.instant('dialog_title_loading');
+    this._loader.showLoader(msg);
+
     this.loadDetails(_object.documentKey,_object.documentNo);
   }
   filterList(evt) {
@@ -256,13 +273,19 @@ export class RadiologyPage implements OnInit {
     }
     that._dataServices.loadData('DOCPDFSET',_param,null,false,null,false).subscribe(
       _success=>{
-        //that._loader.hideLoader();
+        that._loader.hideLoader();
         let _obj = _success.d;
         console.log(_obj);
-        that.openDocument(_obj.PDFData,_documentNo);
+        if(that.model.isVisible){
+          this.openModalMobile(_obj.PDFData,_documentNo);
+        }
+        else{
+          that.openDocument(_obj.PDFData,_documentNo);
+        }
+        //that.openDocument(_obj.PDFData,_documentNo);
 
       },_error=>{
-        //that._loader.hideLoader();
+        that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
         this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }

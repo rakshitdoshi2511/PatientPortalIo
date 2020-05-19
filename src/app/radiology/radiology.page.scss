@@ -62,6 +62,9 @@
   .tasks .task-item.task-success {
     border-left-color: #95b75d;
   }
+  .tasks .task-item.task-review {
+    border-left-color: #FFF2C5;
+  }
   .tasks .task-item.task-info {
     border-left-color: #1caf9a;
   }
@@ -122,6 +125,9 @@
     background: #f8f8fb;
     tr {
       background-color: white;
+    }
+    .dataTable:hover{
+      transform: translateY(0) scale(1.01);
     }
     td {
       padding: .75rem !important;

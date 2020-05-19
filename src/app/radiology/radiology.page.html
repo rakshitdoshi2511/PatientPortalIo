@@ -40,7 +40,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let lt of documents" (click)="showPDF(lt)">
+            <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
               <td>
                 <img
                   src={{lt.imagePath}}
@@ -85,14 +85,14 @@
               </div>
               <div *ngIf="isGroupShown(_document)">
                 <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
-                  <div class="task-item" [ngClass]="document.class">
+                  <div class="task-item" [ngClass]="document.class" (click)="openPDF(document)">
                     <div class="task-text">
                       <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5>
                       <h6>{{document.physician}}</h6>
                       <span>{{'lbl_status' | translate | titlecase}} : {{document.status}}</span>
                       <div [class]="getAlignmentClassRight()">
                         <span style="font-size: 2em;">
-                          <ion-icon [name]="document.documentType == 'image'? 'image' : 'document-text'"></ion-icon>
+                          <ion-icon [name]="document.documentType == 'Image'? 'image' : 'document-text'"></ion-icon>
                         </span>
                       </div>
                     </div>

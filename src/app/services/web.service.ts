@@ -66,8 +66,7 @@ export class WebService {
       });
 
     //   return this.http.get(url, options).timeout(60000)
-      return this.http.get(url, options);
-      
+      return this.http.get(url, options); 
   }
   
   post(url)
@@ -101,32 +100,26 @@ export class WebService {
       
   }
 
+  delete(url:string ,custHeaders?:any ,params?:any, search?:any)
+  delete(url:string ,custHeaders?:any ,params?:any)
+  delete(url:string ,custHeaders?:any )
+  delete(url:string )
+  delete(){
+      let _url = arguments[0]
+      let url = this.baseUrl + _url;
+      let custHeaders = arguments[1];
+      let params = arguments[2];
+      let search = arguments[3];
 
-  // postFork(__url, data) {
-  //   let that = this;
-  //   let _url = arguments[0]
-  //   let url = this.baseUrl + _url;
+      let headers = new Headers();
+      this.createAuthorizationHeader(headers,custHeaders, 'get');
 
-  //   let _data = !arguments[1] ? {} : arguments[1];
-  //   let fork = [];
-
-  //   let custHeaders = !arguments[2] ? {} : arguments[2];
-  //   let params = !arguments[3] ? {} : arguments[3]; 
-
-  //   let headers = new Headers();
-  //   console.log(data);
-  //   this.createAuthorizationHeader(headers,custHeaders, 'post');
-
-  //   let options: RequestOptions = new RequestOptions({
-  //       url: url,
-  //       headers: headers,
-  //       params: params
-  //   });
-
-  //   _.forEach(_data, function(x) {
-  //       fork.push(that.http.post(url, x, options).map(res => res.json()));
-  //   });
-
-  //   return Observable.forkJoin(fork)
-  // }
+      let options: RequestOptions = new RequestOptions({
+          url: url,
+          headers: headers,
+          params: params,
+          search: search
+      });
+      return this.http.get(url, options).toPromise(); 
+  }
 }

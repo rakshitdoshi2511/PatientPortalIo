@@ -7,12 +7,13 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { DataService } from './../services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
-import { AlertController,Platform } from '@ionic/angular';
+import { AlertController,Platform,ModalController } from '@ionic/angular';
 import { GlobalService } from './../services/global.service';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Constant}  from '../constant';
+import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,8 @@ export class LoginPage implements OnInit {
     private nativeHttp:HTTP,
     private platform:Platform,
     private translate: TranslateService,
-    private constant: Constant
+    private constant: Constant,
+    private modalController: ModalController,
 
   ) {
     this.baseUrl = environment.url;
@@ -59,8 +61,19 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+  async presentAlertCustom(title, message) {
+    const modal = await this.modalController.create({
+      component: CustomAlertComponent,
+      backdropDismiss: false,
+      componentProps: {},
+    });
+    return await modal.present();
+  }
   showAlertMessage(title, message) {
     this.presentAlert(title, message);
+  }
+  showCustomAlert(){
+    this.presentAlertCustom('Test','Test');
   }
    /*Helper Functions* */
   clearStorage() {
@@ -84,8 +97,9 @@ export class LoginPage implements OnInit {
   login(){
     let msg = this.translate.instant('dialog_title_authentication');
     this._loader.showLoader(msg);
-
     this.doLogin();
+
+   // this.showCustomAlert()
   }
   doLogin(){
     let that = this;

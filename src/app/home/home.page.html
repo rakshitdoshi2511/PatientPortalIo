@@ -34,7 +34,7 @@
                   <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.nutritionCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: 2nd Feb 2020</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.nutritionLastDate}}</span>
                 </div>
               </div>
             </div>
@@ -55,7 +55,7 @@
                   <img src="./assets/icon/icon_flask.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.laboratoryCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: 2nd Feb 2020</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.laboratoryLastDate}}</span>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@
                   <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.radiologyCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: 2nd Feb 2020</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.radiologyLastDate}}</span>
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@
                   <img src="./assets/icon/icon_report.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.medicalCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: 2nd Feb 2020</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.medicalLastDate}}</span>
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@
           <div class="content">
             <div class="text">{{'tile_laboratory' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
             <div class="number">{{model.laboratoryCount}}</div>
-            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+            <span class="text-small">{{'tile_last_report' | translate}} {{model.laboratoryLastDate}}</span>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@
           <div class="content">
             <div class="text">{{'tile_nutrition' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
             <div class="number">{{model.nutritionCount}}</div>
-            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+            <span class="text-small">{{'tile_last_report' | translate}} {{model.nutritionLastDate}}</span>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@
           <div class="content">
             <div class="text">{{'tile_radiology' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
             <div class="number">{{model.radiologyCount}}</div>
-            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+            <span class="text-small">{{'tile_last_report' | translate}} {{model.radiologyLastDate}}</span>
           </div>
         </div>
       </div>
@@ -159,7 +159,7 @@
           <div class="content">
             <div class="text">{{'tile_medical' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
             <div class="number">{{model.medicalCount}}</div>
-            <span class="text-small">{{'tile_last_report' | translate}} 2nd Feb 2020</span>
+            <span class="text-small">{{'tile_last_report' | translate}} {{model.medicalLastDate}}</span>
           </div>
         </div>
       </div>

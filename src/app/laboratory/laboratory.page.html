@@ -81,14 +81,14 @@
               </div>
               <div *ngIf="isGroupShown(_document)">
                 <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
-                  <div class="task-item" [ngClass]="document.class">
+                  <div class="task-item" [ngClass]="document.class" (click)="openPDF(document)">
                     <div class="task-text">
                       <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5>
                       <h6>{{document.physician}}</h6>
                       <span>{{'lbl_status' | translate | titlecase}} : {{document.status}}</span>
                       <div [class]="getAlignmentClassRight()">
                         <span style="font-size: 2em;">
-                          <ion-icon name="document-text" (click)="openDocument()"></ion-icon>
+                          <ion-icon name="document-text" (click)="openPDF(document)"></ion-icon>
                         </span>
                       </div>
                     </div>

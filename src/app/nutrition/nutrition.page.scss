@@ -69,6 +69,10 @@
 	border-left-color: #95b75d;
 }
 
+.tasks .task-item.task-review {
+    border-left-color: #FFF2C5;
+}
+
 .tasks .task-item.task-info {
 	border-left-color: #1caf9a;
 }
@@ -146,6 +150,10 @@
 	tr {
 		background-color: white;
   }
+  .dataTable:hover{
+	transform: translateY(0) scale(1.01);
+   
+  }
   td {
     padding: .75rem !important;
     vertical-align: top;
@@ -215,6 +223,17 @@
     vertical-align: baseline;
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .pill{
+	font-size: 1rem !important;
+	border: none !important;
+	color: black !important;
+	padding: 10px 20px !important;
+	text-align: center !important;
+	text-decoration: none !important;
+	margin: 4px 2px !important;
+	cursor: none !important;
+	border-radius: 16px !important;
   }
 }
 

@@ -34,31 +34,32 @@
               <th scope="col" style="width: 100px;"></th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_date' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let lt of documents">
+            <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
               <td>
                 <img
                   src="../../assets/icon/icon_document_blue.svg"
                   alt="" class="avatar-sm"></td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" href="/projects-list">{{lt.documentNo}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)">{{lt.documentNo}}</a></h5>
               </td>
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
               </td>
-              <td><span class="badge badge-primary">{{lt.status}}</span></td>
+              
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
               </td>
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
               </td>
+              <td><span class="pill" [style.background]="renderStatus(lt.statusCode)" style="color:black">{{lt.status}}</span></td>
             </tr>
           </tbody>
         </table>
@@ -82,7 +83,7 @@
               </div>
               <div *ngIf="isGroupShown(_document)">
                 <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
-                  <div class="task-item" [ngClass]="document.class">
+                  <div class="task-item" [ngClass]="document.class" (click)="openPDF(document)">
                     <div class="task-text">
                       <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5>
                       <h6>{{document.physician}}</h6>
