@@ -31,6 +31,7 @@ export class AppComponent {
   }
 
   initializeApp() {
+    
     this.translate.setDefaultLang('en');
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -38,9 +39,11 @@ export class AppComponent {
     });
     console.log("Platform" + this.platform);
     //60seconds idle time out
+    
     this.bnIdle.startWatching(this.constant.sessionTimeOut).subscribe((isTimedOut: boolean) => {
       // if (res) {
         console.log("Session Expiry");
+        alert("Session Expired");
         // this.bnIdle.stopTimer();
         // this.router.navigateByUrl('login');
       // }

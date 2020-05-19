@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   url: 'http://achdevemr01.ach.jo:8000/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
-  urlDetails:'',
   ver: '1.0.0',
   app_prefix: 'amc_',
   default_languag: 'en'

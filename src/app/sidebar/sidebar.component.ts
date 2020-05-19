@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import {Storage} from '@ionic/storage';
 import { PopoverController,AlertController } from '@ionic/angular';
+import { DataService } from './../services/data.service';
+import { LoaderService } from './../services/loader.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +24,8 @@ export class SidebarComponent implements OnInit {
     private translate: TranslateService,
     private storage: Storage,
     public alertController: AlertController,
+    private _loader: LoaderService,
+    private _dataServices: DataService,
     ) { }
 
    /**Helper Methods*/
@@ -75,11 +79,39 @@ export class SidebarComponent implements OnInit {
   }
   /**Screen Interaction */
   logOut(){
-    this.storage.clear();
-    this._api.remLocal('isLoggedIn');
-    this._api.remLocal('token');
-    this._api.remLocal('username');
-    window.location.reload();
+    this.deleteSession();
+  }
+  deleteSession(){
+    let that = this;
+    let msg = this.translate.instant('dialog_title_logout');
+    this._loader.showLoader(msg);
+
+    let _param = {
+      Patnr: that._api.getLocal('username'),
+      Token: that._api.getLocal('token')
+    }
+
+    that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
+      _success => {
+        that._loader.hideLoader();
+        
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        window.location.reload();
+
+      }, _error => {
+        that._loader.hideLoader();
+        
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        window.location.reload();
+      }
+    )
   }
   
 

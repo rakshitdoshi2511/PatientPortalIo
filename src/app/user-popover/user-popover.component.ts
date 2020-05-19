@@ -20,6 +20,7 @@ export class UserPopoverComponent implements OnInit {
     public popoverControl: PopoverController,
     private _api: ApiService,
     private storage: Storage,
+    private _loader: LoaderService,
     public alertController: AlertController,
     private _dataServices: DataService,
   ) { }
@@ -58,8 +59,8 @@ export class UserPopoverComponent implements OnInit {
   /**Data API */
   deleteSession() {
     let that = this;
-    let msg = this.translate.instant('dialog_title_authentication');
-    //this._loader.showLoader(msg);
+    let msg = this.translate.instant('dialog_title_logout');
+    this._loader.showLoader(msg);
 
     let _param = {
       Patnr: that._api.getLocal('username'),
@@ -68,8 +69,8 @@ export class UserPopoverComponent implements OnInit {
 
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
       _success => {
-        //that._loader.hideLoader();
-        debugger;
+        that._loader.hideLoader();
+        
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -77,13 +78,13 @@ export class UserPopoverComponent implements OnInit {
         window.location.reload();
 
       }, _error => {
-        //that._loader.hideLoader();
-        debugger;
+        that._loader.hideLoader();
         
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
         window.location.reload();
       }
     )

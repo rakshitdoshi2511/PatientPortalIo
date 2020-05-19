@@ -110,6 +110,18 @@ export class MedicalReportsPage implements OnInit {
     //Do not do anything since originalOrder is not working;
     return 0;
   }
+  getReportCode(code){
+    switch(code){
+      case 'ZMED_PHDIS':
+        return 'PHY';
+      case 'ZMED_ERDIS':
+        return 'EME';
+      case 'ZMED_MEDRP':
+        return 'MED';
+      default:
+        return 'ALL';      
+    }
+  }
   getDateDisplay(item) {
     //console.log(item);
     return item[0].date;
@@ -310,7 +322,7 @@ export class MedicalReportsPage implements OnInit {
           data.date = moment(data.Ddate.toString().replace(/\//g, "")).format("DD.MM.YYYY");
           data.time = that.formatTime(data.Dtime);
           data.type = data.DocCat;
-          data.typeCode = '';//data.DocCat;
+          data.typeCode = that.getReportCode(data.DtID);//data.DocCat;
           data.physician = data.Physician;
           data.statusCode = data.Status;
           data.status = data.StatusTxt;

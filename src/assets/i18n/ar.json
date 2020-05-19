@@ -1,6 +1,7 @@
 {
 	"dialog_title_authentication": "المصادقة",
-	"dialog_title_loading": "Loading Data",
+	"dialog_title_loading": "تحميل البيانات",
+	"dialog_title_logout": "تسجيل الخروج",
 	"lbl_apply_filters":"تطبيق الفلاتر",
 	"lbl_category": "الفئة",
 	"lbl_clear_filters":"مرشحات واضحة",

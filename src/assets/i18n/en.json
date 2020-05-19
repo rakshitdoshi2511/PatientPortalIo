@@ -1,6 +1,7 @@
 {
 	"dialog_title_authentication": "Authenticating",
 	"dialog_title_loading": "Loading Data",
+	"dialog_title_logout": "Logging Out",
 	"lbl_apply_filters":"Apply Filters",
 	"lbl_category": "Category",
 	"lbl_clear_filters":"Clear Filters",

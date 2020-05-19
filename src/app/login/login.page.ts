@@ -116,6 +116,8 @@ export class LoginPage implements OnInit {
         this._api.setLocal('username',that.model.username);
         this._api.setLocal('sessionTimeout',_obj.BrowserTimeout);
         this.constant.sessionTimeOut = _obj.BrowserTimeout/10;
+        console.log(this.constant.sessionTimeOut);
+        
         this.bnIdle.resetTimer();
         that._loader.hideLoader();
         this.router.navigateByUrl('home');
