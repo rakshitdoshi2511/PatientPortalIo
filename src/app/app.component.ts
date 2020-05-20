@@ -8,6 +8,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import {GlobalService} from './services/global.service';
 import { Constant } from './constant';
+import Swal from 'sweetalert2';
+import { ApiService } from './services/api.service';
+import { Storage } from '@ionic/storage';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +30,9 @@ export class AppComponent {
     private router: Router,
     private global:GlobalService,
     private constant: Constant,
+    private _api: ApiService,
+    private storage: Storage,
+    private _dataServices: DataService,
   ) {
     this.initializeApp();
   }
@@ -41,12 +48,11 @@ export class AppComponent {
     //60seconds idle time out
     
     this.bnIdle.startWatching(this.constant.sessionTimeOut).subscribe((isTimedOut: boolean) => {
-      // if (res) {
         console.log("Session Expiry");
-        alert("Session Expired");
-        // this.bnIdle.stopTimer();
-        // this.router.navigateByUrl('login');
-      // }
+        let msg = this.translate.instant('alert_title_session_expired_msg');
+        Swal.fire(this.translate.instant('alert_title_session_expired'), msg, 'error').then((result)=>{
+          this.deleteSession();
+        })
     });
 
     //Set App Direction based on language selected
@@ -54,6 +60,37 @@ export class AppComponent {
       event.lang == 'ar'? this.layoutDir = 'rtl' : this.layoutDir = 'ltr';
       event.lang == 'ar'? this.layoutDirSideMenu = 'end': this.layoutDirSideMenu = 'start';
     })
+  }
+
+  deleteSession() {
+    let that = this;
+    // let msg = this.translate.instant('dialog_title_logout');
+    // this._loader.showLoader(msg);
+
+    let _param = {
+      Patnr: that._api.getLocal('username'),
+      Token: that._api.getLocal('token')
+    }
+
+    that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
+      _success => {
+       
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        window.location.reload();
+
+      }, _error => {
+        
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        window.location.reload();
+      }
+    )
   }
 
 }

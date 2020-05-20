@@ -6,6 +6,7 @@ import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-user-popover',
@@ -45,7 +46,9 @@ export class UserPopoverComponent implements OnInit {
 
     });
   }
-  resetPassword() { }
+  resetPassword() {
+    Swal.fire('Oops...', 'Something went wrong!', 'error');
+  }
   logOut() {
     this.deleteSession();
 

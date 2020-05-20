@@ -41,6 +41,7 @@ export class WebService {
       _.forEach(customeHeaders, function(_h,_k){
           headers.append(_k,_h);
       })
+      headers.append('Access-Control-Allow-Origin','*');
   }
 
 

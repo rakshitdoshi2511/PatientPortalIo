@@ -7,6 +7,8 @@ import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
 import * as _ from "lodash";
 import * as moment from 'moment';
+import { Storage } from '@ionic/storage';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +26,7 @@ export class HomePage {
     private _dataServices: DataService,
     private _loader: LoaderService,
     private _api: ApiService,
+    private storage: Storage,
   ) {}
 
   /*Dialogs and Loaders*/
@@ -90,9 +93,45 @@ export class HomePage {
     this.model.medicalLastDate = _medReports.length>0?_medReports[0].lastDate:'-';
 
   }
+  deleteSession(){
+    let that = this;
+    let msg = this.translate.instant('dialog_title_logout');
+    this._loader.showLoader(msg);
+
+    let _param = {
+      Patnr: that._api.getLocal('username'),
+      Token: that._api.getLocal('token')
+    }
+
+    that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
+      _success => {
+        that._loader.hideLoader();
+        
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        window.location.reload();
+
+      }, _error => {
+        that._loader.hideLoader();
+        
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        window.location.reload();
+      }
+    )
+  }
   /*Default Methods*/
   ngOnInit(){
+    let msg = this.translate.instant('dialog_title_loading');
+    this._loader.showLoader(msg);
+
     this._loadData();
+    
     this.model.laboratoryCount = 0;
     this.model.nutritionCount = 0;
     this.model.radiologyCount = 0;
@@ -111,9 +150,6 @@ export class HomePage {
   /**Data API */
   _loadData(){
     let that = this;
-    let msg = this.translate.instant('dialog_title_authentication');
-   //this._loader.showLoader(msg);
-
     let _param = {
       Patnr:that._api.getLocal('username'),
       Token:that._api.getLocal('token')
@@ -121,13 +157,17 @@ export class HomePage {
 
     that._dataServices.loadData('SESSIONSET',_param,null,false,['SESSIONTOLABDATA','SESSIONTORADDATA','SESSIONTONUTCARE','SESSIONTOMEDREP'],true).subscribe(
       _success=>{
-        //that._loader.hideLoader();
+        that._loader.hideLoader();
         let _obj = _success.d;
         that._dataServices.setData(_obj.Token,_obj);
         console.log(that._dataServices.getData(_obj.Token));
         that.setLocalModel(that._dataServices.getData(_obj.Token));
       },_error=>{
-        //that._loader.hideLoader();
+        that._loader.hideLoader();
+        let errorObj = JSON.parse(_error._body);
+        Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error').then((result)=>{
+          that.deleteSession();
+        });
       }
     )
 

@@ -1,4 +1,7 @@
 {
+	"alert_title_error":"خطأ",
+	"alert_title_session_expired":"انتهت الجلسة",
+	"alert_title_session_expired_msg":"انتهت صلاحية جلسة العمل الخاصة بك. يرجى تسجيل الدخول",
 	"dialog_title_authentication": "المصادقة",
 	"dialog_title_loading": "تحميل البيانات",
 	"dialog_title_logout": "تسجيل الخروج",

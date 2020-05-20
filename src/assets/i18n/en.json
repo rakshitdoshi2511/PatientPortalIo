@@ -1,4 +1,7 @@
 {
+	"alert_title_error":"Error",
+	"alert_title_session_expired":"Session Expired",
+	"alert_title_session_expired_msg":"Your session has expired. Please relogin",
 	"dialog_title_authentication": "Authenticating",
 	"dialog_title_loading": "Loading Data",
 	"dialog_title_logout": "Logging Out",

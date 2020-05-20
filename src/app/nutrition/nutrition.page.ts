@@ -10,6 +10,7 @@ import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
 import {Storage} from '@ionic/storage';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
+import { KeyValue } from '@angular/common';
 
 
 @Component({
@@ -100,8 +101,9 @@ export class NutritionPage implements OnInit {
     this.presentAlert(title, message);
   }
   /**Helper Methods */
-  customSort(a, b) {
+  customSort(a: KeyValue<number, string>, b: KeyValue<number, string>) {
     //Do not do anything since originalOrder is not working;
+    return 0;
   }
   getDateDisplay(item) {
     //console.log(item);

@@ -51,11 +51,11 @@ export class SidebarComponent implements OnInit {
       }
     });
     let _pages = [
-      { title: this.translate.instant('sidemenu_home'),url: '/home',iconName: 'home', iconPath: '../assets/icon/icon_home_blue.svg'},
-      { title: this.translate.instant('sidemenu_lab'), url: "laboratory",iconName: 'card',iconPath: '../assets/icon/icon_flask_blue.svg'},
-      { title: this.translate.instant('sidemenu_nutrition'),url: 'nutrition',iconName: 'person',iconPath: '../assets/icon/icon_nutrition_blue.svg'},
-      { title: this.translate.instant('sidemenu_radiology'),url: 'radiology',iconName: 'notifications',iconPath: '../assets/icon/icon_radiology_blue.svg'},
-      { title: this.translate.instant('sidemenu_medical'), url: 'medical-reports',iconName: 'notifications', iconPath: '../assets/icon/icon_report_blue.svg'}];
+      { title: this.translate.instant('sidemenu_home'),url: '/home',iconName: 'home', iconPath: './assets/icon/icon_home_blue.svg'},
+      { title: this.translate.instant('sidemenu_lab'), url: "laboratory",iconName: 'card',iconPath: './assets/icon/icon_flask_blue.svg'},
+      { title: this.translate.instant('sidemenu_nutrition'),url: 'nutrition',iconName: 'person',iconPath: './assets/icon/icon_nutrition_blue.svg'},
+      { title: this.translate.instant('sidemenu_radiology'),url: 'radiology',iconName: 'notifications',iconPath: './assets/icon/icon_radiology_blue.svg'},
+      { title: this.translate.instant('sidemenu_medical'), url: 'medical-reports',iconName: 'notifications', iconPath: './assets/icon/icon_report_blue.svg'}];
     this.appPages = _pages;
   }
   ionViewDidEnter(){

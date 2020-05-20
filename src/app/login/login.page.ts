@@ -14,6 +14,7 @@ import { from } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Constant}  from '../constant';
 import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -124,7 +125,9 @@ export class LoginPage implements OnInit {
       },_error=>{
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
-        this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+        let errorObj = JSON.parse(_error._body);
+        Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
+        //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }
     )
   }
