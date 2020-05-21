@@ -3,10 +3,6 @@
     <div class="media">
       <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
         src="./assets/icon/usericon_blue.svg">
-      <!-- <a href="#">
-        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
-          src="../../assets/icon/usericon_blue.svg">
-      </a> -->
     </div>
     <div class="media-body">
       <h2 class="text-white display-6">{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h2>
@@ -31,15 +27,14 @@
       </span> {{'lbl_contact' | translate | uppercase}}: <span class="pull-right">
         {{model.contact}}
       </span></h6>
-    <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
-        <ion-icon name='mail'></ion-icon>
-      </span> {{'lbl_email' | translate | uppercase}}: <span class="pull-right">
-        {{model.email | lowercase}}
-      </span></h6>
+    <h6 style="color: #bdbdbd;font-size: 0.7em;">
+      <span><ion-icon name='mail'></ion-icon></span> 
+      {{'lbl_email' | translate | uppercase}}: 
+      <span class="pull-right">{{model.email | lowercase}}</span></h6>
   </div>
   
   <footer class="twt-footer">
-    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_reset_password' | translate | uppercase}}</ion-button>
+    <!-- <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_reset_password' | translate | uppercase}}</ion-button> -->
     <ion-button expand="full" class="ahThemeButton" (click)="logOut()">{{'lbl_logout' | translate | uppercase}}</ion-button>
     <ion-row class="twt-write">
       <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>

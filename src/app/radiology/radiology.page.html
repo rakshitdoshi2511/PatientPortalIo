@@ -14,11 +14,12 @@
     <ion-searchbar showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
     </ion-searchbar>
     <ion-buttons slot="end">
-      <button ion-button (click)="sortData()" icon-only clear>
+      <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
         <ion-icon name="swap-vertical"></ion-icon>
       </button>
-      <button ion-button (click)="showFilters()" icon-only clear>
+      <button ion-button (click)="showFilters()" icon-only clear style="background:transparent!important">
         <ion-icon name="funnel"></ion-icon>
+        <ion-badge color="danger" [hidden]="model.filterCount==0">{{model.filterCount}}</ion-badge>
       </button>
     </ion-buttons>
   </ion-toolbar>

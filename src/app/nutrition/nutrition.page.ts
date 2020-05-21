@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController,PopoverController, Platform,ModalController } from '@ionic/angular';
+import { AlertController, PopoverController, Platform, ModalController } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import { FilterPopoverComponent } from '../filter-popover/filter-popover.component';
 import * as _ from "lodash";
@@ -8,10 +8,10 @@ import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
-import {Storage} from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
 import { KeyValue } from '@angular/common';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nutrition',
@@ -21,15 +21,15 @@ import { KeyValue } from '@angular/common';
 export class NutritionPage implements OnInit {
   model: any = {};
   documents: any;
-  documentsMobile:any;
+  documentsMobile: any;
   documentsOld: any;
   statusFilter: any = [];
-  documentTypesFilter:any = [];
-  physicianFilter:any = [];
+  documentTypesFilter: any = [];
+  physicianFilter: any = [];
 
   constructor(
     public popoverController: PopoverController,
-    public platform:Platform,
+    public platform: Platform,
     public translate: TranslateService,
     private _dataServices: DataService,
     private _loader: LoaderService,
@@ -40,13 +40,13 @@ export class NutritionPage implements OnInit {
   ) { }
 
   /**Dialog and Loaders*/
-  async openModal(_base64,documentNo) {
+  async openModal(_base64, documentNo) {
     const modal = await this.modalController.create({
       component: PdfViewComponent,
       backdropDismiss: false,
-      componentProps: {data:_base64,documentNo:documentNo},
-      cssClass:'pdfViewer',
-      
+      componentProps: { data: _base64, documentNo: documentNo },
+      cssClass: 'pdfViewer',
+
     });
     return await modal.present();
   }
@@ -74,9 +74,6 @@ export class NutritionPage implements OnInit {
       buttons: [{
         text: 'Ok',
         handler: (val) => {
-          // if (title == "SessionExpired") {
-          //   this.router.navigateByUrl('login');
-          // }
         }
       }]
     });
@@ -86,14 +83,35 @@ export class NutritionPage implements OnInit {
     let that = this;
     const popover = await this.popoverController.create({
       component: FilterPopoverComponent,
-      componentProps: { status: that.statusFilter, physicians:that.physicianFilter, type:that.documentTypesFilter},
+      componentProps: { id: 'NUT', 
+                        status: that.statusFilter, 
+                        physicians: that.physicianFilter, 
+                        type: that.documentTypesFilter,
+                        statusFilterValue:that.model.statusFilterVal,
+                        physicianFilterValue: that.model.physicianFilterVal,
+                        typeFilterValue: that.model.typeFilterVal
+                      },
       event: ev,
       translucent: true,
       animated: true,
     });
 
-    popover.onDidDismiss().then((data)=>{
-      console.log(data);
+    popover.onDidDismiss().then((data) => {
+      let _filterCount = 0;
+      that.model.statusFilterVal = data.data.status;
+      if(that.model.statusFilterVal){
+        _filterCount++;
+      }
+      that.model.physicianFilterVal = data.data.physician;
+      if(that.model.physicianFilterVal){
+        _filterCount++;
+      }
+      that.model.typeFilterVal = data.data.type;
+      if(that.model.typeFilterVal){
+        _filterCount++;
+      }
+      that.model.filterCount = _filterCount;
+      that.filterUserList(that.model.statusFilterVal,that.model.physicianFilterVal,that.model.typeFilterVal);
     })
     return await popover.present();
   }
@@ -109,11 +127,11 @@ export class NutritionPage implements OnInit {
     //console.log(item);
     return item[0].date;
   }
-  getAlignmentClassRight(){
-    return this.translate.getDefaultLang()=='en'?'pull-right':'pull-left';
+  getAlignmentClassRight() {
+    return this.translate.getDefaultLang() == 'en' ? 'pull-right' : 'pull-left';
   }
-  getAlignmentClassLeft(){
-    return this.translate.getDefaultLang()=='en'?'pull-left':'pull-right';
+  getAlignmentClassLeft() {
+    return this.translate.getDefaultLang() == 'en' ? 'pull-left' : 'pull-right';
   }
   padZeros(string, length) {
     var my_string = '' + string;
@@ -134,25 +152,28 @@ export class NutritionPage implements OnInit {
       if (matches[3]) seconds = Number(matches[3]);
       totalseconds = hours * 3600 + minutes * 60 + seconds;
     }
-    return that.padZeros(hours,2) + ":" + that.padZeros(minutes,2) + ":" + that.padZeros(seconds,2);
+    return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status){
+  renderStatus(status) {
     //console.log(status);
-    if(status == 'RE'){
+    if (status == 'RE') {
       return '#FFF2C5';
     }
-    else{
+    else {
       return '#1caf9a';
     }
   }
   /**Default Methods*/
   ngOnInit() {
-    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
-                                                                                    :this.model.isVisible = false;
+    this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+      : this.model.isVisible = false;
+    this.model.filterCount = 0;
+    this.loadData();  
   }
   ionViewDidEnter() {
-    this.platform.is('android')||this.platform.is('ios')||this.platform.is('iphone')?this.model.isVisible = true
-                                                                                    :this.model.isVisible = false;
+    this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+      : this.model.isVisible = false;
+    this.model.filterCount = 0;    
     this.loadData();
   }
   /**Screen Interaction */
@@ -166,23 +187,23 @@ export class NutritionPage implements OnInit {
   isGroupShown(group) {
     return group.value[0].show;
   }
-  sortData(){
-    
+  sortData() {
+
   }
-  showFilters(){
+  showFilters() {
     this.filterPopover(event);
   }
-  showPDF(_object){
+  showPDF(_object) {
     let msg = this.translate.instant('dialog_title_loading');
     this._loader.showLoader(msg);
 
-    this.loadDetails(_object.documentKey,_object.documentNo);
+    this.loadDetails(_object.documentKey, _object.documentNo);
   }
-  openPDF(_object){
+  openPDF(_object) {
     let msg = this.translate.instant('dialog_title_loading');
     this._loader.showLoader(msg);
-    
-    this.loadDetails(_object.documentKey,_object.documentNo);
+
+    this.loadDetails(_object.documentKey, _object.documentNo);
   }
   filterList(evt) {
     this.documents = this.documentsOld;
@@ -224,16 +245,94 @@ export class NutritionPage implements OnInit {
     });
     this.documentsMobile = formattedDocuments;
   }
-  openDocument(_base64,_documentNo) {
-    this.openModal(_base64,_documentNo);
+  filterUserList(status, physician, type) {
+    this.documents = this.documentsOld;
+    if (status && physician && type) {//111
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1 &&
+          document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    else if (status && physician && !type) {//110
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    //101
+    else if (status && !physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }//100
+    else if (status && !physician && !type) {
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+         // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+         // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+         ) {
+          return true;
+        }
+        return false;
+      });
+    }//011
+    else if (!status && physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (
+          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }//010
+    else if (!status && physician && !type) {
+      this.documents = this.documents.filter(document => {
+        if (
+          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+          ) {
+          return true;
+        }
+        return false;
+      });
+    }//001
+    else if (!status && !physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    else {
+      this.documents = this.documentsOld;
+    }
+  }
+  openDocument(_base64, _documentNo) {
+    this.openModal(_base64, _documentNo);
   }
   /**Data API */
   loadData() {
     let that = this;
-    that.storage.get(that._api.getLocal('token')).then((val)=>{
+    that.storage.get(that._api.getLocal('token')).then((val) => {
       let _data = val.SESSIONTONUTCARE.results;
       //console.log(_data);
-      if(_data.length>0){
+      if (_data.length > 0) {
         _.forEach(_data, function (data) {
           data.documentNo = data.Doknr;
           data.date = moment(data.Ddate.toString().replace(/\//g, "")).format("DD.MM.YYYY");
@@ -245,10 +344,10 @@ export class NutritionPage implements OnInit {
           data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
           data.documentKey = data.DocKey;
         });
-        
-        that.statusFilter = _.uniqBy(_data,'statusCode');
-        that.documentTypesFilter = _.uniqBy(_data,'type');
-        that.physicianFilter = _.uniqBy(_data,'physician');
+
+        that.statusFilter = _.uniqBy(_data, 'statusCode');
+        that.documentTypesFilter = _.uniqBy(_data, 'type');
+        that.physicianFilter = _.uniqBy(_data, 'physician');
 
         this.documentsOld = _data;
         let formattedDocuments = _.groupBy(_data, 'date');
@@ -261,30 +360,37 @@ export class NutritionPage implements OnInit {
       }
     });
   }
-  loadDetails(_documentKey,_documentNo){
+  loadDetails(_documentKey, _documentNo) {
     let that = this;
     let msg = this.translate.instant('dialog_title_authentication');
-   //this._loader.showLoader(msg);
+    //this._loader.showLoader(msg);
     let _param = {
-      DocKey:_documentKey
+      DocKey: _documentKey
     }
-    that._dataServices.loadData('DOCPDFSET',_param,null,false,null,false).subscribe(
-      _success=>{
+    that._dataServices.loadData('DOCPDFSET', _param, null, false, null, false).subscribe(
+      _success => {
         that._loader.hideLoader();
         let _obj = _success.d;
         console.log(_obj);
-        if(that.model.isVisible){
-          this.openModalMobile(_obj.PDFData,_documentNo);
+        if (that.model.isVisible) {
+          this.openModalMobile(_obj.PDFData, _documentNo);
         }
-        else{
-          that.openDocument(_obj.PDFData,_documentNo);
+        else {
+          that.openDocument(_obj.PDFData, _documentNo);
         }
         //that.openDocument(_obj.PDFData,_documentNo);
 
-      },_error=>{
+      }, _error => {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
-        this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+        Swal.fire({
+          title: _errorResponse.error.code,
+          text: _errorResponse.error.message.value,
+          backdrop:false,
+          icon:'error',
+          confirmButtonColor:'rgb(87,143,182)'
+        });
+        //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }
     )
   }

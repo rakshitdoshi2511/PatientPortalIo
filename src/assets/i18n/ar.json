@@ -1,5 +1,8 @@
 {
+	"alert_message_report":"التقرير غير جاهز للعرض. يرجى المحاولة لاحقًا",
 	"alert_title_error":"خطأ",
+	"alert_title_info":"معلومات",
+	"alert_title_warning":"تحذير",
 	"alert_title_session_expired":"انتهت الجلسة",
 	"alert_title_session_expired_msg":"انتهت صلاحية جلسة العمل الخاصة بك. يرجى تسجيل الدخول",
 	"dialog_title_authentication": "المصادقة",
@@ -13,6 +16,7 @@
 	"lbl_date_of_birth": "تاريخ الولادة",
 	"lbl_document": "المستند",
 	"lbl_document_no": "رقم المستند",
+	"lbl_download_pdf":"تحميل PDF",
 	"lbl_email": "البريد الإلكتروني",
 	"lbl_exam": "امتحان",
 	"lbl_filter_by":"مصنف بواسطة",

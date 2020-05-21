@@ -40,14 +40,33 @@ export class UserPopoverComponent implements OnInit {
         this.model.age = _data.Age;
         this.model.sex = _data.Sex;
         this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
-        this.model.contact = '';
+        this.model.contact = _data.PhoneNo;
+        this.model.email = _data.Emailid;
+      }
+
+    });
+  }
+  ionViewDidEnter(){
+    let that = this;
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
+    that.storage.get(that._api.getLocal('token')).then((val) => {
+      let _data = val;
+      console.log(_data);
+      if (Object.keys(_data).length > 0) {
+        this.model.firstName = _data.Vname;
+        this.model.lastName = _data.Nname;
+        this.model.mrn = _data.Patnr;
+        this.model.age = _data.Age;
+        this.model.sex = _data.Sex;
+        this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
+        this.model.contact = _data.PhoneNo;
         this.model.email = _data.Emailid;
       }
 
     });
   }
   resetPassword() {
-    Swal.fire('Oops...', 'Something went wrong!', 'error');
+    //Swal.fire('Oops...', 'Something went wrong!', 'error');
   }
   logOut() {
     this.deleteSession();

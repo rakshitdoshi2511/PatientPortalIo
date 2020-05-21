@@ -1,5 +1,8 @@
 {
+	"alert_message_report":"Report is not ready for display. Please try later",
 	"alert_title_error":"Error",
+	"alert_title_info":"Information",
+	"alert_title_warning":"Warning",
 	"alert_title_session_expired":"Session Expired",
 	"alert_title_session_expired_msg":"Your session has expired. Please relogin",
 	"dialog_title_authentication": "Authenticating",
@@ -13,6 +16,7 @@
 	"lbl_date_of_birth": "D.O.B",
 	"lbl_document": "Document",
 	"lbl_document_no": "Document Number",
+	"lbl_download_pdf":"Download PDF",
 	"lbl_email": "Email",
 	"lbl_exam": "Exam",
 	"lbl_filter_by":"Filter By",

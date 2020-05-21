@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'nutrition',  loadChildren: () => import('./nutrition/nutrition.module').then( m => m.NutritionPageModule),canActivate: [AuthGuardService],},
   { path: 'radiology',  loadChildren: () => import('./radiology/radiology.module').then( m => m.RadiologyPageModule),canActivate: [AuthGuardService],},
   { path: 'medical-reports',  loadChildren: () => import('./medical-reports/medical-reports.module').then( m => m.MedicalReportsPageModule),canActivate: [AuthGuardService],},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

@@ -13,6 +13,8 @@ import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-medical-reports',
@@ -76,14 +78,35 @@ export class MedicalReportsPage implements OnInit {
     let that = this;
     const popover = await this.popoverController.create({
       component: FilterPopoverComponent,
-      componentProps: { status: that.statusFilter, physicians: that.physicianFilter, type: that.documentTypesFilter },
+      componentProps: { id: 'MED', 
+                        status: that.statusFilter, 
+                        physicians: that.physicianFilter, 
+                        type: that.documentTypesFilter,
+                        statusFilterValue:that.model.statusFilterVal,
+                        physicianFilterValue: that.model.physicianFilterVal,
+                        typeFilterValue: that.model.typeFilterVal
+                      },
       event: ev,
       translucent: true,
       animated: true,
     });
 
     popover.onDidDismiss().then((data) => {
-     // console.log(data);
+      let _filterCount = 0;
+      that.model.statusFilterVal = data.data.status;
+      if(that.model.statusFilterVal){
+        _filterCount++;
+      }
+      that.model.physicianFilterVal = data.data.physician;
+      if(that.model.physicianFilterVal){
+        _filterCount++;
+      }
+      that.model.typeFilterVal = data.data.type;
+      if(that.model.typeFilterVal){
+        _filterCount++;
+      }
+      that.model.filterCount = _filterCount;
+      that.filterUserList(that.model.statusFilterVal,that.model.physicianFilterVal,that.model.typeFilterVal);
     })
     return await popover.present();
   }
@@ -166,10 +189,13 @@ export class MedicalReportsPage implements OnInit {
   ngOnInit() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
+    this.model.filterCount = 0;
+    this.loadData();
   }
   ionViewDidEnter() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
+    this.model.filterCount = 0;
     this.loadData();
   }
   /**Screen Interaction */
@@ -306,6 +332,84 @@ export class MedicalReportsPage implements OnInit {
     });
     this.documentsMobile = formattedDocuments;
   }
+  filterUserList(status, physician, type) {
+    this.documents = this.documentsOld;
+    if (status && physician && type) {//111
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1 &&
+          document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    else if (status && physician && !type) {//110
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    //101
+    else if (status && !physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }//100
+    else if (status && !physician && !type) {
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+         // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+         // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+         ) {
+          return true;
+        }
+        return false;
+      });
+    }//011
+    else if (!status && physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (
+          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }//010
+    else if (!status && physician && !type) {
+      this.documents = this.documents.filter(document => {
+        if (
+          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+          ) {
+          return true;
+        }
+        return false;
+      });
+    }//001
+    else if (!status && !physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    else {
+      this.documents = this.documentsOld;
+    }
+  }
   openDocument(_base64,_documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
     this.openModal(_base64,_documentNo);
@@ -394,7 +498,14 @@ export class MedicalReportsPage implements OnInit {
       },_error=>{
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
-        this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+        Swal.fire({
+          title: _errorResponse.error.code,
+          text: _errorResponse.error.message.value,
+          backdrop:false,
+          icon:'error',
+          confirmButtonColor:'rgb(87,143,182)'
+        });
+        //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }
     )
   }

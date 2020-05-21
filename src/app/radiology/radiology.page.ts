@@ -13,6 +13,7 @@ import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,6 +25,9 @@ export class RadiologyPage implements OnInit {
 
   model: any = {};
   documents: any;
+  statusFilter: any = [];
+  documentTypesFilter:any = [];
+  physicianFilter:any = [];
   documentsMobile: any;
   documentsOld: any;
 
@@ -72,13 +76,34 @@ export class RadiologyPage implements OnInit {
     let that = this;
     const popover = await this.popoverController.create({
       component: FilterPopoverComponent,
-      componentProps: { status: {}, physicians: {}, type: {} },
+      componentProps: { id: 'RAD', 
+                        status: that.statusFilter, 
+                        physicians: that.physicianFilter, 
+                        type: that.documentTypesFilter,
+                        statusFilterValue:that.model.statusFilterVal,
+                        physicianFilterValue: that.model.physicianFilterVal,
+                        typeFilterValue: that.model.typeFilterVal
+                      },
       event: ev,
       translucent: true,
       animated: true,
     });
     popover.onDidDismiss().then((data) => {
-      //console.log(data);
+      let _filterCount = 0;
+      that.model.statusFilterVal = data.data.status;
+      if(that.model.statusFilterVal){
+        _filterCount++;
+      }
+      that.model.physicianFilterVal = data.data.physician;
+      if(that.model.physicianFilterVal){
+        _filterCount++;
+      }
+      that.model.typeFilterVal = data.data.type;
+      if(that.model.typeFilterVal){
+        _filterCount++;
+      }
+      that.model.filterCount = _filterCount;
+      that.filterUserList(that.model.statusFilterVal,that.model.physicianFilterVal,that.model.typeFilterVal);
     })
     return await popover.present();
   }
@@ -149,10 +174,14 @@ export class RadiologyPage implements OnInit {
   ngOnInit() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
+    this.model.filterCount = 0;
+    this.loadData();
+
   }
   ionViewDidEnter() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
+    this.model.filterCount = 0;
     this.loadData();
   }
   /**Screen Interaction */
@@ -173,16 +202,25 @@ export class RadiologyPage implements OnInit {
     this.filterPopover(event);
   }
   showPDF(_object) {
-    if (_object.documentType == "Image") {
-      window.open(_object.ImageURL,'_system', 'location=yes');
+    if(_object.statusCode == 'RE' && _object.documentType != "Image"){
+      Swal.fire({
+        title: this.translate.instant('alert_title_warning'),
+        text: this.translate.instant('alert_message_report'),
+        backdrop:false,
+        icon:'warning'
+      });
     }
-    else {
-      let msg = this.translate.instant('dialog_title_loading');
-      this._loader.showLoader(msg);
-
-      this.loadDetails(_object.documentKey, _object.documentNo);
+    else{
+      if (_object.documentType == "Image") {
+        window.open(_object.ImageURL,'_system', 'location=yes');
+      }
+      else {
+        let msg = this.translate.instant('dialog_title_loading');
+        this._loader.showLoader(msg);
+  
+        this.loadDetails(_object.documentKey, _object.documentNo);
+      }
     }
-
   }
   openPDF(_object) {
     if (_object.documentType == "Image") {
@@ -234,6 +272,84 @@ export class RadiologyPage implements OnInit {
     });
     this.documentsMobile = formattedDocuments;
   }
+  filterUserList(status, physician, type) {
+    this.documents = this.documentsOld;
+    if (status && physician && type) {//111
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1 &&
+          document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    else if (status && physician && !type) {//110
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    //101
+    else if (status && !physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }//100
+    else if (status && !physician && !type) {
+      this.documents = this.documents.filter(document => {
+        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+         // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+         // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+         ) {
+          return true;
+        }
+        return false;
+      });
+    }//011
+    else if (!status && physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (
+          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }//010
+    else if (!status && physician && !type) {
+      this.documents = this.documents.filter(document => {
+        if (
+          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+          ) {
+          return true;
+        }
+        return false;
+      });
+    }//001
+    else if (!status && !physician && type) {
+      this.documents = this.documents.filter(document => {
+        if (document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      });
+    }
+    else {
+      this.documents = this.documentsOld;
+    }
+  }
   openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
     this.openModal(_base64, _documentNo);
@@ -262,6 +378,10 @@ export class RadiologyPage implements OnInit {
           data.imagePath = url + imagePath;
         });
 
+        that.statusFilter = _.uniqBy(_data,'statusCode');
+        that.documentTypesFilter = _.uniqBy(_data,'type');
+        that.physicianFilter = _.uniqBy(_data,'physician');
+        
         this.documentsOld = _data;
         let formattedDocuments = _.groupBy(_data, 'date');
         _.forEach(formattedDocuments, function (_document) {

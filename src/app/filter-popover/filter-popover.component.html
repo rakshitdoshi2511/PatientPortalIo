@@ -2,28 +2,22 @@
     <ion-title>{{'lbl_filter_by' | translate | titlecase}}</ion-title>
 </ion-header>
 <ion-content>
-    <ion-item size="12">
+    <ion-item size="12" [hidden]="model.statusFilterHidden">
         <ion-label size="4">{{'lbl_status' | translate | titlecase}}</ion-label>
-        <ion-select size="8" [(ngModel)]="model.status">
-            <div  *ngFor="let status of statusFilter">
-                <ion-select-option value="{{status.statusCode}}">{{status.status}}</ion-select-option>
-            </div>
+        <ion-select size="8" [(ngModel)]="model.status" [compareWith]="compareWithStatus" value="status.statusCode == model.status">
+            <ion-select-option *ngFor="let status of statusFilter" value="{{status.statusCode}}">{{status.status}}</ion-select-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="model.physicianFilterHidden">
         <ion-label>{{'lbl_physician' | translate | titlecase}}</ion-label>
-        <ion-select [(ngModel)]="model.physician">
-            <div  *ngFor="let physican of physicianFilter">
-                <ion-select-option value="{{physican.physican}}">{{physican.physican}}</ion-select-option>
-            </div>
+        <ion-select [(ngModel)]="model.physician" [compareWith]="compareWithFunctionPhysician" value="status.physician == model.physician">
+            <ion-select-option *ngFor="let physician of physicianFilter" value="{{physician.physician}}">{{physician.physician}}</ion-select-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="model.documentTypeFilterHidden">
         <ion-label>{{'lbl_type' | translate | titlecase}}</ion-label>
-        <ion-select [(ngModel)]="model.type">
-            <div  *ngFor="let documentType of documentTypesFilter">
-                <ion-select-option value="{{documentType.type}}">{{documentType.type}}</ion-select-option>
-            </div>
+        <ion-select [(ngModel)]="model.type" [compareWith]="compareWithFunctionType" value="status.type == model.type">
+            <ion-select-option  *ngFor="let documentType of documentTypesFilter" value="{{documentType.type}}">{{documentType.type}}</ion-select-option>
         </ion-select>
     </ion-item>
 </ion-content>

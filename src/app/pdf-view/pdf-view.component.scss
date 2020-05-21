@@ -21,3 +21,12 @@
   width: 80% !important;
   height: 100% !important;
   }
+
+  .ahThemeButton{
+    --background: rgb(83,143,182);
+    --background-activated: rgb(83,143,182);
+    --background-focused: rgb(83,143,182);
+    --background-hover: rgb(83,143,182);
+    font-size: 1em;
+    font-weight: bold;  
+}

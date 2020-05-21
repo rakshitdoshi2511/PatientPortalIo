@@ -49,10 +49,12 @@ export class AppComponent {
     
     this.bnIdle.startWatching(this.constant.sessionTimeOut).subscribe((isTimedOut: boolean) => {
         console.log("Session Expiry");
-        let msg = this.translate.instant('alert_title_session_expired_msg');
-        Swal.fire(this.translate.instant('alert_title_session_expired'), msg, 'error').then((result)=>{
-          this.deleteSession();
-        })
+        // this.bnIdle.resetTimer();
+        // this.bnIdle.stopTimer();
+        // let msg = this.translate.instant('alert_title_session_expired_msg');
+        // Swal.fire(this.translate.instant('alert_title_session_expired'), msg, 'error').then((result)=>{
+        //   this.deleteSession();
+        // })
     });
 
     //Set App Direction based on language selected
