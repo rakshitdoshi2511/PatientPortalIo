@@ -236,3 +236,11 @@ ion-tab-button[aria-selected=true]{
     border-radius: 16px !important;
   }
 }
+
+ion-toggle{
+  --background-checked: rgb(83,143,182);
+  --handle-background-checked: rgb(83,143,182);
+}
+.toggle-inner{
+  background: rgb(83,143,182) !important;
+}

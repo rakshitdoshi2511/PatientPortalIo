@@ -9,6 +9,7 @@ import * as _ from "lodash";
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomePage {
     private _loader: LoaderService,
     private _api: ApiService,
     private storage: Storage,
+    private router:Router,
   ) { }
 
   /*Dialogs and Loaders*/
@@ -129,6 +131,7 @@ export class HomePage {
   ngOnInit() {
     let msg = this.translate.instant('dialog_title_loading');
     //this._loader.showLoader(msg);
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
 
     this._loadData();
 
@@ -148,7 +151,7 @@ export class HomePage {
   ionViewDidEnter() {
     let msg = this.translate.instant('dialog_title_loading');
     //this._loader.showLoader(msg);
-
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this._loadData();
 
     this.model.laboratoryCount = 0;
@@ -169,7 +172,8 @@ export class HomePage {
     let that = this;
     let _param = {
       Patnr: that._api.getLocal('username'),
-      Token: that._api.getLocal('token')
+      Token: that._api.getLocal('token'),
+      Password:that._api.getLocal('password')
     }
 
     that._dataServices.loadData('SESSIONSET', _param, null, false, ['SESSIONTOLABDATA', 'SESSIONTORADDATA', 'SESSIONTONUTCARE', 'SESSIONTOMEDREP'], true).subscribe(
@@ -182,9 +186,18 @@ export class HomePage {
       }, _error => {
         //that._loader.hideLoader();
         let errorObj = JSON.parse(_error._body);
-        Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error').then((result) => {
-          that.deleteSession();
+        Swal.fire({
+          title: errorObj.error.code,
+          text: errorObj.error.message.value,
+          backdrop:false,
+          icon:'error',
+          confirmButtonColor:'rgb(87,143,182)'
+        }).then((result)=>{
+           //that.deleteSession();
         });
+        // Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error').then((result) => {
+        //   //that.deleteSession();
+        // });
       }
     )
 
@@ -194,5 +207,80 @@ export class HomePage {
   /**Screen Interaction*/
   openProfile(event) {
     this.presentPopover(event);
+  }
+  switchLanguage(){
+    this.model.language ? this.translate.use('en') : this.translate.use('ar');
+    this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+  }
+  goTo(param){
+    switch(param){
+      case 'nutrition':
+        if(Number(this.model.nutritionCount)>0){
+          this.router.navigateByUrl(param);
+        }
+        else{
+          Swal.fire({
+            title: this.translate.instant('lbl_no_data'),
+            text: this.translate.instant('lbl_no_data_msg'),
+            backdrop:false,
+            icon:'info',
+            confirmButtonColor:'rgb(87,143,182)'
+          });
+          //Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info');
+        }
+        break;
+      case 'radiology':
+        if(Number(this.model.radiologyCount)>0){
+          this.router.navigateByUrl(param);
+        }
+        else{
+          Swal.fire({
+            title: this.translate.instant('lbl_no_data'),
+            text: this.translate.instant('lbl_no_data_msg'),
+            backdrop:false,
+            icon:'info',
+            confirmButtonColor:'rgb(87,143,182)'
+          });
+          // Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info').then((result) => {
+            
+          // });
+        }
+        break;
+      case 'laboratory':
+        if(Number(this.model.laboratoryCount)>0){
+          this.router.navigateByUrl(param);
+        }
+        else{
+          Swal.fire({
+            title: this.translate.instant('lbl_no_data'),
+            text: this.translate.instant('lbl_no_data_msg'),
+            backdrop:false,
+            icon:'info',
+            confirmButtonColor:'rgb(87,143,182)'
+          });
+          // Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info').then((result) => {
+            
+          // });
+        }
+        break;
+      case 'medical-reports':
+        if(Number(this.model.medicalCount)>0){
+          this.router.navigateByUrl(param);
+        }
+        else{
+          Swal.fire({
+            title: this.translate.instant('lbl_no_data'),
+            text: this.translate.instant('lbl_no_data_msg'),
+            backdrop:false,
+            icon:'info',
+            confirmButtonColor:'rgb(87,143,182)'
+          });
+          // Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info').then((result) => {
+            
+          // });
+        }
+        break;    
+    }
+    
   }
 }

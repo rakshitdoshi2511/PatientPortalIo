@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class PdfViewComponent implements OnInit {
   pdfSrc: any = "";
+  pdfRaw: any = "";
   model: any = {};
   constructor(
     private modalController: ModalController,
@@ -56,13 +57,14 @@ export class PdfViewComponent implements OnInit {
     let response = this.navParams.data.data;
     this.model.documentNumber = this.navParams.data.documentNo;
     this.pdfSrc = this.base64ToArrayBuffer(response);
+    this.pdfRaw = this.navParams.data.data;
     // this.pdfSrc = './assets/files/Sample.pdf';
   }
 
   /**Screen Interaction */
   downloadPDF() {
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-      let _data = this.pdfSrc;
+      let _data = this.pdfRaw;
       const byteCharacters = atob(_data);
       const byteNumbers = new Array(byteCharacters.length);
       for (let i = 0; i < byteCharacters.length; i++) {
@@ -73,7 +75,7 @@ export class PdfViewComponent implements OnInit {
       window.navigator.msSaveBlob(blob, this.model.documentNumber + ".pdf");
     }
     else {
-      let _data = this.pdfSrc;
+      let _data = this.pdfRaw;
       var blob = this.b64toBlob(_data, 'application/octet-stream');
       var link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
@@ -82,6 +84,22 @@ export class PdfViewComponent implements OnInit {
       link.click();
       document.body.removeChild(link);
     }
+  }
+
+  printPDF() {
+    let _data = this.pdfRaw;
+    var winparams = 'dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,' +
+      'resizable,screenX=50,screenY=50,width=850,height=1050';
+    var htmlPop = '<embed width=100% height=100%'
+      + ' type="application/pdf"'
+      + ' src="data:application/pdf;base64,'
+      + escape(_data)
+      + '"></embed>';
+
+    var printWindow = window.open("", "PDF", winparams);
+    printWindow.document.write(htmlPop);
+    printWindow.print();
+    
   }
 
   dismiss() {

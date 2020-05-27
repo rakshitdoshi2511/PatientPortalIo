@@ -1,3 +1,97 @@
-<div class="row">
-  
-</div>
+<ion-header>
+    <ion-toolbar>
+        <ion-title class='ion-text-center'>
+            {{'lbl_change_password' | translate | uppercase}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+                <ion-icon slot="icon-only" name="close" class="ahThemeButtonMenu"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding="true" class="ion-padding center" text-center>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-sm-6">
+                <form method="post" id="passwordForm">
+                    <!-- <input type="password" class="input-lg form-control" name="password1" id="password1"
+                        placeholder="{{'lbl_new_password' | translate | titlecase}}" autocomplete="off">
+                    <div class="row" style="visibility: hidden;">
+                        <div class="col-sm-6">
+                            <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8
+                            Characters
+                            Long<br>
+                            <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One
+                            Uppercase
+                            Letter
+                        </div>
+                        <div class="col-sm-6">
+                            <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One
+                            Lowercase
+                            Letter<br>
+                            <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Number
+                        </div>
+                    </div>
+                    <input type="password" class="input-lg form-control" name="password2" id="password2"
+                        placeholder="{{'lbl_repeat_password' | translate | titlecase}}" autocomplete="off">
+                    <div class="row" style="visibility: hidden;">
+                        <div class="col-sm-12">
+                            <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>
+                            Passwords
+                            Match
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <input type="password" class="input-lg form-control" name="password1" [(ngModel)]="model.newPassword"
+                        placeholder="{{'lbl_new_password' | translate | titlecase}}" autocomplete="off" required="true">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="input-lg form-control" name="password2" [(ngModel)]="model.repeatPassword"
+                        placeholder="{{'lbl_repeat_password' | translate | titlecase}}" autocomplete="off" required="true">
+                    </div>
+                    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_change_password' | translate | uppercase}}</ion-button>    
+                </form>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<!-- <div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="authentication-main">
+            <div class="row">
+                <div class="authentication-main">
+                    <div class="row">
+                        <div class="col-md-12 p-0">
+                            <div class="auth-innerright">
+                                <div class="reset-password-box">
+                                    <div class="card mt-4 mb-0">
+                                        <h4>Change Password</h4>
+                                        <form class="theme-form">
+                                            <h6 class="f-14 mt-4 mb-3">CREATE YOUR PASSWORD</h6>
+                                            <div class="form-group">
+                                                <label class="col-form-label">New Password</label>
+                                                <input class="form-control" type="password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-form-label">Retype Password</label>
+                                                <input class="form-control" type="password">
+                                            </div>
+                                            <div class="form-group form-row mb-2">
+                                                <div class="col-md-2">
+                                                    <ion-button expand="full" class="ahThemeButton"
+                                                        (click)="resetPassword()">
+                                                        {{'lbl_reset_password' | translate | uppercase}}</ion-button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

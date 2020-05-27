@@ -7,6 +7,11 @@
     <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
       <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
+    <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
+      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">AR</h6>
+      <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
+      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">EN</h6>
+    </ion-row>
     <ion-title class='ion-text-center titleWhite'>Welcome to Patient Portal</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,7 +24,8 @@
         <div id="main">
           <div class="box blue">
             <!--NUTRITION-->
-            <div class="diamondIn" [routerLink]="['/nutrition']">
+            <!-- <div class="diamondIn" [routerLink]="['/nutrition']"> -->
+            <div class="diamondIn" (click)="goTo('nutrition')">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
@@ -34,14 +40,16 @@
                   <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.nutritionCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.nutritionLastDate}}</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}:
+                    {{model.nutritionLastDate}}</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="box green">
             <!--LABORATORY-->
-            <div class="diamondIn" [routerLink]="['/laboratory']">
+            <!-- <div class="diamondIn" [routerLink]="['/laboratory']"> -->
+            <div class="diamondIn" (click)="goTo('laboratory')">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_flask.svg" class="iconTitle">
@@ -55,14 +63,16 @@
                   <img src="./assets/icon/icon_flask.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.laboratoryCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.laboratoryLastDate}}</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}:
+                    {{model.laboratoryLastDate}}</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="box red">
             <!--RADIOLOGY-->
-            <div class="diamondIn" [routerLink]="['/radiology']">
+            <!-- <div class="diamondIn" [routerLink]="['/radiology']" (click)="goTo('radiology')"> -->
+            <div class="diamondIn" (click)="goTo('radiology')">
               <div class="front" style="background: rgb(102,203,221);">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
@@ -77,14 +87,16 @@
                   <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.radiologyCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.radiologyLastDate}}</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}:
+                    {{model.radiologyLastDate}}</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="box yellow">
             <!--MEDICAL-->
-            <div class="diamondIn" [routerLink]="['/medical-reports']">
+            <!-- <div class="diamondIn" [routerLink]="['/medical-reports']"> -->
+            <div class="diamondIn" (click)="goTo('medical-reports')">
               <div class="front" style="background: rgb(87,143,182)">
                 <div class="text-center frontContent">
                   <img src="./assets/icon/icon_report.svg" class="iconTitle">
@@ -99,7 +111,8 @@
                   <img src="./assets/icon/icon_report.svg" class="iconTitle">
                   <br />
                   <h3 class="title">{{'tile_total' | translate | uppercase}}: {{model.medicalCount}}</h3>
-                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}: {{model.medicalLastDate}}</span>
+                  <span class="subtitle smallDevice">{{'tile_last_report' | translate}}:
+                    {{model.medicalLastDate}}</span>
                 </div>
               </div>
             </div>
@@ -114,12 +127,13 @@
     <div class="row clearfix">
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="info-box-3 bg-green" style="background: rgb(87,143,182)" [routerLink]="['/laboratory']">
-          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+          <div class="icon" [style.right]="getAlignRight()" [style.left]="getAlignLeft()">
             <!-- <i class="zmdi zmdi-account col-blue"></i> -->
             <img src="./assets/icon/icon_flask.svg" class="iconTitle">
           </div>
           <div class="content">
-            <div class="text">{{'tile_laboratory' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="text">{{'tile_laboratory' | translate | uppercase}} {{'tile_report' | translate | uppercase}}
+            </div>
             <div class="number">{{model.laboratoryCount}}</div>
             <span class="text-small">{{'tile_last_report' | translate}} {{model.laboratoryLastDate}}</span>
           </div>
@@ -127,12 +141,13 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="info-box-3 bg-green" style="background: rgb(102,203,221);" [routerLink]="['/nutrition']">
-          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+          <div class="icon" [style.right]="getAlignRight()" [style.left]="getAlignLeft()">
             <!-- <i class="zmdi zmdi-account col-blue"></i> -->
             <img src="./assets/icon/icon_nutrition.svg" class="iconTitle">
           </div>
           <div class="content">
-            <div class="text">{{'tile_nutrition' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="text">{{'tile_nutrition' | translate | uppercase}} {{'tile_report' | translate | uppercase}}
+            </div>
             <div class="number">{{model.nutritionCount}}</div>
             <span class="text-small">{{'tile_last_report' | translate}} {{model.nutritionLastDate}}</span>
           </div>
@@ -140,12 +155,13 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="info-box-3 bg-green" style="background: rgb(87,143,182)" [routerLink]="['/radiology']">
-          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
+          <div class="icon" [style.right]="getAlignRight()" [style.left]="getAlignLeft()">
             <!-- <i class="zmdi zmdi-account col-blue"></i> -->
             <img src="./assets/icon/icon_radiology.svg" class="iconTitle">
           </div>
           <div class="content">
-            <div class="text">{{'tile_radiology' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>
+            <div class="text">{{'tile_radiology' | translate | uppercase}} {{'tile_report' | translate | uppercase}}
+            </div>
             <div class="number">{{model.radiologyCount}}</div>
             <span class="text-small">{{'tile_last_report' | translate}} {{model.radiologyLastDate}}</span>
           </div>
@@ -153,8 +169,8 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="info-box-3 bg-green" style="background: rgb(102,203,221);" [routerLink]="['/medical-reports']">
-          <div class="icon" [style.right] = "getAlignRight()" [style.left]="getAlignLeft()">
-            <img src="./assets/icon/icon_report.svg" class="iconTitle" >
+          <div class="icon" [style.right]="getAlignRight()" [style.left]="getAlignLeft()">
+            <img src="./assets/icon/icon_report.svg" class="iconTitle">
           </div>
           <div class="content">
             <div class="text">{{'tile_medical' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</div>

@@ -14,6 +14,7 @@ import { from } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Constant}  from '../constant';
 import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
+import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -70,6 +71,14 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
+  async presentForgotDialog(){
+    const modal = await this.modalController.create({
+      component: ForgotPasswordComponent,
+      backdropDismiss: false,
+      componentProps: {},
+    });
+    return await modal.present();
+  }
   showAlertMessage(title, message) {
     this.presentAlert(title, message);
   }
@@ -90,6 +99,9 @@ export class LoginPage implements OnInit {
     this.clearStorage();
   }
   /**Screen Interactions */
+  forgotPassword(){
+    this.presentForgotDialog();
+  }
   onLogin() {
     this._api.setLocal('isLoggedIn', true);
     this.bnIdle.resetTimer();
@@ -116,6 +128,7 @@ export class LoginPage implements OnInit {
         this._api.setLocal('token', _obj.Token);
         this._api.setLocal('username',that.model.username);
         this._api.setLocal('sessionTimeout',_obj.BrowserTimeout);
+        this._api.setLocal('password',that.model.password);
         this.constant.sessionTimeOut = _obj.BrowserTimeout/10;
         console.log(this.constant.sessionTimeOut);
         
@@ -126,7 +139,14 @@ export class LoginPage implements OnInit {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
         let errorObj = JSON.parse(_error._body);
-        Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
+        Swal.fire({
+          title: errorObj.error.code,
+          text: errorObj.error.message.value,
+          backdrop:false,
+          icon:'error',
+          confirmButtonColor:'rgb(87,143,182)'
+        });
+        //Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }
     )

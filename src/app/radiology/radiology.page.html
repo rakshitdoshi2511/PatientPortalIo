@@ -8,6 +8,11 @@
     <ion-thumbnail slot="end" style="padding:0.5em" (click)="openProfile($event)">
       <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
+    <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
+      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">AR</h6>
+      <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
+      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">EN</h6>
+    </ion-row>
     <ion-title class='ion-text-center titleWhite'>{{'tile_radiology' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>

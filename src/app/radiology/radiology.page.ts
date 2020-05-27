@@ -175,6 +175,7 @@ export class RadiologyPage implements OnInit {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
     this.model.filterCount = 0;
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
 
   }
@@ -182,6 +183,7 @@ export class RadiologyPage implements OnInit {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
     this.model.filterCount = 0;
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
   }
   /**Screen Interaction */
@@ -207,7 +209,8 @@ export class RadiologyPage implements OnInit {
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
         backdrop:false,
-        icon:'warning'
+        icon:'warning',
+        confirmButtonColor:'rgb(87,143,182)'
       });
     }
     else{
@@ -353,6 +356,10 @@ export class RadiologyPage implements OnInit {
   openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
     this.openModal(_base64, _documentNo);
+  }
+  switchLanguage(){
+    this.model.language ? this.translate.use('en') : this.translate.use('ar');
+    this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
   }
   /**Data API */
   loadData() {

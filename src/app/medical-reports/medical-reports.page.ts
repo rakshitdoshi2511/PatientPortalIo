@@ -190,12 +190,14 @@ export class MedicalReportsPage implements OnInit {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
     this.model.filterCount = 0;
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
   }
   ionViewDidEnter() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
     this.model.filterCount = 0;
+    this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
   }
   /**Screen Interaction */
@@ -413,6 +415,10 @@ export class MedicalReportsPage implements OnInit {
   openDocument(_base64,_documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
     this.openModal(_base64,_documentNo);
+  }
+  switchLanguage(){
+    this.model.language ? this.translate.use('en') : this.translate.use('ar');
+    this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
   }
   /**Data API */
   loadData() {
