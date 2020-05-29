@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
 import {CustomAlertComponent} from './../custom-alert/custom-alert.component'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-popover',
@@ -25,7 +26,8 @@ export class UserPopoverComponent implements OnInit {
     private _loader: LoaderService,
     public alertController: AlertController,
     private _dataServices: DataService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router:Router
   ) { }
 
   /**Alerts and Dialogs */
@@ -103,25 +105,27 @@ export class UserPopoverComponent implements OnInit {
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
       _success => {
         that._loader.hideLoader();
-        
+        this.popoverControl.dismiss();
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
-        window.location.reload();
+        this.router.navigateByUrl('login');
+       // window.location.reload();
 
       }, _error => {
         that._loader.hideLoader();
-        
+        this.popoverControl.dismiss();
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
-        window.location.reload();
+        this.router.navigateByUrl('login');
+        //window.location.reload();
       }
     )
   }

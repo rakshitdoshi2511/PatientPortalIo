@@ -92,6 +92,18 @@ export class DataService {
     });  
   }
 
+  postData(entitySetName,_data) {
+    let headers = {
+      'X-Requested-With':'XMLHttpRequest',
+      'Content-Type':'application/json'
+    }
+
+    return this._http.post(entitySetName, _data, headers)
+      .map((response: Response) => {
+        return response.json();
+    });  
+  }
+
   loadData(entitySetName,params,filters,isPost,expandEntities,isExpand){
     let headers = {
       // 'X-Requested-With':'XMLHttpRequest',

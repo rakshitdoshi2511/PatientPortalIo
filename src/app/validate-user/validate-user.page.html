@@ -1,0 +1,26 @@
+<div class="error-wrapper tintimage">
+  <div class="container" *ngIf="model.showScreen">
+    <!-- <img class="img-100"
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJMAAACTCAMAAAC9O9snAAACplBMVEXd3d3////d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d1DbuGWAAAA4XRSTlMAAAECAwQFBgcICQoLDA0ODxAREhMUFhcYGRobHB0eHyAhIiQlJicoKSosLS8wMTIzNDU2Nzg5Ojs8PT4/QUNERUdISUtMTk9QUVJTVFVWV1hZWltcXl9hYmNkZWdoaWprbW5vcHFyc3R1dnh5ent9foCBgoOEhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWmp6iqq6ytrq+wsbS1tri5uru8vsDCw8TFxsfIycrLzM3O0dLT1dbX2Nna29zd3t/g4eLj5ebn6Orr7O3v8PHy8/X29/j5+vv8/f7D+qZDAAAH20lEQVR42s2c/2NVYxzHP7caS1pSTGJjlGIqKlEkadxCpVWIxBZtMSRfFrW0vvgeVkkUZegbtbAWlUXZatMXtTV9sbz+Ez+cc2/n3nPvfZ5zd+/d8/6xPufzvHbOuc95ns+XR6Qt6p47tmD+msqq2vrGY03HGutrqyrXzC8Ym9s9fpc+ny/ua7vdWfxxzQki60TNx8V3dkspU6cRL2+OhuMA2/zyiE6pYUr3VxxEVwcr/OlJZxq5rCF01Na66soVS0rnlhSVzC1dsqKyuq411KBh2chkMmUW1jhHq10/J3/g1S6rqwfmz1lf6zSsKcxMElO/hScdw5Tn94lp3Se/3PEHnFzYLwlMuSvPP64N0/tqXdN3+obzD3JlboKZbvgo6Hvz09kebm7205uDV350QwKZMuYFX9iymz3/UG8uC/4s5mUkimlao+1y14zOcc1nnWfssj00TksIU/9Ntr/q8W34Co2vtr1s6t92ptm2r92TpW2avNv2NLuNTFn2TWqaJW3XrCb7VmW1hWmCPSO9nymJUOb79mw1IX6m+ZaLPaMkURq1x3I5P06mSzZa1y/sIIlTh4WW042XxMPUpw6Aw3mSWOUdBqCuj3emu/4B4Nsekmj1+BaAf+7yyvSgdYtLJRkqtZw/6I1pqnVVviRH+Zb7qV6YHgeg+Q5Jlu5oBuBxfaYp1ro1R5KnHGv9PEWXaRwA+y+XZOry/QCM02MaYX3fukly1c36/o3QYco5C3AgQ5KtjAMAZ3PUTF0aARp6SvLVswGgsYuSaSvA6SxJhbJOA2xVMS0AYIikRkMAWBCbyQ/AREmVJgLgj8XU8xzAPEmd5gGc6xmDaRvAFkmltgBsi85UBNDcOaVMnZsBiqIxXQXASEmtRgJwVRSm7QDlkmqVA2yPzDQZoEFSrwaAyZGY0k4CDGsHpmEAJ9MiMC0AqJD2UIVj5nQy9QY406VdmLqcAejtYloNUCDtowKA1eFM1wIclPbSQYBrw5jWAoxtN6axAGtDmXoD7JP2077AG3WeaSmA5o73xvvG3Xqx7lj9xjxw26U6u2OApU6mjH+BP3XGyF50AODo6uE6C8nXfgNoWnuP2vZP4N8MB9NMgGkaoxSeDUZM31MaTzoeNF5zocp4GsBMB9M+4HhHNVKZMxL/vcL4OafxHtXT7njceqMDTENdK9DImhGatfgypvH9ocY7VM4XAAwNMi0HuF6JdEV4huf+WOui02HGTym8Xw+wPMDU6QRQpb5NS8OZ9us+OYDmNIX7KuBEJ5vpXoAnlEgX/O1KhcUI4O92GY9R+H8C4F6bqQL47zIl0wB3eu6ZqMZXuo3fVPi/7D+gwmY6AmzUnP9DVRbV+Da38WrVABuBIxbTEIAn1UwPuYdZHNV4uNv4C9UATwIM8flEZA6ARqwpwjAvRDW+zm28VBmTApjj89kRgr0ac3j3M65hon8z0v5yGT+qHGEvsNXnE7moRXe38nX4KC0x0uLvupjUoZpyoOUin/1IJulHHLQenf0gnFJ/H2USwHCfSDHANVoLj5Who9THTDC8FnZPNeJ+1wAU+0RWKSZkp35yjnIqx8ujHqzjfz+wyieyE1inyZT2lSOTr8yEL3cUGejtG9cBO33StQV4VXuNOuVXa5BDL2osbfw7LOOjpZrR0VeBlq7WF2OCl9ha4eJlJaPT9IwHPPXW2y/5u+r6ngAwwIrMDRQzNNCK2hUArb0MYerVChRIGXCogyFMHQ4BZfIZ8KOYoh+Bz+QboNIYpkrgG9kBfGoM06fADqmNuQxKtRYDtVIPvG4M0+tAvTQCc41hmgs0yjGgxBimEuCYNIVEzNtbRUCTkffJxPfJxN+difOTifO4id87E9cFJq6fTFxnmrge97xvSabsfYvH/V1yZe/vPO2Do6jjlYPuzvOPHtq/d3rbHNn7YE/xggjKmvjKhrpAduHsX9+VPXZj/M4C8QIPcRWX+s7cdM4dkPv5xUHxuQvGVfTjT+HK+y5qv0bNI/E4DMaf9ON0oXp4e8wukt8LL/DsMhin045nhmjQD8HRm6o/ePaBvGE3DR7tn75o6+Hgvx/we3UajGdqx32d34DSwMB/LBkdmjJMH166K9gW4a1M0BH31Y2Pn1duIHGxblTE/7/lHbtd4/h9Xtw64uO6eYSgxtm/tRW3RDXJfuOUZVPswa8jj6Cbbwmo2Bpt5+0xrbLX2uXw2n5D8i2aeSlbb1hjqfc6k6w81gZdxyF5Kd38nYgE8nJHdMK4mVV6uR9bIfk73TyniMh0a6bW7E/4BIB3tWxD85za+WCRMVahu/Y78iYAz+uYhuWDtfPmV7SG1HRpaBkAt2qsLcLy5tr1BTsB9qZ5mXRWARxVf2dc9QWadRizAE557FD4BeBzpZmrDkOvXqWXVqo5XFZmWNV8565X0avruR3gQ89f+3yAmxRGEep6tOqf0n+G3fEFJlQL/kj1T3p1Yhe+UBRXkWs/ZQorYp2YifV0RtYdmlifaWQdq4n1vkbWRRtZP25inb2R/QhG9m2Y2N9iZB+Qkf1SRvaVmdh/Z2SfopH9nEb2vRrZH2xkH7WR/eZG9uUbeX6Bkec8iInnYYiR54YYeb6KmHgOjRh5Xo+YeK6RGHn+k5h4TpaIieeJiZh47pqIiefTWREH087xExETzzsUEQPPhQxshQw7PzOo5Jwz+j+m3tqMFHdHmAAAAABJRU5ErkJggg=="
+      alt=""> -->
+
+      <img class="img-100"
+      src="./assets/icon/icon_success_blue.svg"
+      alt="">
+      
+    <div class="error-heading">
+      <!-- <h2 class="headline font-success">{{'lbl_password_generated' | translate}}</h2> -->
+      <!-- <h5 class="headline font-success">{{model.passwordGenerated}}</h5> -->
+    </div>
+    <div class="error-heading">
+      <h5 class="headline font-success">{{'lbl_password_generated' | translate}}</h5>
+      <h2>{{'lbl_your_new_password' | translate}} - {{model.passwordGenerated}}</h2>
+    </div>
+    <div class="col-md-12">
+      <p class="sub-content">
+        <!-- <a class="btn btn-success-gradien">{{'lbl_back_to_login' | translate}}</a> -->
+        <ion-button expand="block" class="ahThemeButton" (click)="goBackToLogin()">{{'lbl_back_to_login' | translate | uppercase}}</ion-button>
+      </p>  
+    </div>
+  </div>
+</div>

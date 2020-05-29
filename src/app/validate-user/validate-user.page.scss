@@ -1,0 +1,172 @@
+/**=====================
+     09. Error-page  CSS Start
+==========================**/
+.img-100 {
+    width: 100px!important;
+}
+.tintimage {
+    background: 
+      /* top, transparent red, faked with gradient */ 
+      linear-gradient(
+        rgba(220, 220, 220, 0.45), 
+        rgba(220, 220, 220, 0.45)
+      ),
+      /* bottom, image */
+      url('../../assets/images/bg-02.jpg');
+  }
+
+.ahThemeButton{
+    --background: rgb(83,143,182);
+    --background-activated: rgb(83,143,182);
+    --background-focused: rgb(83,143,182);
+    --background-hover: rgb(83,143,182);
+    font-size: 1em;
+    font-weight: bold;  
+}
+.error-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    &.maintenance-bg {
+    //   background-image: url(../../images/other-images/maintenance-bg.jpg);
+      background-color: rgba(255, 255, 255, 0.97);
+      background-blend-mode: overlay;
+    }
+    .maintenance-icons{
+      li{
+        i{
+          color: gray;
+          font-size: 50px;
+          animation: rotate-effect 40s infinite linear reverse;
+        }
+        &:nth-child(2){
+          i{
+            font-size: 100px;
+            margin-left: 110px;
+            margin-top: -25px;
+            animation: rotate-effect 40s linear infinite reverse;
+          }
+        }
+        &:nth-child(3){
+          i{
+            animation: rotate-effect 30s infinite linear;
+            font-size: 150px;
+            margin-top: -85px;
+            margin-right: 120px;
+          }
+        }
+      }
+    }
+    .maintenance-heading {
+      margin-top: 70px;
+      .headline {
+        font-size: 99px;
+        font-weight: 900;
+        letter-spacing: 10px;
+        color: green;
+        z-index: 2;
+        position: relative;
+        margin-top: -70px;
+      }
+    }
+    .error-heading {
+      margin-top: 115px;
+      .headline {
+        font-size: 55px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-top: -100px;
+        font-family: work-Sans,sans-serif;
+      }
+
+      .font-success {
+        color: rgb(83,143,182)!important;
+        }
+  
+    }
+    .sub-content {
+      font-size: 18px;
+      color: #313131;
+      letter-spacing: 1px;
+      font-weight: normal;
+      line-height: 35px;
+      z-index: 3;
+      position: relative;
+      margin-top: 30px;
+      margin-bottom: 0;
+    }
+    .btn{
+      margin-top: 40px;
+      font-size: 14px;
+      padding: .375rem 1.75rem;
+      letter-spacing: .7px;
+      display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 1.5;
+    border-radius: .25rem;
+    }
+    .btn-success-gradien {
+        background-image: -webkit-gradient(linear,left top,right top,from(#29d155),color-stop(51%,#1b8d39),to(#29d155));
+        background-image: linear-gradient(90deg,#29d155 0,#1b8d39 51%,#29d155);
+        border: none;
+        color: #fff;
+        background-size: auto 200%;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+    }
+  
+  }
+  .error{
+    margin: 70px 0 100px;
+    color:black;
+    .error-title{
+      font-size: 9.5rem;
+      color:white;
+      text-shadow: 6px 6px 7px rgba(0, 0, 0, 0.32);
+    }
+    .line-bottom{
+      width: 10%;
+      height: 5px;
+      background-color: yellow;
+      border: none;
+    }
+    .c-white{
+      color:white;
+    }
+    .error-btn{
+      text-align: center;
+    }
+    .padd{
+      padding: 10px 30px 10px 30px;
+    }
+    .btn-back-home{
+      background-color:blue;
+      color:black;
+  
+      &:hover{
+        background-color:yellow;
+        color:white;
+        box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.21);
+      }
+    }
+    .btn-adnc-serc{
+      background-color:black;
+      color:white;
+      &:hover{
+        background-color:yellow;
+        color:white;
+        box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.21);
+  
+      }
+    }
+  }
+  /**=====================
+       09. Error-page CSS Ends
+  ==========================**/
+  
+  

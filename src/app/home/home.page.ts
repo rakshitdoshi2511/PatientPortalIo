@@ -150,7 +150,7 @@ export class HomePage {
   }
   ionViewDidEnter() {
     let msg = this.translate.instant('dialog_title_loading');
-    //this._loader.showLoader(msg);
+    this._loader.showLoader(msg);
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this._loadData();
 
@@ -178,13 +178,13 @@ export class HomePage {
 
     that._dataServices.loadData('SESSIONSET', _param, null, false, ['SESSIONTOLABDATA', 'SESSIONTORADDATA', 'SESSIONTONUTCARE', 'SESSIONTOMEDREP'], true).subscribe(
       _success => {
-        //that._loader.hideLoader();
+        that._loader.hideLoader();
         let _obj = _success.d;
         that._dataServices.setData(_obj.Token, _obj);
         console.log(that._dataServices.getData(_obj.Token));
         that.setLocalModel(that._dataServices.getData(_obj.Token));
       }, _error => {
-        //that._loader.hideLoader();
+        that._loader.hideLoader();
         let errorObj = JSON.parse(_error._body);
         Swal.fire({
           title: errorObj.error.code,

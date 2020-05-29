@@ -1,0 +1,32 @@
+.ahThemeButtonMenu{
+    --color:rgb(87,143,182);
+    --color-activated: rgb(87,143,182);
+    --color-focused: rgb(87,143,182);
+    --color-hover: rgb(87,143,182);
+    color:rgb(87,143,182);
+}
+
+.pdfViewer{
+    .sc-ion-modal-md-h{
+      --width: 80% !important;
+    --height: 100% !important;
+    width: 80% !important;
+    height: 100% !important;
+    }
+  }
+
+  .sc-ion-modal-md-h{
+    --width: 80% !important;
+  --height: 100% !important;
+  width: 80% !important;
+  height: 100% !important;
+  }
+
+  .ahThemeButton{
+    --background: rgb(83,143,182);
+    --background-activated: rgb(83,143,182);
+    --background-focused: rgb(83,143,182);
+    --background-hover: rgb(83,143,182);
+    font-size: 1em;
+    font-weight: bold;  
+}

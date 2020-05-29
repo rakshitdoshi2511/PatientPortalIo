@@ -48,7 +48,8 @@ export class CustomAlertComponent implements OnInit {
           title: this.translate.instant('lbl_password_mismatch'),
           text: this.translate.instant('lbl_password_mismatch_message'),
           backdrop:false,
-          icon:'warning'
+          icon:'warning',
+          confirmButtonColor: 'rgb(87,143,182)'
         });
        // Swal.fire(this.translate.instant('lbl_password_mismatch'), this.translate.instant('lbl_password_mismatch_message'), 'warning'); 
       }
@@ -58,7 +59,8 @@ export class CustomAlertComponent implements OnInit {
         title: this.translate.instant('lbl_missing_data'),
         text: this.translate.instant('lbl_missing_data_message'),
         backdrop:false,
-        icon:'warning'
+        icon:'warning',
+        confirmButtonColor: 'rgb(87,143,182)'
       });
       //Swal.fire(this.translate.instant('lbl_missing_data'), this.translate.instant('lbl_missing_data_message'), 'warning'); 
     }
@@ -117,7 +119,8 @@ export class CustomAlertComponent implements OnInit {
         title: this.translate.instant('lbl_password_changed'),
         text: this.translate.instant('lbl_password_changed_message'),
         backdrop:false,
-        icon:'success'
+        icon:'success',
+        confirmButtonColor: 'rgb(87,143,182)'
       }).then((result)=>{
         that.logOut();
       });
@@ -133,7 +136,8 @@ export class CustomAlertComponent implements OnInit {
           title: errorObj.error.code,
           text: errorObj.error.message.value,
           backdrop:false,
-          icon:'error'
+          icon:'error',
+          confirmButtonColor: 'rgb(87,143,182)'
         });
         //Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);

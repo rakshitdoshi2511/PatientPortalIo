@@ -25,9 +25,14 @@ export class LoaderService {
       await this.loader.present();
     }
   }
-
+  async dismiss(){
+    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
+  }
   hideLoader() {
-    this.loader.dismiss(); 
+    //this.loader.dismiss(); 
+    setTimeout(() => {
+      this.loader.dismiss();
+    }, 500);
   }
   
 }

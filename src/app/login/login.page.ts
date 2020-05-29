@@ -7,12 +7,12 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { DataService } from './../services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
-import { AlertController,Platform,ModalController } from '@ionic/angular';
+import { AlertController, Platform, ModalController } from '@ionic/angular';
 import { GlobalService } from './../services/global.service';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { Constant}  from '../constant';
+import { Constant } from '../constant';
 import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
 import Swal from 'sweetalert2';
@@ -35,19 +35,19 @@ export class LoginPage implements OnInit {
     private _api: ApiService,
     private bnIdle: BnNgIdleService,
     private _dataServices: DataService,
-    private global:GlobalService,
-    private http:HttpClient,
-    private nativeHttp:HTTP,
-    private platform:Platform,
+    private global: GlobalService,
+    private http: HttpClient,
+    private nativeHttp: HTTP,
+    private platform: Platform,
     private translate: TranslateService,
     private constant: Constant,
     private modalController: ModalController,
 
   ) {
     this.baseUrl = environment.url;
-   }
-  
-   /**Dialogs and Loaders */
+  }
+
+  /**Dialogs and Loaders */
   async presentAlert(title, message) {
     const alert = await this.alertController.create({
       header: title,
@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
-  async presentForgotDialog(){
+  async presentForgotDialog() {
     const modal = await this.modalController.create({
       component: ForgotPasswordComponent,
       backdropDismiss: false,
@@ -82,10 +82,10 @@ export class LoginPage implements OnInit {
   showAlertMessage(title, message) {
     this.presentAlert(title, message);
   }
-  showCustomAlert(){
-    this.presentAlertCustom('Test','Test');
+  showCustomAlert() {
+    this.presentAlertCustom('Test', 'Test');
   }
-   /*Helper Functions* */
+  /*Helper Functions* */
   clearStorage() {
     this._api.remLocal('isLoggedIn');
     this._api.remLocal('token');
@@ -99,7 +99,7 @@ export class LoginPage implements OnInit {
     this.clearStorage();
   }
   /**Screen Interactions */
-  forgotPassword(){
+  forgotPassword() {
     this.presentForgotDialog();
   }
   onLogin() {
@@ -107,44 +107,54 @@ export class LoginPage implements OnInit {
     this.bnIdle.resetTimer();
     this.router.navigateByUrl('home');
   }
-  login(){
-    let msg = this.translate.instant('dialog_title_authentication');
-    this._loader.showLoader(msg);
-    this.doLogin();
-
-   // this.showCustomAlert()
+  login() {
+    if (this.model.username && this.model.password) {
+      let msg = this.translate.instant('dialog_title_authentication');
+      this._loader.showLoader(msg);
+      this.doLogin();
+    }
+    else {
+      Swal.fire({
+        title: this.translate.instant('lbl_missing_data'),
+        text: this.translate.instant('lbl_missing_data_message'),
+        backdrop: false,
+        icon: 'warning',
+        confirmButtonColor: 'rgb(87,143,182)'
+      });
+    }
+    // this.showCustomAlert()
   }
-  doLogin(){
+  doLogin() {
     let that = this;
     let _data = {
-      Patnr:this.model.username,
-      Password:this.model.password,
+      Patnr: this.model.username,
+      Password: this.model.password,
     }
     //that.loginUser("LOGINSESSIONSET",_data);
     that._dataServices.login(_data).subscribe(
-      _success=>{
+      _success => {
         let _obj = _success.d;
         this._api.setLocal('isLoggedIn', true);
         this._api.setLocal('token', _obj.Token);
-        this._api.setLocal('username',that.model.username);
-        this._api.setLocal('sessionTimeout',_obj.BrowserTimeout);
-        this._api.setLocal('password',that.model.password);
-        this.constant.sessionTimeOut = _obj.BrowserTimeout/10;
+        this._api.setLocal('username', that.model.username);
+        this._api.setLocal('sessionTimeout', _obj.BrowserTimeout);
+        this._api.setLocal('password', that.model.password);
+        this.constant.sessionTimeOut = _obj.BrowserTimeout / 10;
         console.log(this.constant.sessionTimeOut);
-        
+
         this.bnIdle.resetTimer();
         that._loader.hideLoader();
         this.router.navigateByUrl('home');
-      },_error=>{
+      }, _error => {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
         let errorObj = JSON.parse(_error._body);
         Swal.fire({
           title: errorObj.error.code,
           text: errorObj.error.message.value,
-          backdrop:false,
-          icon:'error',
-          confirmButtonColor:'rgb(87,143,182)'
+          backdrop: false,
+          icon: 'error',
+          confirmButtonColor: 'rgb(87,143,182)'
         });
         //Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);

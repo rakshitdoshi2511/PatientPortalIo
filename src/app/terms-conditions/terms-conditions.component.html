@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class='ion-text-center'>
+      {{'lbl_terms_conditions' | translate | uppercase}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding corporate-background">
+  <pdf-viewer [src]="pdfSrc" 
+              [fit-to-page]="true"
+              [original-size]="true"
+              [render-text]="true"
+              style="display: block;"
+  ></pdf-viewer>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button class="ahThemeButton" (click)="agreeTerms()" slot="end">
+      <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_agree' | translate}}
+    </ion-button>
+    <ion-button class="ahThemeButton" (click)="declineTerms()" slot="start">
+      <ion-icon slot="start" name="print"></ion-icon>{{ 'lbl_decline' | translate}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

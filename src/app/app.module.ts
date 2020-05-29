@@ -19,6 +19,7 @@ import { CustomAlertComponent } from './custom-alert/custom-alert.component';
 import { FileOpener } from '@ionic-native/file-opener';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { PdfViewComponent } from './pdf-view/pdf-view.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TranslateModule,TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -45,6 +46,7 @@ export function setTranslateLoader(http: HttpClient) {
     FilterPopoverComponent,
     GradientWithRadialProgressCardComponent,
     PdfViewComponent,
+    TermsConditionsComponent,
     CustomAlertComponent,
     ForgotPasswordComponent
   ],
@@ -52,6 +54,7 @@ export function setTranslateLoader(http: HttpClient) {
     UserPopoverComponent,
     FilterPopoverComponent,
     PdfViewComponent,
+    TermsConditionsComponent,
     GradientWithRadialProgressCardComponent,
     CustomAlertComponent,
     ForgotPasswordComponent

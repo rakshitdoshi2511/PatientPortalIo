@@ -18,7 +18,7 @@
               style="display: block;"
   ></pdf-viewer>
 </ion-content>
-<ion-footer>
+<ion-footer [hidden]="model.isVisible">
   <ion-toolbar>
     <ion-button class="ahThemeButton" (click)="downloadPDF()" slot="end">
       <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_download_pdf' | translate}}
