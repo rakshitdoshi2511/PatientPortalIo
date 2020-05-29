@@ -101,6 +101,38 @@ export class WebService {
       
   }
 
+
+  update(url)
+  update(url,data)
+  update(url,data,custHeaders)
+  update(url,data,custHeaders,params)
+  update(){
+
+      let login = false;
+      let _url = arguments[0]
+
+      let url = this.baseUrl + _url;
+      let data = !arguments[1] ? {} : arguments[1];
+
+      let custHeaders = !arguments[2] ? {} : arguments[2];
+      let params = !arguments[3] ? {} : arguments[3]; 
+
+      let headers = new Headers();
+      console.log(data);
+      this.createAuthorizationHeader(headers,custHeaders, 'post');
+
+      let options: RequestOptions = new RequestOptions({
+          url: url,
+          headers: headers,
+          params: params
+      });
+    //   return this.http.post(url, data, options).timeout(60000)
+      return this.http.put(url, data, options);
+
+      //return this._http.post(url,data);
+      
+  }
+
   delete(url:string ,custHeaders?:any ,params?:any, search?:any)
   delete(url:string ,custHeaders?:any ,params?:any)
   delete(url:string ,custHeaders?:any )

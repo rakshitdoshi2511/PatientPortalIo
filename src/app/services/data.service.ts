@@ -104,6 +104,19 @@ export class DataService {
     });  
   }
 
+  updateData(entitySetName,_data,params,filters,isPost,expandEntities,isExpand) {
+    let headers = {
+      'X-Requested-With':'XMLHttpRequest',
+      'Content-Type':'application/json'
+    }
+
+    let _url = this.generateURL(entitySetName,params,filters,isPost,expandEntities,isExpand);
+    return this._http.update(_url, _data, headers)
+      .map((response: Response) => {
+        return response.json();
+    });
+  }
+
   loadData(entitySetName,params,filters,isPost,expandEntities,isExpand){
     let headers = {
       // 'X-Requested-With':'XMLHttpRequest',

@@ -30,3 +30,20 @@
     font-size: 1em;
     font-weight: bold;  
 }
+
+.ahThemeButtonAccept{
+  --background: green;
+  --background-activated: green;
+  --background-focused: green;
+  --background-hover: green;
+  font-size: 1em;
+  font-weight: bold;
+}
+.ahThemeButtonDecline{
+  --background: red;
+  --background-activated: red;
+  --background-focused: red;
+  --background-hover: red;
+  font-size: 1em;
+  font-weight: bold;
+}

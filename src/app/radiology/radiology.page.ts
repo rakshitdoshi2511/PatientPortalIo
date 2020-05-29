@@ -226,13 +226,24 @@ export class RadiologyPage implements OnInit {
     }
   }
   openPDF(_object) {
-    if (_object.documentType == "Image") {
-      window.open(_object.ImageURL,'_system', 'location=yes');
+    if(_object.statusCode == 'RE' && _object.documentType != "Image"){
+      Swal.fire({
+        title: this.translate.instant('alert_title_warning'),
+        text: this.translate.instant('alert_message_report'),
+        backdrop:false,
+        icon:'warning',
+        confirmButtonColor:'rgb(87,143,182)'
+      });
     }
-    else {
-      let msg = this.translate.instant('dialog_title_loading');
-      this._loader.showLoader(msg);
-      this.loadDetails(_object.documentKey, _object.documentNo);
+    else{
+      if (_object.documentType == "Image") {
+        window.open(_object.ImageURL,'_system', 'location=yes');
+      }
+      else {
+        let msg = this.translate.instant('dialog_title_loading');
+        this._loader.showLoader(msg);
+        this.loadDetails(_object.documentKey, _object.documentNo);
+      }
     }
   }
   filterList(evt) {

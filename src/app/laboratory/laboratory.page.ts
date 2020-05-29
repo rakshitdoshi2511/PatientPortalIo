@@ -12,7 +12,7 @@ import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
-import {Storage} from '@ionic/storage';
+import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,8 +25,8 @@ export class LaboratoryPage implements OnInit {
   model: any = {};
   documents: any;
   statusFilter: any = [];
-  documentTypesFilter:any = [];
-  physicianFilter:any = [];
+  documentTypesFilter: any = [];
+  physicianFilter: any = [];
   documentsMobile: any;
   documentsOld: any;
 
@@ -47,13 +47,13 @@ export class LaboratoryPage implements OnInit {
   ) { }
 
   /**Dialog and Loaders*/
-  async openModal(_base64,documentNo) {
+  async openModal(_base64, documentNo) {
     const modal = await this.modalController.create({
       component: PdfViewComponent,
       backdropDismiss: false,
-      componentProps: {data:_base64,documentNo:documentNo},
-      cssClass:'pdfViewer',
-      
+      componentProps: { data: _base64, documentNo: documentNo },
+      cssClass: 'pdfViewer',
+
     });
     return await modal.present();
   }
@@ -78,35 +78,36 @@ export class LaboratoryPage implements OnInit {
     let that = this;
     const popover = await this.popoverController.create({
       component: FilterPopoverComponent,
-      componentProps: { id: 'LAB', 
-                        status: that.statusFilter, 
-                        physicians: that.physicianFilter, 
-                        type: that.documentTypesFilter,
-                        statusFilterValue:that.model.statusFilterVal,
-                        physicianFilterValue: that.model.physicianFilterVal,
-                        typeFilterValue: that.model.typeFilterVal
-                      },
+      componentProps: {
+        id: 'LAB',
+        status: that.statusFilter,
+        physicians: that.physicianFilter,
+        type: that.documentTypesFilter,
+        statusFilterValue: that.model.statusFilterVal,
+        physicianFilterValue: that.model.physicianFilterVal,
+        typeFilterValue: that.model.typeFilterVal
+      },
       event: ev,
       translucent: true,
       animated: true,
     });
 
-    popover.onDidDismiss().then((data)=>{
+    popover.onDidDismiss().then((data) => {
       let _filterCount = 0;
       that.model.statusFilterVal = data.data.status;
-      if(that.model.statusFilterVal){
+      if (that.model.statusFilterVal) {
         _filterCount++;
       }
       that.model.physicianFilterVal = data.data.physician;
-      if(that.model.physicianFilterVal){
+      if (that.model.physicianFilterVal) {
         _filterCount++;
       }
       that.model.typeFilterVal = data.data.type;
-      if(that.model.typeFilterVal){
+      if (that.model.typeFilterVal) {
         _filterCount++;
       }
       that.model.filterCount = _filterCount;
-      that.filterUserList(that.model.statusFilterVal,that.model.physicianFilterVal,that.model.typeFilterVal);
+      that.filterUserList(that.model.statusFilterVal, that.model.physicianFilterVal, that.model.typeFilterVal);
     })
     return await popover.present();
   }
@@ -162,14 +163,14 @@ export class LaboratoryPage implements OnInit {
       if (matches[3]) seconds = Number(matches[3]);
       totalseconds = hours * 3600 + minutes * 60 + seconds;
     }
-    return that.padZeros(hours,2) + ":" + that.padZeros(minutes,2) + ":" + that.padZeros(seconds,2);
+    return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status){
+  renderStatus(status) {
     //console.log(status);
-    if(status == 'RE'){
+    if (status == 'RE') {
       return '#FFF2C5';
     }
-    else{
+    else {
       return '#1caf9a';
     }
   }
@@ -193,7 +194,7 @@ export class LaboratoryPage implements OnInit {
     this.presentPopover(event);
   }
   toggleGroup(group) {
-   // console.log(group);
+    // console.log(group);
     group.value[0].show = !group.value[0].show;
   }
   isGroupShown(group) {
@@ -205,30 +206,40 @@ export class LaboratoryPage implements OnInit {
   showFilters(event) {
     this.filterPopover(event);
   }
-  showPDF(_object){
-    if(_object.statusCode == 'RE'){
+  showPDF(_object) {
+    if (_object.statusCode == 'RE') {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
-        backdrop:false,
-        icon:'warning',
-        confirmButtonColor:'rgb(87,143,182)'
+        backdrop: false,
+        icon: 'warning',
+        confirmButtonColor: 'rgb(87,143,182)'
       });
     }
-    else{
+    else {
       let msg = this.translate.instant('dialog_title_loading');
       this._loader.showLoader(msg);
-      this.loadDetails(_object.documentKey,_object.documentNo);
+      this.loadDetails(_object.documentKey, _object.documentNo);
     }
   }
-  openPDF(_object){
-    let msg = this.translate.instant('dialog_title_loading');
-    this._loader.showLoader(msg);
-
-    this.loadDetails(_object.documentKey,_object.documentNo);
+  openPDF(_object) {
+    if (_object.statusCode == 'RE') {
+      Swal.fire({
+        title: this.translate.instant('alert_title_warning'),
+        text: this.translate.instant('alert_message_report'),
+        backdrop: false,
+        icon: 'warning',
+        confirmButtonColor: 'rgb(87,143,182)'
+      });
+    }
+    else {
+      let msg = this.translate.instant('dialog_title_loading');
+      this._loader.showLoader(msg);
+      this.loadDetails(_object.documentKey, _object.documentNo);
+    }
   }
   filterList(evt) {
-    
+
     this.documents = this.documentsOld;
     const searchTerm = evt.srcElement.value;
     console.log(searchTerm);
@@ -303,9 +314,9 @@ export class LaboratoryPage implements OnInit {
     else if (status && !physician && !type) {
       this.documents = this.documents.filter(document => {
         if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
-         // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
-         // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
-         ) {
+          // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+        ) {
           return true;
         }
         return false;
@@ -328,7 +339,7 @@ export class LaboratoryPage implements OnInit {
           //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
           document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
           //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
-          ) {
+        ) {
           return true;
         }
         return false;
@@ -346,21 +357,21 @@ export class LaboratoryPage implements OnInit {
       this.documents = this.documentsOld;
     }
   }
-  openDocument(_base64,_documentNo) {
+  openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
-    this.openModal(_base64,_documentNo);
+    this.openModal(_base64, _documentNo);
   }
-  switchLanguage(){
+  switchLanguage() {
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
   }
   /**Data API */
   loadData() {
     let that = this;
-    that.storage.get(that._api.getLocal('token')).then((val)=>{
+    that.storage.get(that._api.getLocal('token')).then((val) => {
       let _data = val.SESSIONTOLABDATA.results;
       console.log(_data);
-      if(_data.length>0){
+      if (_data.length > 0) {
         _.forEach(_data, function (data) {
           data.documentNo = data.Doknr;
           data.date = moment(data.Sdate.toString().replace(/\//g, "")).format("DD.MM.YYYY");
@@ -372,10 +383,10 @@ export class LaboratoryPage implements OnInit {
           data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
           data.documentKey = data.DocKey;
         });
-        
-        that.statusFilter = _.uniqBy(_data,'statusCode');
-        that.documentTypesFilter = _.uniqBy(_data,'type');
-        that.physicianFilter = _.uniqBy(_data,'physician');
+
+        that.statusFilter = _.uniqBy(_data, 'statusCode');
+        that.documentTypesFilter = _.uniqBy(_data, 'type');
+        that.physicianFilter = _.uniqBy(_data, 'physician');
 
         this.documentsOld = _data;
         let formattedDocuments = _.groupBy(_data, 'date');
@@ -388,32 +399,32 @@ export class LaboratoryPage implements OnInit {
       }
     });
   }
-  loadDetails(_documentKey,_documentNo){
+  loadDetails(_documentKey, _documentNo) {
     let that = this;
     let _param = {
-      DocKey:_documentKey
+      DocKey: _documentKey
     }
-    that._dataServices.loadData('DOCPDFSET',_param,null,false,null,false).subscribe(
-      _success=>{
+    that._dataServices.loadData('DOCPDFSET', _param, null, false, null, false).subscribe(
+      _success => {
         that._loader.hideLoader();
         let _obj = _success.d;
         console.log(_obj);
         //that.openDocument(_obj.PDFData,_documentNo);
-        if(that.model.isVisible){
-          this.openModalMobile(_obj.PDFData,_documentNo);
+        if (that.model.isVisible) {
+          this.openModalMobile(_obj.PDFData, _documentNo);
         }
-        else{
-          that.openDocument(_obj.PDFData,_documentNo);
+        else {
+          that.openDocument(_obj.PDFData, _documentNo);
         }
-      },_error=>{
+      }, _error => {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
         Swal.fire({
           title: _errorResponse.error.code,
           text: _errorResponse.error.message.value,
-          backdrop:false,
-          icon:'error',
-          confirmButtonColor:'rgb(87,143,182)'
+          backdrop: false,
+          icon: 'error',
+          confirmButtonColor: 'rgb(87,143,182)'
         });
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }

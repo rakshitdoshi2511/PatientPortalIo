@@ -15,11 +15,11 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-button class="ahThemeButton" (click)="agreeTerms()" slot="end">
-      <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_agree' | translate}}
+    <ion-button class="ahThemeButtonAccept" (click)="agreeTerms()" slot="end">
+      <ion-icon slot="start" name="checkmark"></ion-icon>{{ 'lbl_accept' | translate}}
     </ion-button>
-    <ion-button class="ahThemeButton" (click)="declineTerms()" slot="start">
-      <ion-icon slot="start" name="print"></ion-icon>{{ 'lbl_decline' | translate}}
+    <ion-button class="ahThemeButtonDecline" (click)="declineTerms()" slot="start">
+      <ion-icon slot="start" name="close"></ion-icon>{{ 'lbl_decline' | translate}}
     </ion-button>
   </ion-toolbar>
 </ion-footer>

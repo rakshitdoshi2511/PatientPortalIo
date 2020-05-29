@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Constant } from '../constant';
 import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
+import { TermsConditionsComponent } from './../terms-conditions/terms-conditions.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -48,6 +49,24 @@ export class LoginPage implements OnInit {
   }
 
   /**Dialogs and Loaders */
+  async openModalTermsConditions(_base64,_patnr,_token,_password,_termsCond) {
+    const modal = await this.modalController.create({
+      component: TermsConditionsComponent,
+      backdropDismiss: false,
+      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond},
+      cssClass: 'pdfViewer',
+
+    });
+    return await modal.present();
+  }
+  async openModalTermsConditionsMobile(_base64,_patnr,_token,_password,_termsCond) {
+    const modal = await this.modalController.create({
+      component: TermsConditionsComponent,
+      backdropDismiss: false,
+      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond},
+    });
+    return await modal.present();
+  }
   async presentAlert(title, message) {
     const alert = await this.alertController.create({
       header: title,
@@ -144,7 +163,12 @@ export class LoginPage implements OnInit {
 
         this.bnIdle.resetTimer();
         that._loader.hideLoader();
-        this.router.navigateByUrl('home');
+        if(_obj.PendingTermCond == 'X'){
+          that.loadTermsConditions(that.model.username,_obj.Token,that.model.password);
+        }
+        else{
+          this.router.navigateByUrl('home');
+        }
       }, _error => {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
@@ -160,6 +184,34 @@ export class LoginPage implements OnInit {
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }
     )
+  }
+  loadTermsConditions(_username,_token,_password){
+    let that = this;
+    let _param = {
+      Patnr: _username,
+      Token: _token,
+      Password: _password,
+    }
+
+    that._dataServices.loadData('TERMSCONDSET', _param, null, false, null, false).subscribe(
+      _success => {
+        //that._loader.hideLoader();
+        let _obj = _success.d;
+        console.log(_obj);
+        if (that.model.isVisible) {
+          this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password,_obj.TermCond);
+        }
+        else {
+          that.openModalTermsConditions(_obj.PDFData, _username, _token, _password,_obj.TermCond);
+        }
+
+      }, _error => {
+        //that._loader.hideLoader();
+        let _errorResponse = JSON.parse(_error._body);
+        this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+      }
+    )
+
   }
 
 }
