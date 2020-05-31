@@ -3,7 +3,7 @@ import { Response, Http, ResponseContentType } from '@angular/http';
 import { WebService } from './web.service';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +71,8 @@ export class DataService {
   login(_data) {
     let headers = {
       'X-Requested-With':'XMLHttpRequest',
-      'Content-Type':'application/json'
+      'Content-Type':'application/json',
+      'sap-client': environment.client
     }
 
     return this._http.post('LOGINSESSIONSET', _data, headers)
@@ -83,7 +84,8 @@ export class DataService {
   changePassword(_data) {
     let headers = {
       'X-Requested-With':'XMLHttpRequest',
-      'Content-Type':'application/json'
+      'Content-Type':'application/json',
+      'sap-client': environment.client
     }
 
     return this._http.post('CHNGPSWRDSET', _data, headers)
@@ -95,7 +97,8 @@ export class DataService {
   postData(entitySetName,_data) {
     let headers = {
       'X-Requested-With':'XMLHttpRequest',
-      'Content-Type':'application/json'
+      'Content-Type':'application/json',
+      'sap-client': environment.client
     }
 
     return this._http.post(entitySetName, _data, headers)
@@ -107,7 +110,8 @@ export class DataService {
   updateData(entitySetName,_data,params,filters,isPost,expandEntities,isExpand) {
     let headers = {
       'X-Requested-With':'XMLHttpRequest',
-      'Content-Type':'application/json'
+      'Content-Type':'application/json',
+      'sap-client': environment.client
     }
 
     let _url = this.generateURL(entitySetName,params,filters,isPost,expandEntities,isExpand);
@@ -122,6 +126,7 @@ export class DataService {
       // 'X-Requested-With':'XMLHttpRequest',
       // 'Content-Type':'application/json',
       // 'Accept':'application/json'
+      'sap-client': environment.client
     }
     let _url = this.generateURL(entitySetName,params,filters,isPost,expandEntities,isExpand);
     return this._http.get(_url,{} , headers)

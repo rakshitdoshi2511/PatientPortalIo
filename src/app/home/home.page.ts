@@ -113,7 +113,9 @@ export class HomePage {
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
-        window.location.reload();
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this.router.navigateByUrl('login');
 
       }, _error => {
         that._loader.hideLoader();
@@ -123,7 +125,8 @@ export class HomePage {
         this._api.remLocal('token');
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
-        window.location.reload();
+        this._api.remLocal('password');
+        this.router.navigateByUrl('login');
       }
     )
   }
@@ -173,7 +176,7 @@ export class HomePage {
     let _param = {
       Patnr: that._api.getLocal('username'),
       Token: that._api.getLocal('token'),
-      Password:that._api.getLocal('password')
+      //Password:that._api.getLocal('password')
     }
 
     that._dataServices.loadData('SESSIONSET', _param, null, false, ['SESSIONTOLABDATA', 'SESSIONTORADDATA', 'SESSIONTONUTCARE', 'SESSIONTOMEDREP'], true).subscribe(
@@ -193,7 +196,7 @@ export class HomePage {
           icon:'error',
           confirmButtonColor:'rgb(87,143,182)'
         }).then((result)=>{
-           //that.deleteSession();
+           that.deleteSession();
         });
         // Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error').then((result) => {
         //   //that.deleteSession();

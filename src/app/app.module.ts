@@ -30,6 +30,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import {GlobalService} from './services/global.service';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { Constant } from './constant';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { from } from 'rxjs';
 //import { HttpModule, Http } from '@angular/http';
 //import { SharedModule } from './shared/shared.module';
@@ -85,7 +86,8 @@ export function setTranslateLoader(http: HttpClient) {
     StatusBar,
     Constant,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    [{provide: LocationStrategy, useClass: HashLocationStrategy}]
   ],
   bootstrap: [AppComponent]
 })

@@ -99,7 +99,7 @@ export class UserPopoverComponent implements OnInit {
     let _param = {
       Patnr: that._api.getLocal('username'),
       Token: that._api.getLocal('token'),
-      Password:that._api.getLocal('password')
+      //Password:that._api.getLocal('password')
     }
 
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(

@@ -37,7 +37,7 @@ export class CustomAlertComponent implements OnInit {
     let that = this;
     console.log(this.model.newPassword);
     console.log(this.model.repeatPassword);
-    if(this.model.newPassword && this.model.repeatPassword){
+    if(this.model.newPassword && this.model.repeatPassword && this.model.currentPassword){
       if(this.model.newPassword === this.model.repeatPassword){
         let msg = this.translate.instant('dialog_title_changepassword');
         that._loader.showLoader(msg);
@@ -78,7 +78,7 @@ export class CustomAlertComponent implements OnInit {
     let _param = {
       Patnr: that._api.getLocal('username'),
       Token: that._api.getLocal('token'),
-      Password:that._api.getLocal('password')
+      //Password:that._api.getLocal('password')
     }
 
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
@@ -89,7 +89,10 @@ export class CustomAlertComponent implements OnInit {
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
-        window.location.reload();
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        // window.location.reload();
+        this.router.navigateByUrl('login');
 
       }, _error => {
         that._loader.hideLoader();
@@ -99,7 +102,9 @@ export class CustomAlertComponent implements OnInit {
         this._api.remLocal('token');
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
-        window.location.reload();
+        this._api.remLocal('password');
+       // window.location.reload();
+        this.router.navigateByUrl('login');
       }
     )
   }
@@ -108,7 +113,7 @@ export class CustomAlertComponent implements OnInit {
     let _data = {
       Patnr:this._api.getLocal('username'),
       Token:this._api.getLocal('token'),
-      Password: this._api.getLocal('password'),
+      Password: this.model.currentPassword,//this._api.getLocal('password'),
       NewPassword: this.model.newPassword
     }
     //that.loginUser("LOGINSESSIONSET",_data);

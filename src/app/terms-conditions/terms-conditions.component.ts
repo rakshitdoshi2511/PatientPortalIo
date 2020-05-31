@@ -80,7 +80,7 @@ export class TermsConditionsComponent implements OnInit {
     let _data = {
       Patnr: this.model.patnr,
       Token: this.model.token,
-      Password: this.model.password,
+      //Password: this.model.password,
       ACCEPTED: 'X',
       // PDFData: this.pdfRaw,
       TermCond: this.model.termsCond,
@@ -89,7 +89,7 @@ export class TermsConditionsComponent implements OnInit {
     let _params = {
       Patnr: this.model.patnr,
       Token: this.model.token,
-      Password: this.model.password,
+      //Password: this.model.password,
     }
     
     //that.loginUser("LOGINSESSIONSET",_data);
@@ -111,14 +111,14 @@ export class TermsConditionsComponent implements OnInit {
     let _data = {
       Patnr: this.model.patnr,
       Token: this.model.token,
-      Password: this.model.password,
+      //Password: this.model.password,
       ACCEPTED: '',
       TermCond: this.model.termsCond,
     }
     let _params = {
       Patnr: this.model.patnr,
       Token: this.model.token,
-      Password: this.model.password,
+      //Password: this.model.password,
     }
     
     //that.loginUser("LOGINSESSIONSET",_data);
@@ -138,7 +138,7 @@ export class TermsConditionsComponent implements OnInit {
     let _param = {
       Patnr: that._api.getLocal('username'),
       Token: that._api.getLocal('token'),
-      Password:that._api.getLocal('password')
+     // Password:that._api.getLocal('password')
     }
 
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(

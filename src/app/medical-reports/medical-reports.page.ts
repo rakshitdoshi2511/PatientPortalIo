@@ -486,7 +486,9 @@ export class MedicalReportsPage implements OnInit {
     let that = this;
     
     let _param = {
-      DocKey:_documentKey
+      DocKey:_documentKey,
+      Patnr: that._api.getLocal('username'),
+      Token: that._api.getLocal('token'),
     }
     that._dataServices.loadData('DOCPDFSET',_param,null,false,null,false).subscribe(
       _success=>{

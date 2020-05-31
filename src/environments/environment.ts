@@ -4,14 +4,25 @@
 
 export const environment = {
   production: false,
-  url: 'http://achdevemr01.ach.jo:8000/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  /**DEV */
+  // url: 'http://achdevemr01.ach.jo:8000/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  // app_prefix: 'amc_dev_',
+  // client: 110,
+  /**QAS */
+  url: 'http://amcqaemr01.ach.jo:8000/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  app_prefix: 'amc_qas_',
+  client: 210,
+  /**PRD */
+  // url: 'http://achdevemr01.ach.jo:8000/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  // app_prefix: 'amc_prd_',
+  // client: 110,
   ver: '1.0.0',
-  app_prefix: 'amc_',
-  default_languag: 'en'
+  default_languag: 'en',
+  appPath: '',
 };
 
 //open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security
-
+//ionic build --prod;
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

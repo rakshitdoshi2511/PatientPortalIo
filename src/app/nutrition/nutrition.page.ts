@@ -371,7 +371,9 @@ export class NutritionPage implements OnInit {
     let msg = this.translate.instant('dialog_title_authentication');
     //this._loader.showLoader(msg);
     let _param = {
-      DocKey: _documentKey
+      DocKey: _documentKey,
+      Patnr: that._api.getLocal('username'),
+      Token: that._api.getLocal('token'),
     }
     that._dataServices.loadData('DOCPDFSET', _param, null, false, null, false).subscribe(
       _success => {

@@ -16,6 +16,10 @@
             <div class="col-sm-6">
                 <form method="post" id="passwordForm">
                     <div class="form-group">
+                        <input type="password" class="input-lg form-control" name="password0" [(ngModel)]="model.currentPassword"
+                        placeholder="{{'lbl_current_password' | translate | titlecase}}" autocomplete="off" required="true">
+                    </div>
+                    <div class="form-group">
                         <input type="password" class="input-lg form-control" name="password1" [(ngModel)]="model.newPassword"
                         placeholder="{{'lbl_new_password' | translate | titlecase}}" autocomplete="off" required="true">
                     </div>

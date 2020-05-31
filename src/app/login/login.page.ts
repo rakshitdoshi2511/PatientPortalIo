@@ -167,6 +167,7 @@ export class LoginPage implements OnInit {
           that.loadTermsConditions(that.model.username,_obj.Token,that.model.password);
         }
         else{
+          that.model = {};
           this.router.navigateByUrl('home');
         }
       }, _error => {
@@ -190,7 +191,7 @@ export class LoginPage implements OnInit {
     let _param = {
       Patnr: _username,
       Token: _token,
-      Password: _password,
+      //Password: _password,
     }
 
     that._dataServices.loadData('TERMSCONDSET', _param, null, false, null, false).subscribe(
@@ -199,9 +200,11 @@ export class LoginPage implements OnInit {
         let _obj = _success.d;
         console.log(_obj);
         if (that.model.isVisible) {
+          that.model = {};
           this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password,_obj.TermCond);
         }
         else {
+          that.model = {};
           that.openModalTermsConditions(_obj.PDFData, _username, _token, _password,_obj.TermCond);
         }
 

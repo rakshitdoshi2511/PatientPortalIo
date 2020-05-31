@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from '../services/loader.service';
 import { DataService } from '../services/data.service';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-validate-user',
