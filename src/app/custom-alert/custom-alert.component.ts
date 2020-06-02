@@ -68,6 +68,7 @@ export class CustomAlertComponent implements OnInit {
 
   /**Data API */
   logOut() {
+    //this.modalController.dismiss();
     this.deleteSession();
   }
   deleteSession() {
@@ -84,7 +85,7 @@ export class CustomAlertComponent implements OnInit {
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
       _success => {
         that._loader.hideLoader();
-        
+        this.modalController.dismiss();
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -96,7 +97,7 @@ export class CustomAlertComponent implements OnInit {
 
       }, _error => {
         that._loader.hideLoader();
-        
+        this.modalController.dismiss();
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -127,6 +128,7 @@ export class CustomAlertComponent implements OnInit {
         icon:'success',
         confirmButtonColor: 'rgb(87,143,182)'
       }).then((result)=>{
+        this.modalController.dismiss();
         that.logOut();
       });
 

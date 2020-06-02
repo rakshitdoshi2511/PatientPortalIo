@@ -39,9 +39,10 @@
             <tr>
               <th scope="col" style="width: 100px;font-weight: 600;text-align: justify;">{{'lbl_category' | translate | uppercase}}</th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_exam' | translate | uppercase}} {{'lbl_date' | translate | uppercase}}</th>   
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_exam' | translate | uppercase}} {{'lbl_date' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_exam' | translate | uppercase}} {{'lbl_time' | translate | uppercase}}</th>   
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}</th>  
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th>
             </tr>
           </thead>
@@ -56,13 +57,16 @@
               </td>
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
+                <!-- <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5> -->
+              </td>
+              <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
               </td>
               <td><span class="pill" [style.background]="renderStatus(lt.statusCode)" style="color:black">{{lt.status}}</span></td>
             </tr>

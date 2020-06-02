@@ -4,7 +4,7 @@ import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import { FilterPopoverComponent } from '../filter-popover/filter-popover.component';
 import * as _ from "lodash";
 import { KeyValue } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
 import { AlertController, ModalController } from '@ionic/angular';
@@ -14,6 +14,7 @@ import { ApiService } from './../services/api.service';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class RadiologyPage implements OnInit {
     private _api: ApiService,
     private storage: Storage,
     public alertController: AlertController,
+    private router: Router,
   ) { }
 
   /**Dialog and Loaders*/
@@ -177,6 +179,9 @@ export class RadiologyPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      this.model.language = event.lang == 'en' ? true : false;
+    })
 
   }
   ionViewDidEnter() {
@@ -185,6 +190,9 @@ export class RadiologyPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      this.model.language = event.lang == 'en' ? true : false;
+    })
   }
   /**Screen Interaction */
   openProfile(event) {
@@ -264,7 +272,10 @@ export class RadiologyPage implements OnInit {
     }
     this.documents = this.documents.filter(document => {
       if (document.documentNo && searchTerm) {
-        if (document.documentNo.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || document.physician.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || document.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+        if (document.documentNo.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 
+        || document.physician.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 
+        || document.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+        || document.type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
         return false;
@@ -391,7 +402,7 @@ export class RadiologyPage implements OnInit {
           data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
           data.documentKey = data.DocKey;
           data.documentType = data.DocCat;
-          let url = '../../assets/icon/';
+          let url = './assets/icon/';
           let imagePath = data.documentType == 'Report' ? 'icon_document_blue.svg' : 'icon_image_blue.svg';
           data.imagePath = url + imagePath;
         });
@@ -408,6 +419,17 @@ export class RadiologyPage implements OnInit {
         this.documentsMobile = formattedDocuments;
         this.documents = _data;
         //console.log(this.documents);
+      }
+      else{
+        Swal.fire({
+          title: this.translate.instant('lbl_no_data'),
+          text: this.translate.instant('lbl_no_data_msg'),
+          backdrop:false,
+          icon:'info',
+          confirmButtonColor:'rgb(87,143,182)'
+        }).then((result)=>{
+          this.router.navigateByUrl('home');
+        });
       }
     });
   }

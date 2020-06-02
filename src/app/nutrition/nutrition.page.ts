@@ -3,7 +3,7 @@ import { AlertController, PopoverController, Platform, ModalController } from '@
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
 import { FilterPopoverComponent } from '../filter-popover/filter-popover.component';
 import * as _ from "lodash";
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
 import { KeyValue } from '@angular/common';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nutrition',
@@ -37,6 +38,7 @@ export class NutritionPage implements OnInit {
     private storage: Storage,
     public alertController: AlertController,
     private modalController: ModalController,
+    private router: Router,
   ) { }
 
   /**Dialog and Loaders*/
@@ -170,6 +172,9 @@ export class NutritionPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();  
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      this.model.language = event.lang == 'en' ? true : false;
+    })
   }
   ionViewDidEnter() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
@@ -177,6 +182,9 @@ export class NutritionPage implements OnInit {
     this.model.filterCount = 0;    
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      this.model.language = event.lang == 'en' ? true : false;
+    })
   }
   /**Screen Interaction */
   openProfile(event) {
@@ -363,6 +371,17 @@ export class NutritionPage implements OnInit {
         this.documentsMobile = formattedDocuments;
         this.documents = _data;
         //console.log(this.documents);
+      }
+      else{
+        Swal.fire({
+          title: this.translate.instant('lbl_no_data'),
+          text: this.translate.instant('lbl_no_data_msg'),
+          backdrop:false,
+          icon:'info',
+          confirmButtonColor:'rgb(87,143,182)'
+        }).then((result)=>{
+          this.router.navigateByUrl('home');
+        });
       }
     });
   }

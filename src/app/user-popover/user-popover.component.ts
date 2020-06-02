@@ -89,6 +89,7 @@ export class UserPopoverComponent implements OnInit {
     this.popoverControl.dismiss();
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+    
   }
   /**Data API */
   deleteSession() {

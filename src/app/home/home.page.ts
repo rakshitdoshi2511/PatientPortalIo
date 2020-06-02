@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PopoverController, Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Constant } from './../constant';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,7 @@ export class HomePage {
     private _api: ApiService,
     private storage: Storage,
     private router:Router,
+    private constant: Constant,
   ) { }
 
   /*Dialogs and Loaders*/
@@ -136,7 +138,7 @@ export class HomePage {
     //this._loader.showLoader(msg);
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
 
-    this._loadData();
+    //this._loadData();
 
     this.model.laboratoryCount = 0;
     this.model.nutritionCount = 0;
@@ -150,6 +152,11 @@ export class HomePage {
       { id: 3, title: 'Radiology', subtitle: 'Access to the radiology reports and images', icon: 'icon-radiology.svg', class: '', pendingDocuments: '', lastDate: '' },
       { id: 4, title: 'Medical Reports', subtitle: 'Access General Medical Reports, ER and Hospital Discharge reports', icon: 'icon-report.svg', class: '', pendingDocuments: '', lastDate: '' },
     );
+
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      this.model.language = event.lang == 'en' ? true : false;
+    })
+
   }
   ionViewDidEnter() {
     let msg = this.translate.instant('dialog_title_loading');
@@ -169,6 +176,10 @@ export class HomePage {
       { id: 3, title: 'Radiology', subtitle: 'Access to the radiology reports and images', icon: 'icon-radiology.svg', class: '', pendingDocuments: '', lastDate: '' },
       { id: 4, title: 'Medical Reports', subtitle: 'Access General Medical Reports, ER and Hospital Discharge reports', icon: 'icon-report.svg', class: '', pendingDocuments: '', lastDate: '' },
     );
+
+    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+      this.model.language = event.lang == 'en' ? true : false;
+    })
   }
   /**Data API */
   _loadData() {
@@ -183,6 +194,12 @@ export class HomePage {
       _success => {
         that._loader.hideLoader();
         let _obj = _success.d;
+
+        this.constant.firstName = _obj.Vname;
+        this.constant.lastName = _obj.Nname;
+        this.constant.email = _obj.Emailid;
+        this.constant.mrn = _obj.Patnr;
+
         that._dataServices.setData(_obj.Token, _obj);
         console.log(that._dataServices.getData(_obj.Token));
         that.setLocalModel(that._dataServices.getData(_obj.Token));
@@ -214,6 +231,7 @@ export class HomePage {
   switchLanguage(){
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+    this._api.setLocal('lang',this.model.language);
   }
   goTo(param){
     switch(param){

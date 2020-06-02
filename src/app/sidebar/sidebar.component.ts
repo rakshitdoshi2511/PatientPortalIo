@@ -8,6 +8,7 @@ import {Storage} from '@ionic/storage';
 import { PopoverController,AlertController } from '@ionic/angular';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
+import { Constant } from './../constant';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,6 +27,7 @@ export class SidebarComponent implements OnInit {
     public alertController: AlertController,
     private _loader: LoaderService,
     private _dataServices: DataService,
+    private constant: Constant,
     ) { }
 
    /**Helper Methods*/
@@ -35,9 +37,15 @@ export class SidebarComponent implements OnInit {
    /**Default Methods */ 
   ngOnInit() {
     let that = this;
-    
+
+    this.model.firstName  = this.constant.firstName;
+    this.model.lastName = this.constant.lastName;
+    this.model.mrn = this.constant.mrn;
+    this.model.email = this.constant.email;
+
     that.storage.get(that._api.getLocal('token')).then((val)=>{
       let _data = val;
+      //that._loader.hideLoader();
       console.log(_data);
       if(_data!=null && Object.keys(_data).length>0){
         this.model.firstName = _data.Vname;
@@ -61,9 +69,16 @@ export class SidebarComponent implements OnInit {
   ionViewDidEnter(){
     let that = this;
     
+    this.model.firstName  = this.constant.firstName;
+    this.model.lastName = this.constant.lastName;
+    this.model.mrn = this.constant.mrn;
+    this.model.email = this.constant.email;
+
+    console.log("ionView Enter");
     that.storage.get(that._api.getLocal('token')).then((val)=>{
       let _data = val;
       console.log(_data);
+      //that._loader.hideLoader();
       if(_data!=null && Object.keys(_data).length>0){
         this.model.firstName = _data.Vname;
         this.model.lastName = _data.Nname;
