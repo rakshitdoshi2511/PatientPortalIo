@@ -132,6 +132,20 @@ export class LaboratoryPage implements OnInit {
     this.presentAlert(title, message);
   }
   /**Helper Methods */
+  resetSortKeys(){
+    this.model.documentNumberAsc = 'iconNotSort';
+    this.model.documentNumberDesc = 'iconNotSort';
+    this.model.dateAsc = 'iconNotSort';
+    this.model.dateDesc = 'iconNotSort';
+    this.model.timeAsc = 'iconNotSort';
+    this.model.timeDesc = 'iconNotSort';
+    this.model.typeAsc = 'iconNotSort';
+    this.model.typeDesc = 'iconNotSort';
+    this.model.physicianAsc = 'iconNotSort';
+    this.model.physicianDesc = 'iconNotSort';
+    this.model.statusAsc = 'iconNotSort';
+    this.model.statusDesc = 'iconNotSort';
+  }
   customSort(a: KeyValue<number, string>, b: KeyValue<number, string>) {
     //Do not do anything since originalOrder is not working;
     return 0;
@@ -145,6 +159,9 @@ export class LaboratoryPage implements OnInit {
   }
   getAlignmentClassLeft() {
     return this.translate.getDefaultLang() == 'en' ? 'pull-left' : 'pull-right';
+  }
+  getAlignmentClass() {
+    return this.translate.getDefaultLang() == 'en' ? 'float-right' : 'float-left';
   }
   padZeros(string, length) {
     var my_string = '' + string;
@@ -185,7 +202,8 @@ export class LaboratoryPage implements OnInit {
     this.loadData();
     this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
       this.model.language = event.lang == 'en' ? true : false;
-    })
+    });
+    this.resetSortKeys();
   }
   ionViewDidEnter() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
@@ -195,7 +213,8 @@ export class LaboratoryPage implements OnInit {
     this.loadData();
     this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
       this.model.language = event.lang == 'en' ? true : false;
-    })
+    });
+    this.resetSortKeys();
   }
   /**Screen Interaction */
   openProfile(event) {
@@ -367,6 +386,68 @@ export class LaboratoryPage implements OnInit {
     else {
       this.documents = this.documentsOld;
     }
+  }
+  sortDescending(key) {
+    if (key == "date") {
+      key = "dateFormatted";
+    }
+    let className = 'iconSort';
+    this.resetSortKeys();
+    switch(key){
+      case 'documentNo':
+        this.model.documentNumberDesc = className;
+        break;
+      case 'type':
+        this.model.typeDesc = className;  
+        break;
+      case 'dateFormatted':
+        this.model.dateDesc = className;
+        break;
+      case 'time':
+        this.model.timeDesc = className;    
+        break;
+      case 'physician':
+        this.model.physicianDesc = className;
+        break;
+      case 'status':
+        this.model.statusDesc = className;
+        break;  
+      default:
+        this.resetSortKeys();
+        break;
+    }
+    this.documents = _.sortBy(this.documents, key).reverse();
+  }
+  sortAscending(key) {
+    if (key == "date") {
+      key = "dateFormatted";
+    }
+    let className = 'iconSort';
+    this.resetSortKeys();
+    switch(key){
+      case 'documentNo':
+        this.model.documentNumberAsc = className;
+        break;
+      case 'type':
+        this.model.typeAsc = className;  
+        break;
+      case 'dateFormatted':
+        this.model.dateAsc = className;
+        break;
+      case 'time':
+        this.model.timeAsc = className;    
+        break;
+      case 'physician':
+        this.model.physicianAsc = className;
+        break;
+      case 'status':
+        this.model.statusAsc = className;
+        break;  
+      default:
+        this.resetSortKeys();
+        break;
+    }
+    this.documents = _.sortBy(this.documents, key, 'asc')
   }
   openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});

@@ -19,9 +19,9 @@
     <ion-searchbar showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
     </ion-searchbar>
     <ion-buttons slot="end">
-      <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
+      <!-- <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
         <ion-icon name="swap-vertical"></ion-icon>
-      </button>
+      </button> -->
       <button ion-button (click)="showFilters()" icon-only clear style="background:transparent!important">
         <ion-icon name="funnel"></ion-icon>
         <ion-badge color="danger" [hidden]="model.filterCount==0">{{model.filterCount}}</ion-badge>
@@ -38,11 +38,72 @@
           <thead>
             <tr>
               <th scope="col" style="width: 100px;"></th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_date' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_time' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}</th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}</th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortDescending('documentNo')" icon-only clear style="background:transparent!important;">
+                    <ion-icon name="arrow-down" [ngClass]="model.documentNumberDesc"
+                      style="color:#CCC;margin-right: -0.1em;"></ion-icon>
+                  </button>
+                </span>
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortAscending('documentNo')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                    <ion-icon name="arrow-up" [ngClass]="model.documentNumberAsc">
+                    </ion-icon>
+                  </button>
+                </span>
+              </th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_date' | translate | uppercase}}
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortDescending('date')" icon-only clear style="background:transparent!important">
+                    <ion-icon name="arrow-down" [ngClass]="model.dateDesc"></ion-icon>
+                  </button>
+                </span>
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortAscending('date')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                    <ion-icon name="arrow-up" [ngClass]="model.dateAsc">
+                    </ion-icon>
+                  </button>
+                </span>
+              </th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_time' | translate | uppercase}}
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortDescending('time')" icon-only clear style="background:transparent!important">
+                    <ion-icon name="arrow-down" [ngClass]="model.timeDesc"></ion-icon>
+                  </button>
+                </span>
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortAscending('time')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                    <ion-icon name="arrow-up" [ngClass]="model.timeAsc">
+                    </ion-icon>
+                  </button>
+                </span>
+              </th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortDescending('type')" icon-only clear style="background:transparent!important">
+                    <ion-icon name="arrow-down" [ngClass]="model.typeDesc"></ion-icon>
+                  </button>
+                </span>
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortAscending('type')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                    <ion-icon name="arrow-up" [ngClass]="model.typeAsc">
+                    </ion-icon>
+                  </button>
+                </span>
+              </th>
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortDescending('physician')" icon-only clear style="background:transparent!important">
+                    <ion-icon name="arrow-down" [ngClass]="model.physicianDesc"></ion-icon>
+                  </button>
+                </span>
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortAscending('physician')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                    <ion-icon name="arrow-up" [ngClass]="model.physicianAsc">
+                    </ion-icon>
+                  </button>
+                </span>
+              </th>
               
               <!-- <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th> -->
             </tr>

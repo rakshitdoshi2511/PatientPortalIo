@@ -131,36 +131,64 @@ ion-toggle{
     visibility: hidden;
   }
   
-  /*Sorting Class*/
-  .project-list-table{
-    .dataTable thead>tr>th.sorting{
-      padding-right: 10px;
-    }
-    .dataTable thead .sorting{
-      cursor: pointer;
-	    position: relative
-    }
-    .dataTable thead .sorting:before,
-    .dataTable thead .sorting:after{
-      position: absolute;
-      bottom: .9em;
-      display: block;
-      opacity: .3
-    }
-
-    .dataTable thead .sorting:before{
-      right: 1em;
-	    content: "\2191"
-    }
-    .dataTable thead .sorting:after{
-      right: .5em;
-	    content: "\2193"
-    }
-
+  .float-right{
+    float: right;
   }
-  
+  .float-left{
+    float:left;
+  }
+
+  .iconNotSort{
+    color: #CCC;
+  }
+  .iconSort{
+    color: rgb(83,143,182)  !important;
+  }
+  /*Sorting Class*/
+//   .project-list-table > thead > tr > th {
+//     cursor: pointer;
+//     position: relative;
+// }
+
+// .project-list-table > thead > tr > th:after,
+// .project-list-table > thead > tr > th:after,
+// .project-list-table > thead > tr > th:after {
+//     content: ' ';
+//     position: absolute;
+//     height: 0;
+//     width: 0;
+//     right: 10px;
+//     top: 16px;
+// }
 
 
+// .project-list-table > thead > tr > th:after {
+//     border-left: 5px solid transparent;
+//     border-right: 5px solid transparent;
+//     border-top: 5px solid #ccc;
+//     border-bottom: 0px solid transparent;
+// }
+
+// .project-list-table > thead > tr > th:hover:after {
+//     border-top: 5px solid #888;
+// }
+
+// .project-list-table > thead > tr > th.asc:after {
+//     border-left: 5px solid transparent;
+//     border-right: 5px solid transparent;
+//     border-top: 0px solid transparent;
+//     border-bottom: 5px solid #333;
+// }
+// .project-list-table > thead > tr > th.asc:hover:after {
+//     border-bottom: 5px solid #888;
+// }
+
+// .project-list-table > thead > tr > th.desc:after {    
+//     border-left: 5px solid transparent;
+//     border-right: 5px solid transparent;
+//     border-top: 5px solid #333;
+//     border-bottom: 5px solid transparent;
+// }
 
   /*Sorting Class*/
 
