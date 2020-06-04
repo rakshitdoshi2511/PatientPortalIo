@@ -127,6 +127,44 @@ ion-toggle{
     cursor: pointer;
   }
 
+  .th-active{
+    visibility: hidden;
+  }
+  
+  /*Sorting Class*/
+  .project-list-table{
+    .dataTable thead>tr>th.sorting{
+      padding-right: 10px;
+    }
+    .dataTable thead .sorting{
+      cursor: pointer;
+	    position: relative
+    }
+    .dataTable thead .sorting:before,
+    .dataTable thead .sorting:after{
+      position: absolute;
+      bottom: .9em;
+      display: block;
+      opacity: .3
+    }
+
+    .dataTable thead .sorting:before{
+      right: 1em;
+	    content: "\2191"
+    }
+    .dataTable thead .sorting:after{
+      right: .5em;
+	    content: "\2193"
+    }
+
+  }
+  
+
+
+
+  /*Sorting Class*/
+
+
   .project-list-table {
     border-collapse: separate;
     border-spacing: 0 12px;

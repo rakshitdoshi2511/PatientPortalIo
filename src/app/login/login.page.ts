@@ -49,21 +49,21 @@ export class LoginPage implements OnInit {
   }
 
   /**Dialogs and Loaders */
-  async openModalTermsConditions(_base64,_patnr,_token,_password,_termsCond) {
+  async openModalTermsConditions(_base64, _patnr, _token, _password, _termsCond) {
     const modal = await this.modalController.create({
       component: TermsConditionsComponent,
       backdropDismiss: false,
-      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond},
+      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond },
       cssClass: 'pdfViewer',
 
     });
     return await modal.present();
   }
-  async openModalTermsConditionsMobile(_base64,_patnr,_token,_password,_termsCond) {
+  async openModalTermsConditionsMobile(_base64, _patnr, _token, _password, _termsCond) {
     const modal = await this.modalController.create({
       component: TermsConditionsComponent,
       backdropDismiss: false,
-      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond},
+      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond },
     });
     return await modal.present();
   }
@@ -109,6 +109,12 @@ export class LoginPage implements OnInit {
     this._api.remLocal('isLoggedIn');
     this._api.remLocal('token');
     this._api.remLocal('username');
+    this._api.remLocal('sessionTimeout');
+    this._api.remLocal('password');
+    this._api.remLocal('firstName');
+    this._api.remLocal('lastName');
+    this._api.remLocal('email');
+    this._api.remLocal('mrn');
   }
   /*Default Methods*/
   ngOnInit() {
@@ -163,10 +169,10 @@ export class LoginPage implements OnInit {
 
         this.bnIdle.resetTimer();
         that._loader.hideLoader();
-        if(_obj.PendingTermCond == 'X'){
-          that.loadTermsConditions(that.model.username,_obj.Token,that.model.password);
+        if (_obj.PendingTermCond == 'X') {
+          that.loadTermsConditions(that.model.username, _obj.Token, that.model.password);
         }
-        else{
+        else {
           that.model = {};
           this.router.navigateByUrl('home');
         }
@@ -186,7 +192,7 @@ export class LoginPage implements OnInit {
       }
     )
   }
-  loadTermsConditions(_username,_token,_password){
+  loadTermsConditions(_username, _token, _password) {
     let that = this;
     let _param = {
       Patnr: _username,
@@ -201,11 +207,11 @@ export class LoginPage implements OnInit {
         console.log(_obj);
         if (that.model.isVisible) {
           that.model = {};
-          this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password,_obj.TermCond);
+          this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password, _obj.TermCond);
         }
         else {
           that.model = {};
-          that.openModalTermsConditions(_obj.PDFData, _username, _token, _password,_obj.TermCond);
+          that.openModalTermsConditions(_obj.PDFData, _username, _token, _password, _obj.TermCond);
         }
 
       }, _error => {

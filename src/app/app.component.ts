@@ -81,6 +81,12 @@ export class AppComponent {
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         window.location.reload();
 
       }, _error => {
@@ -90,6 +96,11 @@ export class AppComponent {
         this._api.remLocal('token');
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         window.location.reload();
       }
     )

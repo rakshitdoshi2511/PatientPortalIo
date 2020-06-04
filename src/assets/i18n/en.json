@@ -28,7 +28,7 @@
 	"lbl_dietician":"Dietician",
 	"lbl_email": "Email",
 	"lbl_email_sent": "Reset Password",
-	"lbl_email_sent_message": "If the details are registered and matches with our records, you will receive an email to reset the password",
+	"lbl_email_sent_message": "If the details are registered and match with our records, you will receive an email to reset the password",
 	"lbl_exam": "Exam",
 	"lbl_filter_by": "Filter By",
 	"lbl_forgot_password": "Forgot Password?",

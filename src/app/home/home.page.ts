@@ -117,6 +117,10 @@ export class HomePage {
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         this.router.navigateByUrl('login');
 
       }, _error => {
@@ -128,6 +132,10 @@ export class HomePage {
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         this.router.navigateByUrl('login');
       }
     )
@@ -199,6 +207,11 @@ export class HomePage {
         this.constant.lastName = _obj.Nname;
         this.constant.email = _obj.Emailid;
         this.constant.mrn = _obj.Patnr;
+
+        this._api.setLocal('firstName',_obj.Vname);
+        this._api.setLocal('lastName',_obj.Nname);
+        this._api.setLocal('email',_obj.Emailid);
+        this._api.setLocal('mrn',_obj.Patnr);
 
         that._dataServices.setData(_obj.Token, _obj);
         console.log(that._dataServices.getData(_obj.Token));

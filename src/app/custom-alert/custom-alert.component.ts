@@ -92,6 +92,10 @@ export class CustomAlertComponent implements OnInit {
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         // window.location.reload();
         this.router.navigateByUrl('login');
 
@@ -104,6 +108,10 @@ export class CustomAlertComponent implements OnInit {
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
        // window.location.reload();
         this.router.navigateByUrl('login');
       }

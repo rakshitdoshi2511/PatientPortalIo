@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import * as print from 'print-js'
 
 @Component({
   selector: 'app-pdf-view',
@@ -15,7 +16,7 @@ export class PdfViewComponent implements OnInit {
     private modalController: ModalController,
     private navParams: NavParams,
     private translate: TranslateService,
-    private platform: Platform
+    private platform: Platform,
   ) { }
 
   /**Helper Methods */
@@ -90,19 +91,19 @@ export class PdfViewComponent implements OnInit {
   }
 
   printPDF() {
-    let _data = this.pdfRaw;
-    var winparams = 'dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,' +
-      'resizable,screenX=50,screenY=50,width=850,height=1050';
-    var htmlPop = '<embed width=100% height=100%'
-      + ' type="application/pdf"'
-      + ' src="data:application/pdf;base64,'
-      + escape(_data)
-      + '"></embed>';
+    print({printable: this.pdfRaw, type: 'pdf', base64: true});
+    // let _data = this.pdfRaw;
+    // var winparams = 'dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,' +
+    //   'resizable,screenX=50,screenY=50,width=850,height=1050';
+    // var htmlPop = '<embed width=100% height=100%'
+    //   + ' type="application/pdf"'
+    //   + ' src="data:application/pdf;base64,'
+    //   + escape(_data)
+    //   + '"></embed>';
 
-    var printWindow = window.open("", "PDF", winparams);
-    printWindow.document.write(htmlPop);
-    printWindow.print();
-    
+    // var printWindow = window.open("", "PDF", winparams);
+    // printWindow.document.write(htmlPop);
+    // printWindow.print();
   }
 
   dismiss() {

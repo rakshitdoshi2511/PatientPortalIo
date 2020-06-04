@@ -149,6 +149,10 @@ export class TermsConditionsComponent implements OnInit {
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         this.router.navigateByUrl('login');
        // window.location.reload();
 
@@ -159,6 +163,10 @@ export class TermsConditionsComponent implements OnInit {
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
         this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         this.router.navigateByUrl('login');
         //window.location.reload();
       }

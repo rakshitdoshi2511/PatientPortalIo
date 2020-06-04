@@ -38,10 +38,10 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     let that = this;
 
-    this.model.firstName  = this.constant.firstName;
-    this.model.lastName = this.constant.lastName;
-    this.model.mrn = this.constant.mrn;
-    this.model.email = this.constant.email;
+    this.model.firstName  = this._api.getLocal('firstName');;
+    this.model.lastName = this._api.getLocal('lastName');
+    this.model.mrn = this._api.getLocal('mrn');
+    this.model.email = this._api.getLocal('email');
 
     that.storage.get(that._api.getLocal('token')).then((val)=>{
       let _data = val;
@@ -69,10 +69,10 @@ export class SidebarComponent implements OnInit {
   ionViewDidEnter(){
     let that = this;
     
-    this.model.firstName  = this.constant.firstName;
-    this.model.lastName = this.constant.lastName;
-    this.model.mrn = this.constant.mrn;
-    this.model.email = this.constant.email;
+    this.model.firstName  = this._api.getLocal('firstName');;
+    this.model.lastName = this._api.getLocal('lastName');
+    this.model.mrn = this._api.getLocal('mrn');
+    this.model.email = this._api.getLocal('email');
 
     console.log("ionView Enter");
     that.storage.get(that._api.getLocal('token')).then((val)=>{
@@ -114,6 +114,12 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
         this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         window.location.reload();
 
       }, _error => {
@@ -124,6 +130,11 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('token');
         this._api.remLocal('username');
         this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
         window.location.reload();
       }
     )

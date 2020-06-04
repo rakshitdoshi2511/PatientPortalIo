@@ -383,6 +383,9 @@ export class RadiologyPage implements OnInit {
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
   }
+  _onCellClick(param){
+    
+  }
   /**Data API */
   loadData() {
 
