@@ -86,7 +86,7 @@ export class WebService {
       let params = !arguments[3] ? {} : arguments[3]; 
 
       let headers = new Headers();
-      console.log(data);
+      //console.log(data);
       this.createAuthorizationHeader(headers,custHeaders, 'post');
 
       let options: RequestOptions = new RequestOptions({
@@ -118,7 +118,7 @@ export class WebService {
       let params = !arguments[3] ? {} : arguments[3]; 
 
       let headers = new Headers();
-      console.log(data);
+      //console.log(data);
       this.createAuthorizationHeader(headers,custHeaders, 'post');
 
       let options: RequestOptions = new RequestOptions({

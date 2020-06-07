@@ -39,16 +39,16 @@ export class SidebarComponent implements OnInit {
   /**Default Methods */
   ngOnInit() {
     let that = this;
-    console.log("Setting names from api");
-    console.log(this._api.getLocal('firstName'));
+    //console.log("Setting names from api");
+    //console.log(this._api.getLocal('firstName'));
     this.model.firstName = this._api.getLocal('firstName');
     this.model.lastName = this._api.getLocal('lastName');
     this.model.mrn = this._api.getLocal('mrn');
     this.model.email = this._api.getLocal('email');
 
     this.events.subscribe('user-data', (_data: any) => {
-      console.log("Subscription");
-      console.log(_data);
+      //console.log("Subscription");
+      //console.log(_data);
       this.model.firstName = _data.Vname;
       this.model.lastName = _data.Nname;
       this.model.mrn = _data.Patnr;
@@ -91,10 +91,10 @@ export class SidebarComponent implements OnInit {
     this.model.mrn = this._api.getLocal('mrn');
     this.model.email = this._api.getLocal('email');
 
-    console.log("ionView Enter");
+    //console.log("ionView Enter");
     that.storage.get(that._api.getLocal('token')).then((val) => {
       let _data = val;
-      console.log(_data);
+      //console.log(_data);
       //that._loader.hideLoader();
       if (_data != null && Object.keys(_data).length > 0) {
         this.model.firstName = _data.Vname;
@@ -109,8 +109,8 @@ export class SidebarComponent implements OnInit {
 
     });
     this.events.subscribe('user-data', (_data: any) => {
-      console.log("Subscription");
-      console.log(_data);
+      //console.log("Subscription");
+      //console.log(_data);
       this.model.firstName = _data.Vname;
       this.model.lastName = _data.Nname;
       this.model.mrn = _data.Patnr;

@@ -219,7 +219,7 @@ export class HomePage {
         this.events.publish('user-data',_obj);
 
         that._dataServices.setData(_obj.Token, _obj);
-        console.log(that._dataServices.getData(_obj.Token));
+        //console.log(that._dataServices.getData(_obj.Token));
         that.setLocalModel(that._dataServices.getData(_obj.Token));
       }, _error => {
         that._loader.hideLoader();

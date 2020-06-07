@@ -270,7 +270,7 @@ export class LaboratoryPage implements OnInit {
 
     this.documents = this.documentsOld;
     const searchTerm = evt.srcElement.value;
-    console.log(searchTerm);
+    //console.log(searchTerm);
     if (!searchTerm) {
       this.documents = this.documentsOld;
       let formattedDocuments = _.groupBy(this.documents, 'date');
@@ -528,7 +528,7 @@ export class LaboratoryPage implements OnInit {
       _success => {
         that._loader.hideLoader();
         let _obj = _success.d;
-        console.log(_obj);
+        //console.log(_obj);
         //that.openDocument(_obj.PDFData,_documentNo);
         if (that.model.isVisible) {
           this.openModalMobile(_obj.PDFData, _documentNo);

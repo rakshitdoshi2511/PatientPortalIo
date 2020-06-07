@@ -17,6 +17,7 @@ import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
 import { TermsConditionsComponent } from './../terms-conditions/terms-conditions.component';
 import Swal from 'sweetalert2';
+import { Events } from './../services/event.service'; 
 
 @Component({
   selector: 'app-login',
@@ -43,6 +44,7 @@ export class LoginPage implements OnInit {
     private translate: TranslateService,
     private constant: Constant,
     private modalController: ModalController,
+    private events: Events,
 
   ) {
     this.baseUrl = environment.url;
@@ -159,13 +161,16 @@ export class LoginPage implements OnInit {
     that._dataServices.login(_data).subscribe(
       _success => {
         let _obj = _success.d;
+        
         this._api.setLocal('isLoggedIn', true);
         this._api.setLocal('token', _obj.Token);
         this._api.setLocal('username', that.model.username);
         this._api.setLocal('sessionTimeout', _obj.BrowserTimeout);
         this._api.setLocal('password', that.model.password);
         this.constant.sessionTimeOut = _obj.BrowserTimeout / 10;
-        console.log(this.constant.sessionTimeOut);
+        //console.log(this.constant.sessionTimeOut);
+
+        this.events.publish('session-data',_obj);
 
         this.bnIdle.resetTimer();
         that._loader.hideLoader();
@@ -204,7 +209,7 @@ export class LoginPage implements OnInit {
       _success => {
         //that._loader.hideLoader();
         let _obj = _success.d;
-        console.log(_obj);
+        //console.log(_obj);
         if (that.model.isVisible) {
           that.model = {};
           this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password, _obj.TermCond);

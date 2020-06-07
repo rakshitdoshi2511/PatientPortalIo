@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import { ApiService } from './services/api.service';
 import { Storage } from '@ionic/storage';
 import { DataService } from './services/data.service';
+import { Events } from './services/event.service';
+import { LoaderService } from './services/loader.service';
 
 
 @Component({
@@ -34,6 +36,8 @@ export class AppComponent {
     private _api: ApiService,
     private storage: Storage,
     private _dataServices: DataService,
+    private events: Events,
+    private _loader: LoaderService
   ) {
     this.initializeApp();
   }
@@ -45,18 +49,34 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    console.log("Platform" + this.platform);
+    //console.log("Platform" + this.platform);
     //60seconds idle time out
     
-    this.bnIdle.startWatching(this.constant.sessionTimeOut).subscribe((isTimedOut: boolean) => {
-        console.log("Session Expiry");
-        // this.bnIdle.resetTimer();
-        // this.bnIdle.stopTimer();
-        // let msg = this.translate.instant('alert_title_session_expired_msg');
+    this.events.subscribe('session-data',(_data:any)=>{
+      //console.log("App Session");
+      //console.log(_data);
+      this.bnIdle.startWatching(_data.BrowserTimeout).subscribe((isTimedOut: boolean) => {
+        //console.log("Session Expiry");
+        this.bnIdle.resetTimer();
+        this.bnIdle.stopTimer();
+        let msg = this.translate.instant('alert_title_session_expired_msg');
+
+        Swal.fire({
+          title: this.translate.instant('alert_title_session_expired'),
+          text: msg,
+          backdrop:false,
+          icon:'error',
+          confirmButtonColor:'rgb(87,143,182)'
+        }).then((result)=>{
+           this.deleteSession();
+        });
+
         // Swal.fire(this.translate.instant('alert_title_session_expired'), msg, 'error').then((result)=>{
-        //   this.deleteSession();
+        //  this.deleteSession();
         // })
-    });
+      });
+    })
+    
 
     //Set App Direction based on language selected
     this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
@@ -67,8 +87,8 @@ export class AppComponent {
 
   deleteSession() {
     let that = this;
-    // let msg = this.translate.instant('dialog_title_logout');
-    // this._loader.showLoader(msg);
+    let msg = this.translate.instant('dialog_title_logout');
+    this._loader.showLoader(msg);
 
     let _param = {
       Patnr: that._api.getLocal('username'),
@@ -77,7 +97,7 @@ export class AppComponent {
 
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
       _success => {
-       
+        that._loader.hideLoader();
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -88,10 +108,10 @@ export class AppComponent {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-        window.location.reload();
+        this.router.navigateByUrl('login');
 
       }, _error => {
-        
+        that._loader.hideLoader();
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -102,7 +122,7 @@ export class AppComponent {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-        window.location.reload();
+        this.router.navigateByUrl('login');
       }
     )
   }

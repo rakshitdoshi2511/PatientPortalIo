@@ -495,7 +495,7 @@ export class NutritionPage implements OnInit {
       _success => {
         that._loader.hideLoader();
         let _obj = _success.d;
-        console.log(_obj);
+        //console.log(_obj);
         if (that.model.isVisible) {
           this.openModalMobile(_obj.PDFData, _documentNo);
         }

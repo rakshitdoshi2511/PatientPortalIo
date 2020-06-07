@@ -35,8 +35,8 @@ export class CustomAlertComponent implements OnInit {
 
   resetPassword(){
     let that = this;
-    console.log(this.model.newPassword);
-    console.log(this.model.repeatPassword);
+    //console.log(this.model.newPassword);
+    //console.log(this.model.repeatPassword);
     if(this.model.newPassword && this.model.repeatPassword && this.model.currentPassword){
       if(this.model.newPassword === this.model.repeatPassword){
         let msg = this.translate.instant('dialog_title_changepassword');

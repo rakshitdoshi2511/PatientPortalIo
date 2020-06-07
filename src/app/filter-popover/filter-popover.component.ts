@@ -55,7 +55,7 @@ export class FilterPopoverComponent implements OnInit {
       that.model.physicianFilterHidden = true;
     }
     if(that.id == 'MED'){
-      console.log("I am here");
+      //console.log("I am here");
       that.model.documentTypeFilterHidden = true;
     }
     that.model.status = this.navParams.data.statusFilterValue;
@@ -82,7 +82,7 @@ export class FilterPopoverComponent implements OnInit {
       that.model.physicianFilterHidden = true;
     }
     if(that.id == 'MED'){
-      console.log("I am here");
+      //console.log("I am here");
       that.model.documentTypeFilterHidden = true;
     }
     that.model.status = this.navParams.data.statusFilterValue;
