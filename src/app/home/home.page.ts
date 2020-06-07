@@ -11,6 +11,8 @@ import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Constant } from './../constant';
+import { Events } from './../services/event.service';
+
 
 @Component({
   selector: 'app-home',
@@ -31,6 +33,7 @@ export class HomePage {
     private storage: Storage,
     private router:Router,
     private constant: Constant,
+    private events: Events,
   ) { }
 
   /*Dialogs and Loaders*/
@@ -212,6 +215,8 @@ export class HomePage {
         this._api.setLocal('lastName',_obj.Nname);
         this._api.setLocal('email',_obj.Emailid);
         this._api.setLocal('mrn',_obj.Patnr);
+
+        this.events.publish('user-data',_obj);
 
         that._dataServices.setData(_obj.Token, _obj);
         console.log(that._dataServices.getData(_obj.Token));

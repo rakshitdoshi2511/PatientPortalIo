@@ -4,11 +4,12 @@ import { ApiService } from './../services/api.service';
 import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import {Storage} from '@ionic/storage';
-import { PopoverController,AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { PopoverController, AlertController } from '@ionic/angular';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { Constant } from './../constant';
+import { Events } from './../services/event.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,58 +29,74 @@ export class SidebarComponent implements OnInit {
     private _loader: LoaderService,
     private _dataServices: DataService,
     private constant: Constant,
-    ) { }
+    private events: Events,
+  ) { }
 
-   /**Helper Methods*/
-   getImagePath(p){
+  /**Helper Methods*/
+  getImagePath(p) {
     return p.iconPath;
-  } 
-   /**Default Methods */ 
+  }
+  /**Default Methods */
   ngOnInit() {
     let that = this;
-
-    this.model.firstName  = this._api.getLocal('firstName');;
+    console.log("Setting names from api");
+    console.log(this._api.getLocal('firstName'));
+    this.model.firstName = this._api.getLocal('firstName');
     this.model.lastName = this._api.getLocal('lastName');
     this.model.mrn = this._api.getLocal('mrn');
     this.model.email = this._api.getLocal('email');
 
-    that.storage.get(that._api.getLocal('token')).then((val)=>{
-      let _data = val;
-      //that._loader.hideLoader();
+    this.events.subscribe('user-data', (_data: any) => {
+      console.log("Subscription");
       console.log(_data);
-      if(_data!=null && Object.keys(_data).length>0){
-        this.model.firstName = _data.Vname;
-        this.model.lastName = _data.Nname;
-        this.model.mrn = _data.Patnr;
-        this.model.age = _data.Age;
-        this.model.sex = _data.Sex;
-        this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
-        this.model.contact = '';
-        this.model.email = _data.Emailid;
-      }
-    });
+      this.model.firstName = _data.Vname;
+      this.model.lastName = _data.Nname;
+      this.model.mrn = _data.Patnr;
+      this.model.age = _data.Age;
+      this.model.sex = _data.Sex;
+      this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
+      this.model.contact = '';
+      this.model.email = _data.Emailid;
+
+    })
+
+    // that.storage.get(that._api.getLocal('token')).then((val) => {
+    //   let _data = val;
+    //   //that._loader.hideLoader();
+    //   console.log(_data);
+    //   if (_data != null && Object.keys(_data).length > 0) {
+    //     this.model.firstName = _data.Vname;
+    //     this.model.lastName = _data.Nname;
+    //     this.model.mrn = _data.Patnr;
+    //     this.model.age = _data.Age;
+    //     this.model.sex = _data.Sex;
+    //     this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
+    //     this.model.contact = '';
+    //     this.model.email = _data.Emailid;
+    //   }
+    // });
     let _pages = [
-      { title: this.translate.instant('sidemenu_home'),url: '/home',iconName: 'home', iconPath: './assets/icon/icon_home_blue.svg'},
-      { title: this.translate.instant('sidemenu_lab'), url: "laboratory",iconName: 'card',iconPath: './assets/icon/icon_flask_blue.svg'},
-      { title: this.translate.instant('sidemenu_nutrition'),url: 'nutrition',iconName: 'person',iconPath: './assets/icon/icon_nutrition_blue.svg'},
-      { title: this.translate.instant('sidemenu_radiology'),url: 'radiology',iconName: 'notifications',iconPath: './assets/icon/icon_radiology_blue.svg'},
-      { title: this.translate.instant('sidemenu_medical'), url: 'medical-reports',iconName: 'notifications', iconPath: './assets/icon/icon_report_blue.svg'}];
+      { title: this.translate.instant('sidemenu_home'), url: '/home', iconName: 'home', iconPath: './assets/icon/icon_home_blue.svg' },
+      { title: this.translate.instant('sidemenu_lab'), url: "laboratory", iconName: 'card', iconPath: './assets/icon/icon_flask_blue.svg' },
+      { title: this.translate.instant('sidemenu_nutrition'), url: 'nutrition', iconName: 'person', iconPath: './assets/icon/icon_nutrition_blue.svg' },
+      { title: this.translate.instant('sidemenu_radiology'), url: 'radiology', iconName: 'notifications', iconPath: './assets/icon/icon_radiology_blue.svg' },
+      { title: this.translate.instant('sidemenu_medical'), url: 'medical-reports', iconName: 'notifications', iconPath: './assets/icon/icon_report_blue.svg' }];
     this.appPages = _pages;
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     let that = this;
-    
-    this.model.firstName  = this._api.getLocal('firstName');;
+
+    this.model.firstName = this._api.getLocal('firstName');;
     this.model.lastName = this._api.getLocal('lastName');
     this.model.mrn = this._api.getLocal('mrn');
     this.model.email = this._api.getLocal('email');
 
     console.log("ionView Enter");
-    that.storage.get(that._api.getLocal('token')).then((val)=>{
+    that.storage.get(that._api.getLocal('token')).then((val) => {
       let _data = val;
       console.log(_data);
       //that._loader.hideLoader();
-      if(_data!=null && Object.keys(_data).length>0){
+      if (_data != null && Object.keys(_data).length > 0) {
         this.model.firstName = _data.Vname;
         this.model.lastName = _data.Nname;
         this.model.mrn = _data.Patnr;
@@ -89,14 +106,27 @@ export class SidebarComponent implements OnInit {
         this.model.contact = '';
         this.model.email = _data.Emailid;
       }
-      
+
     });
+    this.events.subscribe('user-data', (_data: any) => {
+      console.log("Subscription");
+      console.log(_data);
+      this.model.firstName = _data.Vname;
+      this.model.lastName = _data.Nname;
+      this.model.mrn = _data.Patnr;
+      this.model.age = _data.Age;
+      this.model.sex = _data.Sex;
+      this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
+      this.model.contact = '';
+      this.model.email = _data.Emailid;
+
+    })
   }
   /**Screen Interaction */
-  logOut(){
+  logOut() {
     this.deleteSession();
   }
-  deleteSession(){
+  deleteSession() {
     let that = this;
     let msg = this.translate.instant('dialog_title_logout');
     this._loader.showLoader(msg);
@@ -109,7 +139,7 @@ export class SidebarComponent implements OnInit {
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
       _success => {
         that._loader.hideLoader();
-        
+
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -124,7 +154,7 @@ export class SidebarComponent implements OnInit {
 
       }, _error => {
         that._loader.hideLoader();
-        
+
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -139,6 +169,6 @@ export class SidebarComponent implements OnInit {
       }
     )
   }
-  
+
 
 }

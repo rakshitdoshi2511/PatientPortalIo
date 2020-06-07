@@ -31,7 +31,8 @@ export class LaboratoryPage implements OnInit {
   documentsMobile: any;
   documentsOld: any;
 
-
+  previousSortKeyDesc: any = '';
+  previousSortKeyAsc: any = '';
 
   constructor(
     public popoverController: PopoverController,
@@ -388,66 +389,80 @@ export class LaboratoryPage implements OnInit {
     }
   }
   sortDescending(key) {
-    if (key == "date") {
-      key = "dateFormatted";
+    this.previousSortKeyAsc = '';
+    if(this.previousSortKeyDesc == key){
+
     }
-    let className = 'iconSort';
-    this.resetSortKeys();
-    switch(key){
-      case 'documentNo':
-        this.model.documentNumberDesc = className;
-        break;
-      case 'type':
-        this.model.typeDesc = className;  
-        break;
-      case 'dateFormatted':
-        this.model.dateDesc = className;
-        break;
-      case 'time':
-        this.model.timeDesc = className;    
-        break;
-      case 'physician':
-        this.model.physicianDesc = className;
-        break;
-      case 'status':
-        this.model.statusDesc = className;
-        break;  
-      default:
-        this.resetSortKeys();
-        break;
+    else{
+      this.previousSortKeyDesc = key;
+      if (key == "date") {
+        key = "dateFormatted";
+      }
+      let className = 'iconSort';
+      this.resetSortKeys();
+      switch(key){
+        case 'documentNo':
+          this.model.documentNumberDesc = className;
+          break;
+        case 'type':
+          this.model.typeDesc = className;  
+          break;
+        case 'dateFormatted':
+          this.model.dateDesc = className;
+          break;
+        case 'time':
+          this.model.timeDesc = className;    
+          break;
+        case 'physician':
+          this.model.physicianDesc = className;
+          break;
+        case 'status':
+          this.model.statusDesc = className;
+          break;  
+        default:
+          this.resetSortKeys();
+          break;
+      }
+      this.documents = _.sortBy(this.documents, [key,'documentNo']).reverse();
     }
-    this.documents = _.sortBy(this.documents, key).reverse();
   }
   sortAscending(key) {
-    if (key == "date") {
-      key = "dateFormatted";
+    this.previousSortKeyDesc = '';
+    if(this.previousSortKeyAsc == key){
+
     }
-    let className = 'iconSort';
-    this.resetSortKeys();
-    switch(key){
-      case 'documentNo':
-        this.model.documentNumberAsc = className;
-        break;
-      case 'type':
-        this.model.typeAsc = className;  
-        break;
-      case 'dateFormatted':
-        this.model.dateAsc = className;
-        break;
-      case 'time':
-        this.model.timeAsc = className;    
-        break;
-      case 'physician':
-        this.model.physicianAsc = className;
-        break;
-      case 'status':
-        this.model.statusAsc = className;
-        break;  
-      default:
-        this.resetSortKeys();
-        break;
+    else{
+      this.previousSortKeyAsc = key;
+      if (key == "date") {
+        key = "dateFormatted";
+      }
+      let className = 'iconSort';
+      this.resetSortKeys();
+      switch(key){
+        case 'documentNo':
+          this.model.documentNumberAsc = className;
+          break;
+        case 'type':
+          this.model.typeAsc = className;  
+          break;
+        case 'dateFormatted':
+          this.model.dateAsc = className;
+          break;
+        case 'time':
+          this.model.timeAsc = className;    
+          break;
+        case 'physician':
+          this.model.physicianAsc = className;
+          break;
+        case 'status':
+          this.model.statusAsc = className;
+          break;  
+        default:
+          this.resetSortKeys();
+          break;
+      }
+      this.documents = _.sortBy(this.documents, [key,'documentNo'], 'asc')
     }
-    this.documents = _.sortBy(this.documents, key, 'asc')
   }
   openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
