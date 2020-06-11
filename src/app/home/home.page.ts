@@ -124,6 +124,11 @@ export class HomePage {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
         this.router.navigateByUrl('login');
 
       }, _error => {
@@ -139,6 +144,11 @@ export class HomePage {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
         this.router.navigateByUrl('login');
       }
     )
@@ -225,7 +235,7 @@ export class HomePage {
         that._loader.hideLoader();
         let errorObj = JSON.parse(_error._body);
         Swal.fire({
-          title: errorObj.error.code,
+          title: this.translate.instant('lbl_error'),//errorObj.error.code,
           text: errorObj.error.message.value,
           backdrop:false,
           icon:'error',

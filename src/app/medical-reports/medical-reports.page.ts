@@ -7,7 +7,7 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
 import { AlertController, ModalController } from '@ionic/angular';
 import { KeyValue } from '@angular/common';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
@@ -82,14 +82,15 @@ export class MedicalReportsPage implements OnInit {
     let that = this;
     const popover = await this.popoverController.create({
       component: FilterPopoverComponent,
-      componentProps: { id: 'MED', 
-                        status: that.statusFilter, 
-                        physicians: that.physicianFilter, 
-                        type: that.documentTypesFilter,
-                        statusFilterValue:that.model.statusFilterVal,
-                        physicianFilterValue: that.model.physicianFilterVal,
-                        typeFilterValue: that.model.typeFilterVal
-                      },
+      componentProps: {
+        id: 'MED',
+        status: that.statusFilter,
+        physicians: that.physicianFilter,
+        type: that.documentTypesFilter,
+        statusFilterValue: that.model.statusFilterVal,
+        physicianFilterValue: that.model.physicianFilterVal,
+        typeFilterValue: that.model.typeFilterVal
+      },
       event: ev,
       translucent: true,
       animated: true,
@@ -98,19 +99,19 @@ export class MedicalReportsPage implements OnInit {
     popover.onDidDismiss().then((data) => {
       let _filterCount = 0;
       that.model.statusFilterVal = data.data.status;
-      if(that.model.statusFilterVal){
+      if (that.model.statusFilterVal) {
         _filterCount++;
       }
       that.model.physicianFilterVal = data.data.physician;
-      if(that.model.physicianFilterVal){
+      if (that.model.physicianFilterVal) {
         _filterCount++;
       }
       that.model.typeFilterVal = data.data.type;
-      if(that.model.typeFilterVal){
+      if (that.model.typeFilterVal) {
         _filterCount++;
       }
       that.model.filterCount = _filterCount;
-      that.filterUserList(that.model.statusFilterVal,that.model.physicianFilterVal,that.model.typeFilterVal);
+      that.filterUserList(that.model.statusFilterVal, that.model.physicianFilterVal, that.model.typeFilterVal);
     })
     return await popover.present();
   }
@@ -133,7 +134,7 @@ export class MedicalReportsPage implements OnInit {
     this.presentAlert(title, message);
   }
   /**Helper Methods */
-  resetSortKeys(){
+  resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';
     this.model.dateAsc = 'iconNotSort';
@@ -151,8 +152,8 @@ export class MedicalReportsPage implements OnInit {
     //Do not do anything since originalOrder is not working;
     return 0;
   }
-  getReportCode(code){
-    switch(code){
+  getReportCode(code) {
+    switch (code) {
       case 'ZMED_PHDIS':
         return 'PHY';
       case 'ZMED_ERDIS':
@@ -160,7 +161,7 @@ export class MedicalReportsPage implements OnInit {
       case 'ZMED_MEDRP':
         return 'MED';
       default:
-        return 'ALL';      
+        return 'ALL';
     }
   }
   getDateDisplay(item) {
@@ -213,7 +214,7 @@ export class MedicalReportsPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
-    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.model.language = event.lang == 'en' ? true : false;
     });
     this.resetSortKeys();
@@ -224,7 +225,7 @@ export class MedicalReportsPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
-    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.model.language = event.lang == 'en' ? true : false;
     });
     this.resetSortKeys();
@@ -246,17 +247,40 @@ export class MedicalReportsPage implements OnInit {
   showFilters() {
     this.filterPopover(event);
   }
-  showPDF(_object){
-    let msg = this.translate.instant('dialog_title_loading');
-    this._loader.showLoader(msg);
+  showPDF(_object) {
+    if (_object.isAccessible) {
+      let msg = this.translate.instant('dialog_title_loading');
+      this._loader.showLoader(msg);
 
-    this.loadDetails(_object.documentKey,_object.documentNo);
+      this.loadDetails(_object.documentKey, _object.documentNo);
+    }
+    else {
+      Swal.fire({
+        title: this.translate.instant('alert_title_warning'),
+        text: this.translate.instant('alert_message_report'),
+        backdrop: false,
+        icon: 'warning',
+        confirmButtonColor: 'rgb(87,143,182)'
+      });
+    }
+
   }
-  openPDF(_object){
-    let msg = this.translate.instant('dialog_title_loading');
-    this._loader.showLoader(msg);
-    
-    this.loadDetails(_object.documentKey,_object.documentNo);
+  openPDF(_object) {
+    if (_object.isAccessible) {
+      let msg = this.translate.instant('dialog_title_loading');
+      this._loader.showLoader(msg);
+
+      this.loadDetails(_object.documentKey, _object.documentNo);
+    }
+    else {
+      Swal.fire({
+        title: this.translate.instant('alert_title_warning'),
+        text: this.translate.instant('alert_message_report'),
+        backdrop: false,
+        icon: 'warning',
+        confirmButtonColor: 'rgb(87,143,182)'
+      });
+    }
   }
   filterDocuments(type) {
     //console.log(type);
@@ -398,9 +422,9 @@ export class MedicalReportsPage implements OnInit {
     else if (status && !physician && !type) {
       this.documents = this.documents.filter(document => {
         if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
-         // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
-         // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
-         ) {
+          // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+          // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+        ) {
           return true;
         }
         return false;
@@ -423,7 +447,7 @@ export class MedicalReportsPage implements OnInit {
           //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
           document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
           //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
-          ) {
+        ) {
           return true;
         }
         return false;
@@ -443,85 +467,85 @@ export class MedicalReportsPage implements OnInit {
   }
   sortDescending(key) {
     this.previousSortKeyAsc = '';
-    if(this.previousSortKeyDesc == key){
+    if (this.previousSortKeyDesc == key) {
 
     }
-    else{
+    else {
       this.previousSortKeyDesc = key;
       if (key == "date") {
         key = "dateFormatted";
       }
       let className = 'iconSort';
       this.resetSortKeys();
-      switch(key){
+      switch (key) {
         case 'documentNo':
           this.model.documentNumberDesc = className;
           break;
         case 'type':
-          this.model.typeDesc = className;  
+          this.model.typeDesc = className;
           break;
         case 'dateFormatted':
           this.model.dateDesc = className;
           break;
         case 'time':
-          this.model.timeDesc = className;    
+          this.model.timeDesc = className;
           break;
         case 'physician':
           this.model.physicianDesc = className;
           break;
         case 'status':
           this.model.statusDesc = className;
-          break;  
+          break;
         default:
           this.resetSortKeys();
           break;
       }
-      this.documents = _.sortBy(this.documents, [key,'documentNo']).reverse();
+      this.documents = _.sortBy(this.documents, [key, 'documentNo']).reverse();
     }
   }
   sortAscending(key) {
     this.previousSortKeyDesc = '';
-    if(this.previousSortKeyAsc == key){
+    if (this.previousSortKeyAsc == key) {
 
     }
-    else{
+    else {
       this.previousSortKeyAsc = key;
       if (key == "date") {
         key = "dateFormatted";
       }
       let className = 'iconSort';
       this.resetSortKeys();
-      switch(key){
+      switch (key) {
         case 'documentNo':
           this.model.documentNumberAsc = className;
           break;
         case 'type':
-          this.model.typeAsc = className;  
+          this.model.typeAsc = className;
           break;
         case 'dateFormatted':
           this.model.dateAsc = className;
           break;
         case 'time':
-          this.model.timeAsc = className;    
+          this.model.timeAsc = className;
           break;
         case 'physician':
           this.model.physicianAsc = className;
           break;
         case 'status':
           this.model.statusAsc = className;
-          break;  
+          break;
         default:
           this.resetSortKeys();
           break;
       }
-      this.documents = _.sortBy(this.documents, [key,'documentNo'], 'asc')
+      this.documents = _.sortBy(this.documents, [key, 'documentNo'], 'asc')
     }
   }
-  openDocument(_base64,_documentNo) {
+  openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
-    this.openModal(_base64,_documentNo);
+    this.openModal(_base64, _documentNo);
   }
-  switchLanguage(){
+  switchLanguage() {
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
   }
@@ -541,7 +565,9 @@ export class MedicalReportsPage implements OnInit {
           data.physician = data.Physician;
           data.statusCode = data.Status;
           data.status = data.StatusTxt;
-          data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
+          // data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
+          data.class = data.Accessible != 'X' ? 'task-review' : 'task-warning';
+          data.isAccessible = data.Accessible == 'X' ? true : false;
           data.documentKey = data.DocKey;
         });
 
@@ -583,14 +609,14 @@ export class MedicalReportsPage implements OnInit {
         this.filterDocuments('ALL');
 
       }
-      else{
+      else {
         Swal.fire({
           title: this.translate.instant('lbl_no_data'),
           text: this.translate.instant('lbl_no_data_msg'),
-          backdrop:false,
-          icon:'info',
-          confirmButtonColor:'rgb(87,143,182)'
-        }).then((result)=>{
+          backdrop: false,
+          icon: 'info',
+          confirmButtonColor: 'rgb(87,143,182)'
+        }).then((result) => {
           this.router.navigateByUrl('home');
         });
       }
@@ -598,36 +624,36 @@ export class MedicalReportsPage implements OnInit {
 
   }
 
-  loadDetails(_documentKey,_documentNo){
+  loadDetails(_documentKey, _documentNo) {
     let that = this;
-    
+
     let _param = {
-      DocKey:_documentKey,
+      DocKey: _documentKey,
       Patnr: that._api.getLocal('username'),
       Token: that._api.getLocal('token'),
     }
-    that._dataServices.loadData('DOCPDFSET',_param,null,false,null,false).subscribe(
-      _success=>{
+    that._dataServices.loadData('DOCPDFSET', _param, null, false, null, false).subscribe(
+      _success => {
         that._loader.hideLoader();
         let _obj = _success.d;
         //console.log(_obj);
-        if(that.model.isVisible){
-          this.openModalMobile(_obj.PDFData,_documentNo);
+        if (that.model.isVisible) {
+          this.openModalMobile(_obj.PDFData, _documentNo);
         }
-        else{
-          that.openDocument(_obj.PDFData,_documentNo);
+        else {
+          that.openDocument(_obj.PDFData, _documentNo);
         }
-        
 
-      },_error=>{
+
+      }, _error => {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
         Swal.fire({
-          title: _errorResponse.error.code,
+          title: this.translate.instant('lbl_error'),//_errorResponse.error.code,
           text: _errorResponse.error.message.value,
-          backdrop:false,
-          icon:'error',
-          confirmButtonColor:'rgb(87,143,182)'
+          backdrop: false,
+          icon: 'error',
+          confirmButtonColor: 'rgb(87,143,182)'
         });
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }

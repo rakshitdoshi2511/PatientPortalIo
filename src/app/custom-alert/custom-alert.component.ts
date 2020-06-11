@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
 import { DataService } from './../services/data.service';
@@ -24,13 +24,19 @@ export class CustomAlertComponent implements OnInit {
     private _loader: LoaderService,
     private _api: ApiService,
     private storage: Storage,
+    private navParams: NavParams,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.model.viewName = this.navParams.data.viewName;
+  }
 
   /**Screen Interaction */
   dismiss() {
-    this.modalController.dismiss();
+    let _obj = {
+      goToHome:false,
+    }
+    this.modalController.dismiss(_obj);
   }
 
   resetPassword(){
@@ -73,8 +79,15 @@ export class CustomAlertComponent implements OnInit {
   }
   deleteSession() {
     let that = this;
-    let msg = this.translate.instant('dialog_title_logout');
-    this._loader.showLoader(msg);
+    if(this.model.viewName != 'Login'){
+      let msg = this.translate.instant('dialog_title_logout');
+      this._loader.showLoader(msg);
+    }
+    else{
+      let msg = '';
+      this._loader.showLoader(msg);
+    }
+    
 
     let _param = {
       Patnr: that._api.getLocal('username'),
@@ -136,8 +149,11 @@ export class CustomAlertComponent implements OnInit {
         icon:'success',
         confirmButtonColor: 'rgb(87,143,182)'
       }).then((result)=>{
-        this.modalController.dismiss();
-        that.logOut();
+        let _obj = {
+          goToHome:true,
+        }
+        this.modalController.dismiss(_obj);
+        //that.logOut();
       });
 
       //  Swal.fire(that.translate.instant('lbl_password_changed'),that.translate.instant('lbl_password_changed_message'),'success').then((result)=>{

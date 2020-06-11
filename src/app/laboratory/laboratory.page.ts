@@ -185,14 +185,20 @@ export class LaboratoryPage implements OnInit {
     }
     return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status) {
+  renderStatus(status,isAccessible) {
     //console.log(status);
-    if (status == 'RE') {
-      return '#FFF2C5';
-    }
-    else {
+    if (isAccessible) {
       return '#1caf9a';
     }
+    else {
+      return '#FFF2C5';
+    }
+    // if (status == 'RE') {
+    //   return '#FFF2C5';
+    // }
+    // else {
+    //   return '#1caf9a';
+    // }
   }
   /**Default Methods*/
   ngOnInit() {
@@ -235,7 +241,12 @@ export class LaboratoryPage implements OnInit {
     this.filterPopover(event);
   }
   showPDF(_object) {
-    if (_object.statusCode == 'RE') {
+    if(_object.isAccessible){
+      let msg = this.translate.instant('dialog_title_loading');
+      this._loader.showLoader(msg);
+      this.loadDetails(_object.documentKey, _object.documentNo);
+    }
+    else{
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
@@ -244,14 +255,27 @@ export class LaboratoryPage implements OnInit {
         confirmButtonColor: 'rgb(87,143,182)'
       });
     }
-    else {
-      let msg = this.translate.instant('dialog_title_loading');
-      this._loader.showLoader(msg);
-      this.loadDetails(_object.documentKey, _object.documentNo);
-    }
+    // if (_object.statusCode == 'RE') {
+    //   Swal.fire({
+    //     title: this.translate.instant('alert_title_warning'),
+    //     text: this.translate.instant('alert_message_report'),
+    //     backdrop: false,
+    //     icon: 'warning',
+    //     confirmButtonColor: 'rgb(87,143,182)'
+    //   });
+    // }
+    // else {
+    //   let msg = this.translate.instant('dialog_title_loading');
+    //   this._loader.showLoader(msg);
+    //   this.loadDetails(_object.documentKey, _object.documentNo);
+    // }
   }
   openPDF(_object) {
-    if (_object.statusCode == 'RE') {
+    if(_object.isAccessible){
+      let msg = this.translate.instant('dialog_title_loading');
+      this._loader.showLoader(msg);
+      this.loadDetails(_object.documentKey, _object.documentNo);
+    }else{
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
@@ -260,11 +284,20 @@ export class LaboratoryPage implements OnInit {
         confirmButtonColor: 'rgb(87,143,182)'
       });
     }
-    else {
-      let msg = this.translate.instant('dialog_title_loading');
-      this._loader.showLoader(msg);
-      this.loadDetails(_object.documentKey, _object.documentNo);
-    }
+    // if (_object.statusCode == 'RE') {
+    //   Swal.fire({
+    //     title: this.translate.instant('alert_title_warning'),
+    //     text: this.translate.instant('alert_message_report'),
+    //     backdrop: false,
+    //     icon: 'warning',
+    //     confirmButtonColor: 'rgb(87,143,182)'
+    //   });
+    // }
+    // else {
+    //   let msg = this.translate.instant('dialog_title_loading');
+    //   this._loader.showLoader(msg);
+    //   this.loadDetails(_object.documentKey, _object.documentNo);
+    // }
   }
   filterList(evt) {
 
@@ -487,7 +520,9 @@ export class LaboratoryPage implements OnInit {
           data.physician = data.Physician;
           data.statusCode = data.Status;
           data.status = data.StatusTxt;
-          data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
+          // data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
+          data.class = data.Accessible != 'X' ? 'task-review' : 'task-warning';
+          data.isAccessible = data.Accessible == 'X' ? true : false;
           data.documentKey = data.DocKey;
         });
 
@@ -540,7 +575,7 @@ export class LaboratoryPage implements OnInit {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
         Swal.fire({
-          title: _errorResponse.error.code,
+          title: this.translate.instant('lbl_error'),//_errorResponse.error.code,
           text: _errorResponse.error.message.value,
           backdrop: false,
           icon: 'error',

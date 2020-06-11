@@ -153,7 +153,7 @@
               <td>
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
               </td>
-              <td><span class="pill" [style.background]="renderStatus(lt.statusCode)"
+              <td><span class="pill" [style.background]="renderStatus(lt.statusCode,lt.isAccessible)"
                   style="color:black">{{lt.status}}</span></td>
             </tr>
           </tbody>

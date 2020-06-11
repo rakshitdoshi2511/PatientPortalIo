@@ -10,6 +10,8 @@ import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { Constant } from './../constant';
 import { Events } from './../services/event.service';
+import { Router } from '@angular/router';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-sidebar',
@@ -30,6 +32,8 @@ export class SidebarComponent implements OnInit {
     private _dataServices: DataService,
     private constant: Constant,
     private events: Events,
+    private router:Router,
+    private bnIdle:BnNgIdleService,
   ) { }
 
   /**Helper Methods*/
@@ -57,6 +61,7 @@ export class SidebarComponent implements OnInit {
       this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
       this.model.contact = '';
       this.model.email = _data.Emailid;
+      this.version = environment.ver;
 
     })
 
@@ -150,8 +155,11 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-        window.location.reload();
-
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
+        this.router.navigateByUrl('login');
       }, _error => {
         that._loader.hideLoader();
 
@@ -165,7 +173,11 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-        window.location.reload();
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
+        this.router.navigateByUrl('login');
       }
     )
   }

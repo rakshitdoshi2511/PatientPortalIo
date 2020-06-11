@@ -9,6 +9,8 @@ import { Storage } from '@ionic/storage';
 import Swal from 'sweetalert2';
 import {CustomAlertComponent} from './../custom-alert/custom-alert.component'
 import { Router } from '@angular/router';
+import { BnNgIdleModule, BnNgIdleService } from 'bn-ng-idle';
+import { Events } from '../services/event.service';
 
 @Component({
   selector: 'app-user-popover',
@@ -27,7 +29,9 @@ export class UserPopoverComponent implements OnInit {
     public alertController: AlertController,
     private _dataServices: DataService,
     private modalController: ModalController,
-    private router:Router
+    private router:Router,
+    private bnIdle:BnNgIdleService,
+    private events: Events,
   ) { }
 
   /**Alerts and Dialogs */
@@ -35,7 +39,7 @@ export class UserPopoverComponent implements OnInit {
     const modal = await this.modalController.create({
       component: CustomAlertComponent,
       backdropDismiss: false,
-      componentProps: { },
+      componentProps: { viewName : 'UserPopover'},
     });
     return await modal.present();
   }
@@ -117,6 +121,10 @@ export class UserPopoverComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
         this.router.navigateByUrl('login');
         
        // window.location.reload();
@@ -134,6 +142,11 @@ export class UserPopoverComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
         this.router.navigateByUrl('login');
         //window.location.reload();
       }

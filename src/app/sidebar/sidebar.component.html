@@ -9,7 +9,7 @@
 	</div>
 </div>
 
-<div class="nav">
+<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;">
 	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
 		<div class="nav-item" [routerLink]="[p.url]">
 			<ion-icon src="{{p.iconPath}}"></ion-icon>

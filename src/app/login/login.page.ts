@@ -17,7 +17,8 @@ import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
 import { TermsConditionsComponent } from './../terms-conditions/terms-conditions.component';
 import Swal from 'sweetalert2';
-import { Events } from './../services/event.service'; 
+import { Events } from './../services/event.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -45,6 +46,7 @@ export class LoginPage implements OnInit {
     private constant: Constant,
     private modalController: ModalController,
     private events: Events,
+    private storage: Storage,
 
   ) {
     this.baseUrl = environment.url;
@@ -69,6 +71,25 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
+
+  async openModalChangePassword() {
+    const modal = await this.modalController.create({
+      component: CustomAlertComponent,
+      backdropDismiss: false,
+      componentProps: { viewName: 'Login' },
+    });
+    modal.onDidDismiss().then((data) => {
+      if(data.data.goToHome){
+        this.model = {};
+        this.router.navigateByUrl('home');
+      }
+      else{
+        this.deleteSession();
+      }
+    })
+    return await modal.present();
+  }
+
   async presentAlert(title, message) {
     const alert = await this.alertController.create({
       header: title,
@@ -131,7 +152,9 @@ export class LoginPage implements OnInit {
   }
   onLogin() {
     this._api.setLocal('isLoggedIn', true);
-    this.bnIdle.resetTimer();
+    let _obj = {};
+    this.events.publish('reset-timer', _obj);
+    this.model = {};
     this.router.navigateByUrl('home');
   }
   login() {
@@ -161,7 +184,7 @@ export class LoginPage implements OnInit {
     that._dataServices.login(_data).subscribe(
       _success => {
         let _obj = _success.d;
-        
+
         this._api.setLocal('isLoggedIn', true);
         this._api.setLocal('token', _obj.Token);
         this._api.setLocal('username', that.model.username);
@@ -170,30 +193,103 @@ export class LoginPage implements OnInit {
         this.constant.sessionTimeOut = _obj.BrowserTimeout / 10;
         //console.log(this.constant.sessionTimeOut);
 
-        this.events.publish('session-data',_obj);
+        this.events.publish('session-data', _obj);
 
-        this.bnIdle.resetTimer();
+        let _object = {};
+        this.events.publish('reset-timer', _object);
         that._loader.hideLoader();
-        if (_obj.PendingTermCond == 'X') {
-          that.loadTermsConditions(that.model.username, _obj.Token, that.model.password);
+        if (_obj.SysPswd == 'X') {
+          that.openModalChangePassword();
         }
         else {
-          that.model = {};
-          this.router.navigateByUrl('home');
+          if (_obj.PendingTermCond == 'X') {
+            that.loadTermsConditions(that.model.username, _obj.Token, that.model.password);
+          }
+          else {
+            that.model = {};
+            this.router.navigateByUrl('home');
+          }
         }
       }, _error => {
         that._loader.hideLoader();
-        let _errorResponse = JSON.parse(_error._body);
-        let errorObj = JSON.parse(_error._body);
-        Swal.fire({
-          title: errorObj.error.code,
-          text: errorObj.error.message.value,
-          backdrop: false,
-          icon: 'error',
-          confirmButtonColor: 'rgb(87,143,182)'
-        });
+        if (_error.status == 0) {
+          Swal.fire({
+            title: this.translate.instant('lbl_server_unavailable_title'),//errorObj.error.code,
+            text:this.translate.instant('lbl_server_unavailable'),
+            backdrop: false,
+            icon: 'warning',
+            confirmButtonColor: 'rgb(87,143,182)'
+          });
+        }
+        else {
+          let _errorResponse = JSON.parse(_error._body);
+          let errorObj = JSON.parse(_error._body);
+          Swal.fire({
+            title: this.translate.instant('lbl_error'),//errorObj.error.code,
+            text: errorObj.error.message.value,
+            backdrop: false,
+            icon: 'error',
+            confirmButtonColor: 'rgb(87,143,182)'
+          });
+        }
+
         //Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+      }
+    )
+  }
+  deleteSession() {
+    let that = this;
+    let msg = '';
+    this._loader.showLoader(msg);
+    
+
+    let _param = {
+      Patnr: that._api.getLocal('username'),
+      Token: that._api.getLocal('token'),
+      //Password:that._api.getLocal('password')
+    }
+
+    that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
+      _success => {
+        that._loader.hideLoader();
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
+        // window.location.reload();
+        this.model = {};
+        this.router.navigateByUrl('login');
+
+      }, _error => {
+        that._loader.hideLoader();
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
+        let _obj = {
+          'isLogOut':true
+        };
+        this.events.publish('stop-timer',_obj);
+       // window.location.reload();
+        this.model = {};
+        this.router.navigateByUrl('login');
       }
     )
   }

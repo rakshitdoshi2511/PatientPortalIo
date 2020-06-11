@@ -65,7 +65,7 @@ export class ForgotPasswordComponent implements OnInit {
         that._loader.hideLoader();
         let errorObj = JSON.parse(_error._body);
         Swal.fire({
-          title: errorObj.error.code,
+          title: this.translate.instant('lbl_error'),//errorObj.error.code,
           text: errorObj.error.message.value,
           backdrop: false,
           icon: 'error',

@@ -28,3 +28,10 @@
     </ion-button>
   </ion-toolbar>
 </ion-footer>
+<ion-footer [hidden]="!model.isVisible">
+  <ion-toolbar>
+    <ion-button class="ahThemeButton" (click)="downloadPDF()" expand="full">
+      <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_download_pdf' | translate}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

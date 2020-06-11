@@ -53,7 +53,7 @@ export class ValidateUserPage implements OnInit {
         let errorObj = JSON.parse(_error._body);
         this.model.showScreen = false;
         Swal.fire({
-          title: errorObj.error.code,
+          title: this.translate.instant('lbl_error'),//errorObj.error.code,
           text: errorObj.error.message.value,
           backdrop: false,
           icon: 'error',

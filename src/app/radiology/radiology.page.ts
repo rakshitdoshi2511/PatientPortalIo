@@ -132,7 +132,7 @@ export class RadiologyPage implements OnInit {
     this.presentAlert(title, message);
   }
   /**Helper Methods */
-  resetSortKeys(){
+  resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';
     this.model.dateAsc = 'iconNotSort';
@@ -184,14 +184,20 @@ export class RadiologyPage implements OnInit {
     }
     return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status) {
+  renderStatus(status, isAccessible) {
     //console.log(status);
-    if (status == 'RE') {
-      return '#FFF2C5';
-    }
-    else {
+    if (isAccessible) {
       return '#1caf9a';
     }
+    else {
+      return '#FFF2C5';
+    }
+    // if (status == 'RE') {
+    //   return '#FFF2C5';
+    // }
+    // else {
+    //   return '#1caf9a';
+    // }
   }
   /**Default Methods*/
   ngOnInit() {
@@ -235,7 +241,18 @@ export class RadiologyPage implements OnInit {
     this.filterPopover(event);
   }
   showPDF(_object) {
-    if (_object.statusCode == 'RE' && _object.documentType != "Image") {
+    //if (_object.statusCode == 'RE' && _object.documentType != "Image") {
+    if (_object.isAccessible) {
+      if (_object.documentType != "Image") {
+        let msg = this.translate.instant('dialog_title_loading');
+        this._loader.showLoader(msg);
+        this.loadDetails(_object.documentKey, _object.documentNo);
+      }
+      else {
+        window.open(_object.ImageURL, '_system', 'location=yes');
+      }
+    }
+    else {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
@@ -244,20 +261,39 @@ export class RadiologyPage implements OnInit {
         confirmButtonColor: 'rgb(87,143,182)'
       });
     }
-    else {
-      if (_object.documentType == "Image") {
-        window.open(_object.ImageURL, '_system', 'location=yes');
-      }
-      else {
-        let msg = this.translate.instant('dialog_title_loading');
-        this._loader.showLoader(msg);
+    // if (_object.statusCode == 'RE' && _object.documentType != "Image") {  
+    //   Swal.fire({
+    //     title: this.translate.instant('alert_title_warning'),
+    //     text: this.translate.instant('alert_message_report'),
+    //     backdrop: false,
+    //     icon: 'warning',
+    //     confirmButtonColor: 'rgb(87,143,182)'
+    //   });
+    // }
+    // else {
+    //   if (_object.documentType == "Image") {
+    //     window.open(_object.ImageURL, '_system', 'location=yes');
+    //   }
+    //   else {
+    //     let msg = this.translate.instant('dialog_title_loading');
+    //     this._loader.showLoader(msg);
 
-        this.loadDetails(_object.documentKey, _object.documentNo);
-      }
-    }
+    //     this.loadDetails(_object.documentKey, _object.documentNo);
+    //   }
+    // }
   }
   openPDF(_object) {
-    if (_object.statusCode == 'RE' && _object.documentType != "Image") {
+    if (_object.isAccessible) {
+      if (_object.documentType != "Image") {
+        let msg = this.translate.instant('dialog_title_loading');
+        this._loader.showLoader(msg);
+        this.loadDetails(_object.documentKey, _object.documentNo);
+      }
+      else {
+        window.open(_object.ImageURL, '_system', 'location=yes');
+      }
+    }
+    else {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
@@ -266,16 +302,25 @@ export class RadiologyPage implements OnInit {
         confirmButtonColor: 'rgb(87,143,182)'
       });
     }
-    else {
-      if (_object.documentType == "Image") {
-        window.open(_object.ImageURL, '_system', 'location=yes');
-      }
-      else {
-        let msg = this.translate.instant('dialog_title_loading');
-        this._loader.showLoader(msg);
-        this.loadDetails(_object.documentKey, _object.documentNo);
-      }
-    }
+    // if (_object.isAccessible && _object.documentType != "Image") {
+    //   Swal.fire({
+    //     title: this.translate.instant('alert_title_warning'),
+    //     text: this.translate.instant('alert_message_report'),
+    //     backdrop: false,
+    //     icon: 'warning',
+    //     confirmButtonColor: 'rgb(87,143,182)'
+    //   });
+    // }
+    // else {
+    //   if (_object.documentType == "Image") {
+    //     window.open(_object.ImageURL, '_system', 'location=yes');
+    //   }
+    //   else {
+    //     let msg = this.translate.instant('dialog_title_loading');
+    //     this._loader.showLoader(msg);
+    //     this.loadDetails(_object.documentKey, _object.documentNo);
+    //   }
+    // }
   }
   filterList(evt) {
     this.documents = this.documentsOld;
@@ -400,81 +445,81 @@ export class RadiologyPage implements OnInit {
   }
   sortDescending(key) {
     this.previousSortKeyAsc = '';
-    if(this.previousSortKeyDesc == key){
+    if (this.previousSortKeyDesc == key) {
 
     }
-    else{
+    else {
       this.previousSortKeyDesc = key;
       if (key == "date") {
         key = "dateFormatted";
       }
       let className = 'iconSort';
       this.resetSortKeys();
-      switch(key){
+      switch (key) {
         case 'documentNo':
           this.model.documentNumberDesc = className;
           break;
         case 'type':
-          this.model.typeDesc = className;  
+          this.model.typeDesc = className;
           break;
         case 'dateFormatted':
           this.model.dateDesc = className;
           break;
         case 'time':
-          this.model.timeDesc = className;    
+          this.model.timeDesc = className;
           break;
         case 'physician':
           this.model.physicianDesc = className;
           break;
         case 'status':
           this.model.statusDesc = className;
-          break;  
+          break;
         default:
           this.resetSortKeys();
           break;
       }
-      this.documents = _.sortBy(this.documents, [key,'documentNo']).reverse();
+      this.documents = _.sortBy(this.documents, [key, 'documentNo']).reverse();
     }
-    
+
   }
   sortAscending(key) {
     this.previousSortKeyDesc = '';
-    if(this.previousSortKeyAsc == key){
+    if (this.previousSortKeyAsc == key) {
 
     }
-    else{
+    else {
       this.previousSortKeyAsc = key;
       if (key == "date") {
         key = "dateFormatted";
       }
       let className = 'iconSort';
       this.resetSortKeys();
-      switch(key){
+      switch (key) {
         case 'documentNo':
           this.model.documentNumberAsc = className;
           break;
         case 'type':
-          this.model.typeAsc = className;  
+          this.model.typeAsc = className;
           break;
         case 'dateFormatted':
           this.model.dateAsc = className;
           break;
         case 'time':
-          this.model.timeAsc = className;    
+          this.model.timeAsc = className;
           break;
         case 'physician':
           this.model.physicianAsc = className;
           break;
         case 'status':
           this.model.statusAsc = className;
-          break;  
+          break;
         default:
           this.resetSortKeys();
           break;
       }
-      this.documents = _.sortBy(this.documents, [key,'documentNo'], 'asc')
+      this.documents = _.sortBy(this.documents, [key, 'documentNo'], 'asc')
     }
-    
+
   }
   openDocument(_base64, _documentNo) {
     //this.documentViewer.viewDocument('../../assets/files/Sample.pdf','application/pdf',{});
@@ -503,7 +548,9 @@ export class RadiologyPage implements OnInit {
           data.physician = data.Physician;
           data.statusCode = data.Status;
           data.status = data.StatusTxt;
-          data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
+          //data.class = data.statusCode == 'RE' ? 'task-review' : 'task-warning';
+          data.class = data.Accessible != 'X' ? 'task-review' : 'task-warning';
+          data.isAccessible = data.Accessible == 'X' ? true : false;
           data.documentKey = data.DocKey;
           data.documentType = data.DocCat;
           let url = './assets/icon/';
@@ -563,7 +610,14 @@ export class RadiologyPage implements OnInit {
       }, _error => {
         that._loader.hideLoader();
         let _errorResponse = JSON.parse(_error._body);
-        this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+        Swal.fire({
+          title: this.translate.instant('lbl_error'),//_errorResponse.error.code,
+          text: _errorResponse.error.message.value,
+          backdrop: false,
+          icon: 'error',
+          confirmButtonColor: 'rgb(87,143,182)'
+        });
+        //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }
     )
   }

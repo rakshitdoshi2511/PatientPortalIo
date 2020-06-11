@@ -54,9 +54,9 @@ export class AppComponent {
     
     this.events.subscribe('session-data',(_data:any)=>{
       //console.log("App Session");
-      //console.log(_data);
+      //console.log(_data.BrowserTimeout);
       this.bnIdle.startWatching(_data.BrowserTimeout).subscribe((isTimedOut: boolean) => {
-        //console.log("Session Expiry");
+        console.log("Session Expiry");
         this.bnIdle.resetTimer();
         this.bnIdle.stopTimer();
         let msg = this.translate.instant('alert_title_session_expired_msg');
@@ -75,6 +75,15 @@ export class AppComponent {
         //  this.deleteSession();
         // })
       });
+    })
+
+    this.events.subscribe('stop-timer',(_data:any)=>{
+      this.bnIdle.resetTimer();
+      this.bnIdle.stopTimer();
+    })
+
+    this.events.subscribe('reset-timer',(_data:any)=>{
+      this.bnIdle.resetTimer();
     })
     
 
