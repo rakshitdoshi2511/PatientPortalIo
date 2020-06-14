@@ -6,3 +6,7 @@
     font-size: 1em;
     font-weight: bold;  
 }
+
+.ahSelect .select-interface-option[aria-checked=true] .alert-checkbox-label {
+    color: #79193b;
+  }

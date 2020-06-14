@@ -88,7 +88,11 @@ export class LaboratoryPage implements OnInit {
         type: that.documentTypesFilter,
         statusFilterValue: that.model.statusFilterVal,
         physicianFilterValue: that.model.physicianFilterVal,
-        typeFilterValue: that.model.typeFilterVal
+        typeFilterValue: that.model.typeFilterVal,
+        dateFromValue: that.model.dateFrom,
+        dateToValue: that.model.dateTo,
+        timeFromValue: that.model.timeFrom,
+        timeToValue: that.model.timeTo
       },
       event: ev,
       translucent: true,
@@ -109,11 +113,31 @@ export class LaboratoryPage implements OnInit {
       if (that.model.typeFilterVal) {
         _filterCount++;
       }
+      
+      
+      that.model.dateFrom = data.data.dateFrom;
+      if (that.model.dateFrom){
+        _filterCount++;
+      }
+      that.model.dateTo = data.data.dateTo;
+      if (that.model.dateTo){
+        _filterCount++;
+      }
+      that.model.timeFrom = data.data.timeFrom;
+      if (that.model.timeFrom){
+        _filterCount++;
+      }
+      that.model.timeTo = data.data.timeTo;
+      if (that.model.timeTo){
+        _filterCount++;
+      }
+
       that.model.filterCount = _filterCount;
-      that.filterUserList(that.model.statusFilterVal, that.model.physicianFilterVal, that.model.typeFilterVal);
+      that.filterUserList(that.model.statusFilterVal, that.model.physicianFilterVal, that.model.typeFilterVal 
+                         ,that.model.dateFrom,that.model.dateTo,that.model.timeFrom,that.model.timeTo);
     })
     return await popover.present();
-  }
+  } 
   async presentAlert(title, message) {
     const alert = await this.alertController.create({
       header: title,
@@ -343,81 +367,135 @@ export class LaboratoryPage implements OnInit {
     });
     this.documentsMobile = formattedDocuments;
   }
-  filterUserList(status, physician, type) {
+  filterUserList(status, physician, type, dateFrom, dateTo, timeFrom, timeTo) {
     this.documents = this.documentsOld;
+    let dateTimeFilter = false;
+    if(timeFrom){
+      timeFrom = timeFrom + ":00";
+    }
+    if(timeTo){
+      timeTo = timeTo + ":00";
+    }
+    if(dateFrom){
+      let d1 = new Date(dateFrom);
+      let d2 = dateTo? new Date(dateTo): new Date();
+      if(timeFrom && timeTo){
+        this.documents = _.filter(this.documents,function(doc){ 
+          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time >= timeFrom && doc.time <= timeTo;
+        });
+      }
+      else if(timeFrom){
+        this.documents = _.filter(this.documents,function(doc){ 
+          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time >= timeFrom;
+        });
+      }
+      else if(timeTo){
+        this.documents = _.filter(this.documents,function(doc){ 
+          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time <= timeTo;
+        });
+      }
+      else {
+        this.documents = _.filter(this.documents,function(doc){ 
+          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2;
+        });
+      }
+      dateTimeFilter = true;
+    }
     if (status && physician && type) {//111
-      this.documents = this.documents.filter(document => {
-        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
-          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1 &&
-          document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
-          return true;
-        }
-        return false;
+      // this.documents = this.documents.filter(document => {
+      //   if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+      //     document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1 &&
+      //     document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      this.documents = _.filter(this.documents,function(doc){ 
+        return status == doc.status && physician.indexOf(doc.physician)!=-1 && type.indexOf(doc.type)!=-1;
       });
     }
     else if (status && physician && !type) {//110
-      this.documents = this.documents.filter(document => {
-        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
-          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1) {
-          return true;
-        }
-        return false;
+      // this.documents = this.documents.filter(document => {
+      //   if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1 &&
+      //     document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      this.documents = _.filter(this.documents,function(doc){ 
+        return status == doc.status && physician.indexOf(doc.physician)!=-1;
       });
     }
     //101
     else if (status && !physician && type) {
-      this.documents = this.documents.filter(document => {
-        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
-          && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
-          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
-          return true;
-        }
-        return false;
+      // this.documents = this.documents.filter(document => {
+      //   if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+      //     && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+      //     && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      this.documents = _.filter(this.documents,function(doc){ 
+        return status == doc.status && type.indexOf(doc.type)!=-1;
       });
     }//100
     else if (status && !physician && !type) {
-      this.documents = this.documents.filter(document => {
-        if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
-          // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
-          // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
-        ) {
-          return true;
-        }
-        return false;
+      // this.documents = this.documents.filter(document => {
+      //   if (document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+      //     // && document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+      //     // && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+      //   ) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      this.documents = _.filter(this.documents,function(doc){ 
+        return status == doc.status;
       });
     }//011
     else if (!status && physician && type) {
-      this.documents = this.documents.filter(document => {
-        if (
-          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
-          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
-          && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
-          return true;
-        }
-        return false;
+      // this.documents = this.documents.filter(document => {
+      //   if (
+      //     //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+      //     document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+      //     && document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      this.documents = _.filter(this.documents,function(doc){ 
+        return physician.indexOf(doc.physician)!=-1 && type.indexOf(doc.type)!=-1;
       });
     }//010
     else if (!status && physician && !type) {
-      this.documents = this.documents.filter(document => {
-        if (
-          //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
-          document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
-          //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
-        ) {
-          return true;
-        }
-        return false;
+      // this.documents = this.documents.filter(document => {
+      //   if (
+      //     //document.statusCode.toString().toLowerCase().indexOf(status.toLowerCase()) > -1
+      //     document.physician.toLowerCase().indexOf(physician.toLowerCase()) > -1
+      //     //&& document.type.toLowerCase().indexOf(type.toLowerCase()) > -1
+      //   ) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
+      this.documents = _.filter(this.documents,function(doc){ 
+        return physician.indexOf(doc.physician)!=-1
       });
     }//001
     else if (!status && !physician && type) {
-      this.documents = this.documents.filter(document => {
-        if (document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
-          return true;
-        }
-        return false;
+      this.documents = _.filter(this.documents,function(doc){ 
+        return type.indexOf(doc.type)!=-1
       });
+      // this.documents = this.documents.filter(document => {
+      //   if (document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
+      //     return true;
+      //   }
+      //   return false;
+      // });
     }
     else {
+      if(!dateTimeFilter)
       this.documents = this.documentsOld;
     }
   }

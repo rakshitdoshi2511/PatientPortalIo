@@ -78,7 +78,7 @@ export class AppComponent {
     })
 
     this.events.subscribe('stop-timer',(_data:any)=>{
-      this.bnIdle.resetTimer();
+      //this.bnIdle.resetTimer();
       this.bnIdle.stopTimer();
     })
 

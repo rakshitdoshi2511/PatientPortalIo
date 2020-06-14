@@ -32,7 +32,7 @@ export class LoaderService {
     //this.loader.dismiss(); 
     setTimeout(() => {
       this.loader.dismiss();
-    }, 500);
+    }, 200);
   }
   
 }

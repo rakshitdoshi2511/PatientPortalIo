@@ -4,28 +4,50 @@
 <ion-content>
     <ion-item size="12" [hidden]="model.statusFilterHidden">
         <ion-label size="4">{{'lbl_status' | translate | titlecase}}</ion-label>
-        <ion-select size="8" [(ngModel)]="model.status" [compareWith]="compareWithStatus" value="status.statusCode == model.status">
-            <ion-select-option *ngFor="let status of statusFilter" value="{{status.statusCode}}">{{status.status}}</ion-select-option>
+        <ion-select size="8" [(ngModel)]="model.status" [compareWith]="compareWithStatus"
+            value="status.status == model.status">
+            <ion-select-option *ngFor="let status of statusFilter" value="{{status.status}}">{{status.status}}
+            </ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item [hidden]="model.physicianFilterHidden">
         <ion-label>{{'lbl_physician' | translate | titlecase}}</ion-label>
-        <ion-select [(ngModel)]="model.physician" [compareWith]="compareWithFunctionPhysician" value="status.physician == model.physician">
-            <ion-select-option *ngFor="let physician of physicianFilter" value="{{physician.physician}}">{{physician.physician}}</ion-select-option>
+        <ion-select [(ngModel)]="model.physician" [compareWith]="compareWithFunctionPhysician"
+            value="status.physician == model.physician" multiple="true" class="ahSelect">
+            <ion-select-option *ngFor="let physician of physicianFilter" value="{{physician.physician}}">
+                {{physician.physician}}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item [hidden]="model.documentTypeFilterHidden">
         <ion-label>{{'lbl_type' | translate | titlecase}}</ion-label>
-        <ion-select [(ngModel)]="model.type" [compareWith]="compareWithFunctionType" value="status.type == model.type">
-            <ion-select-option  *ngFor="let documentType of documentTypesFilter" value="{{documentType.type}}">{{documentType.type}}</ion-select-option>
+        <ion-select [(ngModel)]="model.type" [compareWith]="compareWithFunctionType" value="status.type == model.type" multiple="true" class="ahSelect">
+            <ion-select-option *ngFor="let documentType of documentTypesFilter" value="{{documentType.type}}">
+                {{documentType.type}}</ion-select-option>
         </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
+        <ion-input type="date" [(ngModel)]="model.dateFrom"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
+        <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
+        <ion-input type="time" [(ngModel)]="model.timeFrom"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">{{'lbl_time_to' | translate | titlecase}}</ion-label>
+        <ion-input type="time" [(ngModel)]="model.timeTo"></ion-input>
     </ion-item>
 </ion-content>
 <ion-footer>
     <ion-toolbar style="margin-top: 1em;">
         <ion-button expand="full" class="ahThemeButton" (click)="applyFilters()">
             {{'lbl_apply_filters' | translate | uppercase}}</ion-button>
-        <ion-button expand="full" class="ahThemeButton" (click)="clearFilters()">{{'lbl_clear_filters' | translate | uppercase}}
+        <ion-button expand="full" class="ahThemeButton" (click)="clearFilters()">
+            {{'lbl_clear_filters' | translate | uppercase}}
         </ion-button>
         <!-- <ion-label slot="start" (click)="applyFilters()" style="color:rgb(87, 143, 182);font-weight: bold;">Apply</ion-label>
         <ion-label slot="end" (click)="clearFilters()" style="color:black">Clear</ion-label> -->

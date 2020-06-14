@@ -76,7 +76,7 @@ export function setTranslateLoader(http: HttpClient) {
      }
     }),
     AppRoutingModule,
-    PdfViewerModule
+    PdfViewerModule,
   ],
   providers: [
     BnNgIdleService,
