@@ -11,7 +11,7 @@ import { AlertController, Platform, ModalController } from '@ionic/angular';
 import { GlobalService } from './../services/global.service';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { Constant } from '../constant';
 import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 import { ForgotPasswordComponent } from './../forgot-password/forgot-password.component';
@@ -53,21 +53,37 @@ export class LoginPage implements OnInit {
   }
 
   /**Dialogs and Loaders */
-  async openModalTermsConditions(_base64, _patnr, _token, _password, _termsCond) {
+  async openModalTermsConditions(_base64, _patnr, _token, _password, _termsCond, isChangePassword) {
     const modal = await this.modalController.create({
       component: TermsConditionsComponent,
       backdropDismiss: false,
-      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond },
+      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond, isChangePassword: isChangePassword },
       cssClass: 'pdfViewer',
 
     });
+    modal.onDidDismiss().then((data) => {
+      if (data.data.isChangePassword) {
+        this.openModalChangePassword();
+      }
+      else {
+
+      }
+    });
     return await modal.present();
   }
-  async openModalTermsConditionsMobile(_base64, _patnr, _token, _password, _termsCond) {
+  async openModalTermsConditionsMobile(_base64, _patnr, _token, _password, _termsCond, isChangePassword) {
     const modal = await this.modalController.create({
       component: TermsConditionsComponent,
       backdropDismiss: false,
-      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond },
+      componentProps: { data: _base64, patnr: _patnr, token: _token, password: _password, termsCond: _termsCond, isChangePassword: isChangePassword },
+    });
+    modal.onDidDismiss().then((data) => {
+      if (data.data.isChangePassword) {
+        this.openModalChangePassword();
+      }
+      else {
+
+      }
     });
     return await modal.present();
   }
@@ -79,11 +95,12 @@ export class LoginPage implements OnInit {
       componentProps: { viewName: 'Login' },
     });
     modal.onDidDismiss().then((data) => {
-      if(data.data.goToHome){
+      if (data.data.goToHome) {
         this.model = {};
         this.router.navigateByUrl('home');
       }
-      else{
+      else {
+        console.log("I am here from dismiss");
         this.deleteSession();
       }
     })
@@ -139,23 +156,40 @@ export class LoginPage implements OnInit {
     this._api.remLocal('email');
     this._api.remLocal('mrn');
   }
-  setLanguageModel(){
-    this.translate.getDefaultLang()=='en'? this.model.language = this.translate.instant('lbl_lang_ar'):this.model.language = this.translate.instant('lbl_lang_en');
+  getAlignmentClass() {
+    return this.translate.getDefaultLang() == 'en' ? 'mobileToggle text-center p-t-90' : 'mobileToggleAR text-center p-t-90';
+  }
+  setLanguageModel() {
+    this.translate.getDefaultLang() == 'en' ? this.model.language = this.translate.instant('lbl_lang_ar') : this.model.language = this.translate.instant('lbl_lang_en');
   }
   /*Default Methods*/
   ngOnInit() {
     this.clearStorage();
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
-      : this.model.isVisible = false; 
-    //this.translate.setDefaultLang('ar');
-    this.setLanguageModel();  
-    
+      : this.model.isVisible = false;
+    //this.translate.setDefaultLang('ar');  
+    if (this.model.isVisible) {
+      this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
+    }
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      console.log("Here");
+      console.log(event.lang);
+      this.model.language = event.lang == 'en' ? true : false;
+    });
   }
   ionViewDidEnter() {
     this.clearStorage();
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
-    this.setLanguageModel();  
+    if (this.model.isVisible) {
+      this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
+    }
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      console.log("Here1");
+      console.log(event.lang);
+      this.model.language = event.lang == 'en' ? true : false;
+    });
   }
   /**Screen Interactions */
   forgotPassword() {
@@ -187,16 +221,24 @@ export class LoginPage implements OnInit {
   }
   switchLanguage() {
     //console.log(this.model.language);
-    if(this.translate.getDefaultLang()=='en'){
+    if (this.translate.getDefaultLang() == 'en') {
       this.translate.use('ar');
       this.translate.setDefaultLang('ar');
       //this.setLanguageModel();
     }
-    else{
+    else {
       this.translate.use('en');
       this.translate.setDefaultLang('en');
       //this.setLanguageModel();
     }
+  }
+  changeLanguage() {
+    console.log(this.model.language);
+    if (this.model.language != undefined) {
+      this.model.language ? this.translate.use('en') : this.translate.use('ar');
+      this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+    }
+
   }
   doLogin() {
     let that = this;
@@ -222,24 +264,39 @@ export class LoginPage implements OnInit {
         let _object = {};
         this.events.publish('reset-timer', _object);
         that._loader.hideLoader();
-        if (_obj.SysPswd == 'X') {
+        if (_obj.PendingTermCond == 'X') {
+          if (_obj.SysPswd == 'X') {
+            that.loadTermsConditions(that.model.username, _obj.Token, that.model.password, true);
+          }
+          else {
+            that.loadTermsConditions(that.model.username, _obj.Token, that.model.password, false);
+          }
+        }
+        else if (_obj.SysPswd == 'X') {
           that.openModalChangePassword();
         }
         else {
-          if (_obj.PendingTermCond == 'X') {
-            that.loadTermsConditions(that.model.username, _obj.Token, that.model.password);
-          }
-          else {
-            that.model = {};
-            this.router.navigateByUrl('home');
-          }
+          that.model = {};
+          this.router.navigateByUrl('home');
         }
+        // if (_obj.SysPswd == 'X') {
+        //   that.openModalChangePassword();
+        // }
+        // else {
+        //   if (_obj.PendingTermCond == 'X') {
+        //     that.loadTermsConditions(that.model.username, _obj.Token, that.model.password);
+        //   }
+        //   else {
+        //     that.model = {};
+        //     this.router.navigateByUrl('home');
+        //   }
+        // }
       }, _error => {
         that._loader.hideLoader();
         if (_error.status == 0) {
           Swal.fire({
             title: this.translate.instant('lbl_server_unavailable_title'),//errorObj.error.code,
-            text:this.translate.instant('lbl_server_unavailable'),
+            text: this.translate.instant('lbl_server_unavailable'),
             backdrop: false,
             icon: 'warning',
             confirmButtonColor: 'rgb(87,143,182)'
@@ -266,7 +323,7 @@ export class LoginPage implements OnInit {
     let that = this;
     let msg = '';
     this._loader.showLoader(msg);
-    
+
 
     let _param = {
       Patnr: that._api.getLocal('username'),
@@ -288,12 +345,18 @@ export class LoginPage implements OnInit {
         this._api.remLocal('email');
         this._api.remLocal('mrn');
         let _obj = {
-          'isLogOut':true
+          'isLogOut': true
         };
-        this.events.publish('stop-timer',_obj);
+        this.events.publish('stop-timer', _obj);
         // window.location.reload();
+        this.translate.resetLang(this.translate.getBrowserLang());
         this.model = {};
         this.router.navigateByUrl('login');
+        this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+          : this.model.isVisible = false;
+        if (this.model.isVisible) {
+          this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
+        }
 
       }, _error => {
         that._loader.hideLoader();
@@ -308,16 +371,22 @@ export class LoginPage implements OnInit {
         this._api.remLocal('email');
         this._api.remLocal('mrn');
         let _obj = {
-          'isLogOut':true
+          'isLogOut': true
         };
-        this.events.publish('stop-timer',_obj);
-       // window.location.reload();
+        this.translate.resetLang(this.translate.getBrowserLang());
+        this.events.publish('stop-timer', _obj);
+        // window.location.reload();
         this.model = {};
         this.router.navigateByUrl('login');
+        this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+          : this.model.isVisible = false;
+        if (this.model.isVisible) {
+          this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
+        }
       }
     )
   }
-  loadTermsConditions(_username, _token, _password) {
+  loadTermsConditions(_username, _token, _password, isChangePassword) {
     let that = this;
     let _param = {
       Patnr: _username,
@@ -332,11 +401,11 @@ export class LoginPage implements OnInit {
         //console.log(_obj);
         if (that.model.isVisible) {
           that.model = {};
-          this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password, _obj.TermCond);
+          this.openModalTermsConditionsMobile(_obj.PDFData, _username, _token, _password, _obj.TermCond, isChangePassword);
         }
         else {
           that.model = {};
-          that.openModalTermsConditions(_obj.PDFData, _username, _token, _password, _obj.TermCond);
+          that.openModalTermsConditions(_obj.PDFData, _username, _token, _password, _obj.TermCond, isChangePassword);
         }
 
       }, _error => {

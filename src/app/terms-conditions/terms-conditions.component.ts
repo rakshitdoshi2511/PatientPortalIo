@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { ApiService } from '../services/api.service';
 import { Storage } from '@ionic/storage';
+import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-terms-conditions',
@@ -26,6 +27,24 @@ export class TermsConditionsComponent implements OnInit {
     private _api: ApiService,
     private storage: Storage,
   ) { }
+
+  async openModalChangePassword() {
+    const modal = await this.modalController.create({
+      component: CustomAlertComponent,
+      backdropDismiss: false,
+      componentProps: { viewName: 'Login' },
+    });
+    modal.onDidDismiss().then((data) => {
+      if (data.data.goToHome) {
+        this.model = {};
+        this.router.navigateByUrl('home');
+      }
+      else {
+        this.deleteSession();
+      }
+    })
+    return await modal.present();
+  }
 
   /**Helper Methods */
   base64ToArrayBuffer(base64) {
@@ -68,6 +87,7 @@ export class TermsConditionsComponent implements OnInit {
     this.model.token = this.navParams.data.token;
     this.model.password = this.navParams.data.password;
     this.model.termsCond = this.navParams.data.termsCond;
+    this.model.isChangePassword = this.navParams.data.isChangePassword;
     this.pdfSrc = this.base64ToArrayBuffer(response);
     this.pdfRaw = this.navParams.data.data;
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
@@ -96,8 +116,15 @@ export class TermsConditionsComponent implements OnInit {
     that._dataServices.updateData("TERMSCONDUPDSET",_data,_params,null,false,null,false).subscribe(
       _success => {
         debugger;
-        that.modalController.dismiss();
-        this.router.navigateByUrl('home');
+        if(this.model.isChangePassword){
+          let _obj = {
+            isChangePassword: this.model.isChangePassword
+          }
+          that.modalController.dismiss(_obj);
+        }
+        else{
+          this.router.navigateByUrl('home');
+        }
       }, _error => {
         that.modalController.dismiss();
         debugger;
