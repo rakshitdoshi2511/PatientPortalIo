@@ -5,7 +5,7 @@
     <ion-item size="12" [hidden]="model.statusFilterHidden">
         <ion-label size="4">{{'lbl_status' | translate | titlecase}}</ion-label>
         <ion-select size="8" [(ngModel)]="model.status" [compareWith]="compareWithStatus"
-            value="status.status == model.status">
+            value="status.status == model.status" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
             <ion-select-option *ngFor="let status of statusFilter" value="{{status.status}}">{{status.status}}
             </ion-select-option>
         </ion-select>
@@ -13,33 +13,56 @@
     <ion-item [hidden]="model.physicianFilterHidden">
         <ion-label>{{'lbl_physician' | translate | titlecase}}</ion-label>
         <ion-select [(ngModel)]="model.physician" [compareWith]="compareWithFunctionPhysician"
-            value="status.physician == model.physician" multiple="true" class="ahSelect">
+            value="status.physician == model.physician" multiple="true" class="ahSelect" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
             <ion-select-option *ngFor="let physician of physicianFilter" value="{{physician.physician}}">
                 {{physician.physician}}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item [hidden]="model.documentTypeFilterHidden">
         <ion-label>{{'lbl_type' | translate | titlecase}}</ion-label>
-        <ion-select [(ngModel)]="model.type" [compareWith]="compareWithFunctionType" value="status.type == model.type" multiple="true" class="ahSelect">
+        <ion-select [(ngModel)]="model.type" [compareWith]="compareWithFunctionType" value="status.type == model.type" multiple="true" class="ahSelect" 
+        okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
             <ion-select-option *ngFor="let documentType of documentTypesFilter" value="{{documentType.type}}">
                 {{documentType.type}}</ion-select-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <!--For Web View-->
+    <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
         <ion-input type="date" [(ngModel)]="model.dateFrom"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
         <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
         <ion-input type="time" [(ngModel)]="model.timeFrom"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_time_to' | translate | titlecase}}</ion-label>
         <ion-input type="time" [(ngModel)]="model.timeTo"></ion-input>
+    </ion-item>
+    <!--For Mobile View-->
+    <ion-item [hidden]="!model.isVisible">
+        <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
+        <!-- <ion-input type="date" [(ngModel)]="model.dateFrom"></ion-input> -->
+        <ion-datetime displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateFrom" value="model.dateFrom"></ion-datetime>
+    </ion-item>
+    <ion-item [hidden]="!model.isVisible">
+        <ion-label position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
+        <!-- <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input> -->
+        <ion-datetime displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateTo" value="model.dateTo"></ion-datetime>
+    </ion-item>
+    <ion-item [hidden]="!model.isVisible">
+        <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
+        <!-- <ion-input type="time" [(ngModel)]="model.timeFrom"></ion-input> -->
+        <ion-datetime displayFormat="HH:mm A" format="HH:mm A" [(ngModel)]="model.timeFrom" value="model.timeFrom"></ion-datetime>
+    </ion-item>
+    <ion-item [hidden]="!model.isVisible">
+        <ion-label position="floating">{{'lbl_time_to' | translate | titlecase}}</ion-label>
+        <!-- <ion-input type="time" [(ngModel)]="model.timeTo"></ion-input> -->
+        <ion-datetime displayFormat="HH:mm A" format="HH:mm A" [(ngModel)]="model.timeTo" value="model.timeTo"></ion-datetime>
     </ion-item>
 </ion-content>
 <ion-footer>

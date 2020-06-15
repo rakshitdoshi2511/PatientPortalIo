@@ -403,22 +403,22 @@ export class RadiologyPage implements OnInit {
       let d2 = dateTo? new Date(dateTo): new Date();
       if(timeFrom && timeTo){
         this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time >= timeFrom && doc.time <= timeTo;
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2 && doc.time >= timeFrom && doc.time <= timeTo;
         });
       }
       else if(timeFrom){
         this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time >= timeFrom;
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2 && doc.time >= timeFrom;
         });
       }
       else if(timeTo){
         this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time <= timeTo;
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2 && doc.time <= timeTo;
         });
       }
       else {
         this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2;
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2;
         });
       }
       dateTimeFilter = true;
@@ -506,6 +506,11 @@ export class RadiologyPage implements OnInit {
       if(!dateTimeFilter)
       this.documents = this.documentsOld;
     }
+    let formattedDocuments = _.groupBy(this.documents, 'date');
+      _.forEach(formattedDocuments, function (_document) {
+        _document['lineItems'] = _document;
+      });
+      this.documentsMobile = formattedDocuments;
   }
   sortDescending(key) {
     this.previousSortKeyAsc = '';
@@ -592,6 +597,16 @@ export class RadiologyPage implements OnInit {
   switchLanguage() {
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+  }
+  changeLanguage(){
+    if(this.translate.getDefaultLang()=='en'){
+      this.translate.use('ar');
+      this.translate.setDefaultLang('ar');
+    }
+    else{
+      this.translate.use('en');
+      this.translate.setDefaultLang('en');
+    }
   }
   _onCellClick(param) {
 

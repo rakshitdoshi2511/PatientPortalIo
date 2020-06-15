@@ -261,6 +261,16 @@ export class HomePage {
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
     this._api.setLocal('lang',this.model.language);
   }
+  changeLanguage(){
+    if(this.translate.getDefaultLang()=='en'){
+      this.translate.use('ar');
+      this.translate.setDefaultLang('ar');
+    }
+    else{
+      this.translate.use('en');
+      this.translate.setDefaultLang('en');
+    }
+  }
   goTo(param){
     switch(param){
       case 'nutrition':

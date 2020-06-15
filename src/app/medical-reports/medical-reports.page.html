@@ -9,14 +9,15 @@
       <img src="./assets/icon/usericon.svg">
     </ion-thumbnail>
     <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
-      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">AR</h6>
+      <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
-      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">EN</h6>
+      <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
+      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
     <ion-title class='ion-text-center titleWhite'>{{'tile_medical' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
+    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
     </ion-searchbar>
     <ion-buttons slot="end">
       <!-- <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
@@ -157,13 +158,15 @@
                 <div class="tasks" id="tasks" *ngFor="let document of documentsMobile[_document.key].lineItems">
                   <div class="task-item" [ngClass]="document.class" (click)="openPDF(document)">
                     <div class="task-text">
-                      <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5>
+                      <!-- <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5> -->
+                      <h5 style="color:rgb(87,143,182);font-weight:bold">{{document.type}}</h5>
                       <h6>{{document.physician}}</h6>
                       <span>{{'lbl_status' | translate | titlecase}} : {{document.status}}</span>
                     </div>
                     <div class="task-footer">
                       <div [class]="getAlignmentClassLeft()"><span class="fa fa-clock-o"></span> {{document.date}} - {{document.time}}</div>
-                      <div [class]="getAlignmentClassRight()"><h6 style="color:rgb(87,143,182);">{{document.type}}</h6></div>
+                      <!-- <div [class]="getAlignmentClassRight()"><h6 style="color:rgb(87,143,182);">{{document.type}}</h6></div> -->
+                      <div [class]="getAlignmentClassRight()"><h6 style="color:rgb(87,143,182);">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h6></div>
                     </div>
                   </div>
                 </div>

@@ -9,4 +9,8 @@
 
 .ahSelect .select-interface-option[aria-checked=true] .alert-checkbox-label {
     color: #79193b;
-  }
+}
+
+.sc-ion-alert-md-h{
+    --max-width:20% !important;
+}

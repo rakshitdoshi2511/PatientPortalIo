@@ -54,7 +54,7 @@
 
 .tasks .task-item:hover {
 	background: #F9F9F9;
-	cursor: pointer;
+	cursor: pointer !important;
 }
 
 .tasks .task-item.task-complete {
@@ -114,6 +114,7 @@
 
 .tasks .task-item .task-footer a:hover {
 	color: #22262e;
+	cursor: pointer !important;
 }
 
 .tasks .task-drop {
@@ -132,7 +133,7 @@
 .tasks .task-drop:hover {
 	opacity: 0.5;
 	filter: alpha(opacity=50);
-	cursor: pointer;
+	cursor: pointer !important;
 }
 
 .hidden-show-when {
@@ -152,7 +153,7 @@
   }
   .dataTable:hover{
 	transform: translateY(0) scale(1.01);
-   
+    cursor: pointer !important;
   }
   td {
     padding: .75rem !important;

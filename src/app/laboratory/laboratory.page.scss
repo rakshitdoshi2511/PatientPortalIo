@@ -100,6 +100,7 @@
   }
   .tasks .task-item .task-footer a:hover {
     color: #22262e;
+    cursor: pointer;
   }
   .tasks .task-drop {
     float: left;
@@ -116,7 +117,7 @@
   .tasks .task-drop:hover {
     opacity: 0.5;
     filter: alpha(opacity = 50);
-    cursor: pointer;
+    cursor: pointer !important;
   }
   .filterClass{
     position: absolute;
@@ -134,7 +135,7 @@
     }
     .dataTable:hover{
       transform: translateY(0) scale(1.01);
-     
+      cursor: pointer !important;
     }
     td {
       padding: .75rem !important;

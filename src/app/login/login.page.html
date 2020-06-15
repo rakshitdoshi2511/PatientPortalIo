@@ -1,3 +1,11 @@
+<ion-header [hidden]="model.isVisible">
+  <ion-toolbar class="ahThemeToolBar">
+    <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
+      <ion-button expand="full" class="ahThemeButton" (click)="switchLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button> 
+    </ion-row>
+    <ion-title class='ion-text-center titleWhite'>{{'lbl_app_title' | translate | titlecase}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <div class="limiter">
   <div class="container-login100 tintimage">
     <!-- style="background-image: url('./assets/images/bg-01.jpg');"> -->
@@ -30,6 +38,16 @@
         <div class="text-center p-t-90">
           <a class="txt1" (click)="forgotPassword()" style="cursor: pointer;">{{ 'lbl_forgot_password' | translate}}</a>
         </div>
+
+        <!-- <div class="col-md-12 text-center p-t-90" [hidden]="!model.isVisible">
+          <ion-row class="text-center p-t-90" text-center>
+            <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
+            <ion-toggle [(ngModel)]="model.language" (ionChange)="changeLanguage()"></ion-toggle>
+            <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
+          </ion-row>
+        </div> -->
+
+        
       </form>
     </div>
   </div>

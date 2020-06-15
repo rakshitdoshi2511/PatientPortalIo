@@ -139,12 +139,23 @@ export class LoginPage implements OnInit {
     this._api.remLocal('email');
     this._api.remLocal('mrn');
   }
+  setLanguageModel(){
+    this.translate.getDefaultLang()=='en'? this.model.language = this.translate.instant('lbl_lang_ar'):this.model.language = this.translate.instant('lbl_lang_en');
+  }
   /*Default Methods*/
   ngOnInit() {
     this.clearStorage();
+    this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+      : this.model.isVisible = false; 
+    //this.translate.setDefaultLang('ar');
+    this.setLanguageModel();  
+    
   }
   ionViewDidEnter() {
     this.clearStorage();
+    this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+      : this.model.isVisible = false;
+    this.setLanguageModel();  
   }
   /**Screen Interactions */
   forgotPassword() {
@@ -173,6 +184,19 @@ export class LoginPage implements OnInit {
       });
     }
     // this.showCustomAlert()
+  }
+  switchLanguage() {
+    //console.log(this.model.language);
+    if(this.translate.getDefaultLang()=='en'){
+      this.translate.use('ar');
+      this.translate.setDefaultLang('ar');
+      //this.setLanguageModel();
+    }
+    else{
+      this.translate.use('en');
+      this.translate.setDefaultLang('en');
+      //this.setLanguageModel();
+    }
   }
   doLogin() {
     let that = this;

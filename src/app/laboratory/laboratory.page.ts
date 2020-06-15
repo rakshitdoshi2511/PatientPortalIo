@@ -7,7 +7,7 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { PdfViewComponent } from '../pdf-view/pdf-view.component';
 import { AlertController, ModalController } from '@ionic/angular';
 import { KeyValue } from '@angular/common';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
 import { ApiService } from './../services/api.service';
@@ -113,31 +113,31 @@ export class LaboratoryPage implements OnInit {
       if (that.model.typeFilterVal) {
         _filterCount++;
       }
-      
-      
+
+
       that.model.dateFrom = data.data.dateFrom;
-      if (that.model.dateFrom){
+      if (that.model.dateFrom) {
         _filterCount++;
       }
       that.model.dateTo = data.data.dateTo;
-      if (that.model.dateTo){
+      if (that.model.dateTo) {
         _filterCount++;
       }
       that.model.timeFrom = data.data.timeFrom;
-      if (that.model.timeFrom){
+      if (that.model.timeFrom) {
         _filterCount++;
       }
       that.model.timeTo = data.data.timeTo;
-      if (that.model.timeTo){
+      if (that.model.timeTo) {
         _filterCount++;
       }
 
       that.model.filterCount = _filterCount;
-      that.filterUserList(that.model.statusFilterVal, that.model.physicianFilterVal, that.model.typeFilterVal 
-                         ,that.model.dateFrom,that.model.dateTo,that.model.timeFrom,that.model.timeTo);
+      that.filterUserList(that.model.statusFilterVal, that.model.physicianFilterVal, that.model.typeFilterVal
+        , that.model.dateFrom, that.model.dateTo, that.model.timeFrom, that.model.timeTo);
     })
     return await popover.present();
-  } 
+  }
   async presentAlert(title, message) {
     const alert = await this.alertController.create({
       header: title,
@@ -157,7 +157,7 @@ export class LaboratoryPage implements OnInit {
     this.presentAlert(title, message);
   }
   /**Helper Methods */
-  resetSortKeys(){
+  resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';
     this.model.dateAsc = 'iconNotSort';
@@ -209,7 +209,7 @@ export class LaboratoryPage implements OnInit {
     }
     return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status,isAccessible) {
+  renderStatus(status, isAccessible) {
     //console.log(status);
     if (isAccessible) {
       return '#1caf9a';
@@ -231,7 +231,7 @@ export class LaboratoryPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
-    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.model.language = event.lang == 'en' ? true : false;
     });
     this.resetSortKeys();
@@ -242,7 +242,7 @@ export class LaboratoryPage implements OnInit {
     this.model.filterCount = 0;
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     this.loadData();
-    this.translate.onLangChange.subscribe((event:LangChangeEvent)=>{
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.model.language = event.lang == 'en' ? true : false;
     });
     this.resetSortKeys();
@@ -265,12 +265,12 @@ export class LaboratoryPage implements OnInit {
     this.filterPopover(event);
   }
   showPDF(_object) {
-    if(_object.isAccessible){
+    if (_object.isAccessible) {
       let msg = this.translate.instant('dialog_title_loading');
       this._loader.showLoader(msg);
       this.loadDetails(_object.documentKey, _object.documentNo);
     }
-    else{
+    else {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
@@ -295,11 +295,11 @@ export class LaboratoryPage implements OnInit {
     // }
   }
   openPDF(_object) {
-    if(_object.isAccessible){
+    if (_object.isAccessible) {
       let msg = this.translate.instant('dialog_title_loading');
       this._loader.showLoader(msg);
       this.loadDetails(_object.documentKey, _object.documentNo);
-    }else{
+    } else {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
@@ -342,10 +342,10 @@ export class LaboratoryPage implements OnInit {
     }
     this.documents = this.documents.filter(document => {
       if (document.documentNo && searchTerm) {
-        if (document.documentNo.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 
-        || document.physician.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 
-        || document.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 
-        || document.type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+        if (document.documentNo.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+          || document.physician.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+          || document.status.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+          || document.type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           return true;
         }
         return false;
@@ -370,33 +370,33 @@ export class LaboratoryPage implements OnInit {
   filterUserList(status, physician, type, dateFrom, dateTo, timeFrom, timeTo) {
     this.documents = this.documentsOld;
     let dateTimeFilter = false;
-    if(timeFrom){
+    if (timeFrom) {
       timeFrom = timeFrom + ":00";
     }
-    if(timeTo){
+    if (timeTo) {
       timeTo = timeTo + ":00";
     }
-    if(dateFrom){
+    if (dateFrom) {
       let d1 = new Date(dateFrom);
-      let d2 = dateTo? new Date(dateTo): new Date();
-      if(timeFrom && timeTo){
-        this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time >= timeFrom && doc.time <= timeTo;
+      let d2 = dateTo ? new Date(dateTo) : new Date();
+      if (timeFrom && timeTo) {
+        this.documents = _.filter(this.documents, function (doc) {
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2 && doc.time >= timeFrom && doc.time <= timeTo;
         });
       }
-      else if(timeFrom){
-        this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time >= timeFrom;
+      else if (timeFrom) {
+        this.documents = _.filter(this.documents, function (doc) {
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2 && doc.time >= timeFrom;
         });
       }
-      else if(timeTo){
-        this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2 && doc.time <= timeTo;
+      else if (timeTo) {
+        this.documents = _.filter(this.documents, function (doc) {
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2 && doc.time <= timeTo;
         });
       }
       else {
-        this.documents = _.filter(this.documents,function(doc){ 
-          return doc.dateFormatted >= d1 && doc.dateFormatted <= d2;
+        this.documents = _.filter(this.documents, function (doc) {
+          return new Date(doc.dateFormattedStr) >= d1 && new Date(doc.dateFormattedStr) <= d2;
         });
       }
       dateTimeFilter = true;
@@ -410,8 +410,8 @@ export class LaboratoryPage implements OnInit {
       //   }
       //   return false;
       // });
-      this.documents = _.filter(this.documents,function(doc){ 
-        return status == doc.status && physician.indexOf(doc.physician)!=-1 && type.indexOf(doc.type)!=-1;
+      this.documents = _.filter(this.documents, function (doc) {
+        return status == doc.status && physician.indexOf(doc.physician) != -1 && type.indexOf(doc.type) != -1;
       });
     }
     else if (status && physician && !type) {//110
@@ -422,8 +422,8 @@ export class LaboratoryPage implements OnInit {
       //   }
       //   return false;
       // });
-      this.documents = _.filter(this.documents,function(doc){ 
-        return status == doc.status && physician.indexOf(doc.physician)!=-1;
+      this.documents = _.filter(this.documents, function (doc) {
+        return status == doc.status && physician.indexOf(doc.physician) != -1;
       });
     }
     //101
@@ -436,8 +436,8 @@ export class LaboratoryPage implements OnInit {
       //   }
       //   return false;
       // });
-      this.documents = _.filter(this.documents,function(doc){ 
-        return status == doc.status && type.indexOf(doc.type)!=-1;
+      this.documents = _.filter(this.documents, function (doc) {
+        return status == doc.status && type.indexOf(doc.type) != -1;
       });
     }//100
     else if (status && !physician && !type) {
@@ -450,7 +450,7 @@ export class LaboratoryPage implements OnInit {
       //   }
       //   return false;
       // });
-      this.documents = _.filter(this.documents,function(doc){ 
+      this.documents = _.filter(this.documents, function (doc) {
         return status == doc.status;
       });
     }//011
@@ -464,8 +464,8 @@ export class LaboratoryPage implements OnInit {
       //   }
       //   return false;
       // });
-      this.documents = _.filter(this.documents,function(doc){ 
-        return physician.indexOf(doc.physician)!=-1 && type.indexOf(doc.type)!=-1;
+      this.documents = _.filter(this.documents, function (doc) {
+        return physician.indexOf(doc.physician) != -1 && type.indexOf(doc.type) != -1;
       });
     }//010
     else if (!status && physician && !type) {
@@ -479,13 +479,13 @@ export class LaboratoryPage implements OnInit {
       //   }
       //   return false;
       // });
-      this.documents = _.filter(this.documents,function(doc){ 
-        return physician.indexOf(doc.physician)!=-1
+      this.documents = _.filter(this.documents, function (doc) {
+        return physician.indexOf(doc.physician) != -1
       });
     }//001
     else if (!status && !physician && type) {
-      this.documents = _.filter(this.documents,function(doc){ 
-        return type.indexOf(doc.type)!=-1
+      this.documents = _.filter(this.documents, function (doc) {
+        return type.indexOf(doc.type) != -1
       });
       // this.documents = this.documents.filter(document => {
       //   if (document.type.toLowerCase().indexOf(type.toLowerCase()) > -1) {
@@ -495,84 +495,89 @@ export class LaboratoryPage implements OnInit {
       // });
     }
     else {
-      if(!dateTimeFilter)
-      this.documents = this.documentsOld;
+      if (!dateTimeFilter)
+        this.documents = this.documentsOld;
     }
+    let formattedDocuments = _.groupBy(this.documents, 'date');
+    _.forEach(formattedDocuments, function (_document) {
+      _document['lineItems'] = _document;
+    });
+    this.documentsMobile = formattedDocuments;
   }
   sortDescending(key) {
     this.previousSortKeyAsc = '';
-    if(this.previousSortKeyDesc == key){
+    if (this.previousSortKeyDesc == key) {
 
     }
-    else{
+    else {
       this.previousSortKeyDesc = key;
       if (key == "date") {
         key = "dateFormatted";
       }
       let className = 'iconSort';
       this.resetSortKeys();
-      switch(key){
+      switch (key) {
         case 'documentNo':
           this.model.documentNumberDesc = className;
           break;
         case 'type':
-          this.model.typeDesc = className;  
+          this.model.typeDesc = className;
           break;
         case 'dateFormatted':
           this.model.dateDesc = className;
           break;
         case 'time':
-          this.model.timeDesc = className;    
+          this.model.timeDesc = className;
           break;
         case 'physician':
           this.model.physicianDesc = className;
           break;
         case 'status':
           this.model.statusDesc = className;
-          break;  
+          break;
         default:
           this.resetSortKeys();
           break;
       }
-      this.documents = _.sortBy(this.documents, [key,'documentNo']).reverse();
+      this.documents = _.sortBy(this.documents, [key, 'documentNo']).reverse();
     }
   }
   sortAscending(key) {
     this.previousSortKeyDesc = '';
-    if(this.previousSortKeyAsc == key){
+    if (this.previousSortKeyAsc == key) {
 
     }
-    else{
+    else {
       this.previousSortKeyAsc = key;
       if (key == "date") {
         key = "dateFormatted";
       }
       let className = 'iconSort';
       this.resetSortKeys();
-      switch(key){
+      switch (key) {
         case 'documentNo':
           this.model.documentNumberAsc = className;
           break;
         case 'type':
-          this.model.typeAsc = className;  
+          this.model.typeAsc = className;
           break;
         case 'dateFormatted':
           this.model.dateAsc = className;
           break;
         case 'time':
-          this.model.timeAsc = className;    
+          this.model.timeAsc = className;
           break;
         case 'physician':
           this.model.physicianAsc = className;
           break;
         case 'status':
           this.model.statusAsc = className;
-          break;  
+          break;
         default:
           this.resetSortKeys();
           break;
       }
-      this.documents = _.sortBy(this.documents, [key,'documentNo'], 'asc')
+      this.documents = _.sortBy(this.documents, [key, 'documentNo'], 'asc')
     }
   }
   openDocument(_base64, _documentNo) {
@@ -582,6 +587,16 @@ export class LaboratoryPage implements OnInit {
   switchLanguage() {
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+  }
+  changeLanguage(){
+    if(this.translate.getDefaultLang()=='en'){
+      this.translate.use('ar');
+      this.translate.setDefaultLang('ar');
+    }
+    else{
+      this.translate.use('en');
+      this.translate.setDefaultLang('en');
+    }
   }
   /**Data API */
   loadData() {
@@ -617,14 +632,14 @@ export class LaboratoryPage implements OnInit {
         this.documents = _data;
         //console.log(this.documents);
       }
-      else{
+      else {
         Swal.fire({
           title: this.translate.instant('lbl_no_data'),
           text: this.translate.instant('lbl_no_data_msg'),
-          backdrop:false,
-          icon:'info',
-          confirmButtonColor:'rgb(87,143,182)'
-        }).then((result)=>{
+          backdrop: false,
+          icon: 'info',
+          confirmButtonColor: 'rgb(87,143,182)'
+        }).then((result) => {
           this.router.navigateByUrl('home');
         });
       }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController,NavParams, PopoverController } from '@ionic/angular';
+import { ModalController,NavParams, PopoverController, Platform } from '@ionic/angular';
 import * as _ from "lodash";
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +21,8 @@ export class FilterPopoverComponent implements OnInit {
     private modalController: ModalController,
     private navParams: NavParams,
     private popoverController: PopoverController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private platform: Platform,
   ) { }
 
   /**Helper Methods */
@@ -83,6 +84,9 @@ export class FilterPopoverComponent implements OnInit {
     that.statusFilter = this.navParams.data.status;
     that.statusFilter = _.uniqBy(that.statusFilter,'status');
 
+    this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+      : this.model.isVisible = false;
+
     if(that.statusFilter.length==0){
       that.model.statusFilterHidden = true;
     }
@@ -120,6 +124,9 @@ export class FilterPopoverComponent implements OnInit {
     that.id = this.navParams.data.id;
     that.statusFilter = this.navParams.data.status;
 
+    this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
+      : this.model.isVisible = false;
+
     that.statusFilter = _.uniqBy(that.statusFilter,'status');
     console.log(that.statusFilter);
     if(that.statusFilter.length==0){
@@ -153,9 +160,23 @@ export class FilterPopoverComponent implements OnInit {
   }
   /**Screen Interaction */
   applyFilters(){
-
+    debugger;
     let that = this;
     //console.log(this.model.status);
+    if(this.model.isVisible){
+      if(this.model.dateFrom){
+        this.model.dateFrom = this.model.dateFrom.split("T")[0];
+      }
+      if(this.model.dateTo){
+        this.model.dateTo = this.model.dateTo.split("T")[0];
+      }
+      if(this.model.timeFrom){
+        this.model.timeFrom = this.model.timeFrom.split("T")[1].split(".")[0].substr(0,5);
+      }
+      if(this.model.timeTo){
+        this.model.timeTo = this.model.timeTo.split("T")[1].split(".")[0].substr(0,5);
+      }
+    }
     let isCheckDate = this.checkDate();
     let isCheckTime = this.checkTime();
     if(isCheckDate || isCheckTime){
