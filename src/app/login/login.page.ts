@@ -203,6 +203,7 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('home');
   }
   login() {
+    
     if (this.model.username && this.model.password) {
       let msg = this.translate.instant('dialog_title_authentication');
       this._loader.showLoader(msg);
@@ -214,7 +215,8 @@ export class LoginPage implements OnInit {
         text: this.translate.instant('lbl_missing_data_message'),
         backdrop: false,
         icon: 'warning',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       });
     }
     // this.showCustomAlert()
@@ -299,7 +301,8 @@ export class LoginPage implements OnInit {
             text: this.translate.instant('lbl_server_unavailable'),
             backdrop: false,
             icon: 'warning',
-            confirmButtonColor: 'rgb(87,143,182)'
+            confirmButtonColor: 'rgb(87,143,182)',
+            confirmButtonText: this.translate.instant('lbl_filter_ok')
           });
         }
         else {
@@ -310,7 +313,8 @@ export class LoginPage implements OnInit {
             text: errorObj.error.message.value,
             backdrop: false,
             icon: 'error',
-            confirmButtonColor: 'rgb(87,143,182)'
+            confirmButtonColor: 'rgb(87,143,182)',
+            confirmButtonText: this.translate.instant('lbl_filter_ok')
           });
         }
 
@@ -357,6 +361,7 @@ export class LoginPage implements OnInit {
         if (this.model.isVisible) {
           this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
         }
+        window.location.reload();
 
       }, _error => {
         that._loader.hideLoader();
@@ -383,6 +388,7 @@ export class LoginPage implements OnInit {
         if (this.model.isVisible) {
           this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
         }
+        window.location.reload();
       }
     )
   }

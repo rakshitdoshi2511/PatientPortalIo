@@ -57,7 +57,8 @@ export class ValidateUserPage implements OnInit {
           text: errorObj.error.message.value,
           backdrop: false,
           icon: 'error',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         });
       }
     )

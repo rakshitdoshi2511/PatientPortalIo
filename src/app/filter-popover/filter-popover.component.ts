@@ -185,7 +185,8 @@ export class FilterPopoverComponent implements OnInit {
         text: this.translate.instant('lbl_warning_validation'),
         backdrop: false,
         icon: 'warning',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       });
     }
     else{

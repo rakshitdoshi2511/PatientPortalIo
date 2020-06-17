@@ -56,7 +56,8 @@ export class CustomAlertComponent implements OnInit {
           text: this.translate.instant('lbl_password_mismatch_message'),
           backdrop:false,
           icon:'warning',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         });
        // Swal.fire(this.translate.instant('lbl_password_mismatch'), this.translate.instant('lbl_password_mismatch_message'), 'warning'); 
       }
@@ -67,7 +68,8 @@ export class CustomAlertComponent implements OnInit {
         text: this.translate.instant('lbl_missing_data_message'),
         backdrop:false,
         icon:'warning',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       });
       //Swal.fire(this.translate.instant('lbl_missing_data'), this.translate.instant('lbl_missing_data_message'), 'warning'); 
     }
@@ -148,7 +150,8 @@ export class CustomAlertComponent implements OnInit {
         text: this.translate.instant('lbl_password_changed_message'),
         backdrop:false,
         icon:'success',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       }).then((result)=>{
         let _obj = {
           goToHome:true,
@@ -169,7 +172,8 @@ export class CustomAlertComponent implements OnInit {
           text: errorObj.error.message.value,
           backdrop:false,
           icon:'error',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         });
         //Swal.fire(errorObj.error.code, errorObj.error.message.value, 'error')
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);

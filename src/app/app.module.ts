@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserPopoverComponent } from './user-popover/user-popover.component';
+import { HelpComponent } from './help/help.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { GradientWithRadialProgressCardComponent } from './gradient-with-radial-progress-card/gradient-with-radial-progress-card.component';
 import { FilterPopoverComponent } from './filter-popover/filter-popover.component';
@@ -44,6 +45,7 @@ export function setTranslateLoader(http: HttpClient) {
     AppComponent,
     SidebarComponent,
     UserPopoverComponent,
+    HelpComponent,
     FilterPopoverComponent,
     GradientWithRadialProgressCardComponent,
     PdfViewComponent,
@@ -53,6 +55,7 @@ export function setTranslateLoader(http: HttpClient) {
   ],
   entryComponents: [
     UserPopoverComponent,
+    HelpComponent,
     FilterPopoverComponent,
     PdfViewComponent,
     TermsConditionsComponent,

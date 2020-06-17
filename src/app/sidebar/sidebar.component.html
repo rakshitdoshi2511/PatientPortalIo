@@ -1,3 +1,41 @@
+<section class="card">
+  <div class="twt-feed blue-bg">
+    <div class="media">
+      <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
+        src="./assets/icon/usericon_blue.svg">
+    </div>
+    <div class="media-body">
+      <h2 class="text-white display-6">{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h2>
+      <p class="text-light">{{'lbl_mrn' | translate | uppercase}}:{{model.mrn}}</p>
+    </div>
+  </div>
+  <div class="weather-category twt-category">
+    <ul>
+      <li class="active">
+        <h6 style="font-size:13px;">{{'lbl_gender' | translate | uppercase}}</h6>
+        {{model.sex}}
+      </li>
+      <li>
+        <h6 style="font-size:13px;">{{'lbl_date_of_birth' | translate | uppercase}}</h6>
+        {{model.birthDate}}
+      </li>
+    </ul>
+  </div>
+  <div class="twt-write col-sm-12">
+    <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
+        <ion-icon name='call'></ion-icon>
+      </span> {{'lbl_contact' | translate | uppercase}}: <span [class]="getAlignmentClassRight()">
+        {{model.contact}}
+      </span></h6>
+    <h6 style="color: #bdbdbd;font-size: 0.7em;">
+      <span><ion-icon name='mail'></ion-icon></span> 
+      {{'lbl_email' | translate | uppercase}}: 
+      <span [class]="getAlignmentClassRight()">{{model.email | lowercase}}</span></h6>
+  </div>
+</section>
+
+<!-- 
+
 <div class="header">
 	<div class="logo">
 		<img src="./assets/icon/usericon_blue.svg" style="visibility: hidden;">
@@ -7,12 +45,12 @@
 			<p>{{model.email | lowercase}}</p>
 		</span>
 	</div>
-</div>
+</div> -->
 
-<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;">
+<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;">
 	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
 		<div class="nav-item" [routerLink]="[p.url]">
-			<ion-icon src="{{p.iconPath}}"></ion-icon>
+      <ion-icon src="{{p.iconPath}}"></ion-icon>
 			{{p.title | translate}}
 			<span class="divider"></span>
 		</div>
@@ -21,9 +59,15 @@
 
 <div class="footer">
 	<div class="footer-nav">
-		<ion-button expand="full" class="ahThemeButton" (click)="logOut()">{{ 'lbl_logout' | translate | uppercase}}</ion-button>
+		<ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_change_password' | translate | uppercase}}</ion-button>
+		<ion-button expand="full" class="ahThemeButton" (click)="logOut()">{{ 'lbl_logout' | translate | uppercase}}
+		</ion-button>
+		<ion-row class="twt-write_toggle" [hidden]="!model.isVisible">
+			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
+			<ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
+			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
+		  </ion-row>
 	</div>
-
 	<div class="footer-app-version">
 		Version v{{version}}
 	</div>

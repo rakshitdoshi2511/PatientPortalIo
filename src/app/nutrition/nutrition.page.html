@@ -4,16 +4,16 @@
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
       <img src="./assets/icon/favico.png" class="ahLogoMini" />
     </ion-buttons>
-    <ion-thumbnail slot="end" style="padding:0.5em;cursor: pointer;" (click)="openProfile($event)">
+    <!-- <ion-thumbnail slot="end" style="padding:0.5em;cursor: pointer;" (click)="openProfile($event)">
       <img src="./assets/icon/usericon.svg">
-    </ion-thumbnail>
+    </ion-thumbnail> -->
     <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
       <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
       <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
-    <ion-title class='ion-text-center titleWhite'>{{'tile_nutrition' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</ion-title>
+    <ion-title class='ion-text-center titleWhite'>{{'sidemenu_nutrition' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
@@ -41,7 +41,7 @@
                 [ngClass]="{active:isGroupShown(_document)}">
                 <h4 class="panel-title">
                   <span>
-                    <ion-icon [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document' | translate | titlecase}} {{'lbl_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}
+                    <ion-icon [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}
                   </span>
                 </h4>
               </div>

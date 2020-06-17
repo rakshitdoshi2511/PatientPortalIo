@@ -261,7 +261,8 @@ export class NutritionPage implements OnInit {
         text: this.translate.instant('alert_message_report'),
         backdrop: false,
         icon: 'warning',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       });
     }
 
@@ -279,7 +280,8 @@ export class NutritionPage implements OnInit {
         text: this.translate.instant('alert_message_report'),
         backdrop: false,
         icon: 'warning',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       });
     }
 
@@ -593,7 +595,8 @@ export class NutritionPage implements OnInit {
           text: this.translate.instant('lbl_no_data_msg'),
           backdrop: false,
           icon: 'info',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         }).then((result) => {
           this.router.navigateByUrl('home');
         });
@@ -630,7 +633,8 @@ export class NutritionPage implements OnInit {
           text: _errorResponse.error.message.value,
           backdrop: false,
           icon: 'error',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         });
         //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
       }

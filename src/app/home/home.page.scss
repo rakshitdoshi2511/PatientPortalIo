@@ -7,8 +7,8 @@ ion-content ion-toolbar {
   height: 3.5em;
 }
 .background-image{
-  background: url('../../assets/images/bg-02.jpg') no-repeat 100% 100%;
-  --background: url('../../assets/images/bg-02.jpg') no-repeat 100% 100%;
+  background: url('../../assets/images/bg-04.jpg') no-repeat 100% 100%;
+  --background: url('../../assets/images/bg-04.jpg') no-repeat 100% 100%;
 }
 .ahThemeToolBar{
   --background: rgb(190,230,239);
@@ -17,9 +17,9 @@ ion-content ion-toolbar {
   --color:rgb(87,143,182);
 }
 .titleWhite{
-  color:black;
+  color:transparent;
 }
-.title{
+.title:lang(en){
   color: white;
   font-weight: bold;
   font-size: 1.5em;
@@ -30,7 +30,7 @@ ion-content ion-toolbar {
 }
 
 .iconTitle{
-  height:2em;
+  height:3em;
 }
 
 #main {

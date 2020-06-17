@@ -29,20 +29,20 @@
     <!--For Web View-->
     <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
-        <ion-input type="date" [(ngModel)]="model.dateFrom"></ion-input>
+        <ion-input type="date" [(ngModel)]="model.dateFrom" placeholder="Foo"></ion-input>
     </ion-item>
     <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
         <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input>
     </ion-item>
-    <ion-item [hidden]="model.isVisible">
+    <!-- <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
         <ion-input type="time" [(ngModel)]="model.timeFrom"></ion-input>
     </ion-item>
     <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_time_to' | translate | titlecase}}</ion-label>
         <ion-input type="time" [(ngModel)]="model.timeTo"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <!--For Mobile View-->
     <ion-item [hidden]="!model.isVisible">
         <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
@@ -54,16 +54,14 @@
         <!-- <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input> -->
         <ion-datetime displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateTo" value="model.dateTo"></ion-datetime>
     </ion-item>
-    <ion-item [hidden]="!model.isVisible">
+    <!-- <ion-item [hidden]="!model.isVisible">
         <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
-        <!-- <ion-input type="time" [(ngModel)]="model.timeFrom"></ion-input> -->
         <ion-datetime displayFormat="HH:mm A" format="HH:mm A" [(ngModel)]="model.timeFrom" value="model.timeFrom"></ion-datetime>
     </ion-item>
     <ion-item [hidden]="!model.isVisible">
         <ion-label position="floating">{{'lbl_time_to' | translate | titlecase}}</ion-label>
-        <!-- <ion-input type="time" [(ngModel)]="model.timeTo"></ion-input> -->
         <ion-datetime displayFormat="HH:mm A" format="HH:mm A" [(ngModel)]="model.timeTo" value="model.timeTo"></ion-datetime>
-    </ion-item>
+    </ion-item> -->
 </ion-content>
 <ion-footer>
     <ion-toolbar style="margin-top: 1em;">

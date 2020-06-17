@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { HostListener, Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -42,6 +42,16 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler(event) {
+  }
+
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHandler(event) {
+    // console.log(event);
+     //this.deleteSession();
+  }
+
   initializeApp() {
     
     this.translate.setDefaultLang('en');
@@ -66,7 +76,8 @@ export class AppComponent {
           text: msg,
           backdrop:false,
           icon:'error',
-          confirmButtonColor:'rgb(87,143,182)'
+          confirmButtonColor:'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         }).then((result)=>{
            this.deleteSession();
         });
@@ -118,6 +129,7 @@ export class AppComponent {
         this._api.remLocal('email');
         this._api.remLocal('mrn');
         this.router.navigateByUrl('login');
+        
 
       }, _error => {
         that._loader.hideLoader();
@@ -132,6 +144,7 @@ export class AppComponent {
         this._api.remLocal('email');
         this._api.remLocal('mrn');
         this.router.navigateByUrl('login');
+        //this.router.navigate(['/login'],{replaceUrl:true});
       }
     )
   }

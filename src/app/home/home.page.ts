@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PopoverController, Platform } from '@ionic/angular';
 import { UserPopoverComponent } from '../user-popover/user-popover.component';
+import { HelpComponent } from '../help/help.component';
 import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import { DataService } from './../services/data.service';
 import { LoaderService } from './../services/loader.service';
@@ -40,6 +41,15 @@ export class HomePage {
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: UserPopoverComponent,
+      event: ev,
+      translucent: true,
+      animated: true,
+    });
+    return await popover.present();
+  }
+  async presentPopoverHelp(ev: any) {
+    const popover = await this.popoverController.create({
+      component: HelpComponent,
       event: ev,
       translucent: true,
       animated: true,
@@ -225,8 +235,11 @@ export class HomePage {
         this._api.setLocal('lastName',_obj.Nname);
         this._api.setLocal('email',_obj.Emailid);
         this._api.setLocal('mrn',_obj.Patnr);
+        this._api.setLocal('helpPhone',_obj.HelpPhone);
+        this._api.setLocal('helpEmail',_obj.HelpEmail);
 
         this.events.publish('user-data',_obj);
+        this.events.publish('help-data',_obj);
 
         that._dataServices.setData(_obj.Token, _obj);
         //console.log(that._dataServices.getData(_obj.Token));
@@ -239,7 +252,8 @@ export class HomePage {
           text: errorObj.error.message.value,
           backdrop:false,
           icon:'error',
-          confirmButtonColor:'rgb(87,143,182)'
+          confirmButtonColor:'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         }).then((result)=>{
            that.deleteSession();
         });
@@ -255,6 +269,9 @@ export class HomePage {
   /**Screen Interaction*/
   openProfile(event) {
     this.presentPopover(event);
+  }
+  openHelp(event){
+    this.presentPopoverHelp(event);
   }
   switchLanguage(){
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
@@ -283,7 +300,8 @@ export class HomePage {
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
             icon:'info',
-            confirmButtonColor:'rgb(87,143,182)'
+            confirmButtonColor:'rgb(87,143,182)',
+            confirmButtonText: this.translate.instant('lbl_filter_ok')
           });
           //Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info');
         }
@@ -298,7 +316,8 @@ export class HomePage {
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
             icon:'info',
-            confirmButtonColor:'rgb(87,143,182)'
+            confirmButtonColor:'rgb(87,143,182)',
+            confirmButtonText: this.translate.instant('lbl_filter_ok')
           });
           // Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info').then((result) => {
             
@@ -315,7 +334,8 @@ export class HomePage {
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
             icon:'info',
-            confirmButtonColor:'rgb(87,143,182)'
+            confirmButtonColor:'rgb(87,143,182)',
+            confirmButtonText: this.translate.instant('lbl_filter_ok')
           });
           // Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info').then((result) => {
             
@@ -332,7 +352,8 @@ export class HomePage {
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
             icon:'info',
-            confirmButtonColor:'rgb(87,143,182)'
+            confirmButtonColor:'rgb(87,143,182)',
+            confirmButtonText: this.translate.instant('lbl_filter_ok')
           });
           // Swal.fire(this.translate.instant('lbl_no_data'), this.translate.instant('lbl_no_data_msg'), 'info').then((result) => {
             

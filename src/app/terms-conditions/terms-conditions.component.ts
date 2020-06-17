@@ -123,6 +123,7 @@ export class TermsConditionsComponent implements OnInit {
           that.modalController.dismiss(_obj);
         }
         else{
+          that.modalController.dismiss();
           this.router.navigateByUrl('home');
         }
       }, _error => {

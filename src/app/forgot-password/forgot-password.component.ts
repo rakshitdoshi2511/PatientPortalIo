@@ -38,7 +38,8 @@ export class ForgotPasswordComponent implements OnInit {
         text: this.translate.instant('lbl_missing_data_message'),
         backdrop:false,
         icon:'warning',
-        confirmButtonColor: 'rgb(87,143,182)'
+        confirmButtonColor: 'rgb(87,143,182)',
+        confirmButtonText: this.translate.instant('lbl_filter_ok')
       });
     }
   }
@@ -57,7 +58,8 @@ export class ForgotPasswordComponent implements OnInit {
           text: this.translate.instant('lbl_email_sent_message'),
           backdrop: false,
           icon: 'success',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         }).then((result)=>{
           that.modalController.dismiss();
         });
@@ -69,7 +71,8 @@ export class ForgotPasswordComponent implements OnInit {
           text: errorObj.error.message.value,
           backdrop: false,
           icon: 'error',
-          confirmButtonColor: 'rgb(87,143,182)'
+          confirmButtonColor: 'rgb(87,143,182)',
+          confirmButtonText: this.translate.instant('lbl_filter_ok')
         });
       }
     )

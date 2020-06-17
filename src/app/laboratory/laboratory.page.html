@@ -5,16 +5,16 @@
       <!-- <img src="../assets/images/ahlogo.png" class="ahLogo" /> -->
       <img src="./assets/icon/favico.png" class="ahLogoMini" />
     </ion-buttons>
-    <ion-thumbnail slot="end" style="padding:0.5em;cursor: pointer;" (click)="openProfile($event)">
+    <!-- <ion-thumbnail slot="end" style="padding:0.5em;cursor: pointer;" (click)="openProfile($event)">
       <img src="./assets/icon/usericon.svg">
-    </ion-thumbnail>
+    </ion-thumbnail> -->
     <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
       <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
       <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
-    <ion-title class='ion-text-center titleWhite'>{{'tile_laboratory' | translate | uppercase}} {{'tile_report' | translate | uppercase}}</ion-title>
+    <ion-title class='ion-text-center titleWhite'>{{'sidemenu_lab' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
@@ -53,7 +53,7 @@
                   </button>
                 </span>
               </th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_sample' | translate | uppercase}} {{'lbl_date' | translate | uppercase}}
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_sample_date' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
                   <button ion-button (click)="sortDescending('date')" icon-only clear style="background:transparent!important">
                     <ion-icon name="arrow-down" [ngClass]="model.dateDesc"></ion-icon>
@@ -66,7 +66,7 @@
                   </button>
                 </span>
               </th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_sample' | translate | uppercase}} {{'lbl_time' | translate | uppercase}}
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_sample_time' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
                   <button ion-button (click)="sortDescending('time')" icon-only clear style="background:transparent!important">
                     <ion-icon name="arrow-down" [ngClass]="model.timeDesc"></ion-icon>
@@ -159,7 +159,7 @@
             <div class="panel panel-default">
               <div class="panel-heading clickable" (click)="toggleGroup(_document)" [ngClass]="{active:isGroupShown(_document)}">
                 <h4 class="panel-title">
-                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document' | translate | titlecase}} {{'lbl_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}</span>
+                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}</span>
                 </h4>
               </div>
               <div *ngIf="isGroupShown(_document)">
