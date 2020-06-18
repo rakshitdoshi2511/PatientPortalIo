@@ -26,6 +26,9 @@ export class ForgotPasswordComponent implements OnInit {
   dismiss() {
     this.modalController.dismiss();
   }
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   forgotPassword() {
     if (this.model.username && this.model.email) {
       let msg = this.translate.instant('dialog_title_reset');

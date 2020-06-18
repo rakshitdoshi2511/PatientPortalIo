@@ -61,6 +61,9 @@ export class SidebarComponent implements OnInit {
   getAlignmentClassLeft() {
     return this.translate.getDefaultLang() == 'en' ? 'pull-left' : 'pull-right';
   }
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   /**Default Methods */
   ngOnInit() {
     let that = this;

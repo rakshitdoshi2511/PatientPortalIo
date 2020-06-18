@@ -47,6 +47,9 @@ export class TermsConditionsComponent implements OnInit {
   }
 
   /**Helper Methods */
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   base64ToArrayBuffer(base64) {
     let binary_string = window.atob(base64);
     let len = binary_string.length;

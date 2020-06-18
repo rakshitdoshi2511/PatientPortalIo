@@ -145,6 +145,9 @@ export class LoginPage implements OnInit {
     this.presentAlertCustom('Test', 'Test');
   }
   /*Helper Functions* */
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   clearStorage() {
     this._api.remLocal('isLoggedIn');
     this._api.remLocal('token');

@@ -63,6 +63,9 @@ export class HomePage {
   getAlignLeft() {
     return this.translate.getDefaultLang() == 'en' ? 'unset' : '20px';
   }
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   setLocalModel(_data) {
     let _laboratory = _data.SESSIONTOLABDATA.results;
     _.forEach(_laboratory, function (data) {

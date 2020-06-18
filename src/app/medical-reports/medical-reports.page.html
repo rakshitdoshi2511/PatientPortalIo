@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [style.font-family]="getFontFamily()">
   <ion-toolbar class="ahThemeToolBar">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
@@ -30,7 +30,7 @@
     </ion-buttons>
   </ion-toolbar>  
 </ion-header>
-<ion-content>
+<ion-content [style.font-family]="getFontFamily()">
   <!--Web View-->
   <div class="row">
     <div class="col-lg-12">
@@ -178,28 +178,28 @@
     </div>
   </div>
 </ion-content>
-<ion-footer>
+<ion-footer [style.font-family]="getFontFamily()">
   <ion-toolbar>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
         <ion-tab-button id="all" (click)="filterDocuments('ALL')" [ngClass]="model.selectedAll">
-          <ion-icon name="person-circle"></ion-icon>
+          <ion-icon src="./assets/icon/icon_all_documents.svg"></ion-icon>
           <!-- <ion-label>All Documents</ion-label> -->
           <span>{{ 'tab_all_documents' | translate }}</span>
           <ion-badge color="dark">{{model.allDocuments}}</ion-badge>
         </ion-tab-button>
         <ion-tab-button id="emergencyc" (click)="filterDocuments('EME')" [ngClass]="model.selectedEmergency">
-          <ion-icon name="person-circle"></ion-icon>
+          <ion-icon src="./assets/icon/icon_emergency_discharge.svg"></ion-icon>
           <span>{{'tab_emergency_discharge' | translate}}</span>
           <ion-badge color="dark">{{model.emergencyDocuments}}</ion-badge>
         </ion-tab-button>
         <ion-tab-button id="physicain" (click)="filterDocuments('PHY')" [ngClass]="model.selectedPhysician">
-          <ion-icon name="person-circle"></ion-icon>
+          <ion-icon src="./assets/icon/icon_physicians_discharge.svg"></ion-icon>
           <span>{{ 'tab_physician_discharge' | translate}}</span>
           <ion-badge color="dark">{{model.physicianDocuments}}</ion-badge>
         </ion-tab-button>
         <ion-tab-button id="medical" (click)="filterDocuments('MED')" [ngClass]="model.selectedMedical">
-          <ion-icon name="person-circle"></ion-icon>
+          <ion-icon src="./assets/icon/icon_medical_records.svg"></ion-icon>
           <span>{{ 'tab_medical_report' | translate}}</span>
           <ion-badge color="dark">{{model.medicalDocuments}}</ion-badge>
         </ion-tab-button>

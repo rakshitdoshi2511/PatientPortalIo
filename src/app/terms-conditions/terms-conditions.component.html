@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header [style.font-family]="getFontFamily()">
   <ion-toolbar>
     <ion-title class='ion-text-center'>
       {{'lbl_terms_conditions' | translate | uppercase}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding corporate-background">
+<ion-content class="ion-padding corporate-background" [style.font-family]="getFontFamily()">
   <pdf-viewer [src]="pdfSrc" 
               [fit-to-page]="true"
               [original-size]="true"
@@ -13,7 +13,7 @@
               style="display: block;"
   ></pdf-viewer>
 </ion-content>
-<ion-footer>
+<ion-footer [style.font-family]="getFontFamily()">
   <ion-toolbar>
     <ion-button class="ahThemeButtonAccept" (click)="agreeTerms()" slot="end">
       <ion-icon slot="start" name="checkmark"></ion-icon>{{ 'lbl_accept' | translate}}

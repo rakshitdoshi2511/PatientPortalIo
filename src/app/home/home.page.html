@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [style.font-family]="getFontFamily()">
   <ion-toolbar class="ahThemeToolBar">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
@@ -17,7 +17,7 @@
     <ion-title class='ion-text-center titleWhite'>{{'lbl_app_title' | translate | uppercase}}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="background-image">
+<ion-content class="background-image" [style.font-family]="getFontFamily()">
   <!--Web View-->
   <div class="row  h-100 align-items-center" [hidden]="model.isVisible">
     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 col-xl-12">

@@ -43,6 +43,9 @@ export class UserPopoverComponent implements OnInit {
     });
     return await modal.present();
   }
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   /**Default Methods */
   ngOnInit() {
     let that = this;

@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar class="ahThemeToolBar">
+<ion-header [style.font-family]="getFontFamily()">
+  <ion-toolbar class="ahThemeToolBar" [style.font-family]="getFontFamily()">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
       <img src="./assets/icon/favico.png" class="ahLogoMini" />
@@ -13,7 +13,7 @@
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
       <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
-    <ion-title class='ion-text-center titleWhite'>{{'sidemenu_nutrition' | translate | uppercase}}</ion-title>
+    <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">{{'sidemenu_nutrition' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
     <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
@@ -29,7 +29,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [style.font-family]="getFontFamily()">
   <!--Mobile View-->
   <div class="card" [hidden]="!model.isVisible">
     <div class="content">

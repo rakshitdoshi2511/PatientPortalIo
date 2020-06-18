@@ -2,6 +2,38 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
+@font-face {
+  font-family: 'Futura-Bold';
+  font-weight: bold;
+  src: url('../assets/fonts/futurastd-bold.otf');
+}
+@font-face {
+  font-family: 'Futura-Light';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/futurastd-light.otf');
+}
+@font-face {
+  font-family: 'Futura-Book';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/futurastd-book.otf');
+}
+@font-face {
+  font-family: 'Futura-Medium';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/futurastd-medium.otf');
+}
+@font-face {
+  font-family: 'Helvetica-Arabic-Medium';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/helvetica-neue-lt-arabic-45-light.ttf');
+}
+
+
 :root {
   /** primary **/
   --ion-color-primary: #538eb6;
@@ -10,6 +42,7 @@
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #538eb6;
   --ion-color-primary-tint: #538eb6;
+  font-family:  'Futura-Medium' !important;
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;

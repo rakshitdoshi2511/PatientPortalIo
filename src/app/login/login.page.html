@@ -1,4 +1,4 @@
-<ion-header [hidden]="model.isVisible">
+<ion-header [hidden]="model.isVisible" [style.font-family]="getFontFamily()">
   <ion-toolbar class="ahThemeToolBar">
     <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
       <ion-button expand="full" class="ahThemeButton" (click)="switchLanguage()">
@@ -7,7 +7,7 @@
     <ion-title class='ion-text-center titleWhite'>{{'lbl_app_title' | translate | titlecase}}</ion-title>
   </ion-toolbar>
 </ion-header>
-<div class="limiter">
+<div class="limiter" [style.font-family]="getFontFamily()">
   <div class="container-login100 tintimage">
     <!-- style="background-image: url('./assets/images/bg-01.jpg');"> -->
     <div class="wrap-login100">

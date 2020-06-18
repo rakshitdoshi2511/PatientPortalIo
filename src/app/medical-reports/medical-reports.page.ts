@@ -157,6 +157,9 @@ export class MedicalReportsPage implements OnInit {
     this.presentAlert(title, message);
   }
   /**Helper Methods */
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';

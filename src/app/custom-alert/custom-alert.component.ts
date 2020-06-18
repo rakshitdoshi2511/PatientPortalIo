@@ -27,6 +27,10 @@ export class CustomAlertComponent implements OnInit {
     private navParams: NavParams,
   ) { }
 
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
+  
   ngOnInit() {
     this.model.viewName = this.navParams.data.viewName;
   }

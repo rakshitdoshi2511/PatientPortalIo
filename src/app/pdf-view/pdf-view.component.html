@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [style.font-family]="getFontFamily()">
   <ion-toolbar>
     <ion-title class='ion-text-center'>
       {{'lbl_document' | translate | uppercase}} - {{model.documentNumber}}
@@ -10,7 +10,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding corporate-background">
+<ion-content class="ion-padding corporate-background" [style.font-family]="getFontFamily()">
   <pdf-viewer [src]="pdfSrc" 
               [fit-to-page]="true"
               [original-size]="true"
@@ -18,7 +18,7 @@
               style="display: block;"
   ></pdf-viewer>
 </ion-content>
-<ion-footer [hidden]="model.isVisible">
+<ion-footer [hidden]="model.isVisible" [style.font-family]="getFontFamily()">
   <ion-toolbar>
     <ion-button class="ahThemeButton" (click)="downloadPDF()" slot="end">
       <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_download_pdf' | translate}}

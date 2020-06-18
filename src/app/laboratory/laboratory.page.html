@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar class="ahThemeToolBar">
+<ion-header [style.font-family]="getFontFamily()">
+  <ion-toolbar class="ahThemeToolBar" [style.font-family]="getFontFamily()">
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false" class="ahThemeButtonMenu"></ion-menu-button>
       <!-- <img src="../assets/images/ahlogo.png" class="ahLogo" /> -->
@@ -30,9 +30,9 @@
     </ion-buttons>
   </ion-toolbar>  
 </ion-header>
-<ion-content>
+<ion-content [style.font-family]="getFontFamily()">
   <!--Web View-->
-  <div class="row">
+  <div class="row" [style.font-family]="getFontFamily()">
     <div class="col-lg-12">
       <div class="table-responsive padding" style="margin:1em" [hidden]="model.isVisible">
         <table class="project-list-table table-nowrap table-centered table-borderless table padding" style="padding:1rem">
@@ -120,30 +120,30 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
-              <td>
+          <tbody [style.font-family]="getFontFamily()">
+            <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)" [style.font-family]="getFontFamily()">
+              <td [style.font-family]="getFontFamily()">
                 <img
                   src="../../assets/icon/icon_document_blue.svg"
                   alt="" class="avatar-sm"></td>
-              <td>
+              <td [style.font-family]="getFontFamily()">
                 <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)">{{lt.documentNo}}</a></h5>
               </td>
-              <td>
+              <td [style.font-family]="getFontFamily()">
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
                 <!-- <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5> -->
               </td>
-              <td>
+              <td [style.font-family]="getFontFamily()">
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
               </td>
-              <td>
+              <td [style.font-family]="getFontFamily()">
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
               </td>
-              <td>
+              <td [style.font-family]="getFontFamily()">
                 <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
               </td>
                <!-- <td><span class="badge badge-primary" [style.background]="renderStatus(lt.statusCode)" style="color:black">{{lt.status}}</span></td> -->
-               <td><span class="pill" [style.background]="renderStatus(lt.statusCode,lt.isAccessible)" style="color:black">{{lt.status}}</span></td>
+               <td [style.font-family]="getFontFamily()"><span class="pill" [style.background]="renderStatus(lt.statusCode,lt.isAccessible)" style="color:black">{{lt.status}}</span></td>
             </tr>
           </tbody>
         </table>

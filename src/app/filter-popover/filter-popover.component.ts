@@ -26,6 +26,9 @@ export class FilterPopoverComponent implements OnInit {
   ) { }
 
   /**Helper Methods */
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
   compareWithFunctionStatus = (o1,o2) => {
     //return  o1 && o2 ? o1.statusCode === o2.statusCode: o1 === o2;
     return  o1 && o2 ? o1=== o2 : o1 === o2;

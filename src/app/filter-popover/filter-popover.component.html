@@ -1,7 +1,7 @@
-<ion-header>
+<ion-header [style.font-family]="getFontFamily()">
     <ion-title>{{'lbl_filter_by' | translate | titlecase}}</ion-title>
 </ion-header>
-<ion-content>
+<ion-content [style.font-family]="getFontFamily()">
     <ion-item size="12" [hidden]="model.statusFilterHidden">
         <ion-label size="4">{{'lbl_status' | translate | titlecase}}</ion-label>
         <ion-select size="8" [(ngModel)]="model.status" [compareWith]="compareWithStatus"
@@ -63,7 +63,7 @@
         <ion-datetime displayFormat="HH:mm A" format="HH:mm A" [(ngModel)]="model.timeTo" value="model.timeTo"></ion-datetime>
     </ion-item> -->
 </ion-content>
-<ion-footer>
+<ion-footer [style.font-family]="getFontFamily()">
     <ion-toolbar style="margin-top: 1em;">
         <ion-button expand="full" class="ahThemeButton" (click)="applyFilters()">
             {{'lbl_apply_filters' | translate | uppercase}}</ion-button>

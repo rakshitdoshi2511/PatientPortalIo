@@ -16,6 +16,10 @@ export class HelpComponent implements OnInit {
     private _api: ApiService,
   ) { }
 
+  getFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
+  }
+  
   ngOnInit() {
     this.events.subscribe('help-data', (_data: any) => {
       this.model.helpEmail = _data.HelpEmail;

@@ -1,4 +1,4 @@
-<section class="card">
+<section class="card" [style.font-family]="getFontFamily()">
   <div class="twt-feed blue-bg">
     <div class="media">
       <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
@@ -47,7 +47,7 @@
 	</div>
 </div> -->
 
-<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;">
+<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;" [style.font-family]="getFontFamily()">
 	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
 		<div class="nav-item" [routerLink]="[p.url]">
       <ion-icon src="{{p.iconPath}}"></ion-icon>
@@ -57,12 +57,12 @@
 	</ion-menu-toggle>
 </div>
 
-<div class="footer">
-	<div class="footer-nav">
-		<ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_change_password' | translate | uppercase}}</ion-button>
-		<ion-button expand="full" class="ahThemeButton" (click)="logOut()">{{ 'lbl_logout' | translate | uppercase}}
+<div class="footer" [style.font-family]="getFontFamily()">
+	<div class="footer-nav" [style.font-family]="getFontFamily()">
+		<ion-button expand="full" class="ahThemeButton" (click)="resetPassword()" [style.font-family]="getFontFamily()">{{'lbl_change_password' | translate | uppercase}}</ion-button>
+		<ion-button expand="full" class="ahThemeButton" (click)="logOut()" [style.font-family]="getFontFamily()">{{ 'lbl_logout' | translate | uppercase}}
 		</ion-button>
-		<ion-row class="twt-write_toggle" [hidden]="!model.isVisible">
+		<ion-row class="twt-write_toggle" [hidden]="!model.isVisible" [style.font-family]="getFontFamily()">
 			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
 			<ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
 			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
