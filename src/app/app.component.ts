@@ -49,7 +49,7 @@ export class AppComponent {
   @HostListener('window:beforeunload', [ '$event' ])
   beforeUnloadHandler(event) {
     // console.log(event);
-     //this.deleteSession();
+     this.deleteSession();
   }
 
   initializeApp() {

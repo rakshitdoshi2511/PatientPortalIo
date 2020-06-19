@@ -148,6 +148,12 @@ export class LoginPage implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getFontSize(){
+    return this.model.isVisible?'0.75em':'1em';
+  }
+  getButtonFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
+  }
   clearStorage() {
     this._api.remLocal('isLoggedIn');
     this._api.remLocal('token');
@@ -178,6 +184,8 @@ export class LoginPage implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       console.log("Here");
       console.log(event.lang);
+      this.translate.setDefaultLang(event.lang);
+      this.translate.use(event.lang);
       this.model.language = event.lang == 'en' ? true : false;
     });
   }
@@ -242,6 +250,8 @@ export class LoginPage implements OnInit {
     if (this.model.language != undefined) {
       this.model.language ? this.translate.use('en') : this.translate.use('ar');
       this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
+      console.log(this.translate.getDefaultLang());
+      console.log(this.translate.getBrowserLang());
     }
 
   }

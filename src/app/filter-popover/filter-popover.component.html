@@ -3,37 +3,37 @@
 </ion-header>
 <ion-content [style.font-family]="getFontFamily()">
     <ion-item size="12" [hidden]="model.statusFilterHidden">
-        <ion-label size="4">{{'lbl_status' | translate | titlecase}}</ion-label>
+        <ion-label size="4" [style.font-family]="getFontFamily()">{{'lbl_status' | translate | titlecase}}</ion-label>
         <ion-select size="8" [(ngModel)]="model.status" [compareWith]="compareWithStatus"
-            value="status.status == model.status" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
-            <ion-select-option *ngFor="let status of statusFilter" value="{{status.status}}">{{status.status}}
+        [style.font-family]="getFontFamily()" value="status.status == model.status" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
+            <ion-select-option *ngFor="let status of statusFilter" value="{{status.status}}" [style.font-family]="getFontFamily()">{{status.status}}
             </ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item [hidden]="model.physicianFilterHidden">
-        <ion-label>{{'lbl_physician' | translate | titlecase}}</ion-label>
+        <ion-label [style.font-family]="getFontFamily()">{{'lbl_physician' | translate | titlecase}}</ion-label>
         <ion-select [(ngModel)]="model.physician" [compareWith]="compareWithFunctionPhysician"
-            value="status.physician == model.physician" multiple="true" class="ahSelect" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
-            <ion-select-option *ngFor="let physician of physicianFilter" value="{{physician.physician}}">
+        [style.font-family]="getFontFamily()" value="status.physician == model.physician" multiple="true" class="ahSelect" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
+            <ion-select-option *ngFor="let physician of physicianFilter" value="{{physician.physician}}" [style.font-family]="getFontFamily()">
                 {{physician.physician}}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item [hidden]="model.documentTypeFilterHidden">
-        <ion-label>{{'lbl_type' | translate | titlecase}}</ion-label>
+        <ion-label [style.font-family]="getFontFamily()">{{'lbl_type' | translate | titlecase}}</ion-label>
         <ion-select [(ngModel)]="model.type" [compareWith]="compareWithFunctionType" value="status.type == model.type" multiple="true" class="ahSelect" 
-        okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
-            <ion-select-option *ngFor="let documentType of documentTypesFilter" value="{{documentType.type}}">
+        [style.font-family]="getFontFamily()" okText="{{'lbl_filter_ok' | translate}}" cancelText="{{'lbl_filter_cancel' | translate}}">
+            <ion-select-option *ngFor="let documentType of documentTypesFilter" value="{{documentType.type}}" [style.font-family]="getFontFamily()">
                 {{documentType.type}}</ion-select-option>
         </ion-select>
     </ion-item>
     <!--For Web View-->
     <ion-item [hidden]="model.isVisible">
-        <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
-        <ion-input type="date" [(ngModel)]="model.dateFrom" placeholder="Foo"></ion-input>
+        <ion-label [style.font-family]="getFontFamily()" position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
+        <ion-input [style.font-family]="getFontFamily()" type="date" [(ngModel)]="model.dateFrom"></ion-input>
     </ion-item>
     <ion-item [hidden]="model.isVisible">
-        <ion-label position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
-        <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input>
+        <ion-label [style.font-family]="getFontFamily()" position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
+        <ion-input [style.font-family]="getFontFamily()" type="date" [(ngModel)]="model.dateTo"></ion-input>
     </ion-item>
     <!-- <ion-item [hidden]="model.isVisible">
         <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
@@ -45,14 +45,14 @@
     </ion-item> -->
     <!--For Mobile View-->
     <ion-item [hidden]="!model.isVisible">
-        <ion-label position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
+        <ion-label [style.font-family]="getFontFamily()" position="floating">{{'lbl_date_from' | translate | titlecase}}</ion-label>
         <!-- <ion-input type="date" [(ngModel)]="model.dateFrom"></ion-input> -->
-        <ion-datetime displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateFrom" value="model.dateFrom"></ion-datetime>
+        <ion-datetime [style.font-family]="getFontFamily()" displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateFrom" value="model.dateFrom"></ion-datetime>
     </ion-item>
     <ion-item [hidden]="!model.isVisible">
-        <ion-label position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
+        <ion-label [style.font-family]="getFontFamily()" position="floating">{{'lbl_date_to' | translate | titlecase}}</ion-label>
         <!-- <ion-input type="date" [(ngModel)]="model.dateTo"></ion-input> -->
-        <ion-datetime displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateTo" value="model.dateTo"></ion-datetime>
+        <ion-datetime [style.font-family]="getFontFamily()" displayFormat="DD-MM-YYYY" format="YYYY-MM-DD" [(ngModel)]="model.dateTo" value="model.dateTo"></ion-datetime>
     </ion-item>
     <!-- <ion-item [hidden]="!model.isVisible">
         <ion-label position="floating">{{'lbl_time_from' | translate | titlecase}}</ion-label>
@@ -65,9 +65,9 @@
 </ion-content>
 <ion-footer [style.font-family]="getFontFamily()">
     <ion-toolbar style="margin-top: 1em;">
-        <ion-button expand="full" class="ahThemeButton" (click)="applyFilters()">
+        <ion-button expand="full" class="ahThemeButton" (click)="applyFilters()" [style.font-family]="getFontFamily()">
             {{'lbl_apply_filters' | translate | uppercase}}</ion-button>
-        <ion-button expand="full" class="ahThemeButton" (click)="clearFilters()">
+        <ion-button expand="full" class="ahThemeButton" (click)="clearFilters()" [style.font-family]="getFontFamily()">
             {{'lbl_clear_filters' | translate | uppercase}}
         </ion-button>
         <!-- <ion-label slot="start" (click)="applyFilters()" style="color:rgb(87, 143, 182);font-weight: bold;">Apply</ion-label>

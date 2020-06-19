@@ -9,7 +9,7 @@
       <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
-      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button> 
+      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()" [style.font-family]="getButtonFontFamily()">{{'lbl_app_lang' | translate | titlecase}}</ion-button> 
     </ion-row>
     <ion-thumbnail slot="end" style="padding:0.5em;cursor: pointer;" (click)="openHelp($event)">
       <img src="./assets/icon/icon_help.svg">

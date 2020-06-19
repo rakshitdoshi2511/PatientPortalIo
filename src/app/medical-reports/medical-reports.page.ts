@@ -203,6 +203,9 @@ export class MedicalReportsPage implements OnInit {
   getAlignmentClass() {
     return this.translate.getDefaultLang() == 'en' ? 'float-right' : 'float-left';
   }
+  getIconAttr(lt){
+    return lt.DocCat == 'Image' ? '3.85em' : '5em';
+  }
   padZeros(string, length) {
     var my_string = '' + string;
     while (my_string.length < length) {
@@ -232,6 +235,9 @@ export class MedicalReportsPage implements OnInit {
     else {
       return '#1caf9a';
     }
+  }
+  getButtonFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
   }
   /**Default Methods*/
   ngOnInit() {

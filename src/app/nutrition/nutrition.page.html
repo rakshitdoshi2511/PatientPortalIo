@@ -11,12 +11,12 @@
       <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
-      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
+      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()" [style.font-family]="getButtonFontFamily()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
     <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">{{'sidemenu_nutrition' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
+    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)" [style.font-family]="getFontFamily()">
     </ion-searchbar>
     <ion-buttons slot="end" style="background:transparent!important">
       <!-- <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
@@ -52,6 +52,12 @@
                       <h5 style="color:rgb(87,143,182);font-weight:bold">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h5>
                       <h6>{{document.physician}}</h6>
                       <!-- <span>{{'lbl_status' | translate | titlecase}} : {{document.status}}</span> -->
+                      <div [class]="getAlignmentClassRight()">
+                        <span style="font-size: 2em;">
+                          <!-- <ion-icon name="document-text" (click)="openPDF(document)"></ion-icon> -->
+                          <ion-icon src="./assets/icon/icon_amc_document_blue.svg" (click)="openPDF(document)" style="width: 1.5em;height:1.5em"></ion-icon>
+                        </span>
+                      </div>
                     </div>
                     <div class="task-footer">
                       <div [class]="getAlignmentClassLeft()"><span class="fa fa-clock-o"></span> {{document.date}} - {{document.time}}
@@ -162,20 +168,20 @@
               <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
                 <td>
                   <img
-                    src="../../assets/icon/icon_document_blue.svg"
-                    alt="" class="avatar-sm"></td>
+                    src="./assets/icon/icon_amc_document_blue.svg"
+                    alt="" class="avatar-sm" [style.width]="getIconAttr(lt)" [style.height]="getIconAttr(lt)"></td>
                 <td>
-                  <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)">{{lt.documentNo}}</a></h5>
+                  <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)" [style.font-family]="getFontFamily()">{{lt.documentNo}}</a></h5>
                 </td>
                 <td>
-                  <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
+                  <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.date}}</a></h5>
                   <!-- <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5> -->
                 </td>
                 <td>
-                  <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
+                  <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.time}}</a></h5>
                 </td>
                 <td>
-                  <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
+                  <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.physician}}</a></h5>
                 </td>
                 <!-- <td>
                   <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>

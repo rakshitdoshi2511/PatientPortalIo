@@ -5,17 +5,17 @@
       <div class="elementor-widget-wrap">
         <div class="elementor-element elementor-element-85cdace elementor-widget elementor-widget-heading"
           data-id="85cdace" data-element_type="widget" data-widget_type="heading.default">
-          <div class="elementor-widget-container">
+          <!-- <div class="elementor-widget-container">
             <h2 class="elementor-heading-title elementor-size-default" text-center>{{'lbl_contact_us' | translate}}</h2>
             <br/>
-          </div>
+          </div> -->
         </div>
         <div class="elementor-element elementor-element-982a09e elementor-widget elementor-widget-text-editor"
           data-id="982a09e" data-element_type="widget" data-widget_type="text-editor.default">
           <div class="elementor-widget-container">
             <div class="elementor-text-editor elementor-clearfix">
-              <p>{{'lbl_contact_us_msg' | translate}}</p>
-              
+              <!-- <p>{{'lbl_contact_us_msg' | translate}}</p> -->
+              <h2 class="elementor-heading-title elementor-size-default" text-center>{{'lbl_contact_us_msg' | translate}}</h2>
             </div>
           </div>
         </div>
@@ -27,12 +27,12 @@
               <li class="elementor-icon-list-item">
                 <span class="elementor-icon-list-icon" style="color:rgb(87,143,182)">
                   <i aria-hidden="true" class="fas fa-envelope"></i> </span>
-                <span class="elementor-icon-list-text" style="padding-left:10px;padding-right:10px;">{{model.helpEmail}}</span>
+                <span class="elementor-icon-list-text" style="padding-left:10px;padding-right:10px;" [style.font-size]="getFontSize()">{{model.helpEmail}}</span>
               </li>
               <li class="elementor-icon-list-item">
                 <span class="elementor-icon-list-icon" style="color:rgb(87,143,182)">
                   <i aria-hidden="true" class="fas fa-phone-alt"></i> </span>
-                <span class="elementor-icon-list-text" style="padding-left:10px;padding-right:10px;">{{model.helpPhone}}</span>
+                <span class="elementor-icon-list-text" style="padding-left:10px;padding-right:10px;unicode-bidi: embed;" [style.direction]="getPhoneNumberDirection()" [style.font-size]="getFontSize()">{{model.helpPhone}}</span>
               </li>
             </ul>
           </div>

@@ -151,6 +151,9 @@ ion-tab-button[aria-selected=true]{
 	tr {
 		background-color: white;
   }
+  tr:nth-child(even) { 
+    background-color: rgb(235, 249, 252); 
+  }
   .dataTable:hover{
     transform: translateY(0) scale(1.01);
     cursor: pointer !important;

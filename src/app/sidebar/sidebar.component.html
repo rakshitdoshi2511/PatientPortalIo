@@ -5,18 +5,18 @@
         src="./assets/icon/usericon_blue.svg">
     </div>
     <div class="media-body">
-      <h2 class="text-white display-6">{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h2>
-      <p class="text-light">{{'lbl_mrn' | translate | uppercase}}:{{model.mrn}}</p>
+      <h2 class="text-white display-6" [style.font-family]="getFontFamily()">{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h2>
+      <p class="text-light" [style.font-family]="getFontFamily()">{{'lbl_mrn' | translate | uppercase}} ({{'lbl_mrn_short' | translate | uppercase}}):{{model.mrn}}</p>
     </div>
   </div>
   <div class="weather-category twt-category">
     <ul>
-      <li class="active">
-        <h6 style="font-size:13px;">{{'lbl_gender' | translate | uppercase}}</h6>
+      <li class="active" [style.font-family]="getFontFamily()">
+        <h6 style="font-size:13px;" [style.font-family]="getFontFamily()">{{'lbl_gender' | translate | uppercase}}</h6>
         {{model.sex}}
       </li>
       <li>
-        <h6 style="font-size:13px;">{{'lbl_date_of_birth' | translate | uppercase}}</h6>
+        <h6 style="font-size:13px;" [style.font-family]="getFontFamily()">{{'lbl_date_of_birth' | translate | uppercase}}</h6>
         {{model.birthDate}}
       </li>
     </ul>
@@ -24,13 +24,14 @@
   <div class="twt-write col-sm-12">
     <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
         <ion-icon name='call'></ion-icon>
-      </span> {{'lbl_contact' | translate | uppercase}}: <span [class]="getAlignmentClassRight()">
+      </span> {{'lbl_contact' | translate | uppercase}}: <span [class]="getAlignmentClassRight()" [style.direction]="getPhoneNumberDirection()">
         {{model.contact}}
       </span></h6>
     <h6 style="color: #bdbdbd;font-size: 0.7em;">
       <span><ion-icon name='mail'></ion-icon></span> 
       {{'lbl_email' | translate | uppercase}}: 
       <span [class]="getAlignmentClassRight()">{{model.email | lowercase}}</span></h6>
+    <br/>
   </div>
 </section>
 

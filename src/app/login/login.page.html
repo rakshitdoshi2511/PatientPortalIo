@@ -1,43 +1,59 @@
 <ion-header [hidden]="model.isVisible" [style.font-family]="getFontFamily()">
   <ion-toolbar class="ahThemeToolBar">
     <ion-row slot="end" style="padding:0.5em" [hidden]="model.isVisible">
-      <ion-button expand="full" class="ahThemeButton" (click)="switchLanguage()">
+      <ion-button expand="full" class="ahThemeButton" (click)="switchLanguage()" [style.font-family]="getButtonFontFamily()">
         {{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
-    <ion-title class='ion-text-center titleWhite'>{{'lbl_app_title' | translate | titlecase}}</ion-title>
+    <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">{{'lbl_app_title' | translate | titlecase}}</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <div class="limiter" [style.font-family]="getFontFamily()">
   <div class="container-login100 tintimage">
     <!-- style="background-image: url('./assets/images/bg-01.jpg');"> -->
-    <div class="wrap-login100">
+    <!-- <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <p>Welcome to Abdali Hospital’s patient portal. Please login to access your test results, medical reports, care and nutrition plans. 
+          You can access your information securely 24/7, using any smart device: computer, laptop, mobile phone, tablet and iPad.
+          Please contact info@abdali.com if you need support.</p>
+      </div>
+      <div class="col-md-3"></div>
+    </div> -->
+
+    <div class="wrap-login100" style="padding-top:1%;">
       <form class="login100-form validate-form">
         <!-- <span class="login100-form-logo">
           <i class="zmdi zmdi-landscape"></i>
         </span> -->
-        <span class="login100-form-logo">
+        <span >
+          <p style="color:rgb(87,143,182);" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_1' | translate}}</p> 
+          <p style="color:rgb(87,143,182);" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_2' | translate}}</p>
+          <p style="color:rgb(87,143,182);" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_3' | translate}}</p>  
+        </span>
+        <span class="login100-form-logo" style="font-size: 47px;">
           <img src="./assets/images/ahlogo.png" style="width: 100%;" />
         </span>
         <!-- <span class="login100-form-title p-b-34 p-t-27">Log in
         </span> -->
-        <div class="wrap-input100 validate-input" data-validate="Enter username">
+        <div class="wrap-input100 validate-input" data-validate="Enter username" [style.font-family]="getFontFamily()">
           <input class="input100" type="text" name="username" placeholder="{{ 'username' | translate}}"
-            [(ngModel)]="model.username">
+            [(ngModel)]="model.username" [style.font-family]="getFontFamily()">
           <span class="focus-input100" data-placeholder="&#xf207;"></span>
         </div>
-        <div class="wrap-input100 validate-input" data-validate="Enter password">
+        <div class="wrap-input100 validate-input" data-validate="Enter password" [style.font-family]="getFontFamily()">
           <input class="input100" type="password" name="pass" placeholder="{{ 'password' | translate}}"
-            [(ngModel)]="model.password">
+            [(ngModel)]="model.password" [style.font-family]="getFontFamily()">
           <span class="focus-input100" data-placeholder="&#xf191;"></span>
         </div>
 
         <div class="container-login100-form-btn">
-          <button class="login100-form-btn" (click)="login()">
+          <button class="login100-form-btn" (click)="login()" [style.font-family]="getFontFamily()">
             {{ 'lbl_login' | translate}}
           </button>
         </div>
         <div class="text-center p-t-90">
-          <a class="txt1" (click)="forgotPassword()" style="cursor: pointer;">{{ 'lbl_forgot_password' | translate}}</a>
+          <a class="txt1" (click)="forgotPassword()" style="cursor: pointer;" [style.font-family]="getFontFamily()">{{ 'lbl_forgot_password' | translate}}</a>
         </div>
 
         

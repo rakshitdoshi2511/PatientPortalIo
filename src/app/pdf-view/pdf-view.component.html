@@ -1,6 +1,6 @@
 <ion-header [style.font-family]="getFontFamily()">
   <ion-toolbar>
-    <ion-title class='ion-text-center'>
+    <ion-title class='ion-text-center' [style.font-family]="getFontFamily()">
       {{'lbl_document' | translate | uppercase}} - {{model.documentNumber}}
     </ion-title>
     <ion-buttons slot="end">
@@ -20,17 +20,17 @@
 </ion-content>
 <ion-footer [hidden]="model.isVisible" [style.font-family]="getFontFamily()">
   <ion-toolbar>
-    <ion-button class="ahThemeButton" (click)="downloadPDF()" slot="end">
+    <ion-button class="ahThemeButton" (click)="downloadPDF()" slot="end" [style.font-family]="getFontFamily()">
       <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_download_pdf' | translate}}
     </ion-button>
-    <ion-button class="ahThemeButton" (click)="printPDF()" slot="start">
+    <ion-button class="ahThemeButton" (click)="printPDF()" slot="start" [style.font-family]="getFontFamily()">
       <ion-icon slot="start" name="print"></ion-icon>{{ 'lbl_print_pdf' | translate}}
     </ion-button>
   </ion-toolbar>
 </ion-footer>
 <ion-footer [hidden]="!model.isVisible">
   <ion-toolbar>
-    <ion-button class="ahThemeButton" (click)="downloadPDF()" expand="full">
+    <ion-button class="ahThemeButton" (click)="downloadPDF()" expand="full" [style.font-family]="getFontFamily()">
       <ion-icon slot="start" name="arrow-down"></ion-icon>{{ 'lbl_download_pdf' | translate}}
     </ion-button>
   </ion-toolbar>

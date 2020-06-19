@@ -64,6 +64,9 @@ export class SidebarComponent implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getPhoneNumberDirection(){
+    return this.translate.getDefaultLang() == 'en' ? 'ltr' : 'ltr';
+  }
   /**Default Methods */
   ngOnInit() {
     let that = this;
@@ -71,6 +74,7 @@ export class SidebarComponent implements OnInit {
     //console.log(this._api.getLocal('firstName'));
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
       : this.model.isVisible = false;
+    console.log("Sidebar" + this.translate.getDefaultLang());
     this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
 
     this.model.firstName = this._api.getLocal('firstName');
@@ -90,7 +94,7 @@ export class SidebarComponent implements OnInit {
       this.model.contact = _data.PhoneNo;
       this.model.email = _data.Emailid;
       this.version = environment.ver;
-
+      this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
     })
 
     // that.storage.get(that._api.getLocal('token')).then((val) => {
@@ -142,6 +146,7 @@ export class SidebarComponent implements OnInit {
         this.model.birthDate = moment(_data.Gbdat.toString().replace(/\//g, "")).format("DD.MM.YYYY");
         this.model.contact = _data.PhoneNo;
         this.model.email = _data.Emailid;
+        this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
       }
 
     });

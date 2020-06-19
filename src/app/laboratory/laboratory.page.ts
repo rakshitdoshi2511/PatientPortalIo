@@ -160,6 +160,9 @@ export class LaboratoryPage implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getButtonFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
+  }
   resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';
@@ -187,6 +190,9 @@ export class LaboratoryPage implements OnInit {
   }
   getAlignmentClassLeft() {
     return this.translate.getDefaultLang() == 'en' ? 'pull-left' : 'pull-right';
+  }
+  getIconAttr(lt){
+    return lt.DocCat == 'Image' ? '3.85em' : '5em';
   }
   getAlignmentClass() {
     return this.translate.getDefaultLang() == 'en' ? 'float-right' : 'float-left';
@@ -277,6 +283,12 @@ export class LaboratoryPage implements OnInit {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
+        customClass: {
+          title: this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic',
+          content:this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic',
+          confirmButton:this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic',
+          container:this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic'
+        },
         backdrop: false,
         icon: 'warning',
         confirmButtonColor: 'rgb(87,143,182)',

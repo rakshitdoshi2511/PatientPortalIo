@@ -158,6 +158,20 @@ export class RadiologyPage implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getButtonFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
+  }
+  getIconAttr(lt){
+    return lt.DocCat == 'Image' ? '3.85em' : '5em';
+  }
+  getIconMargin(lt){
+    if(this.translate.getDefaultLang() == 'en'){
+      return lt.DocCat == 'Image' ? '0.5em' : '0em';
+    }
+    else{
+      return lt.DocCat == 'Image' ? '0.5em' : '0em';
+    }
+  }
   resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';
@@ -637,7 +651,7 @@ export class RadiologyPage implements OnInit {
           data.documentKey = data.DocKey;
           data.documentType = data.DocCat;
           let url = './assets/icon/';
-          let imagePath = data.documentType == 'Report' ? 'icon_document_blue.svg' : 'icon_image_blue.svg';
+          let imagePath = data.documentType == 'Report' ? 'icon_amc_document_blue.svg' : 'icon_image_black.svg';
           data.imagePath = url + imagePath;
         });
 

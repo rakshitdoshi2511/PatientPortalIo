@@ -12,12 +12,12 @@
       <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
-      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
+      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()" [style.font-family]="getButtonFontFamily()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
     <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">{{'sidemenu_radiology' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)">
+    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)" [style.font-family]="getFontFamily()">
     </ion-searchbar>
     <ion-buttons slot="end">
       <!-- <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
@@ -133,26 +133,26 @@
           <tbody>
             <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
               <td style="width: 8%;">
-                <img src={{lt.imagePath}} alt="" class="avatar-sm"></td>
+                <img src={{lt.imagePath}} alt="" class="avatar-sm" [style.width]="getIconAttr(lt)" [style.height]="getIconAttr(lt)" [style.margin-left]="getIconMargin(lt)" [style.margin-right]="getIconMargin(lt)"></td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)">{{lt.documentNo}}</a>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)" [style.font-family]="getFontFamily()">{{lt.documentNo}}</a>
                 </h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.date}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.date}}</a></h5>
                 <!-- <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5> -->
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.time}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.type}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.type}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.physician}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.physician}}</a></h5>
               </td>
               <td><span class="pill" [style.background]="renderStatus(lt.statusCode,lt.isAccessible)"
-                  style="color:black">{{lt.status}}</span></td>
+                  style="color:black" [style.font-family]="getFontFamily()">{{lt.status}}</span></td>
             </tr>
           </tbody>
         </table>
@@ -190,7 +190,7 @@
                       <span>{{'lbl_status' | translate | titlecase}} : {{document.status}}</span>
                       <div [class]="getAlignmentClassRight()">
                         <span style="font-size: 2em;">
-                          <ion-icon [name]="document.documentType == 'Image'? 'image' : 'document-text'"></ion-icon>
+                          <ion-icon [src]="document.documentType == 'Image'? './assets/icon/icon_image_black.svg' : './assets/icon/icon_amc_document_blue.svg'" style="width: 1.5em;height:1.5em"></ion-icon>
                         </span>
                       </div>
                     </div>

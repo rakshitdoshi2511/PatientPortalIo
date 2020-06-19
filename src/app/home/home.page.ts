@@ -66,6 +66,9 @@ export class HomePage {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getButtonFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
+  }
   setLocalModel(_data) {
     let _laboratory = _data.SESSIONTOLABDATA.results;
     _.forEach(_laboratory, function (data) {

@@ -150,6 +150,12 @@ export class NutritionPage implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getButtonFontFamily(){
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
+  }
+  getIconAttr(lt){
+    return lt.DocCat == 'Image' ? '3.85em' : '5em';
+  }
   resetSortKeys() {
     this.model.documentNumberAsc = 'iconNotSort';
     this.model.documentNumberDesc = 'iconNotSort';

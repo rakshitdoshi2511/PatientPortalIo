@@ -1,6 +1,6 @@
 <ion-header [style.font-family]="getFontFamily()">
     <ion-toolbar>
-        <ion-title class='ion-text-center'>
+        <ion-title class='ion-text-center' [style.font-family]="getFontFamily()">
             {{'lbl_change_password' | translate | uppercase}}
         </ion-title>
         <ion-buttons slot="end">
@@ -11,23 +11,23 @@
     </ion-toolbar>
 </ion-header>
 <ion-content padding="true" class="ion-padding center" text-center [style.font-family]="getFontFamily()">
-    <div class="container">
+    <div class="container" style="width: 100%!important;">
         <div class="row text-center">
-            <div class="col-sm-6">
+            <div class="col-md-12">
                 <form method="post" id="passwordForm">
-                    <div class="form-group">
+                    <div class="form-group" [style.font-family]="getFontFamily()">
                         <input type="password" class="input-lg form-control" name="password0" [(ngModel)]="model.currentPassword"
                         placeholder="{{'lbl_current_password' | translate | titlecase}}" autocomplete="off" required="true">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [style.font-family]="getFontFamily()">
                         <input type="password" class="input-lg form-control" name="password1" [(ngModel)]="model.newPassword"
                         placeholder="{{'lbl_new_password' | translate | titlecase}}" autocomplete="off" required="true">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [style.font-family]="getFontFamily()">
                         <input type="password" class="input-lg form-control" name="password2" [(ngModel)]="model.repeatPassword"
                         placeholder="{{'lbl_repeat_password' | translate | titlecase}}" autocomplete="off" required="true">
                     </div>
-                    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()">{{'lbl_change_password' | translate | uppercase}}</ion-button>    
+                    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()" [style.font-family]="getFontFamily()">{{'lbl_change_password' | translate | uppercase}}</ion-button>    
                 </form>
             </div>
         </div>
