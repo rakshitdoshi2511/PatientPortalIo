@@ -9,7 +9,7 @@
   appPath: '',
 }; */
 /**QAS */
-/* export const environment = {
+export const environment = {
   production: true,
   url: 'https://amcqaemr01.ach.jo:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
   ver: '1.0.0',
@@ -17,14 +17,14 @@
   app_prefix: 'amc_qas_',
   default_languag: 'en',
   appPath: '',
-}; */
+};
 /**PRD */
-export const environment = {
+/* export const environment = {
   production: true,
-  url: 'https://achemr01.ach.jo:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  url: 'https://94.249.82.110:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
   ver: '1.0.0',
   client: 300,
   app_prefix: 'amc_prd_',
   default_languag: 'en',
   appPath: '',
-};
+}; */

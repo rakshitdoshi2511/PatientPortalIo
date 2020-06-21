@@ -50,6 +50,9 @@ export class TermsConditionsComponent implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   base64ToArrayBuffer(base64) {
     let binary_string = window.atob(base64);
     let len = binary_string.length;

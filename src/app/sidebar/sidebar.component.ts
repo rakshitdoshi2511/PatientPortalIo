@@ -64,6 +64,9 @@ export class SidebarComponent implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   getPhoneNumberDirection(){
     return this.translate.getDefaultLang() == 'en' ? 'ltr' : 'ltr';
   }

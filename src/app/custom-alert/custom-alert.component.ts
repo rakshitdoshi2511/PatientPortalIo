@@ -30,7 +30,9 @@ export class CustomAlertComponent implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
-  
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   ngOnInit() {
     this.model.viewName = this.navParams.data.viewName;
   }
@@ -59,6 +61,14 @@ export class CustomAlertComponent implements OnInit {
           title: this.translate.instant('lbl_password_mismatch'),
           text: this.translate.instant('lbl_password_mismatch_message'),
           backdrop:false,
+          customClass:{
+            title:that.getFontFamilyAlert(),
+            header:that.getFontFamilyAlert(),
+            content: that.getFontFamilyAlert(),
+            container: that.getFontFamilyAlert(),
+            confirmButton: that.getFontFamilyAlert(),
+            
+           },
           icon:'warning',
           confirmButtonColor: 'rgb(87,143,182)',
           confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -71,6 +81,14 @@ export class CustomAlertComponent implements OnInit {
         title: this.translate.instant('lbl_missing_data'),
         text: this.translate.instant('lbl_missing_data_message'),
         backdrop:false,
+        customClass:{
+          title:that.getFontFamilyAlert(),
+          header:that.getFontFamilyAlert(),
+          content: that.getFontFamilyAlert(),
+          container: that.getFontFamilyAlert(),
+          confirmButton: that.getFontFamilyAlert(),
+          
+         },
         icon:'warning',
         confirmButtonColor: 'rgb(87,143,182)',
         confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -153,6 +171,14 @@ export class CustomAlertComponent implements OnInit {
         title: this.translate.instant('lbl_password_changed'),
         text: this.translate.instant('lbl_password_changed_message'),
         backdrop:false,
+        customClass:{
+          title:that.getFontFamilyAlert(),
+          header:that.getFontFamilyAlert(),
+          content: that.getFontFamilyAlert(),
+          container: that.getFontFamilyAlert(),
+          confirmButton: that.getFontFamilyAlert(),
+          
+         },
         icon:'success',
         confirmButtonColor: 'rgb(87,143,182)',
         confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -175,6 +201,14 @@ export class CustomAlertComponent implements OnInit {
           title: errorObj.error.code,
           text: errorObj.error.message.value,
           backdrop:false,
+          customClass:{
+            title:that.getFontFamilyAlert(),
+            header:that.getFontFamilyAlert(),
+            content: that.getFontFamilyAlert(),
+            container: that.getFontFamilyAlert(),
+            confirmButton: that.getFontFamilyAlert(),
+            
+           },
           icon:'error',
           confirmButtonColor: 'rgb(87,143,182)',
           confirmButtonText: this.translate.instant('lbl_filter_ok')

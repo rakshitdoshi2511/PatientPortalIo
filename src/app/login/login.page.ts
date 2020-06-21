@@ -7,7 +7,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { DataService } from './../services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
-import { AlertController, Platform, ModalController } from '@ionic/angular';
+import { AlertController, Platform, ModalController, PopoverController } from '@ionic/angular';
 import { GlobalService } from './../services/global.service';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
@@ -19,6 +19,7 @@ import { TermsConditionsComponent } from './../terms-conditions/terms-conditions
 import Swal from 'sweetalert2';
 import { Events } from './../services/event.service';
 import { Storage } from '@ionic/storage';
+import { InstructionComponent } from './../instruction/instruction.component';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +48,7 @@ export class LoginPage implements OnInit {
     private modalController: ModalController,
     private events: Events,
     private storage: Storage,
-
+    public popoverController: PopoverController,
   ) {
     this.baseUrl = environment.url;
   }
@@ -138,6 +139,16 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
+  async presentPopoverHelp(ev: any,data) {
+    const popover = await this.popoverController.create({
+      component: InstructionComponent,
+      event: ev,
+      componentProps: { instructionData: data },
+      translucent: true,
+      animated: true,
+    });
+    return await popover.present();
+  }
   showAlertMessage(title, message) {
     this.presentAlert(title, message);
   }
@@ -145,14 +156,29 @@ export class LoginPage implements OnInit {
     this.presentAlertCustom('Test', 'Test');
   }
   /*Helper Functions* */
-  getFontFamily(){
+  getFontFamily() {
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
-  getFontSize(){
-    return this.model.isVisible?'0.75em':'1em';
+  getFontFamilyAlert() {
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
   }
-  getButtonFontFamily(){
-    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
+  getFontSize() {
+    return this.model.isVisible ? '0.90em' : '1.1em';
+  }
+  getMarginLeft(){
+    return this.translate.getDefaultLang() == 'en' ? '0.5em' : '0em';
+  }
+  getMarginRight(){
+    return this.translate.getDefaultLang() == 'en' ? '0em' : '0.5em';
+  }
+  getFontSizeLogo() {
+    return this.model.isVisible ? '5em' : '6em';
+  }
+  getButtonFontFamily() {
+    return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium' : 'Futura-Medium';
+  }
+  getPhoneNumberDirection() {
+    return this.translate.getDefaultLang() == 'en' ? 'ltr' : 'rtl';
   }
   clearStorage() {
     this._api.remLocal('isLoggedIn');
@@ -203,6 +229,9 @@ export class LoginPage implements OnInit {
     });
   }
   /**Screen Interactions */
+  openHelp(event) {
+    this.getInstructions(event);
+  }
   forgotPassword() {
     this.presentForgotDialog();
   }
@@ -214,7 +243,7 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('home');
   }
   login() {
-    
+    let that = this;
     if (this.model.username && this.model.password) {
       let msg = this.translate.instant('dialog_title_authentication');
       this._loader.showLoader(msg);
@@ -224,6 +253,13 @@ export class LoginPage implements OnInit {
       Swal.fire({
         title: this.translate.instant('lbl_missing_data'),
         text: this.translate.instant('lbl_missing_data_message'),
+        customClass: {
+          title: that.getFontFamilyAlert(),
+          header: that.getFontFamilyAlert(),
+          content: that.getFontFamilyAlert(),
+          container: that.getFontFamilyAlert(),
+          confirmButton: that.getFontFamilyAlert(),
+        },
         backdrop: false,
         icon: 'warning',
         confirmButtonColor: 'rgb(87,143,182)',
@@ -254,6 +290,27 @@ export class LoginPage implements OnInit {
       console.log(this.translate.getBrowserLang());
     }
 
+  }
+
+  getInstructions(event) {
+    let that = this;
+    let filters = {
+      SPRAS: that.translate.getDefaultLang().toUpperCase(),
+    }
+
+
+
+    that._dataServices.loadData('PORTALINSTRUCTIONSSET', null, filters, false, null, false).subscribe(
+      _success => {
+        console.log(_success);
+        that.presentPopoverHelp(event,_success.d.results);
+        //that.openDocument(_obj.PDFData,_documentNo);
+
+      }, _error => {
+
+        //this.showAlertMessage(_errorResponse.error.code, _errorResponse.error.message.value);
+      }
+    )
   }
   doLogin() {
     let that = this;
@@ -294,18 +351,6 @@ export class LoginPage implements OnInit {
           that.model = {};
           this.router.navigateByUrl('home');
         }
-        // if (_obj.SysPswd == 'X') {
-        //   that.openModalChangePassword();
-        // }
-        // else {
-        //   if (_obj.PendingTermCond == 'X') {
-        //     that.loadTermsConditions(that.model.username, _obj.Token, that.model.password);
-        //   }
-        //   else {
-        //     that.model = {};
-        //     this.router.navigateByUrl('home');
-        //   }
-        // }
       }, _error => {
         that._loader.hideLoader();
         if (_error.status == 0) {
@@ -313,6 +358,13 @@ export class LoginPage implements OnInit {
             title: this.translate.instant('lbl_server_unavailable_title'),//errorObj.error.code,
             text: this.translate.instant('lbl_server_unavailable'),
             backdrop: false,
+            customClass: {
+              title: that.getFontFamilyAlert(),
+              header: that.getFontFamilyAlert(),
+              content: that.getFontFamilyAlert(),
+              container: that.getFontFamilyAlert(),
+              confirmButton: that.getFontFamilyAlert(),
+            },
             icon: 'warning',
             confirmButtonColor: 'rgb(87,143,182)',
             confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -324,6 +376,14 @@ export class LoginPage implements OnInit {
           Swal.fire({
             title: this.translate.instant('lbl_error'),//errorObj.error.code,
             text: errorObj.error.message.value,
+            customClass: {
+              title: that.getFontFamilyAlert(),
+              header: that.getFontFamilyAlert(),
+              content: that.getFontFamilyAlert(),
+              container: that.getFontFamilyAlert(),
+              confirmButton: that.getFontFamilyAlert(),
+
+            },
             backdrop: false,
             icon: 'error',
             confirmButtonColor: 'rgb(87,143,182)',

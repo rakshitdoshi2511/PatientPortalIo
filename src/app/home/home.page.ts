@@ -66,6 +66,9 @@ export class HomePage {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   getButtonFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
   }
@@ -256,6 +259,13 @@ export class HomePage {
         Swal.fire({
           title: this.translate.instant('lbl_error'),//errorObj.error.code,
           text: errorObj.error.message.value,
+          customClass:{
+            title:that.getFontFamilyAlert(),
+            header:that.getFontFamilyAlert(),
+            content: that.getFontFamilyAlert(),
+            container: that.getFontFamilyAlert(),
+            confirmButton: that.getFontFamilyAlert(),
+          },
           backdrop:false,
           icon:'error',
           confirmButtonColor:'rgb(87,143,182)',
@@ -295,6 +305,7 @@ export class HomePage {
     }
   }
   goTo(param){
+    let that = this;
     switch(param){
       case 'nutrition':
         if(Number(this.model.nutritionCount)>0){
@@ -305,6 +316,13 @@ export class HomePage {
             title: this.translate.instant('lbl_no_data'),
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
+            customClass:{
+              title:that.getFontFamilyAlert(),
+              header:that.getFontFamilyAlert(),
+              content: that.getFontFamilyAlert(),
+              container: that.getFontFamilyAlert(),
+              confirmButton: that.getFontFamilyAlert(),
+            },
             icon:'info',
             confirmButtonColor:'rgb(87,143,182)',
             confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -321,6 +339,13 @@ export class HomePage {
             title: this.translate.instant('lbl_no_data'),
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
+            customClass:{
+              title:that.getFontFamilyAlert(),
+              header:that.getFontFamilyAlert(),
+              content: that.getFontFamilyAlert(),
+              container: that.getFontFamilyAlert(),
+              confirmButton: that.getFontFamilyAlert(),
+            },
             icon:'info',
             confirmButtonColor:'rgb(87,143,182)',
             confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -339,6 +364,13 @@ export class HomePage {
             title: this.translate.instant('lbl_no_data'),
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
+            customClass:{
+              title:that.getFontFamilyAlert(),
+              header:that.getFontFamilyAlert(),
+              content: that.getFontFamilyAlert(),
+              container: that.getFontFamilyAlert(),
+              confirmButton: that.getFontFamilyAlert(),
+            },
             icon:'info',
             confirmButtonColor:'rgb(87,143,182)',
             confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -357,6 +389,13 @@ export class HomePage {
             title: this.translate.instant('lbl_no_data'),
             text: this.translate.instant('lbl_no_data_msg'),
             backdrop:false,
+            customClass:{
+              title:that.getFontFamilyAlert(),
+              header:that.getFontFamilyAlert(),
+              content: that.getFontFamilyAlert(),
+              container: that.getFontFamilyAlert(),
+              confirmButton: that.getFontFamilyAlert(),
+            },
             icon:'info',
             confirmButtonColor:'rgb(87,143,182)',
             confirmButtonText: this.translate.instant('lbl_filter_ok')

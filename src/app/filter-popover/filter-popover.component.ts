@@ -29,6 +29,9 @@ export class FilterPopoverComponent implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   compareWithFunctionStatus = (o1,o2) => {
     //return  o1 && o2 ? o1.statusCode === o2.statusCode: o1 === o2;
     return  o1 && o2 ? o1=== o2 : o1 === o2;
@@ -187,6 +190,14 @@ export class FilterPopoverComponent implements OnInit {
         title: this.translate.instant('lbl_warning'),
         text: this.translate.instant('lbl_warning_validation'),
         backdrop: false,
+        customClass:{
+          title:that.getFontFamilyAlert(),
+          header:that.getFontFamilyAlert(),
+          content: that.getFontFamilyAlert(),
+          container: that.getFontFamilyAlert(),
+          confirmButton: that.getFontFamilyAlert(),
+          
+         },
         icon: 'warning',
         confirmButtonColor: 'rgb(87,143,182)',
         confirmButtonText: this.translate.instant('lbl_filter_ok')

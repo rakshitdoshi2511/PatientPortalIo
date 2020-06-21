@@ -4,9 +4,18 @@
       <ion-button expand="full" class="ahThemeButton" (click)="switchLanguage()" [style.font-family]="getButtonFontFamily()">
         {{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
+    <ion-thumbnail slot="end" style="padding:0.5em;cursor: pointer;" (click)="openHelp($event)">
+      <img src="./assets/icon/icon_help_ltblue.svg">
+    </ion-thumbnail>
     <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">{{'lbl_app_title' | translate | titlecase}}</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-fab [hidden]="!model.isVisible" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="openHelp($event)">
+    <ion-icon src='./assets/icon/icon_help_ltblue.svg'></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 <div class="limiter" [style.font-family]="getFontFamily()">
   <div class="container-login100 tintimage">
@@ -28,10 +37,16 @@
         </span> -->
         <span >
           <p style="color:rgb(87,143,182);" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_1' | translate}}</p> 
-          <p style="color:rgb(87,143,182);" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_2' | translate}}</p>
-          <p style="color:rgb(87,143,182);" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_3' | translate}}</p>  
+          <p style="color:rgb(87,143,182);margin-top:0.75em" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">{{'lbl_msg_2' | translate}}</p>
+          <p style="color:rgb(87,143,182);margin-top:0.75em" [style.font-family]="getFontFamily()" [style.font-size]="getFontSize()">
+            <span>{{'lbl_msg_3' | translate}}</span>
+            <span [style.margin-left]="getMarginLeft()" [style.margin-right]="getMarginRight()">{{ 'lbl_msg_3_email' | translate}}</span> 
+            <span [style.margin-left]="getMarginLeft()" [style.margin-right]="getMarginRight()">{{ 'lbl_msg_3_1' | translate}}</span> 
+            <span [style.margin-left]="getMarginLeft()" [style.margin-right]="getMarginRight()" style="direction: ltr;display: inline-block;">{{ 'lbl_msg_3_phone' | translate}}</span> 
+            <span [style.margin-left]="getMarginLeft()" [style.margin-right]="getMarginRight()">{{ 'lbl_msg_3_2' | translate}}</span>
+          </p>
         </span>
-        <span class="login100-form-logo" style="font-size: 47px;">
+        <span class="login100-form-logo" style="margin-top: -0.5em;margin-bottom: -0.5em;" [style.font-size]="getFontSizeLogo()">
           <img src="./assets/images/ahlogo.png" style="width: 100%;" />
         </span>
         <!-- <span class="login100-form-title p-b-34 p-t-27">Log in

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,8 @@ import { LoadingController } from '@ionic/angular';
 export class LoaderService {
   loader: HTMLIonLoadingElement;
   constructor(
-    public loadingController:LoadingController
+    public loadingController:LoadingController,
+    public translate: TranslateService,
   ) { }
 
   async showLoader(_message): Promise<void>{
@@ -15,12 +17,14 @@ export class LoaderService {
       this.loader.dismiss();
       this.loader = await this.loadingController.create({
         message: _message,
+        cssClass:this.translate.getDefaultLang()=='en'?'font-english':'font-arabic'
       });
       await this.loader.present();
     }
     else{
       this.loader = await this.loadingController.create({
         message: _message,
+        cssClass:this.translate.getDefaultLang()=='en'?'font-english':'font-arabic'
       });
       await this.loader.present();
     }

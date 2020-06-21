@@ -160,6 +160,9 @@ export class LaboratoryPage implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   getButtonFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
   }
@@ -274,6 +277,7 @@ export class LaboratoryPage implements OnInit {
     this.filterPopover(event);
   }
   showPDF(_object) {
+    let that = this;
     if (_object.isAccessible) {
       let msg = this.translate.instant('dialog_title_loading');
       this._loader.showLoader(msg);
@@ -283,11 +287,12 @@ export class LaboratoryPage implements OnInit {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
-        customClass: {
-          title: this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic',
-          content:this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic',
-          confirmButton:this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic',
-          container:this.translate.getDefaultLang()=='en'?'font-class-english':'font-class-arabic'
+        customClass:{
+          title:that.getFontFamilyAlert(),
+          header:that.getFontFamilyAlert(),
+          content: that.getFontFamilyAlert(),
+          container: that.getFontFamilyAlert(),
+          confirmButton: that.getFontFamilyAlert(),
         },
         backdrop: false,
         icon: 'warning',
@@ -311,6 +316,7 @@ export class LaboratoryPage implements OnInit {
     // }
   }
   openPDF(_object) {
+    let that = this;
     if (_object.isAccessible) {
       let msg = this.translate.instant('dialog_title_loading');
       this._loader.showLoader(msg);
@@ -319,6 +325,13 @@ export class LaboratoryPage implements OnInit {
       Swal.fire({
         title: this.translate.instant('alert_title_warning'),
         text: this.translate.instant('alert_message_report'),
+        customClass:{
+          title:that.getFontFamilyAlert(),
+          header:that.getFontFamilyAlert(),
+          content: that.getFontFamilyAlert(),
+          container: that.getFontFamilyAlert(),
+          confirmButton: that.getFontFamilyAlert(),
+        },
         backdrop: false,
         icon: 'warning',
         confirmButtonColor: 'rgb(87,143,182)',
@@ -654,6 +667,13 @@ export class LaboratoryPage implements OnInit {
           title: this.translate.instant('lbl_no_data'),
           text: this.translate.instant('lbl_no_data_msg'),
           backdrop: false,
+          customClass:{
+            title:that.getFontFamilyAlert(),
+            header:that.getFontFamilyAlert(),
+            content: that.getFontFamilyAlert(),
+            container: that.getFontFamilyAlert(),
+            confirmButton: that.getFontFamilyAlert(),
+          },
           icon: 'info',
           confirmButtonColor: 'rgb(87,143,182)',
           confirmButtonText: this.translate.instant('lbl_filter_ok')
@@ -688,6 +708,13 @@ export class LaboratoryPage implements OnInit {
         Swal.fire({
           title: this.translate.instant('lbl_error'),//_errorResponse.error.code,
           text: _errorResponse.error.message.value,
+          customClass:{
+            title:that.getFontFamilyAlert(),
+            header:that.getFontFamilyAlert(),
+            content: that.getFontFamilyAlert(),
+            container: that.getFontFamilyAlert(),
+            confirmButton: that.getFontFamilyAlert(),
+          },
           backdrop: false,
           icon: 'error',
           confirmButtonColor: 'rgb(87,143,182)',

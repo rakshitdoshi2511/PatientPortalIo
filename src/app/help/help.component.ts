@@ -21,7 +21,9 @@ export class HelpComponent implements OnInit {
   getFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
-
+  getFontFamilyAlert(){
+    return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
+  }
   getFontSize(){
     return this.model.isVisible? '0.75em' : '1em';
   }
