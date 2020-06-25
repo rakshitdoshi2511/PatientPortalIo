@@ -174,6 +174,12 @@ export class LoginPage implements OnInit {
   getFontSizeLogo() {
     return this.model.isVisible ? '5em' : '6em';
   }
+  getImageHeight(){
+    return this.model.isVisible? '120%' : '100%';
+  }
+  getOverFlowScroll(){
+    return this.model.isVisible?'scroll':'hidden';
+  }
   getButtonFontFamily() {
     return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium' : 'Futura-Medium';
   }

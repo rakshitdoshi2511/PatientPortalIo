@@ -17,8 +17,8 @@
   </ion-fab-button>
 </ion-fab>
 
-<div class="limiter" [style.font-family]="getFontFamily()">
-  <div class="container-login100 tintimage">
+<div class="limiter" [style.font-family]="getFontFamily()" [style.overflow-y]="getOverFlowScroll()">
+  <div class="container-login100 tintimage" [style.height]="getImageHeight()">
     <!-- style="background-image: url('./assets/images/bg-01.jpg');"> -->
     <!-- <div class="row">
       <div class="col-md-3"></div>

@@ -133,7 +133,9 @@
 .twt-feed {
     -webkit-border-radius: 4px 4px 0 0;
     color: #fff;
-    padding: 40px 10px 10px;
+    // padding: 40px 10px 10px;
+    padding: 2em 1em 1em;
+    padding-bottom: 0em;
     position: relative;
     min-height: 170px;
 }
@@ -194,12 +196,13 @@ p {
 
 .twt-category {
     display: inline-block;
-    margin-bottom: 11px;
+    //margin-bottom: 11px;
     margin-top: 10px;
     width: 100%;
 }
 .weather-category {
-    padding: 15px 0;
+    // padding: 15px 0;
+    padding: 0.25em 0;
     color: #74829c;
 }
 .twt-category ul li {

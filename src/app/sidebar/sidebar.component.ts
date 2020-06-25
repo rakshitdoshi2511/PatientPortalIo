@@ -67,6 +67,9 @@ export class SidebarComponent implements OnInit {
   getFontFamilyAlert(){
     return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
   }
+  getOverFlow(){
+    return this.model.isVisible? 'visible' : 'hidden';
+  }
   getPhoneNumberDirection(){
     return this.translate.getDefaultLang() == 'en' ? 'ltr' : 'ltr';
   }
@@ -165,6 +168,10 @@ export class SidebarComponent implements OnInit {
       this.model.contact = _data.PhoneNo;
       this.model.email = _data.Emailid;
 
+    });
+
+    this.events.subscribe('session-expired',(_data: any)=>{
+      this.menuCtrl.close();
     })
   }
   /**Screen Interaction */

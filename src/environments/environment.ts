@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   url: 'https://achdevemr01.ach.jo:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
-  // url: 'http://ishmed.soltiusme.com:3000/',
+  //url: 'http://ishmed.soltiusme.com:3000/',
   app_prefix: 'amc_dev_',
   client: 110,
   ver: '1.0.0',
@@ -25,7 +25,8 @@ export const environment = {
 /**PRD */
 /* export const environment = {
   production: true,
-  url: 'https://94.249.82.110:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  //url: 'https://94.249.82.110:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
+  url: 'http://patientportal.abdalihospital.com:8000/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
   ver: '1.0.0',
   client: 300,
   app_prefix: 'amc_prd_',

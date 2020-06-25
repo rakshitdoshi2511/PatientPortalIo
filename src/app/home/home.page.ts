@@ -132,7 +132,8 @@ export class HomePage {
     that._dataServices.deleteSession('SESSIONSET', _param, null, false, null, false).subscribe(
       _success => {
         that._loader.hideLoader();
-
+        let _object = {};
+        this.events.publish('session-expired',_object);
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');
@@ -152,7 +153,8 @@ export class HomePage {
 
       }, _error => {
         that._loader.hideLoader();
-
+        let _object = {};
+        this.events.publish('session-expired',_object);
         this.storage.clear();
         this._api.remLocal('isLoggedIn');
         this._api.remLocal('token');

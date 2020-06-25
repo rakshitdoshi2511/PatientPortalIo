@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoaderService {
   loader: HTMLIonLoadingElement;
+  isLoading = false;
+  
   constructor(
     public loadingController:LoadingController,
     public translate: TranslateService,
@@ -14,6 +16,9 @@ export class LoaderService {
 
   async showLoader(_message): Promise<void>{
     if(this.loader){
+      // setTimeout(()=>{
+      //   this.loader.dismiss();
+      // },1000);
       this.loader.dismiss();
       this.loader = await this.loadingController.create({
         message: _message,
@@ -31,7 +36,9 @@ export class LoaderService {
   }
   async dismiss(){
     return await this.loadingController.dismiss().then(() => console.log('dismissed'));
-  }
+  } 
+
+
   hideLoader() {
     //this.loader.dismiss(); 
     setTimeout(() => {

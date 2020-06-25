@@ -1,7 +1,7 @@
 <section class="card" [style.font-family]="getFontFamily()">
   <div class="twt-feed blue-bg">
     <div class="media">
-      <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt=""
+      <img class="align-self-center rounded-circle mr-3" style="width:4em; height:4em;" alt=""
         src="./assets/icon/usericon_blue.svg">
     </div>
     <div class="media-body">
@@ -48,7 +48,7 @@
 	</div>
 </div> -->
 
-<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;" [style.font-family]="getFontFamily()">
+<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;" [style.font-family]="getFontFamily()" [style.overflow-y]="getOverFlow()">
 	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
 		<div class="nav-item" [routerLink]="[p.url]">
       <ion-icon src="{{p.iconPath}}"></ion-icon>
@@ -67,9 +67,9 @@
 			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
 			<ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
 			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
-		  </ion-row>
+    </ion-row>
 	</div>
-	<div class="footer-app-version">
+	<!-- <div class="footer-app-version">
 		Version v{{version}}
-	</div>
+	</div> -->
 </div>

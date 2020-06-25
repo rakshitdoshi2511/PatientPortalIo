@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from "./../../environments/environment";
 declare let localStorage: any;
+declare let sessionStorage: any;
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,7 @@ export class ApiService {
     }
 
     localStorage.setItem(this.env['app_prefix'] + key, value);
+    sessionStorage.setItem(this.env['app_prefix'] + key, value);
   }
 
   remLocal(key) {
