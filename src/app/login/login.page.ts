@@ -196,6 +196,8 @@ export class LoginPage implements OnInit {
     this._api.remLocal('lastName');
     this._api.remLocal('email');
     this._api.remLocal('mrn');
+    this._api.remLocal('helpPhone');
+    this._api.remLocal('helpEmail');
   }
   getAlignmentClass() {
     return this.translate.getDefaultLang() == 'en' ? 'mobileToggle text-center p-t-90' : 'mobileToggleAR text-center p-t-90';
@@ -251,8 +253,8 @@ export class LoginPage implements OnInit {
   login() {
     let that = this;
     if (this.model.username && this.model.password) {
-      let msg = this.translate.instant('dialog_title_authentication');
-      this._loader.showLoader(msg);
+      // let msg = this.translate.instant('dialog_title_authentication');
+      // this._loader.showLoader(msg);
       this.doLogin();
     }
     else {
@@ -320,6 +322,8 @@ export class LoginPage implements OnInit {
   }
   doLogin() {
     let that = this;
+    let msg = this.translate.instant('dialog_title_authentication');
+    this._loader.showLoader(msg);
     let _data = {
       Patnr: this.model.username,
       Password: this.model.password,
@@ -328,12 +332,12 @@ export class LoginPage implements OnInit {
     that._dataServices.login(_data).subscribe(
       _success => {
         let _obj = _success.d;
-
+        that._loader.hideLoader();
         this._api.setLocal('isLoggedIn', true);
         this._api.setLocal('token', _obj.Token);
         this._api.setLocal('username', that.model.username);
         this._api.setLocal('sessionTimeout', _obj.BrowserTimeout);
-        this._api.setLocal('password', that.model.password);
+        //this._api.setLocal('password', that.model.password);
         this.constant.sessionTimeOut = _obj.BrowserTimeout / 10;
         //console.log(this.constant.sessionTimeOut);
 
@@ -341,7 +345,7 @@ export class LoginPage implements OnInit {
 
         let _object = {};
         this.events.publish('reset-timer', _object);
-        that._loader.hideLoader();
+        
         if (_obj.PendingTermCond == 'X') {
           if (_obj.SysPswd == 'X') {
             that.loadTermsConditions(that.model.username, _obj.Token, that.model.password, true);
@@ -427,6 +431,8 @@ export class LoginPage implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut': true
         };
@@ -454,6 +460,8 @@ export class LoginPage implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut': true
         };

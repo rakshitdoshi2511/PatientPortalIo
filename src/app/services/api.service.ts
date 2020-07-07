@@ -26,6 +26,7 @@ export class ApiService {
 
   getLocal(key: string, skipParse?) {
     var data = localStorage.getItem(this.env['app_prefix'] + key);
+    //var data = sessionStorage.getItem(this.env['app_prefix'] + key);
 
     if (data) {
       if (!skipParse) {
@@ -42,10 +43,11 @@ export class ApiService {
     }
 
     localStorage.setItem(this.env['app_prefix'] + key, value);
-    sessionStorage.setItem(this.env['app_prefix'] + key, value);
+    //sessionStorage.setItem(this.env['app_prefix'] + key, value);
   }
 
   remLocal(key) {
     localStorage.removeItem(this.env['app_prefix'] + key);
+    //sessionStorage.removeItem(this.env['app_prefix'] + key);
   }
 }

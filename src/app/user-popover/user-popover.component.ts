@@ -124,6 +124,8 @@ export class UserPopoverComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut':true
         };
@@ -145,7 +147,8 @@ export class UserPopoverComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-        
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut':true
         };

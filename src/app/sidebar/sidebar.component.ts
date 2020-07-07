@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from './../services/api.service';
 import { environment } from '../../environments/environment';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import { PopoverController, AlertController, Platform, ModalController } from '@ionic/angular';
@@ -101,6 +101,10 @@ export class SidebarComponent implements OnInit {
       this.model.email = _data.Emailid;
       this.version = environment.ver;
       this.model.language = this.translate.getDefaultLang() == 'en' ? true : false;
+    })
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      
     })
 
     // that.storage.get(that._api.getLocal('token')).then((val) => {
@@ -214,6 +218,8 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut':true
         };
@@ -232,6 +238,8 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut':true
         };

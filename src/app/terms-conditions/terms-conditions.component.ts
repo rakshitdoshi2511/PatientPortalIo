@@ -187,6 +187,8 @@ export class TermsConditionsComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         this.router.navigateByUrl('login');
        // window.location.reload();
 
@@ -201,6 +203,8 @@ export class TermsConditionsComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         this.router.navigateByUrl('login');
         //window.location.reload();
       }

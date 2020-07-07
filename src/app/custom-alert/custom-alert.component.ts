@@ -134,6 +134,8 @@ export class CustomAlertComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         // window.location.reload();
         this.router.navigateByUrl('login');
 
@@ -150,6 +152,8 @@ export class CustomAlertComponent implements OnInit {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
        // window.location.reload();
         this.router.navigateByUrl('login');
       }

@@ -43,6 +43,7 @@ export class AppComponent {
     private _loader: LoaderService
   ) {
     this.initializeApp();
+    this.listenToWebEvents();
   }
 
   ignoreKeys() {
@@ -96,39 +97,13 @@ export class AppComponent {
 
   @HostListener('window:unload', ['$event'])
   unloadHandler(event) {
-    this.deleteSession();
+    //this.deleteSession();
   }
 
   @HostListener('window:beforeunload', ['$event'])
   beforeUnloadHandler(e) {
     // console.log(event);
-    // event = event || window.event;
 
-    // // For IE and Firefox prior to version 4
-    // if (event) {
-    //     event.returnValue = 'Sure?';
-    // }
-
-    // // For Safari
-    // return 'Sure?';
-    // this._api.setLocal('test',new Date());
-    // e.preventDefault();
-    // e.returnValue = '';
-    let _param = {
-      Patnr: this._api.getLocal('username'),
-      Token: this._api.getLocal('token')
-    }
-
-    let _url = this.generateURL("SESSIONSET", _param, null, false, null, false);
-    let url = environment.url + _url
-    this._api.setLocal("URL", url);
-    // var client = new XMLHttpRequest();
-
-    // client.open("GET", url, false); // third parameter indicates sync xhr
-    // client.setRequestHeader("Content-Type", "application/json");
-    // client.send();
-    navigator.sendBeacon(url,null);
-    console.log('done!!!');
 
     // this.deleteSession();
 
@@ -138,6 +113,35 @@ export class AppComponent {
   onUnloadHandler(event) {
     // console.log(event);
     //this.deleteSession();
+  }
+
+  listenToWebEvents() {
+    window.onbeforeunload = (e) => {
+      //this.deleteSession();
+      // if(e){
+        let _param = {
+          Patnr: this._api.getLocal('username'),
+          Token: this._api.getLocal('token')
+        }
+        let _url = environment.url + this.generateURL('SESSIONSET', _param, null, false, null, false);
+  
+        var peticion = new XMLHttpRequest();
+        peticion.open("GET", _url);
+        peticion.send();
+        this.storage.clear();
+        this._api.remLocal('isLoggedIn');
+        this._api.remLocal('token');
+        this._api.remLocal('username');
+        this._api.remLocal('sessionTimeout');
+        this._api.remLocal('password');
+        this._api.remLocal('firstName');
+        this._api.remLocal('lastName');
+        this._api.remLocal('email');
+        this._api.remLocal('mrn');
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
+     // }
+    }
   }
 
   initializeApp() {
@@ -188,8 +192,12 @@ export class AppComponent {
 
     //Set App Direction based on language selected
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+
       event.lang == 'ar' ? this.layoutDir = 'rtl' : this.layoutDir = 'ltr';
       event.lang == 'ar' ? this.layoutDirSideMenu = 'end' : this.layoutDirSideMenu = 'start';
+      console.log(this.layoutDirSideMenu);
+
+
     })
   }
 
@@ -216,6 +224,8 @@ export class AppComponent {
           this._api.remLocal('lastName');
           this._api.remLocal('email');
           this._api.remLocal('mrn');
+          this._api.remLocal('helpPhone');
+          this._api.remLocal('helpEmail');
           this.router.navigateByUrl('login');
 
 
@@ -231,6 +241,8 @@ export class AppComponent {
           this._api.remLocal('lastName');
           this._api.remLocal('email');
           this._api.remLocal('mrn');
+          this._api.remLocal('helpPhone');
+          this._api.remLocal('helpEmail');
           this.router.navigateByUrl('login');
           //this.router.navigate(['/login'],{replaceUrl:true});
         }

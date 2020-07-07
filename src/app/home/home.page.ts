@@ -144,7 +144,8 @@ export class HomePage {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut':true
         };
@@ -165,7 +166,8 @@ export class HomePage {
         this._api.remLocal('lastName');
         this._api.remLocal('email');
         this._api.remLocal('mrn');
-
+        this._api.remLocal('helpPhone');
+        this._api.remLocal('helpEmail');
         let _obj = {
           'isLogOut':true
         };
