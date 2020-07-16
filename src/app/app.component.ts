@@ -43,7 +43,7 @@ export class AppComponent {
     private _loader: LoaderService
   ) {
     this.initializeApp();
-    this.listenToWebEvents();
+    //this.listenToWebEvents();
   }
 
   ignoreKeys() {
@@ -116,15 +116,15 @@ export class AppComponent {
   }
 
   listenToWebEvents() {
-    window.onbeforeunload = (e) => {
-      //this.deleteSession();
-      // if(e){
+
+    window.onhashchange = (e) => {
+      if (e.newURL.indexOf("#/login") != -1) {
         let _param = {
           Patnr: this._api.getLocal('username'),
           Token: this._api.getLocal('token')
         }
         let _url = environment.url + this.generateURL('SESSIONSET', _param, null, false, null, false);
-  
+
         var peticion = new XMLHttpRequest();
         peticion.open("GET", _url);
         peticion.send();
@@ -140,10 +140,39 @@ export class AppComponent {
         this._api.remLocal('mrn');
         this._api.remLocal('helpPhone');
         this._api.remLocal('helpEmail');
-     // }
+      }
     }
-  }
 
+    window.onbeforeunload = (e) => {
+      
+      let _param = {
+        Patnr: this._api.getLocal('username'),
+        Token: this._api.getLocal('token')
+      }
+      let _url = environment.url + this.generateURL('SESSIONSET', _param, null, false, null, false);
+
+      var peticion = new XMLHttpRequest();
+      peticion.open("GET", _url);
+      peticion.send();
+      this.storage.clear();
+      this._api.remLocal('isLoggedIn');
+      this._api.remLocal('token');
+      this._api.remLocal('username');
+      this._api.remLocal('sessionTimeout');
+      this._api.remLocal('password');
+      this._api.remLocal('firstName');
+      this._api.remLocal('lastName');
+      this._api.remLocal('email');
+      this._api.remLocal('mrn');
+      this._api.remLocal('helpPhone');
+      this._api.remLocal('helpEmail');
+    }
+
+
+  }
+  menuOpened() {
+    this.events.publish('menu-open', {});
+  }
   initializeApp() {
 
     this.translate.setDefaultLang('en');
@@ -155,7 +184,7 @@ export class AppComponent {
     //60seconds idle time out
 
     this.events.subscribe('session-data', (_data: any) => {
-      //console.log("App Session");
+      console.log("App Session");
       //console.log(_data.BrowserTimeout);
       this.bnIdle.startWatching(_data.BrowserTimeout).subscribe((isTimedOut: boolean) => {
         console.log("Session Expiry");
@@ -171,6 +200,8 @@ export class AppComponent {
           confirmButtonColor: 'rgb(87,143,182)',
           confirmButtonText: this.translate.instant('lbl_filter_ok')
         }).then((result) => {
+          let _object = {};
+          this.events.publish('session-expired', _object);
           this.deleteSession();
         });
 

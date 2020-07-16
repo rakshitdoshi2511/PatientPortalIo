@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from './../services/api.service';
 import { environment } from '../../environments/environment';
-import { TranslateService,LangChangeEvent } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import { PopoverController, AlertController, Platform, ModalController } from '@ionic/angular';
@@ -13,7 +13,7 @@ import { Events } from './../services/event.service';
 import { Router } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { MenuController } from '@ionic/angular';
-import {CustomAlertComponent} from './../custom-alert/custom-alert.component'
+import { CustomAlertComponent } from './../custom-alert/custom-alert.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -34,8 +34,8 @@ export class SidebarComponent implements OnInit {
     private _dataServices: DataService,
     private constant: Constant,
     private events: Events,
-    private router:Router,
-    private bnIdle:BnNgIdleService,
+    private router: Router,
+    private bnIdle: BnNgIdleService,
     private menuCtrl: MenuController,
     private platform: Platform,
     private modalController: ModalController,
@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit {
     const modal = await this.modalController.create({
       component: CustomAlertComponent,
       backdropDismiss: false,
-      componentProps: { viewName : 'UserPopover'},
+      componentProps: { viewName: 'UserPopover' },
     });
     return await modal.present();
   }
@@ -61,20 +61,21 @@ export class SidebarComponent implements OnInit {
   getAlignmentClassLeft() {
     return this.translate.getDefaultLang() == 'en' ? 'pull-left' : 'pull-right';
   }
-  getFontFamily(){
+  getFontFamily() {
     return this.translate.getDefaultLang() == 'en' ? 'Futura-Medium' : 'Helvetica-Arabic-Medium';
   }
-  getFontFamilyAlert(){
+  getFontFamilyAlert() {
     return this.translate.getDefaultLang() == 'en' ? 'font-english' : 'font-arabic';
   }
-  getOverFlow(){
-    return this.model.isVisible? 'visible' : 'hidden';
+  getOverFlow() {
+    return this.model.isVisible ? 'visible' : 'hidden';
   }
-  getPhoneNumberDirection(){
+  getPhoneNumberDirection() {
     return this.translate.getDefaultLang() == 'en' ? 'ltr' : 'ltr';
   }
   /**Default Methods */
   ngOnInit() {
+
     let that = this;
     //console.log("Setting names from api");
     //console.log(this._api.getLocal('firstName'));
@@ -104,7 +105,11 @@ export class SidebarComponent implements OnInit {
     })
 
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      
+
+    })
+
+    this.events.subscribe('menu-open', (data: any) => {
+        
     })
 
     // that.storage.get(that._api.getLocal('token')).then((val) => {
@@ -130,7 +135,9 @@ export class SidebarComponent implements OnInit {
       { title: this.translate.instant('sidemenu_medical'), url: 'medical-reports', iconName: 'notifications', iconPath: './assets/icon/icon_amc_report_blue.svg' }];
     this.appPages = _pages;
   }
+
   ionViewDidEnter() {
+
     let that = this;
 
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true
@@ -174,7 +181,7 @@ export class SidebarComponent implements OnInit {
 
     });
 
-    this.events.subscribe('session-expired',(_data: any)=>{
+    this.events.subscribe('session-expired', (_data: any) => {
       this.menuCtrl.close();
     })
   }
@@ -188,11 +195,14 @@ export class SidebarComponent implements OnInit {
     this.menuCtrl.close();
     this.model.language ? this.translate.use('en') : this.translate.use('ar');
     this.model.language ? this.translate.setDefaultLang('en') : this.translate.setDefaultLang('ar');
-    
+
   }
   resetPassword() {
     this.menuCtrl.close();
     this.openModal();
+  }
+  dismiss() {
+    this.menuCtrl.close();
   }
   deleteSession() {
     let that = this;
@@ -221,9 +231,9 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('helpPhone');
         this._api.remLocal('helpEmail');
         let _obj = {
-          'isLogOut':true
+          'isLogOut': true
         };
-        this.events.publish('stop-timer',_obj);
+        this.events.publish('stop-timer', _obj);
         this.router.navigateByUrl('login');
       }, _error => {
         that._loader.hideLoader();
@@ -241,9 +251,9 @@ export class SidebarComponent implements OnInit {
         this._api.remLocal('helpPhone');
         this._api.remLocal('helpEmail');
         let _obj = {
-          'isLogOut':true
+          'isLogOut': true
         };
-        this.events.publish('stop-timer',_obj);
+        this.events.publish('stop-timer', _obj);
         this.router.navigateByUrl('login');
       }
     )

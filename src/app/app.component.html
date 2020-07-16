@@ -1,5 +1,5 @@
 <ion-app dir="{{layoutDir}}">
-  <ion-menu side="{{layoutDirSideMenu}}" contentId="content">
+  <ion-menu side="{{layoutDirSideMenu}}" contentId="content" (ionWillOpen)="menuOpened()">
     <app-sidebar></app-sidebar>
   </ion-menu>
   <ion-router-outlet id="content"></ion-router-outlet>

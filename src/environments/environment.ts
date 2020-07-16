@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   url: 'https://achdevemr01.ach.jo:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
   //url: 'http://ishmed.soltiusme.com:3000/',
+  //url: 'http://192.168.100.30:3000/',
   app_prefix: 'amc_dev_',
   client: 110,
   ver: '1.0.0',

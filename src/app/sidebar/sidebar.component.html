@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar class="transparentToolBar">
+    <ion-buttons slot="end">
+      <ion-row>
+        <ion-icon name="close" style="margin-top: 0.6em;"></ion-icon>
+        <ion-button expand="full" class="ahThemeButtonClear" (click)="dismiss()" [style.font-family]="getFontFamily()" >{{'lbl_close' | translate | uppercase}}</ion-button>
+      </ion-row>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <section class="card" [style.font-family]="getFontFamily()">
   <div class="twt-feed blue-bg">
     <div class="media">
@@ -5,8 +16,10 @@
         src="./assets/icon/usericon_blue.svg">
     </div>
     <div class="media-body">
-      <h2 class="text-white display-6" [style.font-family]="getFontFamily()">{{model.firstName | titlecase}} {{model.lastName | titlecase}}</h2>
-      <p class="text-light" [style.font-family]="getFontFamily()">{{'lbl_mrn' | translate | uppercase}} ({{'lbl_mrn_short' | translate | uppercase}}):{{model.mrn}}</p>
+      <h2 class="text-white display-6" [style.font-family]="getFontFamily()">{{model.firstName | titlecase}}
+        {{model.lastName | titlecase}}</h2>
+      <p class="text-light" [style.font-family]="getFontFamily()">{{'lbl_mrn' | translate | uppercase}}
+        ({{'lbl_mrn_short' | translate | uppercase}}):{{model.mrn}}</p>
     </div>
   </div>
   <div class="weather-category twt-category">
@@ -16,7 +29,8 @@
         {{model.sex}}
       </li>
       <li>
-        <h6 style="font-size:13px;" [style.font-family]="getFontFamily()">{{'lbl_date_of_birth' | translate | uppercase}}</h6>
+        <h6 style="font-size:13px;" [style.font-family]="getFontFamily()">
+          {{'lbl_date_of_birth' | translate | uppercase}}</h6>
         {{model.birthDate}}
       </li>
     </ul>
@@ -24,14 +38,17 @@
   <div class="twt-write col-sm-12">
     <h6 style="color: #bdbdbd;font-size: 0.7em;"><span>
         <ion-icon name='call'></ion-icon>
-      </span> {{'lbl_contact' | translate | uppercase}}: <span [class]="getAlignmentClassRight()" [style.direction]="getPhoneNumberDirection()">
+      </span> {{'lbl_contact' | translate | uppercase}}: <span [class]="getAlignmentClassRight()"
+        [style.direction]="getPhoneNumberDirection()">
         {{model.contact}}
       </span></h6>
     <h6 style="color: #bdbdbd;font-size: 0.7em;">
-      <span><ion-icon name='mail'></ion-icon></span> 
-      {{'lbl_email' | translate | uppercase}}: 
+      <span>
+        <ion-icon name='mail'></ion-icon>
+      </span>
+      {{'lbl_email' | translate | uppercase}}:
       <span [class]="getAlignmentClassRight()">{{model.email | lowercase}}</span></h6>
-    <br/>
+    <br />
   </div>
 </section>
 
@@ -48,28 +65,32 @@
 	</div>
 </div> -->
 
-<div class="nav" style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;" [style.font-family]="getFontFamily()" [style.overflow-y]="getOverFlow()">
-	<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-		<div class="nav-item" [routerLink]="[p.url]">
+<div class="nav"
+  style="overflow-y: hidden !important; overflow-x: hidden !important;margin-left:0.75rem;margin-right:0.75rem;"
+  [style.font-family]="getFontFamily()" [style.overflow-y]="getOverFlow()">
+  <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+    <div class="nav-item" [routerLink]="[p.url]">
       <ion-icon src="{{p.iconPath}}"></ion-icon>
-			{{p.title | translate}}
-			<span class="divider"></span>
-		</div>
-	</ion-menu-toggle>
+      {{p.title | translate}}
+      <span class="divider"></span>
+    </div>
+  </ion-menu-toggle>
 </div>
 
 <div class="footer" [style.font-family]="getFontFamily()">
-	<div class="footer-nav" [style.font-family]="getFontFamily()">
-		<ion-button expand="full" class="ahThemeButton" (click)="resetPassword()" [style.font-family]="getFontFamily()">{{'lbl_change_password' | translate | uppercase}}</ion-button>
-		<ion-button expand="full" class="ahThemeButton" (click)="logOut()" [style.font-family]="getFontFamily()">{{ 'lbl_logout' | translate | uppercase}}
-		</ion-button>
-		<ion-row class="twt-write_toggle" [hidden]="!model.isVisible" [style.font-family]="getFontFamily()">
-			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
-			<ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
-			<h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
+  <div class="footer-nav" [style.font-family]="getFontFamily()">
+    <ion-button expand="full" class="ahThemeButton" (click)="resetPassword()" [style.font-family]="getFontFamily()">
+      {{'lbl_change_password' | translate | uppercase}}</ion-button>
+    <ion-button expand="full" class="ahThemeButton" (click)="logOut()" [style.font-family]="getFontFamily()">
+      {{ 'lbl_logout' | translate | uppercase}}
+    </ion-button>
+    <ion-row class="twt-write_toggle" [hidden]="!model.isVisible" [style.font-family]="getFontFamily()">
+      <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-right: 0.8em;">AR</h6>
+      <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
+      <h6 style="color: #bdbdbd;font-size: 1em;margin-top: 0.8em;margin-left: 0.8em;">EN</h6>
     </ion-row>
-	</div>
-	<!-- <div class="footer-app-version">
+  </div>
+  <!-- <div class="footer-app-version">
 		Version v{{version}}
 	</div> -->
 </div>
