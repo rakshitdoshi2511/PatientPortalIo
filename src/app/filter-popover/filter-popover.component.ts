@@ -107,10 +107,10 @@ export class FilterPopoverComponent implements OnInit {
     if(that.id == 'MED'){
       //console.log("I am here");
       that.model.documentTypeFilterHidden = true;
-      that.model.statusFilterHidden = true;
+      //that.model.statusFilterHidden = true;
     }
     if (that.id == 'NUT'){
-      that.model.statusFilterHidden = true;
+      //that.model.statusFilterHidden = true;
     }
     that.model.status = this.navParams.data.statusFilterValue;
     that.model.physician = this.navParams.data.physicianFilterValue;
@@ -149,10 +149,10 @@ export class FilterPopoverComponent implements OnInit {
     if(that.id == 'MED'){
       //console.log("I am here");
       that.model.documentTypeFilterHidden = true;
-      that.model.statusFilterHidden = true;
+      //that.model.statusFilterHidden = true;
     }
     if (that.id == 'NUT'){
-      that.model.statusFilterHidden = true;
+      //that.model.statusFilterHidden = true;
     }
     that.model.status = this.navParams.data.statusFilterValue;
     that.model.physician = this.navParams.data.physicianFilterValue;

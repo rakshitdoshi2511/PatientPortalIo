@@ -140,6 +140,7 @@ export class AppComponent {
         this._api.remLocal('mrn');
         this._api.remLocal('helpPhone');
         this._api.remLocal('helpEmail');
+        this.events.publish("stop-timer", { isLogOut: !0 });
       }
     }
 
@@ -166,6 +167,7 @@ export class AppComponent {
       this._api.remLocal('mrn');
       this._api.remLocal('helpPhone');
       this._api.remLocal('helpEmail');
+      this.events.publish("stop-timer", { isLogOut: !0 });
     }
 
 

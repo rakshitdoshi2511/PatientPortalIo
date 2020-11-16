@@ -1,5 +1,5 @@
 /**DEV */
-/* export const environment = {
+export const environment = {
   production: true,
   url: 'https://achdevemr01.ach.jo:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
   //url: 'http://ishmed.soltiusme.com:3000/',
@@ -8,9 +8,9 @@
   app_prefix: 'amc_dev_',
   default_languag: 'en',
   appPath: '',
-}; */
+};
 /**QAS */
-export const environment = {
+/* export const environment = {
   production: true,
   url: 'https://amcqaemr01.ach.jo:5200/sap/opu/odata/sap/ZNPATPORTAL_SRV/',
   ver: '1.0.0',
@@ -18,7 +18,7 @@ export const environment = {
   app_prefix: 'amc_qas_',
   default_languag: 'en',
   appPath: '',
-};
+}; */
 /**PRD */
 /* export const environment = {
   production: true,

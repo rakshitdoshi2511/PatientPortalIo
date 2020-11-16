@@ -211,15 +211,32 @@ export class NutritionPage implements OnInit {
     }
     return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status) {
+
+  renderStatus(status, isAccessible) {
     //console.log(status);
-    if (status == 'RE') {
-      return '#FFF2C5';
-    }
-    else {
+    if (isAccessible) {
       return '#1caf9a';
     }
+    else {
+      return '#FFF2C5';
+    }
+    // if (status == 'RE') {
+    //   return '#FFF2C5';
+    // }
+    // else {
+    //   return '#1caf9a';
+    // }
   }
+
+  // renderStatus(status) {
+  //   //console.log(status);
+  //   if (status == 'RE') {
+  //     return '#FFF2C5';
+  //   }
+  //   else {
+  //     return '#1caf9a';
+  //   }
+  // }
   /**Default Methods*/
   ngOnInit() {
     this.platform.is('android') || this.platform.is('ios') || this.platform.is('iphone') ? this.model.isVisible = true

@@ -333,9 +333,10 @@ export class LoginPage implements OnInit {
       _success => {
         let _obj = _success.d;
         that._loader.hideLoader();
+        that._loader.disMissLoader();
         this._api.setLocal('isLoggedIn', true);
         this._api.setLocal('token', _obj.Token);
-        this._api.setLocal('username', that.model.username);
+        this._api.setLocal('username', that.model.username.toString().trim());
         this._api.setLocal('sessionTimeout', _obj.BrowserTimeout);
         //this._api.setLocal('password', that.model.password);
         this.constant.sessionTimeOut = _obj.BrowserTimeout / 10;

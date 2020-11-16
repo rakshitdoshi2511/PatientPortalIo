@@ -38,6 +38,11 @@ export class LoaderService {
     return await this.loadingController.dismiss().then(() => console.log('dismissed'));
   } 
 
+  async disMissLoader(){
+    return await this.loadingController.getTop().then((e)=>{
+      e&&e.dismiss().then(()=> console.log("Dismiss"));
+    })
+  }
 
   hideLoader() {
     //this.loader.dismiss(); 

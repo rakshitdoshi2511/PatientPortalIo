@@ -12,12 +12,15 @@
       <!-- <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-right: 0.25em;">{{'lbl_lang_ar' | translate}}</h6>
       <ion-toggle [(ngModel)]="model.language" (ionChange)="switchLanguage()"></ion-toggle>
       <h6 style="color: #000000;font-size: 1em;margin-top: 0.8em;margin-left: 0.25em;">{{'lbl_lang_en' | translate}}</h6> -->
-      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()" [style.font-family]="getButtonFontFamily()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
+      <ion-button expand="full" class="ahThemeButton" (click)="changeLanguage()"
+        [style.font-family]="getButtonFontFamily()">{{'lbl_app_lang' | translate | titlecase}}</ion-button>
     </ion-row>
-    <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">{{'sidemenu_medical' | translate | uppercase}}</ion-title>
+    <ion-title class='ion-text-center titleWhite' [style.font-family]="getFontFamily()">
+      {{'sidemenu_medical' | translate | uppercase}}</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)" (ionClear)="filterListClear($event)" [style.font-family]="getFontFamily()">
+    <ion-searchbar placeholder="{{'lbl_search' | translate}}" showCancelButton="never" (ionInput)="filterList($event)"
+      (ionClear)="filterListClear($event)" [style.font-family]="getFontFamily()">
     </ion-searchbar>
     <ion-buttons slot="end">
       <!-- <button ion-button (click)="sortData()" icon-only clear style="background:transparent!important">
@@ -28,26 +31,30 @@
         <ion-badge color="danger" [hidden]="model.filterCount==0">{{model.filterCount}}</ion-badge>
       </button>
     </ion-buttons>
-  </ion-toolbar>  
+  </ion-toolbar>
 </ion-header>
 <ion-content [style.font-family]="getFontFamily()">
   <!--Web View-->
   <div class="row">
     <div class="col-lg-12">
       <div class="table-responsive padding" style="margin:1em" [hidden]="model.isVisible">
-        <table class="project-list-table table-nowrap table-centered table-borderless table padding" style="padding:1rem">
+        <table class="project-list-table table-nowrap table-centered table-borderless table padding"
+          style="padding:1rem">
           <thead>
             <tr>
               <th scope="col" style="width: 100px;"></th>
-              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_document_no' | translate | uppercase}}
+              <th scope="col" style="font-weight: 600;text-align: justify;">
+                {{'lbl_document_no' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortDescending('documentNo')" icon-only clear style="background:transparent!important;">
+                  <button ion-button (click)="sortDescending('documentNo')" icon-only clear
+                    style="background:transparent!important;">
                     <ion-icon name="arrow-down" [ngClass]="model.documentNumberDesc"
                       style="color:#CCC;margin-right: -0.1em;"></ion-icon>
                   </button>
                 </span>
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortAscending('documentNo')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                  <button ion-button (click)="sortAscending('documentNo')" icon-only clear
+                    style="background:transparent!important;margin-right: -0.75em;">
                     <ion-icon name="arrow-up" [ngClass]="model.documentNumberAsc">
                     </ion-icon>
                   </button>
@@ -55,12 +62,14 @@
               </th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_date' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortDescending('date')" icon-only clear style="background:transparent!important">
+                  <button ion-button (click)="sortDescending('date')" icon-only clear
+                    style="background:transparent!important">
                     <ion-icon name="arrow-down" [ngClass]="model.dateDesc"></ion-icon>
                   </button>
                 </span>
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortAscending('date')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                  <button ion-button (click)="sortAscending('date')" icon-only clear
+                    style="background:transparent!important;margin-right: -0.75em;">
                     <ion-icon name="arrow-up" [ngClass]="model.dateAsc">
                     </ion-icon>
                   </button>
@@ -68,12 +77,14 @@
               </th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_time' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortDescending('time')" icon-only clear style="background:transparent!important">
+                  <button ion-button (click)="sortDescending('time')" icon-only clear
+                    style="background:transparent!important">
                     <ion-icon name="arrow-down" [ngClass]="model.timeDesc"></ion-icon>
                   </button>
                 </span>
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortAscending('time')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                  <button ion-button (click)="sortAscending('time')" icon-only clear
+                    style="background:transparent!important;margin-right: -0.75em;">
                     <ion-icon name="arrow-up" [ngClass]="model.timeAsc">
                     </ion-icon>
                   </button>
@@ -81,12 +92,14 @@
               </th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_type' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortDescending('type')" icon-only clear style="background:transparent!important">
+                  <button ion-button (click)="sortDescending('type')" icon-only clear
+                    style="background:transparent!important">
                     <ion-icon name="arrow-down" [ngClass]="model.typeDesc"></ion-icon>
                   </button>
                 </span>
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortAscending('type')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                  <button ion-button (click)="sortAscending('type')" icon-only clear
+                    style="background:transparent!important;margin-right: -0.75em;">
                     <ion-icon name="arrow-up" [ngClass]="model.typeAsc">
                     </ion-icon>
                   </button>
@@ -94,51 +107,74 @@
               </th>
               <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_physician' | translate | uppercase}}
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortDescending('physician')" icon-only clear style="background:transparent!important">
+                  <button ion-button (click)="sortDescending('physician')" icon-only clear
+                    style="background:transparent!important">
                     <ion-icon name="arrow-down" [ngClass]="model.physicianDesc"></ion-icon>
                   </button>
                 </span>
                 <span [class]="getAlignmentClass()">
-                  <button ion-button (click)="sortAscending('physician')" icon-only clear style="background:transparent!important;margin-right: -0.75em;">
+                  <button ion-button (click)="sortAscending('physician')" icon-only clear
+                    style="background:transparent!important;margin-right: -0.75em;">
                     <ion-icon name="arrow-up" [ngClass]="model.physicianAsc">
                     </ion-icon>
                   </button>
                 </span>
               </th>
-              
+              <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortDescending('status')" icon-only clear
+                    style="background:transparent!important">
+                    <ion-icon name="arrow-down" [ngClass]="model.statusDesc"></ion-icon>
+                  </button>
+                </span>
+                <span [class]="getAlignmentClass()">
+                  <button ion-button (click)="sortAscending('status')" icon-only clear
+                    style="background:transparent!important;margin-right: -0.75em;">
+                    <ion-icon name="arrow-up" [ngClass]="model.statusAsc">
+                    </ion-icon>
+                  </button>
+                </span>
+              </th>
               <!-- <th scope="col" style="font-weight: 600;text-align: justify;">{{'lbl_status' | translate | uppercase}}</th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let lt of documents" class="dataTable" (click)="showPDF(lt)">
               <td>
-                <img
-                  src="../../assets/icon/icon_amc_document_blue.svg"
-                  alt="" class="avatar-sm" [style.width]="getIconAttr(lt)" [style.height]="getIconAttr(lt)"></td>
+                <img src="../../assets/icon/icon_amc_document_blue.svg" alt="" class="avatar-sm"
+                  [style.width]="getIconAttr(lt)" [style.height]="getIconAttr(lt)"></td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)" [style.font-family]="getFontFamily()">{{lt.documentNo}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark" (click)="showPDF(lt)"
+                    [style.font-family]="getFontFamily()">{{lt.documentNo}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.date}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark"
+                    [style.font-family]="getFontFamily()">{{lt.date}}</a></h5>
                 <!-- <h5 class="text-truncate font-size-14"><a class="text-dark">{{lt.time}}</a></h5> -->
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.time}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark"
+                    [style.font-family]="getFontFamily()">{{lt.time}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.type}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark"
+                    [style.font-family]="getFontFamily()">{{lt.type}}</a></h5>
               </td>
               <td>
-                <h5 class="text-truncate font-size-14"><a class="text-dark" [style.font-family]="getFontFamily()">{{lt.physician}}</a></h5>
+                <h5 class="text-truncate font-size-14"><a class="text-dark"
+                    [style.font-family]="getFontFamily()">{{lt.physician}}</a></h5>
               </td>
-<!--               
+              <td [style.font-family]="getFontFamily()"><span class="pill"
+                  [style.background]="renderStatus(lt.statusCode,lt.isAccessible)" style="color:black"
+                  [style.font-family]="getFontFamily()">{{lt.status}}</span></td>
+              <!--               
               <td><span class="pill" [style.background]="renderStatus(lt.statusCode)" style="color:black">{{lt.status}}</span></td> -->
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-</div>
+  </div>
   <!--Mobile View-->
   <div class="card" [hidden]="!model.isVisible">
     <div class="content">
@@ -146,11 +182,15 @@
         <ion-list>
           <div *ngFor="let _document of documentsMobile | keyvalue: customSort">
             <div class="panel panel-default">
-              <div class="panel-heading clickable" (click)="toggleGroup(_document)" [ngClass]="{active:isGroupShown(_document)}">
-                
+              <div class="panel-heading clickable" (click)="toggleGroup(_document)"
+                [ngClass]="{active:isGroupShown(_document)}">
+
                 <h4 class="panel-title">
                   <!-- <div class="block"></div> -->
-                  <span><ion-icon  [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>{{'lbl_document_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}</span>
+                  <span>
+                    <ion-icon [name]="isGroupShown(_document) ? 'remove-outline' : 'add-outline'"></ion-icon>
+                    {{'lbl_document_date' | translate | titlecase}} : {{getDateDisplay(documentsMobile[_document.key])}}
+                  </span>
                   <!-- <p><span>Pricing Period: {{getPricingDates(orders[cust.key])}}</span></p> -->
                 </h4>
               </div>
@@ -165,14 +205,19 @@
                       <div [class]="getAlignmentClassRight()">
                         <span style="font-size: 2em;">
                           <!-- <ion-icon name="document-text" (click)="openPDF(document)"></ion-icon> -->
-                          <ion-icon src="./assets/icon/icon_amc_document_blue.svg" (click)="openPDF(document)" style="width: 1.5em;height:1.5em"></ion-icon>
+                          <ion-icon src="./assets/icon/icon_amc_document_blue.svg" (click)="openPDF(document)"
+                            style="width: 1.5em;height:1.5em"></ion-icon>
                         </span>
                       </div>
                     </div>
                     <div class="task-footer">
-                      <div [class]="getAlignmentClassLeft()"><span class="fa fa-clock-o"></span> {{document.date}} - {{document.time}}</div>
+                      <div [class]="getAlignmentClassLeft()"><span class="fa fa-clock-o"></span> {{document.date}} -
+                        {{document.time}}</div>
                       <!-- <div [class]="getAlignmentClassRight()"><h6 style="color:rgb(87,143,182);">{{document.type}}</h6></div> -->
-                      <div [class]="getAlignmentClassRight()"><h6 style="color:rgb(87,143,182);">{{'lbl_document_no' | translate | titlecase}}: {{document.documentNo}}</h6></div>
+                      <div [class]="getAlignmentClassRight()">
+                        <h6 style="color:rgb(87,143,182);">{{'lbl_document_no' | translate | titlecase}}:
+                          {{document.documentNo}}</h6>
+                      </div>
                     </div>
                   </div>
                 </div>

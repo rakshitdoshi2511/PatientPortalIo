@@ -230,7 +230,23 @@ export class MedicalReportsPage implements OnInit {
     }
     return that.padZeros(hours, 2) + ":" + that.padZeros(minutes, 2) + ":" + that.padZeros(seconds, 2);
   }
-  renderStatus(status) {
+  renderStatus(status, isAccessible) {
+    //console.log(status);
+    if (isAccessible) {
+      return '#1caf9a';
+    }
+    else {
+      return '#FFF2C5';
+    }
+    // if (status == 'RE') {
+    //   return '#FFF2C5';
+    // }
+    // else {
+    //   return '#1caf9a';
+    // }
+  }
+  
+  /* renderStatus(status) {
     //console.log(status);
     if (status == 'RE') {
       return '#FFF2C5';
@@ -238,7 +254,7 @@ export class MedicalReportsPage implements OnInit {
     else {
       return '#1caf9a';
     }
-  }
+  } */
   getButtonFontFamily(){
     return this.translate.getDefaultLang() == 'en' ? 'Helvetica-Arabic-Medium': 'Futura-Medium';
   }
