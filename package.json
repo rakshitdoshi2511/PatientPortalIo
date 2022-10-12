@@ -38,7 +38,7 @@
     "angular-svg-round-progressbar": "^3.0.1",
     "angular2-material-datepicker": "^0.5.0",
     "bn-ng-idle": "^1.0.1",
-    "cordova-browser": "^5.0.4",
+    "cordova-browser": "^6.0.0",
     "cordova-plugin-advanced-http": "^2.4.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
